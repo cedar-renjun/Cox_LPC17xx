@@ -1,7 +1,7 @@
 //*****************************************************************************
 //
 //! \file xhw_nvic.h
-//! \brief Macros used when accessing the NVIC hardware.
+//! \brief Macros used when accessing the Cortex-M NVIC.
 //! \version V2.2.1.0
 //! \todo Update this time information
 //! \date 11/20/2011
@@ -73,7 +73,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_Address NVIC Address Register(NVIC_Address)
+//! \addtogroup NVIC_Register_Address NVIC Address Register(NVIC_Address)
 //! \brief Defines for the bit fields in the NVIC_Register_Address register
 //! @{
 //
@@ -81,149 +81,232 @@
 //
 //! Interrupt Controller Type Reg
 //
-#define NVIC_INT_TYPE           0xE000E004
+#define NVIC_INT_TYPE           ((unsigned long)0xE000E004)
 
 //
 //! Auxiliary Control
 //
-#define NVIC_ACTLR              0xE000E008
+#define NVIC_ACTLR              ((unsigned long)0xE000E008)
 
 //
 //! SysTick Control and Status Register
 //
-#define NVIC_ST_CTRL            0xE000E010
+#define NVIC_ST_CTRL            ((unsigned long)0xE000E010)
 
 //
 //! SysTick Reload Value Register
 //
-#define NVIC_ST_RELOAD          0xE000E014
+#define NVIC_ST_RELOAD          ((unsigned long)0xE000E014)
 
 //
 //! SysTick Current Value Register
 //
-#define NVIC_ST_CURRENT         0xE000E018
+#define NVIC_ST_CURRENT         ((unsigned long)0xE000E018)
 
 //
 //! SysTick Calibration Value Reg
 //
-#define NVIC_ST_CAL             0xE000E01C
+#define NVIC_ST_CAL             ((unsigned long)0xE000E01C)
 
-//
-//! Interrupt 0-31 Set Enable
-//
-#define NVIC_EN0                0xE000E100
-#define NVIC_EN1                0xE000E104
-#define NVIC_EN2                0xE000E108
 
-//
-//! Interrupt 0-31 Clear Enable
-//
-#define NVIC_DIS0               0xE000E180
-#define NVIC_DIS1               0xE000E184
-#define NVIC_DIS2               0xE000E188
+////////////////////////////// Int enable register ////////////////////////////
+//! Int Enable Register 0   --> 31
+#define NVIC_EN0                ((unsigned long)0xE000E100)
 
-//
-//! Interrupt 0-31 Set Pending
-//
-#define NVIC_PEND0              0xE000E200
-#define NVIC_PEND1              0xE000E204
-#define NVIC_PEND2              0xE000E208
+//! Int Enable Register 32  --> 63
+#define NVIC_EN1                ((unsigned long)0xE000E104)
 
-//
-//! Interrupt 0-31 Clear Pending
-//
-#define NVIC_UNPEND0            0xE000E280
-#define NVIC_UNPEND1            0xE000E284
-#define NVIC_UNPEND2            0xE000E288
+//! Int Enable Register 64  --> 95
+#define NVIC_EN2                ((unsigned long)0xE000E108)
+
+//! Int Enable Register 96  --> 127
+#define NVIC_EN3                ((unsigned long)0xE000E10C)
+
+//! Int Enable Register 128 --> 159
+#define NVIC_EN4                ((unsigned long)0xE000E110)
+
+//! Int Enable Register 160 --> 191
+#define NVIC_EN5                ((unsigned long)0xE000E114)
+
+//! Int Enable Register 192 --> 223
+#define NVIC_EN6                ((unsigned long)0xE000E118)
+
+//! Int Enable Register 224 --> 239
+#define NVIC_EN7                ((unsigned long)0xE000E11C)
+
+////////////////////////////// Int disable register ////////////////////////////
+//! Int Disable Register 0   --> 31
+#define NVIC_DIS0               ((unsigned long)0xE000E180)
+
+//! Int Disable Register 32  --> 63
+#define NVIC_DIS1               ((unsigned long)0xE000E184)
+
+//! Int Disable Register 64  --> 95
+#define NVIC_DIS2               ((unsigned long)0xE000E188)
+
+//! Int Disable Register 96  --> 127
+#define NVIC_DIS3               ((unsigned long)0xE000E18C)
+
+//! Int Disable Register 128 --> 159
+#define NVIC_DIS4               ((unsigned long)0xE000E190)
+
+//! Int Disable Register 160 --> 191
+#define NVIC_DIS5               ((unsigned long)0xE000E194)
+
+//! Int Disable Register 192 --> 223
+#define NVIC_DIS6               ((unsigned long)0xE000E198)
+
+//! Int Disable Register 224 --> 239
+#define NVIC_DIS7               ((unsigned long)0xE000E19C)
+
+////////////////////////////// Int set pending register ////////////////////////////
+//! Int Set Pending Register 0   --> 31
+#define NVIC_SET_PEND0               ((unsigned long)0xE000E200)
+
+//! Int Set Pending Register 32  --> 63
+#define NVIC_SET_PEND1               ((unsigned long)0xE000E204)
+
+//! Int Set Pending Register 64  --> 95
+#define NVIC_SET_PEND2               ((unsigned long)0xE000E208)
+
+//! Int Set Pending Register 96  --> 127
+#define NVIC_SET_PEND3               ((unsigned long)0xE000E20C)
+
+//! Int Set Pending Register 128 --> 159
+#define NVIC_SET_PEND4               ((unsigned long)0xE000E210)
+
+//! Int Set Pending Register 160 --> 191
+#define NVIC_SET_PEND5               ((unsigned long)0xE000E214)
+
+//! Int Set Pending Register 192 --> 223
+#define NVIC_SET_PEND6               ((unsigned long)0xE000E218)
+
+//! Int Set Pending Register 224 --> 239
+#define NVIC_SET_PEND7               ((unsigned long)0xE000E21C)
+
+////////////////////////////// Int clear pending register ////////////////////////////
+//! Int Clear Pending Register 0   --> 31
+#define NVIC_CLR_PEND0               ((unsigned long)0xE000E280)
+
+//! Int Clear Pending Register 32  --> 63
+#define NVIC_CLR_PEND1               ((unsigned long)0xE000E284)
+
+//! Int Clear Pending Register 64  --> 95
+#define NVIC_CLR_PEND2               ((unsigned long)0xE000E288)
+
+//! Int Clear Pending Register 96  --> 127
+#define NVIC_CLR_PEND3               ((unsigned long)0xE000E28C)
+
+//! Int Clear Pending Register 128 --> 159
+#define NVIC_CLR_PEND4               ((unsigned long)0xE000E290)
+
+//! Int Clear Pending Register 160 --> 191
+#define NVIC_CLR_PEND5               ((unsigned long)0xE000E294)
+
+//! Int Clear Pending Register 192 --> 223
+#define NVIC_CLR_PEND6               ((unsigned long)0xE000E298)
+
+//! Int Clear Pending Register 224 --> 239
+#define NVIC_CLR_PEND7               ((unsigned long)0xE000E29C)
+
+////////////////////////////// Int Active bit register ////////////////////////////
+//! Int Active Bit Register 0   --> 31
+#define NVIC_ACT_BIT0               ((unsigned long)0xE000E300)
+
+//! Int Active Bit Register 32  --> 63
+#define NVIC_ACT_BIT1               ((unsigned long)0xE000E304)
+
+//! Int Active Bit Register 64  --> 95
+#define NVIC_ACT_BIT2               ((unsigned long)0xE000E308)
+
+//! Int Active Bit Register 96  --> 127
+#define NVIC_ACT_BIT3               ((unsigned long)0xE000E30C)
+
+//! Int Active Bit Register 128 --> 159
+#define NVIC_ACT_BIT4               ((unsigned long)0xE000E310)
+
+//! Int Active Bit Register 160 --> 191
+#define NVIC_ACT_BIT5               ((unsigned long)0xE000E314)
+
+//! Int Active Bit Register 192 --> 223
+#define NVIC_ACT_BIT6               ((unsigned long)0xE000E318)
+
+//! Int Active Bit Register 224 --> 239
+#define NVIC_ACT_BIT7               ((unsigned long)0xE000E31C)
+
+////////////////////////// Int Priority Register ///////////////////////////////
 
 //
 //! Interrupt 0-3 Priority
 //
 #define NVIC_PRI0               0xE000E400
 
-//
-//! Interrupt 4-7 Priority
-//
-#define NVIC_PRI1               0xE000E404
+#define NVIC_PRI0                0xE000E400
+#define NVIC_PRI1                0xE000E400
+#define NVIC_PRI2                0xE000E400
+#define NVIC_PRI3                0xE000E400
+#define NVIC_PRI4                0xE000E400
+#define NVIC_PRI5                0xE000E400
+#define NVIC_PRI6                0xE000E400
+#define NVIC_PRI7                0xE000E400
+#define NVIC_PRI8                0xE000E400
+#define NVIC_PRI9                0xE000E400
+#define NVIC_PRI10               0xE000E400
+#define NVIC_PRI11               0xE000E400
+#define NVIC_PRI12               0xE000E400
+#define NVIC_PRI13               0xE000E400
+#define NVIC_PRI14               0xE000E400
+#define NVIC_PRI15               0xE000E400
+#define NVIC_PRI16               0xE000E400
+#define NVIC_PRI17               0xE000E400
+#define NVIC_PRI18               0xE000E400
+#define NVIC_PRI19               0xE000E400
+#define NVIC_PRI20               0xE000E400
+#define NVIC_PRI21               0xE000E400
+#define NVIC_PRI22               0xE000E400
+#define NVIC_PRI23               0xE000E400
+#define NVIC_PRI24               0xE000E400
+#define NVIC_PRI25               0xE000E400
+#define NVIC_PRI26               0xE000E400
+#define NVIC_PRI27               0xE000E400
+#define NVIC_PRI28               0xE000E400
+#define NVIC_PRI29               0xE000E400
+#define NVIC_PRI30               0xE000E400
+#define NVIC_PRI31               0xE000E400
+#define NVIC_PRI32               0xE000E400
+#define NVIC_PRI33               0xE000E400
+#define NVIC_PRI34               0xE000E400
+#define NVIC_PRI35               0xE000E400
+#define NVIC_PRI36               0xE000E400
+#define NVIC_PRI37               0xE000E400
+#define NVIC_PRI38               0xE000E400
+#define NVIC_PRI39               0xE000E400
+#define NVIC_PRI40               0xE000E400
+#define NVIC_PRI41               0xE000E400
+#define NVIC_PRI42               0xE000E400
+#define NVIC_PRI43               0xE000E400
+#define NVIC_PRI44               0xE000E400
+#define NVIC_PRI45               0xE000E400
+#define NVIC_PRI46               0xE000E400
+#define NVIC_PRI47               0xE000E400
+#define NVIC_PRI48               0xE000E400
+#define NVIC_PRI49               0xE000E400
+#define NVIC_PRI50               0xE000E400
+#define NVIC_PRI51               0xE000E400
+#define NVIC_PRI52               0xE000E400
+#define NVIC_PRI53               0xE000E400
+#define NVIC_PRI54               0xE000E400
+#define NVIC_PRI55               0xE000E400
+#define NVIC_PRI56               0xE000E400
+#define NVIC_PRI57               0xE000E400
+#define NVIC_PRI58               0xE000E400
+#define NVIC_PRI59               0xE000E400
+#define NVIC_PRI60               0xE000E400
+#define NVIC_PRI61               0xE000E400
+#define NVIC_PRI62               0xE000E400
+#define NVIC_PRI63               0xE000E400
 
-//
-//! Interrupt 8-11 Priority
-//
-#define NVIC_PRI2               0xE000E408
 
-//
-//! Interrupt 12-15 Priority
-//
-#define NVIC_PRI3               0xE000E40C
-
-//
-//! Interrupt 16-19 Priority
-//
-#define NVIC_PRI4               0xE000E410
-
-//
-//! Interrupt 20-23 Priority
-//
-#define NVIC_PRI5               0xE000E414
-
-//
-//! Interrupt 24-27 Priority
-//
-#define NVIC_PRI6               0xE000E418
-
-//
-//! Interrupt 28-31 Priority
-//
-#define NVIC_PRI7               0xE000E41C
-
-//
-//! Interrupt 32-35 Priority
-//
-#define NVIC_PRI8               0xE000E420
-
-//
-//! Interrupt 36-39 Priority
-//
-#define NVIC_PRI9               0xE000E424
-
-//
-//! Interrupt 40-43 Priority
-//
-#define NVIC_PRI10              0xE000E428
-
-//
-//! Interrupt 44-47 Priority
-//
-#define NVIC_PRI11              0xE000E42C
-
-//
-//! Interrupt 48-51 Priority
-//
-#define NVIC_PRI12              0xE000E430
-
-//
-//! Interrupt 52-55 Priority
-//
-#define NVIC_PRI13              0xE000E434
-
-//
-//! Interrupt 56-59 Priority
-//
-#define NVIC_PRI14              0xE000E438
-
-//
-//! Interrupt 60-63 Priority
-//
-#define NVIC_PRI15              0xE000E43C
-
-//
-//! Interrupt 64-68 Priority
-//
-#define NVIC_PRI16              0xE000E440
-#define NVIC_PRI17              0xE000E444
-#define NVIC_PRI18              0xE000E448
-#define NVIC_PRI19              0xE000E44C
-#define NVIC_PRI20              0xE000E450
 
 //
 //! CPU ID Base
@@ -307,7 +390,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_INT_TYPE NVIC Interrupt Type Register(NVIC_INT_TYPE)
+//! \addtogroup NVIC_Register_NVIC_INT_TYPE NVIC Interrupt Type Register(NVIC_INT_TYPE)
 //! \brief Defines for the bit fields in the NVIC_INT_TYPE register.
 //! @{
 //
@@ -327,7 +410,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_ACTLR NVIC ACTLR Register(NVIC_ACTLR)
+//! \addtogroup NVIC_Register_NVIC_ACTLR NVIC ACTLR Register(NVIC_ACTLR)
 //! \brief Defines for the bit fields in the NVIC_ACTLR register.
 //! @{
 //
@@ -356,7 +439,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_ST_CTRL NVIC Status Control Register(NVIC_ST_CTRL)
+//! \addtogroup NVIC_Register_NVIC_ST_CTRL NVIC Status Control Register(NVIC_ST_CTRL)
 //! \brief Defines for the bit fields in the NVIC_ST_CTRL register.
 //! @{
 //
@@ -390,7 +473,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_ST_RELOAD NVIC Status Reload Register(NVIC_ST_RELOAD)
+//! \addtogroup NVIC_Register_NVIC_ST_RELOAD NVIC Status Reload Register(NVIC_ST_RELOAD)
 //! \brief Defines for the bit fields in the NVIC_ST_RELOAD register.
 //! @{
 //
@@ -410,7 +493,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_ST_CURRENT NVIC Status Current Register(NVIC_ST_CURRENT)
+//! \addtogroup NVIC_Register_NVIC_ST_CURRENT NVIC Status Current Register(NVIC_ST_CURRENT)
 //! \brief Defines for the bit fields in the NVIC_ST_CURRENT register.
 //! @{
 //
@@ -430,7 +513,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_ST_CAL NVIC Status Cal Register(NVIC_ST_CAL)
+//! \addtogroup NVIC_Register_NVIC_ST_CAL NVIC Status Cal Register(NVIC_ST_CAL)
 //! \brief Defines for the bit fields in the NVIC_ST_CAL register.
 //! @{
 //
@@ -460,7 +543,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_EN0 NVIC Ebanle0 Register(NVIC_EN0)
+//! \addtogroup NVIC_Register_NVIC_EN0 NVIC Ebanle0 Register(NVIC_EN0)
 //! \brief Defines for the bit fields in the NVIC_EN0 register.
 //! @{
 //
@@ -637,7 +720,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_DIS0 NVIC Disable0 Register(NVIC_DIS0)
+//! \addtogroup NVIC_Register_NVIC_DIS0 NVIC Disable0 Register(NVIC_DIS0)
 //! \brief Defines for the bit fields in the NVIC_DIS0 register.
 //! @{
 //
@@ -816,7 +899,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PEND0 NVIC PEND 0 Register(NVIC_PEND0)
+//! \addtogroup NVIC_Register_NVIC_PEND0 NVIC PEND 0 Register(NVIC_PEND0)
 //! \brief Defines for the bit fields in the NVIC_PEND0 register.
 //! @{
 //
@@ -995,7 +1078,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_UNPEND0 NVIC UNPEND 0 Register(NVIC_UNPEND0)
+//! \addtogroup NVIC_Register_NVIC_UNPEND0 NVIC UNPEND 0 Register(NVIC_UNPEND0)
 //! \brief Defines for the bit fields in the NVIC_UNPEND0 register.
 //! @{
 //
@@ -1173,7 +1256,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI0 NVIC Priority 0 Register(NVIC_PRI0)
+//! \addtogroup NVIC_Register_NVIC_PRI0 NVIC Priority 0 Register(NVIC_PRI0)
 //! \brief Defines for the bit fields in the NVIC_PRI0 register.
 //! @{
 //
@@ -1211,7 +1294,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI1 NVIC Priority 1 Register(NVIC_PRI1)
+//! \addtogroup NVIC_Register_NVIC_PRI1 NVIC Priority 1 Register(NVIC_PRI1)
 //! \brief Defines for the bit fields in the NVIC_PRI1 register.
 //! @{
 //
@@ -1249,7 +1332,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI2 NVIC Priority 2 Register(NVIC_PRI2)
+//! \addtogroup NVIC_Register_NVIC_PRI2 NVIC Priority 2 Register(NVIC_PRI2)
 //! \brief Defines for the bit fields in the NVIC_PRI2 register.
 //! @{
 //
@@ -1287,7 +1370,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI3 NVIC Priority 3 Register(NVIC_PRI3)
+//! \addtogroup NVIC_Register_NVIC_PRI3 NVIC Priority 3 Register(NVIC_PRI3)
 //! \brief Defines for the bit fields in the NVIC_PRI3 register.
 //! @{
 //
@@ -1325,7 +1408,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI4 NVIC Priority 4 Register(NVIC_PRI4)
+//! \addtogroup NVIC_Register_NVIC_PRI4 NVIC Priority 4 Register(NVIC_PRI4)
 //! \brief Defines for the bit fields in the NVIC_PRI4 register.
 //! @{
 //
@@ -1363,7 +1446,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI5 NVIC Priority 5 Register(NVIC_PRI5)
+//! \addtogroup NVIC_Register_NVIC_PRI5 NVIC Priority 5 Register(NVIC_PRI5)
 //! \brief Defines for the bit fields in the NVIC_PRI5 register.
 //! @{
 //
@@ -1401,7 +1484,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI6 NVIC Priority 6 Register(NVIC_PRI6)
+//! \addtogroup NVIC_Register_NVIC_PRI6 NVIC Priority 6 Register(NVIC_PRI6)
 //! \brief Defines for the bit fields in the NVIC_PRI6 register.
 //! @{
 //
@@ -1439,7 +1522,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_PRI7 NVIC Priority 7 Register(NVIC_PRI7)
+//! \addtogroup NVIC_Register_NVIC_PRI7 NVIC Priority 7 Register(NVIC_PRI7)
 //! \brief Defines for the bit fields in the NVIC_PRI7 register.
 //! @{
 //
@@ -1477,7 +1560,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_CPUID  NVIC CPUID Register(NVIC_CPUID)
+//! \addtogroup NVIC_Register_NVIC_CPUID  NVIC CPUID Register(NVIC_CPUID)
 //! \brief Defines for the bit fields in the NVIC_CPUID register.
 //! @{
 //
@@ -1526,7 +1609,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_INT_CTRL NVIC Interrupt Control Register(NVIC_INT_CTRL)
+//! \addtogroup NVIC_Register_NVIC_INT_CTRL NVIC Interrupt Control Register(NVIC_INT_CTRL)
 //! \brief Defines for the bit fields in the NVIC_INT_CTRL register.
 //! @{
 //
@@ -1640,7 +1723,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_APINT NVIC APINT Register(NVIC_APINT)
+//! \addtogroup NVIC_Register_NVIC_APINT NVIC APINT Register(NVIC_APINT)
 //! \brief Defines for the bit fields in the NVIC_APINT register.
 //! @{
 //
@@ -1729,7 +1812,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_SYS_CTRL NVIC System Control Register(NVIC_SYS_CTRL)
+//! \addtogroup NVIC_Register_NVIC_SYS_CTRL NVIC System Control Register(NVIC_SYS_CTRL)
 //! \brief Defines for the bit fields in the NVIC_SYS_CTRL register.
 //! @{
 //
@@ -1758,7 +1841,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_CFG_CTRL NVIC Cfg Control Register(NVIC_CFG_CTRL)
+//! \addtogroup NVIC_Register_NVIC_CFG_CTRL NVIC Cfg Control Register(NVIC_CFG_CTRL)
 //! \brief Defines for the bit fields in the NVIC_CFG_CTRL register.
 //! @{
 //
@@ -1802,7 +1885,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_SYS_PRI2 NVIC System Priority 2 Register(NVIC_SYS_PRI2)
+//! \addtogroup NVIC_Register_NVIC_SYS_PRI2 NVIC System Priority 2 Register(NVIC_SYS_PRI2)
 //! \brief Defines for the bit fields in the NVIC_SYS_PRI2 register.
 //! @{
 //
@@ -1822,7 +1905,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_SYS_PRI3 NVIC System Priority 3 Register(NVIC_SYS_PRI3)
+//! \addtogroup NVIC_Register_NVIC_SYS_PRI3 NVIC System Priority 3 Register(NVIC_SYS_PRI3)
 //! \brief Defines for the bit fields in the NVIC_SYS_PRI3 register.
 //! @{
 //
@@ -1854,7 +1937,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_SYS_HND_CTRL NVIC HND Control Register(NVIC_SYS_HND_CTRL)
+//! \addtogroup NVIC_Register_NVIC_SYS_HND_CTRL NVIC HND Control Register(NVIC_SYS_HND_CTRL)
 //! \brief Defines for the bit fields in the NVIC_SYS_HND_CTRL register.
 //! @{
 //
@@ -1939,7 +2022,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_DEBUG_STAT NVIC Debug State Register(NVIC_DEBUG_STAT)
+//! \addtogroup NVIC_Register_NVIC_DEBUG_STAT NVIC Debug State Register(NVIC_DEBUG_STAT)
 //! \brief Defines for the bit fields in the NVIC_DEBUG_STAT register.
 //! @{
 //
@@ -1978,7 +2061,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_DEBUG_CTRL NVIC Debug Control Register(NVIC_DBG_CTRL)
+//! \addtogroup NVIC_Register_NVIC_DEBUG_CTRL NVIC Debug Control Register(NVIC_DBG_CTRL)
 //! \brief Defines for the bit fields in the NVIC_DBG_CTRL register.
 //! @{
 //
@@ -2060,7 +2143,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_DBG_XFER NVIC XFER Register(NVIC_DBG_XFER)
+//! \addtogroup NVIC_Register_NVIC_DBG_XFER NVIC XFER Register(NVIC_DBG_XFER)
 //! \brief Defines for the bit fields in the NVIC_DBG_XFER register.
 //! @{
 //
@@ -2189,7 +2272,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_DBG_DATA NVIC Debug Data Register(NVIC_DBG_DATA)
+//! \addtogroup NVIC_Register_NVIC_DBG_DATA NVIC Debug Data Register(NVIC_DBG_DATA)
 //! \brief Defines for the bit fields in the NVIC_DBG_DATA register.
 //! @{
 //
@@ -2209,7 +2292,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_NVIC_Register_NVIC_DBG_INT NVIC Debug Intrrupt Register(NVIC_DBG_INT)
+//! \addtogroup NVIC_Register_NVIC_DBG_INT NVIC Debug Intrrupt Register(NVIC_DBG_INT)
 //! \brief Defines for the bit fields in the NVIC_DBG_INT register.
 //! @{
 //
