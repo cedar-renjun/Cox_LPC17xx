@@ -7,32 +7,31 @@
 //! \author CooCox
 //! \copy
 //!
-//! Copyright (c)  2011, CooCox 
+//! Copyright (c)  2011, CooCox
 //! All rights reserved.
-//! 
-//! Redistribution and use in source and binary forms, with or without 
-//! modification, are permitted provided that the following conditions 
-//! are met: 
-//! 
-//!     * Redistributions of source code must retain the above copyright 
-//! notice, this list of conditions and the following disclaimer. 
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!     * Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
 //! notice, this list of conditions and the following disclaimer in the
-//! documentation and/or other materials provided with the distribution. 
-//!     * Neither the name of the <ORGANIZATION> nor the names of its 
-//! contributors may be used to endorse or promote products derived 
-//! from this software without specific prior written permission. 
-//! 
+//! documentation and/or other materials provided with the distribution.
+//!     * Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
 //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
 //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 //! THE POSSIBILITY OF SUCH DAMAGE.
 //
 //*****************************************************************************
@@ -119,15 +118,15 @@ GPIOBaseValid(unsigned long ulPort)
 //! \param eShortPin is the base address of the GPIO port
 //!
 //! \note For NUC1xx,all GPIO port use the some Peripheral clock.
-//! 
+//!
 //! \return GPIO port code which is used by \ref xSysCtlPeripheralEnable,
 //! \ref xSysCtlPeripheralDisable, \ref xSysCtlPeripheralReset.
 //
 //*****************************************************************************
-unsigned long 
+unsigned long
 GPIOPinToPeripheralId(unsigned long ulPort, unsigned long ulPin)
 {
-        
+
     //
     // Check the arguments.
     //
@@ -143,14 +142,14 @@ GPIOPinToPeripheralId(unsigned long ulPort, unsigned long ulPin)
 //! \param eShortPin is the base address of the GPIO port
 //!
 //! \note None.
-//! 
+//!
 //! \return GPIO port address which is used by GPIO API.
 //
 //*****************************************************************************
-unsigned long 
+unsigned long
 GPIOPinToPort(unsigned long ulPort, unsigned long ulPin)
 {
-        
+
     //
     // Check the arguments.
     //
@@ -166,14 +165,14 @@ GPIOPinToPort(unsigned long ulPort, unsigned long ulPin)
 //! \param eShortPin is the base address of the GPIO port
 //!
 //! \note None.
-//! 
+//!
 //! \return GPIO pin number which is used by GPIO API.
 //
 //*****************************************************************************
-unsigned long 
+unsigned long
 GPIOPinToPin(unsigned long ulPort, unsigned long ulPin)
 {
-        
+
     //
     // Check the arguments.
     //
@@ -563,9 +562,9 @@ GPIOPadConfigGet(unsigned long ulPort, unsigned char ucPin,
 //! \param pfnCallback is the callback function.
 //! Details please refer to \ref xLowLayer_Exported_Types.
 //!
-//! When there is any pins interrupt occrus, Interrupt Handler will 
-//! call the callback function. 
-//! 
+//! When there is any pins interrupt occrus, Interrupt Handler will
+//! call the callback function.
+//!
 //! param of pfnCallback
 //! - pvCBData not used, always 0.
 //! - ulEvent not used, always 0.
@@ -582,7 +581,7 @@ GPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin,
 {
     int i;
     unsigned long ulPinID;
-    
+
     //
     // Check the arguments.
     //
@@ -594,14 +593,14 @@ GPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin,
     {
         //
         // Find the corresponding pin, Set the interrupts callback.
-        //        
+        //
         if(g_psGPIOPinIntAssignTable[i].ulPinID == ulPinID)
         {
             g_psGPIOPinIntAssignTable[i].pfnGPIOPinHandlerCallback =
                                          xtPortCallback;
             break;
         }
-        
+
         //
         // Below are empty item, have not assigned this pin
         // Assign the pin item
@@ -613,29 +612,29 @@ GPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin,
                                          xtPortCallback;
             break;
         }
-    } 
+    }
 }
 
 //*****************************************************************************
 //
 //! \brief GPIO Port x Interrupt Handler.
 //!
-//! \param ulPort is the base address of the GPIO port. 
+//! \param ulPort is the base address of the GPIO port.
 //!
 //! \return Returns the pins which interrupt happen.
 //
 //*****************************************************************************
 unsigned long
-GPIOIntHandler(unsigned long ulPort)    
+GPIOIntHandler(unsigned long ulPort)
 {
     unsigned long ulIntPins;
     int i;
-    
+
     //
     // Check the arguments.
     //
     xASSERT(GPIOBaseValid(ulPort));
-    
+
     //
     // Gets interrupt status
     //
@@ -651,10 +650,10 @@ GPIOIntHandler(unsigned long ulPort)
     //
     for(i = 0; i < xGPIO_INT_NUMBER; i++)
     {
-        if((g_psGPIOPinIntAssignTable[i].ulPinID & 0xFFFF0000) == 
+        if((g_psGPIOPinIntAssignTable[i].ulPinID & 0xFFFF0000) ==
            ((ulPort & 0x0000FFFF) << 16))
         {
-            if((g_psGPIOPinIntAssignTable[i].ulPinID & 0x0000FFFF & 
+            if((g_psGPIOPinIntAssignTable[i].ulPinID & 0x0000FFFF &
                 ulIntPins))
             {
                 if(g_psGPIOPinIntAssignTable[i].pfnGPIOPinHandlerCallback != 0)
@@ -665,7 +664,7 @@ GPIOIntHandler(unsigned long ulPort)
             }
         }
     }
-    
+
     return ulIntPins;
 
 }
@@ -674,24 +673,24 @@ GPIOIntHandler(unsigned long ulPort)
 //
 //! \brief GPIO Port A Interrupt Handler.
 //!
-//! If users want to user the GPIO Callback feature, Users should promise 
+//! If users want to user the GPIO Callback feature, Users should promise
 //! that the GPIO Handle in the vector table is GPIOAIntHandler.
 //!
 //! \return None.
 //
 //*****************************************************************************
 void
-GPIOAIntHandler(void)    
+GPIOAIntHandler(void)
 {
     volatile unsigned long ulIntPins;
-    
+
     //
     // Call pin interrupt callback functions
     //
     ulIntPins = GPIOIntHandler(GPIO_PORTA_BASE);
-    
+
     //
-    // TODO: User can use the ulIntPins to do more things if have not 
+    // TODO: User can use the ulIntPins to do more things if have not
     // init the callback function.
     //
 }
@@ -700,24 +699,24 @@ GPIOAIntHandler(void)
 //
 //! \brief GPIO Port B Interrupt Handler.
 //!
-//! If users want to user the GPIO Callback feature, Users should promise 
+//! If users want to user the GPIO Callback feature, Users should promise
 //! that the GPIO Handle in the vector table is GPIOBIntHandler.
 //!
 //! \return None.
 //
 //*****************************************************************************
 void
-GPIOBIntHandler(void)    
+GPIOBIntHandler(void)
 {
     volatile unsigned long ulIntPins;
-    
+
     //
     // Call pin interrupt callback functions
     //
     ulIntPins = GPIOIntHandler(GPIO_PORTB_BASE);
-    
+
     //
-    // TODO: User can use the ulIntPins to do more things if have not 
+    // TODO: User can use the ulIntPins to do more things if have not
     // init the callback function.
     //
 
@@ -727,24 +726,24 @@ GPIOBIntHandler(void)
 //
 //! \brief GPIO Port C Interrupt Handler.
 //!
-//! If users want to user the GPIO Callback feature, Users should promise 
+//! If users want to user the GPIO Callback feature, Users should promise
 //! that the GPIO Handle in the vector table is GPIOCIntHandler.
 //!
 //! \return None.
 //
 //*****************************************************************************
 void
-GPIOCIntHandler(void)    
+GPIOCIntHandler(void)
 {
     volatile unsigned long ulIntPins;
-    
+
     //
     // Call pin interrupt callback functions
     //
     ulIntPins = GPIOIntHandler(GPIO_PORTC_BASE);
-    
+
     //
-    // TODO: User can use the ulIntPins to do more things if have not 
+    // TODO: User can use the ulIntPins to do more things if have not
     // init the callback function.
     //
 }
@@ -753,24 +752,24 @@ GPIOCIntHandler(void)
 //
 //! \brief GPIO Port D Interrupt Handler.
 //!
-//! If users want to user the GPIO Callback feature, Users should promise 
+//! If users want to user the GPIO Callback feature, Users should promise
 //! that the GPIO Handle in the vector table is GPIODIntHandler.
 //!
 //! \return None.
 //
 //*****************************************************************************
 void
-GPIODIntHandler(void)    
+GPIODIntHandler(void)
 {
     volatile unsigned long ulIntPins;
-    
+
     //
     // Call pin interrupt callback functions
     //
     ulIntPins = GPIOIntHandler(GPIO_PORTD_BASE);
-    
+
     //
-    // TODO: User can use the ulIntPins to do more things if have not 
+    // TODO: User can use the ulIntPins to do more things if have not
     // init the callback function.
     //
 }
@@ -779,24 +778,24 @@ GPIODIntHandler(void)
 //
 //! \brief GPIO Port E Interrupt Handler.
 //!
-//! If users want to user the GPIO Callback feature, Users should promise 
+//! If users want to user the GPIO Callback feature, Users should promise
 //! that the GPIO Handle in the vector table is GPIOEIntHandler.
 //!
 //! \return None.
 //
 //*****************************************************************************
 void
-GPIOEIntHandler(void)    
+GPIOEIntHandler(void)
 {
     volatile unsigned long ulIntPins;
-    
+
     //
     // Call pin interrupt callback functions
     //
     ulIntPins = GPIOIntHandler(GPIO_PORTE_BASE);
-    
+
     //
-    // TODO: User can use the ulIntPins to do more things if have not 
+    // TODO: User can use the ulIntPins to do more things if have not
     // init the callback function.
     //
 }
@@ -805,24 +804,24 @@ GPIOEIntHandler(void)
 //
 //! \brief GPIO Port F Interrupt Handler.
 //!
-//! If users want to user the GPIO Callback feature, Users should promise 
+//! If users want to user the GPIO Callback feature, Users should promise
 //! that the GPIO Handle in the vector table is GPIOFIntHandler.
 //!
 //! \return None.
 //
 //*****************************************************************************
 void
-GPIOFIntHandler(void)    
+GPIOFIntHandler(void)
 {
     volatile unsigned long ulIntPins;
-    
+
     //
     // Call pin interrupt callback functions
     //
     ulIntPins = GPIOIntHandler(GPIO_PORTF_BASE);
-    
+
     //
-    // TODO: User can use the ulIntPins to do more things if have not 
+    // TODO: User can use the ulIntPins to do more things if have not
     // init the callback function.
     //
 }
@@ -1030,7 +1029,7 @@ GPIOPinWrite(unsigned long ulPort, unsigned char ucPins, unsigned char ucVal)
     while(ucTemp)
     {
         ucCnt++;
-        ucTemp >>= 1; 
+        ucTemp >>= 1;
     }
     //
     // Write the pins.

@@ -52,6 +52,15 @@
 //
 //*****************************************************************************
 
+//! Detect MCU Type.
+#if defined(LPC_175x) || defined (LPC_176x) ||       \
+    defined(LPC_177x) || defined (LPC_178x)
+#else
+#error Please select your LPC MCU first!             \
+       This value can be one of the following value: \
+       LPC_175x or LPC_176x or LPC_177x or LPC_178x
+#endif
+
 //*****************************************************************************
 //
 // Stack Configuration
@@ -83,55 +92,51 @@ void WEAK PendSVIntHandler       (void);
 void WEAK SysTickIntHandler      (void);
 
 // External Interrupts
-void WEAK WDT_IRQHandler         (void);     // 16: Watchdog Timer
-void WEAK TIMER0_IRQHandler      (void);     // 17: Timer0
-void WEAK TIMER1_IRQHandler      (void);     // 18: Timer1
-void WEAK TIMER2_IRQHandler      (void);     // 19: Timer2
-void WEAK TIMER3_IRQHandler      (void);     // 20: Timer3
-void WEAK UART0_IRQHandler       (void);     // 21: UART0
-void WEAK UART1_IRQHandler       (void);     // 22: UART1
-void WEAK UART2_IRQHandler       (void);     // 23: UART2
-void WEAK UART3_IRQHandler       (void);     // 24: UART3
-void WEAK PWM1_IRQHandler        (void);     // 25: PWM1
-void WEAK I2C0_IRQHandler        (void);     // 26: I2C0
-void WEAK I2C1_IRQHandler        (void);     // 27: I2C1
-void WEAK I2C2_IRQHandler        (void);     // 28: I2C2
-void WEAK SPI_IRQHandler         (void);     // 29: SPI
-void WEAK SSP0_IRQHandler        (void);     // 30: SSP0
-void WEAK SSP1_IRQHandler        (void);     // 31: SSP1
-void WEAK PLL0_IRQHandler        (void);     // 32: PLL0 Lock (Main PLL)
-void WEAK RTC_IRQHandler         (void);     // 33: Real Time Clock
-void WEAK EINT0_IRQHandler       (void);     // 34: External Interrupt 0
-void WEAK EINT1_IRQHandler       (void);     // 35: External Interrupt 1
-void WEAK EINT2_IRQHandler       (void);     // 36: External Interrupt 2
-void WEAK EINT3_IRQHandler       (void);     // 37: External Interrupt 3
-void WEAK ADC_IRQHandler         (void);     // 38: A/D Converter
-void WEAK BOD_IRQHandler         (void);     // 39: Brown-Out Detect
-void WEAK USB_IRQHandler         (void);     // 40: USB
-void WEAK CAN_IRQHandler         (void);     // 41: CAN
-void WEAK DMA_IRQHandler         (void);     // 42: General Purpose DMA
-void WEAK I2S_IRQHandler         (void);     // 43: I2S
-void WEAK ENET_IRQHandler        (void);     // 44: Ethernet
+void WEAK WDTIntHandler         (void);     // 16: Watchdog Timer
+void WEAK TIMER0IntHandler      (void);     // 17: Timer0
+void WEAK TIMER1IntHandler      (void);     // 18: Timer1
+void WEAK TIMER2IntHandler      (void);     // 19: Timer2
+void WEAK TIMER3IntHandler      (void);     // 20: Timer3
+void WEAK UART0IntHandler       (void);     // 21: UART0
+void WEAK UART1IntHandler       (void);     // 22: UART1
+void WEAK UART2IntHandler       (void);     // 23: UART2
+void WEAK UART3IntHandler       (void);     // 24: UART3
+void WEAK PWM1IntHandler        (void);     // 25: PWM1
+void WEAK I2C0IntHandler        (void);     // 26: I2C0
+void WEAK I2C1IntHandler        (void);     // 27: I2C1
+void WEAK I2C2IntHandler        (void);     // 28: I2C2
+void WEAK SPIIntHandler         (void);     // 29: SPI
+void WEAK SSP0IntHandler        (void);     // 30: SSP0
+void WEAK SSP1IntHandler        (void);     // 31: SSP1
+void WEAK PLL0IntHandler        (void);     // 32: PLL0 Lock (Main PLL)
+void WEAK RTCIntHandler         (void);     // 33: Real Time Clock
+void WEAK EINT0IntHandler       (void);     // 34: External Interrupt 0
+void WEAK EINT1IntHandler       (void);     // 35: External Interrupt 1
+void WEAK EINT2IntHandler       (void);     // 36: External Interrupt 2
+void WEAK EINT3IntHandler       (void);     // 37: External Interrupt 3
+void WEAK ADCIntHandler         (void);     // 38: A/D Converter
+void WEAK BODIntHandler         (void);     // 39: Brown-Out Detect
+void WEAK USBIntHandler         (void);     // 40: USB
+void WEAK CANIntHandler         (void);     // 41: CAN
+void WEAK DMAIntHandler         (void);     // 42: General Purpose DMA
+void WEAK I2SIntHandler         (void);     // 43: I2S
+void WEAK ENETIntHandler        (void);     // 44: Ethernet
 #if defined(LPC_175x) || defined (LPC_176x)
-void WEAK RIT_IRQHandler         (void);     // 45: Repetitive Interrupt Timer
+void WEAK RITIntHandler         (void);     // 45: Repetitive Interrupt Timer
 #elif defined(LPC_177x) || defined (LPC_178x)
-void WEAK MCI_IRQHandler         (void);     // 45: SD/MMC Card
-#else
-#error Please select your LPC MCU first!             \
-       This value can be one of the following value: \
-       LPC_175x or LPC_176x or LPC_177x or LPC_178x
+void WEAK MCIIntHandler         (void);     // 45: SD/MMC Card
 #endif
-void WEAK MCPWM_IRQHandler       (void);     // 46: Motor Control PWM
-void WEAK QEI_IRQHandler         (void);     // 47: Quadrature Encoder Interface
-void WEAK PLL1_IRQHandler        (void);     // 48: PLL1 Lock (USB PLL)
-void WEAK USBActivity_IRQHandler (void);     // 49: USB Activity
-void WEAK CANActivity_IRQHandler (void);     // 50: CAN Activity
-void WEAK UART4_IRQHandler       (void);     // 51: UART4
-void WEAK SSP2_IRQHandler        (void);     // 52: SSP2
-void WEAK LCD_IRQHandler         (void);     // 53: LCD
-void WEAK GPIO_IRQHandler        (void);     // 54: GPIO
-void WEAK PWM0_IRQHandler        (void);     // 55: PWM0
-void WEAK EEPROM_IRQHandler      (void);     // 56: EEPROM
+void WEAK MCPWMIntHandler       (void);     // 46: Motor Control PWM
+void WEAK QEIIntHandler         (void);     // 47: Quadrature Encoder Interface
+void WEAK PLL1IntHandler        (void);     // 48: PLL1 Lock (USB PLL)
+void WEAK USBActivityIntHandler (void);     // 49: USB Activity
+void WEAK CANActivityIntHandler (void);     // 50: CAN Activity
+void WEAK UART4IntHandler       (void);     // 51: UART4
+void WEAK SSP2IntHandler        (void);     // 52: SSP2
+void WEAK LCDIntHandler         (void);     // 53: LCD
+void WEAK GPIOIntHandler        (void);     // 54: GPIO
+void WEAK PWM0IntHandler        (void);     // 55: PWM0
+void WEAK EEPROMIntHandler      (void);     // 56: EEPROM
 //*****************************************************************************
 //
 // Symbols defined in linker script
@@ -203,55 +208,51 @@ void (* const g_pfnVectors[])(void) =
     SysTickIntHandler            ,          // The SysTick handler
 
     // External Interrupts
-    WDT_IRQHandler               ,          // 16: Watchdog Timer
-    TIMER0_IRQHandler            ,          // 17: Timer0
-    TIMER1_IRQHandler            ,          // 18: Timer1
-    TIMER2_IRQHandler            ,          // 19: Timer2
-    TIMER3_IRQHandler            ,          // 20: Timer3
-    UART0_IRQHandler             ,          // 21: UART0
-    UART1_IRQHandler             ,          // 22: UART1
-    UART2_IRQHandler             ,          // 23: UART2
-    UART3_IRQHandler             ,          // 24: UART3
-    PWM1_IRQHandler              ,          // 25: PWM1
-    I2C0_IRQHandler              ,          // 26: I2C0
-    I2C1_IRQHandler              ,          // 27: I2C1
-    I2C2_IRQHandler              ,          // 28: I2C2
-    SPI_IRQHandler               ,          // 29: SPI
-    SSP0_IRQHandler              ,          // 30: SSP0
-    SSP1_IRQHandler              ,          // 31: SSP1
-    PLL0_IRQHandler              ,          // 32: PLL0 Lock (Main PLL)
-    RTC_IRQHandler               ,          // 33: Real Time Clock
-    EINT0_IRQHandler             ,          // 34: External Interrupt 0
-    EINT1_IRQHandler             ,          // 35: External Interrupt 1
-    EINT2_IRQHandler             ,          // 36: External Interrupt 2
-    EINT3_IRQHandler             ,          // 37: External Interrupt 3
-    ADC_IRQHandler               ,          // 38: A/D Converter
-    BOD_IRQHandler               ,          // 39: Brown-Out Detect
-    USB_IRQHandler               ,          // 40: USB
-    CAN_IRQHandler               ,          // 41: CAN
-    DMA_IRQHandler               ,          // 42: General Purpose DMA
-    I2S_IRQHandler               ,          // 43: I2S
-    ENET_IRQHandler              ,          // 44: Ethernet
+    WDTIntHandler               ,          // 16: Watchdog Timer
+    TIMER0IntHandler            ,          // 17: Timer0
+    TIMER1IntHandler            ,          // 18: Timer1
+    TIMER2IntHandler            ,          // 19: Timer2
+    TIMER3IntHandler            ,          // 20: Timer3
+    UART0IntHandler             ,          // 21: UART0
+    UART1IntHandler             ,          // 22: UART1
+    UART2IntHandler             ,          // 23: UART2
+    UART3IntHandler             ,          // 24: UART3
+    PWM1IntHandler              ,          // 25: PWM1
+    I2C0IntHandler              ,          // 26: I2C0
+    I2C1IntHandler              ,          // 27: I2C1
+    I2C2IntHandler              ,          // 28: I2C2
+    SPIIntHandler               ,          // 29: SPI
+    SSP0IntHandler              ,          // 30: SSP0
+    SSP1IntHandler              ,          // 31: SSP1
+    PLL0IntHandler              ,          // 32: PLL0 Lock (Main PLL)
+    RTCIntHandler               ,          // 33: Real Time Clock
+    EINT0IntHandler             ,          // 34: External Interrupt 0
+    EINT1IntHandler             ,          // 35: External Interrupt 1
+    EINT2IntHandler             ,          // 36: External Interrupt 2
+    EINT3IntHandler             ,          // 37: External Interrupt 3
+    ADCIntHandler               ,          // 38: A/D Converter
+    BODIntHandler               ,          // 39: Brown-Out Detect
+    USBIntHandler               ,          // 40: USB
+    CANIntHandler               ,          // 41: CAN
+    DMAIntHandler               ,          // 42: General Purpose DMA
+    I2SIntHandler               ,          // 43: I2S
+    ENETIntHandler              ,          // 44: Ethernet
 #if defined(LPC_175x) || defined (LPC_176x)
-    RIT_IRQHandler               ,          // 45: Repetitive Interrupt Timer
+    RITIntHandler               ,          // 45: Repetitive Interrupt Timer
 #elif defined(LPC_177x) || defined (LPC_178x)
-    MCI_IRQHandler               ,          // 45: SD/MMC Card
-#else
-#error Please select your LPC MCU first!             \
-       This value can be one of the following value: \
-       LPC_175x or LPC_176x or LPC_177x or LPC_178x
+    MCIIntHandler               ,          // 45: SD/MMC Card
 #endif
-    MCPWM_IRQHandler             ,          // 46: Motor Control PWM
-    QEI_IRQHandler               ,          // 47: Quadrature Encoder Interface
-    PLL1_IRQHandler              ,          // 48: PLL1 Lock (USB PLL)
-    USBActivity_IRQHandler       ,          // 49: USB Activity
-    CANActivity_IRQHandler       ,          // 50: CAN Activity
-    UART4_IRQHandler             ,          // 51: UART4
-    SSP2_IRQHandler              ,          // 52: SSP2
-    LCD_IRQHandler               ,          // 53: LCD
-    GPIO_IRQHandler              ,          // 54: GPIO
-    PWM0_IRQHandler              ,          // 55: PWM0
-    EEPROM_IRQHandler            ,          // 56: EEPROM
+    MCPWMIntHandler             ,          // 46: Motor Control PWM
+    QEIIntHandler               ,          // 47: Quadrature Encoder Interface
+    PLL1IntHandler              ,          // 48: PLL1 Lock (USB PLL)
+    USBActivityIntHandler       ,          // 49: USB Activity
+    CANActivityIntHandler       ,          // 50: CAN Activity
+    UART4IntHandler             ,          // 51: UART4
+    SSP2IntHandler              ,          // 52: SSP2
+    LCDIntHandler               ,          // 53: LCD
+    GPIOIntHandler              ,          // 54: GPIO
+    PWM0IntHandler              ,          // 55: PWM0
+    EEPROMIntHandler            ,          // 56: EEPROM
 };
 
 //*****************************************************************************
@@ -318,57 +319,53 @@ void Default_ResetHandler(void)
 #pragma weak SysTickIntHandler       = DefaultIntHandler
 
 // External Interrupts
-#pragma weak WDT_IRQHandler          = DefaultIntHandler    // 16: Watchdog Timer
-#pragma weak TIMER0_IRQHandler       = DefaultIntHandler    // 17: Timer0
-#pragma weak TIMER1_IRQHandler       = DefaultIntHandler    // 18: Timer1
-#pragma weak TIMER2_IRQHandler       = DefaultIntHandler    // 19: Timer2
-#pragma weak TIMER3_IRQHandler       = DefaultIntHandler    // 20: Timer3
-#pragma weak UART0_IRQHandler        = DefaultIntHandler    // 21: UART0
-#pragma weak UART1_IRQHandler        = DefaultIntHandler    // 22: UART1
-#pragma weak UART2_IRQHandler        = DefaultIntHandler    // 23: UART2
-#pragma weak UART3_IRQHandler        = DefaultIntHandler    // 24: UART3
-#pragma weak PWM1_IRQHandler         = DefaultIntHandler    // 25: PWM1
-#pragma weak I2C0_IRQHandler         = DefaultIntHandler    // 26: I2C0
-#pragma weak I2C1_IRQHandler         = DefaultIntHandler    // 27: I2C1
-#pragma weak I2C2_IRQHandler         = DefaultIntHandler    // 28: I2C2
-#pragma weak SPI_IRQHandler          = DefaultIntHandler    // 29: SPI
-#pragma weak SSP0_IRQHandler         = DefaultIntHandler    // 30: SSP0
-#pragma weak SSP1_IRQHandler         = DefaultIntHandler    // 31: SSP1
-#pragma weak PLL0_IRQHandler         = DefaultIntHandler    // 32: PLL0 Lock (Main PLL)
-#pragma weak RTC_IRQHandler          = DefaultIntHandler    // 33: Real Time Clock
-#pragma weak EINT0_IRQHandler        = DefaultIntHandler    // 34: External Interrupt 0
-#pragma weak EINT1_IRQHandler        = DefaultIntHandler    // 35: External Interrupt 1
-#pragma weak EINT2_IRQHandler        = DefaultIntHandler    // 36: External Interrupt 2
-#pragma weak EINT3_IRQHandler        = DefaultIntHandler    // 37: External Interrupt 3
-#pragma weak ADC_IRQHandler          = DefaultIntHandler    // 38: A/D Converter
-#pragma weak BOD_IRQHandler          = DefaultIntHandler    // 39: Brown-Out Detect
-#pragma weak USB_IRQHandler          = DefaultIntHandler    // 40: USB
-#pragma weak CAN_IRQHandler          = DefaultIntHandler    // 41: CAN
-#pragma weak DMA_IRQHandler          = DefaultIntHandler    // 42: General Purpose DMA
-#pragma weak I2S_IRQHandler          = DefaultIntHandler    // 43: I2S
-#pragma weak ENET_IRQHandler         = DefaultIntHandler    // 44: Ethernet
+#pragma weak WDTIntHandler          = DefaultIntHandler    // 16: Watchdog Timer
+#pragma weak TIMER0IntHandler       = DefaultIntHandler    // 17: Timer0
+#pragma weak TIMER1IntHandler       = DefaultIntHandler    // 18: Timer1
+#pragma weak TIMER2IntHandler       = DefaultIntHandler    // 19: Timer2
+#pragma weak TIMER3IntHandler       = DefaultIntHandler    // 20: Timer3
+#pragma weak UART0IntHandler        = DefaultIntHandler    // 21: UART0
+#pragma weak UART1IntHandler        = DefaultIntHandler    // 22: UART1
+#pragma weak UART2IntHandler        = DefaultIntHandler    // 23: UART2
+#pragma weak UART3IntHandler        = DefaultIntHandler    // 24: UART3
+#pragma weak PWM1IntHandler         = DefaultIntHandler    // 25: PWM1
+#pragma weak I2C0IntHandler         = DefaultIntHandler    // 26: I2C0
+#pragma weak I2C1IntHandler         = DefaultIntHandler    // 27: I2C1
+#pragma weak I2C2IntHandler         = DefaultIntHandler    // 28: I2C2
+#pragma weak SPIIntHandler          = DefaultIntHandler    // 29: SPI
+#pragma weak SSP0IntHandler         = DefaultIntHandler    // 30: SSP0
+#pragma weak SSP1IntHandler         = DefaultIntHandler    // 31: SSP1
+#pragma weak PLL0IntHandler         = DefaultIntHandler    // 32: PLL0 Lock (Main PLL)
+#pragma weak RTCIntHandler          = DefaultIntHandler    // 33: Real Time Clock
+#pragma weak EINT0IntHandler        = DefaultIntHandler    // 34: External Interrupt 0
+#pragma weak EINT1IntHandler        = DefaultIntHandler    // 35: External Interrupt 1
+#pragma weak EINT2IntHandler        = DefaultIntHandler    // 36: External Interrupt 2
+#pragma weak EINT3IntHandler        = DefaultIntHandler    // 37: External Interrupt 3
+#pragma weak ADCIntHandler          = DefaultIntHandler    // 38: A/D Converter
+#pragma weak BODIntHandler          = DefaultIntHandler    // 39: Brown-Out Detect
+#pragma weak USBIntHandler          = DefaultIntHandler    // 40: USB
+#pragma weak CANIntHandler          = DefaultIntHandler    // 41: CAN
+#pragma weak DMAIntHandler          = DefaultIntHandler    // 42: General Purpose DMA
+#pragma weak I2SIntHandler          = DefaultIntHandler    // 43: I2S
+#pragma weak ENETIntHandler         = DefaultIntHandler    // 44: Ethernet
 
 #if defined(LPC_175x) || defined (LPC_176x)
-#pragma weak RIT_IRQHandler          = DefaultIntHandler    // 45: Repetitive Interrupt Timer
+#pragma weak RITIntHandler          = DefaultIntHandler    // 45: Repetitive Interrupt Timer
 #elif defined(LPC_177x) || defined (LPC_178x)
-#pragma weak MCI_IRQHandler          = DefaultIntHandler    // 45: SD/MMC Card
-#else
-#error Please select your LPC MCU first!             \
-       This value can be one of the following value: \
-       LPC_175x or LPC_176x or LPC_177x or LPC_178x
+#pragma weak MCIIntHandler          = DefaultIntHandler    // 45: SD/MMC Card
 #endif
 
-#pragma weak MCPWM_IRQHandler        = DefaultIntHandler    // 46: Motor Control PWM
-#pragma weak QEI_IRQHandler          = DefaultIntHandler    // 47: Quadrature Encoder Interface
-#pragma weak PLL1_IRQHandler         = DefaultIntHandler    // 48: PLL1 Lock (USB PLL)
-#pragma weak USBActivity_IRQHandler  = DefaultIntHandler    // 49: USB Activity
-#pragma weak CANActivity_IRQHandler  = DefaultIntHandler    // 50: CAN Activity
-#pragma weak UART4_IRQHandler        = DefaultIntHandler    // 51: UART4
-#pragma weak SSP2_IRQHandler         = DefaultIntHandler    // 52: SSP2
-#pragma weak LCD_IRQHandler          = DefaultIntHandler    // 53: LCD
-#pragma weak GPIO_IRQHandler         = DefaultIntHandler    // 54: GPIO
-#pragma weak PWM0_IRQHandler         = DefaultIntHandler    // 55: PWM0
-#pragma weak EEPROM_IRQHandler       = DefaultIntHandler    // 56: EEPROM
+#pragma weak MCPWMIntHandler        = DefaultIntHandler    // 46: Motor Control PWM
+#pragma weak QEIIntHandler          = DefaultIntHandler    // 47: Quadrature Encoder Interface
+#pragma weak PLL1IntHandler         = DefaultIntHandler    // 48: PLL1 Lock (USB PLL)
+#pragma weak USBActivityIntHandler  = DefaultIntHandler    // 49: USB Activity
+#pragma weak CANActivityIntHandler  = DefaultIntHandler    // 50: CAN Activity
+#pragma weak UART4IntHandler        = DefaultIntHandler    // 51: UART4
+#pragma weak SSP2IntHandler         = DefaultIntHandler    // 52: SSP2
+#pragma weak LCDIntHandler          = DefaultIntHandler    // 53: LCD
+#pragma weak GPIOIntHandler         = DefaultIntHandler    // 54: GPIO
+#pragma weak PWM0IntHandler         = DefaultIntHandler    // 55: PWM0
+#pragma weak EEPROMIntHandler       = DefaultIntHandler    // 56: EEPROM
 //*****************************************************************************
 //
 //! \brief This is the code that gets called when the processor receives an

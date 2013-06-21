@@ -7,32 +7,31 @@
 //! \author CooCox
 //! \copy
 //!
-//! Copyright (c)  2011, CooCox 
+//! Copyright (c)  2011, CooCox
 //! All rights reserved.
-//! 
-//! Redistribution and use in source and binary forms, with or without 
-//! modification, are permitted provided that the following conditions 
-//! are met: 
-//! 
-//!     * Redistributions of source code must retain the above copyright 
-//! notice, this list of conditions and the following disclaimer. 
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!     * Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
 //! notice, this list of conditions and the following disclaimer in the
-//! documentation and/or other materials provided with the distribution. 
-//!     * Neither the name of the <ORGANIZATION> nor the names of its 
-//! contributors may be used to endorse or promote products derived 
-//! from this software without specific prior written permission. 
-//! 
+//! documentation and/or other materials provided with the distribution.
+//!     * Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
 //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
 //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 //! THE POSSIBILITY OF SUCH DAMAGE.
 //
 //*****************************************************************************
@@ -57,7 +56,7 @@
 //*****************************************************************************
 //
 //! \addtogroup LPC17xx_Register_SysCtl
-//! \brief Here are the detailed info of SysCtl registers. 
+//! \brief Here are the detailed info of SysCtl registers.
 //!
 //! it contains:
 //! - Register offset.
@@ -114,12 +113,12 @@
 //
 //! PLL0 Enable
 //
-#define SYSCTL_PLL0CON_PLLE0    0x00000001 
+#define SYSCTL_PLL0CON_PLLE0    0x00000001
 
 //
 //! PLL0 Connect
 //
-#define SYSCTL_PLL0CON_PLLC0    0x00000002  
+#define SYSCTL_PLL0CON_PLLC0    0x00000002
 
 //*****************************************************************************
 //
@@ -137,13 +136,13 @@
 //
 //! PLL0 Pre-Divider value
 //
-#define SYSCTL_PLL0CFG_NSEL0_M  0x00FF0000  
+#define SYSCTL_PLL0CFG_NSEL0_M  0x00FF0000
 #define SYSCTL_PLL0CFG_NSEL0_S  16
 
 //
 //! PLL0 Multiplier value
 //
-#define SYSCTL_PLL0CFG_MSEL0_M  0x00004FFF 
+#define SYSCTL_PLL0CFG_MSEL0_M  0x00004FFF
 #define SYSCTL_PLL0CFG_MSEL0_S  0
 
 //*****************************************************************************
@@ -168,26 +167,26 @@
 //! Read-back for the PLL0 Connect bit
 //
 #define SYSCTL_PLL0STAT_PLLC0_STAT                                            \
-                                0x02000000  
+                                0x02000000
 
 //
 //! Read-back for the PLL0 Enable bit
 //
 #define SYSCTL_PLL0STAT_PLLE0_STAT                                            \
-                                0x01000000  
+                                0x01000000
 
 //
 //! Read-back for the PLL0 Pre-Divider value
 //
-#define SYSCTL_PLL0STAT_NSEL0_M 0x00FF0000 
-#define SYSCTL_PLL0STAT_NSEL0_S 16 
-                                  
+#define SYSCTL_PLL0STAT_NSEL0_M 0x00FF0000
+#define SYSCTL_PLL0STAT_NSEL0_S 16
+
 //
 //! Read-back for the PLL0 Multiplier value
 //
-#define SYSCTL_PLL0STAT_MSEL0_M 0x00004FFF                                  
+#define SYSCTL_PLL0STAT_MSEL0_M 0x00004FFF
 #define SYSCTL_PLL0STAT_MSEL0_S 0
-                                  
+
 //*****************************************************************************
 //
 //! @}
@@ -205,7 +204,7 @@
 //! Read-back for the PLL0 Multiplier value
 //
 #define SYSCTL_PLL0FEED_PLL0FEED_M                                            \
-                                0x000000FF  
+                                0x000000FF
 #define SYSCTL_PLL0FEED_PLL0FEED_S                                            \
                                 0
 
@@ -225,19 +224,19 @@
 //
 //! PLL1 Enable
 //
-#define SYSCTL_PLL1CON_PLLE1    0x00000001 
+#define SYSCTL_PLL1CON_PLLE1    0x00000001
 
 //
 //! PLL1 Connect
 //
-#define SYSCTL_PLL1CON_PLLC1    0x00000002  
+#define SYSCTL_PLL1CON_PLLC1    0x00000002
 
 //*****************************************************************************
 //
 //! @}
 //
 //*****************************************************************************
- 
+
 //*****************************************************************************
 //
 //! \addtogroup LPC17xx_Register_SYSCTL_PLL1CFG SYSCTL_PLL1CFG
@@ -248,13 +247,13 @@
 //
 //! PLL1 Divider value
 //
-#define SYSCTL_PLL1CFG_PSEL1_M  0x00000060  
+#define SYSCTL_PLL1CFG_PSEL1_M  0x00000060
 #define SYSCTL_PLL1CFG_PSEL1_S  5
 
 //
 //! PLL1 Multiplier value
 //
-#define SYSCTL_PLL0CFG_MSEL1_M  0x0000001F 
+#define SYSCTL_PLL0CFG_MSEL1_M  0x0000001F
 #define SYSCTL_PLL0CFG_MSEL1_S  0
 
 //*****************************************************************************
@@ -279,26 +278,26 @@
 //! Read-back for the PLL0 Connect bit
 //
 #define SYSCTL_PLL1STAT_PLLC1_STAT                                            \
-                                0x00000200  
+                                0x00000200
 
 //
 //! Read-back for the PLL1 Enable bit
 //
 #define SYSCTL_PLL1STAT_PLLE1_STAT                                            \
-                                0x00000100  
+                                0x00000100
 
 //
 //! Read-back for the PLL1 Divider value
 //
-#define SYSCTL_PLL1STAT_NSEL1_M 0x0000060                                  
-#define SYSCTL_PLL1STAT_NSEL1_S 5 
-                                  
+#define SYSCTL_PLL1STAT_NSEL1_M 0x0000060
+#define SYSCTL_PLL1STAT_NSEL1_S 5
+
 //
 //! Read-back for the PLL1 Multiplier value
 //
-#define SYSCTL_PLL1STAT_MSEL1_M 0x0000001F  
+#define SYSCTL_PLL1STAT_MSEL1_M 0x0000001F
 #define SYSCTL_PLL1STAT_MSEL1_S 0
-                                  
+
 //*****************************************************************************
 //
 //! @}
@@ -316,7 +315,7 @@
 //! Read-back for the PLL1 Multiplier value
 //
 #define SYSCTL_PLL1FEED_PLL1FEED_M                                            \
-                                0x000000FF  
+                                0x000000FF
 #define SYSCTL_PLL1FEED_PLL1FEED_S                                            \
                                 0
 
@@ -325,7 +324,7 @@
 //! @}
 //
 //*****************************************************************************
-                                  
+
 //*****************************************************************************
 //
 //! \addtogroup LPC17xx_Register_SYSCTL_CLKCFG SYSCTL_CLKCFG
@@ -335,9 +334,9 @@
 
 //
 //! Selects the divide value for creating the CPU clock from the PLL0 output.
-//                                 
-#define SYSCTL_CLKCFG_CLKSEL_M  0x000000FF  
-#define SYSCTL_CLKCFG_CLKSEL_S  0  
+//
+#define SYSCTL_CLKCFG_CLKSEL_M  0x000000FF
+#define SYSCTL_CLKCFG_CLKSEL_S  0
 //*****************************************************************************
 //
 //! @}
@@ -353,11 +352,11 @@
 
 //
 //! Selects the divide value for creating the USB clock from the PLL0 output.
-//                                  
+//
 #define SYSCTL_USBCLKCFG_USBSEL_M                                             \
-                                0x0000000F  
+                                0x0000000F
 #define SYSCTL_USBCLKCFG_USBSEL_S                                             \
-                                0 
+                                0
 //*****************************************************************************
 //
 //! @}
@@ -373,23 +372,23 @@
 
 //
 //! The frequency range of the main oscillator is 1 MHz to 20 MHz
-//                                  
-#define SYSCTL_SCS_OSCRANGE_1   0x00000000 
+//
+#define SYSCTL_SCS_OSCRANGE_1   0x00000000
 
 //
 //! The frequency range of the main oscillator is 15 MHz to 25 MHz
-//                                  
-#define SYSCTL_SCS_OSCRANGE_15  0x00000010  
+//
+#define SYSCTL_SCS_OSCRANGE_15  0x00000010
 
 //
 //! The main oscillator is enabled
-//                                  
-#define SYSCTL_SCS_OSCEN        0x00000020 
-                                  
+//
+#define SYSCTL_SCS_OSCEN        0x00000020
+
 //
 //! The main oscillator is ready to be used as a clock source
-//                                  
-#define SYSCTL_SCS_OSCSTAT      0x00000040  
+//
+#define SYSCTL_SCS_OSCSTAT      0x00000040
 
 //*****************************************************************************
 //
@@ -403,7 +402,7 @@
 //! @{
 //
 //*****************************************************************************
-                                
+
 #define SYSCTL_PCLKSEL0_ACF_CLK_4                                             \
                                 0x00000000
 #define SYSCTL_PCLKSEL0_ACF_CLK_1                                             \
@@ -412,123 +411,123 @@
                                 0x80000000
 #define SYSCTL_PCLKSEL0_ACF_CLK_8                                             \
                                 0xC0000000
-                                  
+
 #define SYSCTL_PCLKSEL0_CAN2_CLK_4                                            \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL0_CAN2_CLK_1                                            \
                                 0x10000000
 #define SYSCTL_PCLKSEL0_CAN2_CLK_2                                            \
                                 0x20000000
 #define SYSCTL_PCLKSEL0_CAN2_CLK_6                                            \
                                 0x30000000
-                                  
+
 #define SYSCTL_PCLKSEL0_CAN1_CLK_4                                            \
-                                0x00000000   
+                                0x00000000
 #define SYSCTL_PCLKSEL0_CAN1_CLK_1                                            \
                                 0x04000000
 #define SYSCTL_PCLKSEL0_CAN1_CLK_2                                            \
                                 0x08000000
 #define SYSCTL_PCLKSEL0_CAN1_CLK_6                                            \
                                 0x0C000000
-                                  
+
 #define SYSCTL_PCLKSEL0_ADC_CLK_4                                             \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL0_ADC_CLK_1                                             \
                                 0x01000000
 #define SYSCTL_PCLKSEL0_ADC_CLK_2                                             \
                                 0x02000000
 #define SYSCTL_PCLKSEL0_ADC_CLK_8                                             \
                                 0x03000000
-                                  
+
 #define SYSCTL_PCLKSEL0_DAC_CLK_4                                             \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL0_DAC_CLK_1                                             \
                                 0x00400000
 #define SYSCTL_PCLKSEL0_DAC_CLK_2                                             \
                                 0x00800000
 #define SYSCTL_PCLKSEL0_DAC_CLK_8                                             \
                                 0x00C00000
-                                  
+
 #define SYSCTL_PCLKSEL0_SSP1_CLK_4                                            \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL0_SSP1_CLK_1                                            \
-                                0x00100000 
+                                0x00100000
 #define SYSCTL_PCLKSEL0_SSP1_CLK_2                                            \
-                                0x00200000 
+                                0x00200000
 #define SYSCTL_PCLKSEL0_SSP1_CLK_8                                            \
-                                0x00300000 
-                                  
+                                0x00300000
+
 #define SYSCTL_PCLKSEL0_SPI_CLK_4                                             \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL0_SPI_CLK_1                                             \
                                 0x00010000
 #define SYSCTL_PCLKSEL0_SPI_CLK_2                                             \
                                 0x00020000
 #define SYSCTL_PCLKSEL0_SPI_CLK_8                                             \
                                 0x00030000
-                                  
+
 #define SYSCTL_PCLKSEL0_I2C0_CLK_4                                            \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL0_I2C0_CLK_1                                            \
                                 0x00004000
 #define SYSCTL_PCLKSEL0_I2C0_CLK_2                                            \
                                 0x00008000
 #define SYSCTL_PCLKSEL0_I2C0_CLK_8                                            \
                                 0x0000C000
-                                  
+
 #define SYSCTL_PCLKSEL0_PWM1_CLK_4                                            \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL0_PWM1_CLK_1                                            \
-                                0x00001000 
+                                0x00001000
 #define SYSCTL_PCLKSEL0_PWM1_CLK_2                                            \
-                                0x00002000 
+                                0x00002000
 #define SYSCTL_PCLKSEL0_PWM1_CLK_8                                            \
-                                0x00003000 
-                                  
+                                0x00003000
+
 #define SYSCTL_PCLKSEL0_UART1_CLK_4                                           \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL0_UART1_CLK_1                                           \
                                 0x00000100
 #define SYSCTL_PCLKSEL0_UART1_CLK_2                                           \
                                 0x00000200
 #define SYSCTL_PCLKSEL0_UART1_CLK_8                                           \
                                 0x00000300
-                                  
+
 #define SYSCTL_PCLKSEL0_UART0_CLK_4                                           \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL0_UART0_CLK_1                                           \
                                 0x00000040
 #define SYSCTL_PCLKSEL0_UART0_CLK_2                                           \
                                 0x00000080
 #define SYSCTL_PCLKSEL0_UART0_CLK_8                                           \
                                 0x000000C0
-                                  
+
 #define SYSCTL_PCLKSEL0_TIMER1_CLK_4                                          \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL0_TIMER1_CLK_1                                          \
                                 0x00000010
 #define SYSCTL_PCLKSEL0_TIMER1_CLK_2                                          \
                                 0x00000020
 #define SYSCTL_PCLKSEL0_TIMER1_CLK_8                                          \
                                 0x00000030
-                                  
+
 #define SYSCTL_PCLKSEL0_TIMER0_CLK_4                                          \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL0_TIMER0_CLK_1                                          \
-                                0x00000004 
+                                0x00000004
 #define SYSCTL_PCLKSEL0_TIMER0_CLK_2                                          \
-                                0x00000008 
+                                0x00000008
 #define SYSCTL_PCLKSEL0_TIMER0_CLK_8                                          \
-                                0x0000000C 
-                                  
+                                0x0000000C
+
 #define SYSCTL_PCLKSEL0_WDT_CLK_4                                             \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL0_WDT_CLK_1                                             \
-                                0x00000001 
+                                0x00000001
 #define SYSCTL_PCLKSEL0_WDT_CLK_2                                             \
-                                0x00000002  
+                                0x00000002
 #define SYSCTL_PCLKSEL0_WDT_CLK_8                                             \
-                                0x00000003  
+                                0x00000003
 
 //*****************************************************************************
 //
@@ -551,123 +550,123 @@
                                 0x80000000
 #define SYSCTL_PCLKSEL1_MC_CLK_8                                              \
                                 0xC0000000
-                                  
+
 #define SYSCTL_PCLKSEL1_SYSCON_CLK_4                                          \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL1_SYSCON_CLK_1                                          \
                                 0x10000000
 #define SYSCTL_PCLKSEL1_SYSCON_CLK_2                                          \
                                 0x20000000
 #define SYSCTL_PCLKSEL1_SYSCON_CLK_8                                          \
                                 0x30000000
-                                  
+
 #define SYSCTL_PCLKSEL1_RIT_CLK_4                                             \
-                                0x00000000   
+                                0x00000000
 #define SYSCTL_PCLKSEL1_RIT_CLK_1                                             \
                                 0x04000000
 #define SYSCTL_PCLKSEL1_RIT_CLK_2                                             \
                                 0x08000000
 #define SYSCTL_PCLKSEL1_RIT_CLK_8                                             \
                                 0x0C000000
-                                  
+
 #define SYSCTL_PCLKSEL1_I2S_CLK_4                                             \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL1_I2S_CLK_1                                             \
                                 0x00400000
 #define SYSCTL_PCLKSEL1_I2S_CLK_2                                             \
                                 0x00800000
 #define SYSCTL_PCLKSEL1_I2S_CLK_8                                             \
                                 0x00C00000
-                                  
+
 #define SYSCTL_PCLKSEL1_I2C2_CLK_4                                            \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL1_I2C2_CLK_1                                            \
                                 0x00100000
 #define SYSCTL_PCLKSEL1_I2C2_CLK_2                                            \
                                 0x00200000
 #define SYSCTL_PCLKSEL1_I2C2_CLK_8                                            \
                                 0x00300000
-                                  
+
 #define SYSCTL_PCLKSEL1_UART3_CLK_4                                           \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL1_UART3_CLK_1                                           \
-                                0x00040000 
+                                0x00040000
 #define SYSCTL_PCLKSEL1_UART3_CLK_2                                           \
-                                0x00080000 
+                                0x00080000
 #define SYSCTL_PCLKSEL1_UART3_CLK_8                                           \
-                                0x000C0000 
-                                  
+                                0x000C0000
+
 #define SYSCTL_PCLKSEL1_UART2_CLK_4                                           \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL1_UART2_CLK_1                                           \
                                 0x00010000
 #define SYSCTL_PCLKSEL1_UART2_CLK_2                                           \
                                 0x00020000
 #define SYSCTL_PCLKSEL1_UART2_CLK_8                                           \
                                 0x00030000
-                                  
+
 #define SYSCTL_PCLKSEL1_TIMER3_CLK_4                                          \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL1_TIMER3_CLK_1                                          \
                                 0x00004000
 #define SYSCTL_PCLKSEL1_TIMER3_CLK_2                                          \
                                 0x00008000
 #define SYSCTL_PCLKSEL1_TIMER3_CLK_8                                          \
                                 0x0000C000
-                                  
+
 #define SYSCTL_PCLKSEL1_TIMER2_CLK_4                                          \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL1_TIMER2_CLK_1                                          \
-                                0x00001000 
+                                0x00001000
 #define SYSCTL_PCLKSEL1_TIMER2_CLK_2                                          \
-                                0x00002000 
+                                0x00002000
 #define SYSCTL_PCLKSEL1_TIMER2_CLK_8                                          \
-                                0x00003000 
-                                  
+                                0x00003000
+
 #define SYSCTL_PCLKSEL1_SSP0_CLK_4                                            \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL1_SSP0_CLK_1                                            \
                                 0x00000400
 #define SYSCTL_PCLKSEL1_SSP0_CLK_2                                            \
                                 0x00000800
 #define SYSCTL_PCLKSEL1_SSP0_CLK_8                                            \
                                 0x00000C00
-                                  
+
 #define SYSCTL_PCLKSEL1_I2C1_CLK_4                                            \
-                                0x00000000   
+                                0x00000000
 #define SYSCTL_PCLKSEL1_I2C1_CLK_1                                            \
                                 0x00000040
 #define SYSCTL_PCLKSEL1_I2C1_CLK_2                                            \
                                 0x00000080
 #define SYSCTL_PCLKSEL1_I2C1_CLK_8                                            \
                                 0x000000C0
-                                  
+
 #define SYSCTL_PCLKSEL1_PCB_CLK_4                                             \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL1_PCB_CLK_1                                             \
-                                0x00000010 
+                                0x00000010
 #define SYSCTL_PCLKSEL1_PCB_CLK_2                                             \
                                 0x00000020
 #define SYSCTL_PCLKSEL1_PCB_CLK_8                                             \
                                 0x00000030
-                                  
+
 #define SYSCTL_PCLKSEL1_GPIOINT_CLK_4                                         \
-                                0x00000000 
+                                0x00000000
 #define SYSCTL_PCLKSEL1_GPIOINT_CLK_1                                         \
-                                0x00000004 
+                                0x00000004
 #define SYSCTL_PCLKSEL1_GPIOINT_CLK_2                                         \
-                                0x00000008 
+                                0x00000008
 #define SYSCTL_PCLKSEL1_GPIOINT_CLK_8                                         \
-                                0x0000000C 
-                                  
+                                0x0000000C
+
 #define SYSCTL_PCLKSEL1_QEI_CLK_4                                             \
-                                0x00000000  
+                                0x00000000
 #define SYSCTL_PCLKSEL1_QEI_CLK_1                                             \
-                                0x00000001 
+                                0x00000001
 #define SYSCTL_PCLKSEL1_QEI_CLK_2                                             \
-                                0x00000002  
+                                0x00000002
 #define SYSCTL_PCLKSEL1_QEI_CLK_8                                             \
-                                0x00000003  
+                                0x00000003
 
 //*****************************************************************************
 //
@@ -684,48 +683,48 @@
 
 //
 //! Deep Power-down entry flag
-//                                  
-#define SYSCTL_PCON_DPDFLAG     0x00000800  
+//
+#define SYSCTL_PCON_DPDFLAG     0x00000800
 
 //
 //! Power-down entry flag
-//                                  
+//
 #define SYSCTL_PCON_PDFLAG      0x00000400
 
 //
 //! Deep Sleep entry flag
-//                                  
-#define SYSCTL_PCON_DSFLAG      0x00000200  
+//
+#define SYSCTL_PCON_DSFLAG      0x00000200
 
 //
 //! Sleep Mode entry flag
-//                                  
-#define SYSCTL_PCON_SMFLAG      0x00000100  
+//
+#define SYSCTL_PCON_SMFLAG      0x00000100
 
 //
 //! Brown-Out Reset Disable
-//                                  
-#define SYSCTL_PCON_BORD        0x00000010  
+//
+#define SYSCTL_PCON_BORD        0x00000010
 
 //
 //! Brown-Out Global Disable
-//                                 
-#define SYSCTL_PCON_BOGD        0x00000008  
+//
+#define SYSCTL_PCON_BOGD        0x00000008
 
 //
 //! Brown-Out Reduced Power Mode
-//                                  
-#define SYSCTL_PCON_BODRPM      0x00000004  
+//
+#define SYSCTL_PCON_BODRPM      0x00000004
 
 //
 //! Power mode control bit 1
-//                                  
-#define SYSCTL_PCON_PM1         0x00000002  
+//
+#define SYSCTL_PCON_PM1         0x00000002
 
 //
 //! Power mode control bit 0
-//                                 
-#define SYSCTL_PCON_PM0         0x00000001  
+//
+#define SYSCTL_PCON_PM0         0x00000001
 
 //*****************************************************************************
 //
@@ -782,26 +781,26 @@
 //*****************************************************************************
 
 //
-//! 
+//!
 //
 #define SYSCTL_CLKSRCSEL_CLKSRC_M                                             \
                                 0x00000003
-                                  
+
 //
 //! Selects the Internal RC oscillator as the PLL0 clock source (default)
 //
-#define SYSCTL_CLKSRCSEL_INTRC  0x00000000  
+#define SYSCTL_CLKSRCSEL_INTRC  0x00000000
 
 //
 //! Selects the main oscillator as the PLL0 clock source (default)
 //
 #define SYSCTL_CLKSRCSEL_MAINOSC                                              \
-                                0x00000001 
+                                0x00000001
 
 //
 //! Selects the RTC oscillator as the PLL0 clock source (default)
 //
-#define SYSCTL_CLKSRCSEL_OSC_32 0x00000002  
+#define SYSCTL_CLKSRCSEL_OSC_32 0x00000002
 
 //*****************************************************************************
 //
@@ -818,24 +817,24 @@
 
 //
 //! BOD reset
-//                                  
-#define SYSCTL_RSID_BODR        0x00000008  
+//
+#define SYSCTL_RSID_BODR        0x00000008
 
 //
 //! Watchdog reset
 //
-#define SYSCTL_RSID_WDTR        0x00000004 
+#define SYSCTL_RSID_WDTR        0x00000004
 
 //
 //! the RESET signal reset
 //
-#define SYSCTL_RSID_EXTR        0x00000002 
+#define SYSCTL_RSID_EXTR        0x00000002
 
 //
 //! POR signal reset
 //
-#define SYSCTL_RSID_POR         0x00000001  
-                                  
+#define SYSCTL_RSID_POR         0x00000001
+
 //*****************************************************************************
 //
 //! @}
@@ -851,19 +850,19 @@
 
 //
 //! CLKOUT activity indication
-//                                  
+//
 #define SYSCTL_CLKOUTCFG_CLKOUT_ACT                                           \
-                                0x00000200 
+                                0x00000200
 
 //
 //! CLKOUT enable control
-//                                  
+//
 #define SYSCTL_CLKOUTCFG_CLKOUT_EN                                            \
-                                0x00000100                                    
+                                0x00000100
 
 //
 //! Integer value to divide the output clock by, minus one.
-//                                  
+//
 #define SYSCTL_CLKOUTCFG_CLKOUTDIV_M                                          \
                                 0x000000F0
 #define SYSCTL_CLKOUTCFG_CLKOUTDIV_S                                          \
@@ -875,7 +874,7 @@
 #define SYSCTL_CLKOUTCFG_CLKOUTSEL_M                                          \
                                 0x0000000F
 #define SYSCTL_CLKOUTCFG_CLKOUTSEL_S                                          \
-                                0                                 
+                                0
 #define SYSCTL_CLKOUTCFG_CLKOUTSEL_CPUCLK                                     \
                                 0x00000000
 #define SYSCTL_CLKOUTCFG_CLKOUTSEL_MAINOSC                                    \
@@ -885,7 +884,7 @@
 #define SYSCTL_CLKOUTCFG_CLKOUTSEL_USBCLK                                     \
                                 0x00000003
 #define SYSCTL_CLKOUTCFG_CLKOUTSEL_RTCOSC                                     \
-                                0x00000004                                  
+                                0x00000004
 //*****************************************************************************
 //
 //! @}
@@ -901,40 +900,40 @@
 
 //
 //! Flash access time
-//                                  
+//
 #define FLASH_FLASHCFG_FLASHTIM_M                                             \
-                                0x0000F000 
+                                0x0000F000
 //
 //! Flash accesses use 1 CPU clock. Use for up to 20 MHz CPU clock
-//                                  
+//
 #define FLASH_FLASHCFG_FLASHTIM_1                                             \
                                 0x00000000
 //
 //! Flash accesses use 2 CPU clocks. Use for up to 40 MHz CPU clock
-//                                  
+//
 #define FLASH_FLASHCFG_FLASHTIM_2                                             \
                                 0x00001000
 //
 //! Flash accesses use 3 CPU clocks. Use for up to 60 MHz CPU clock
-//                                  
+//
 #define FLASH_FLASHCFG_FLASHTIM_3                                             \
                                 0x00002000
 //
 //! Flash accesses use 4 CPU clocks. Use for up to 80 MHz CPU clock
-//                                  
+//
 #define FLASH_FLASHCFG_FLASHTIM_4                                             \
                                 0x00003000
 //
 //! Flash accesses use 5 CPU clocks.  Use for up to 100 MHz CPU clock.
 //! Use for up to 120 Mhz for LPC1759 and LPC1769 only
-//                                  
+//
 #define FLASH_FLASHCFG_FLASHTIM_5                                             \
                                 0x00004000
 //
 //! Flash accesses use 6 CPU clocks. This ¡°safe¡± setting will work under any conditions
-//                                  
+//
 #define FLASH_FLASHCFG_FLASHTIM_6                                             \
-                                0x00005000								
+                                0x00005000
 
 //*****************************************************************************
 //

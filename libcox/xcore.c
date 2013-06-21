@@ -9,32 +9,31 @@
 //! \author CooCox
 //! \copy
 //!
-//! Copyright (c)  2011, CooCox 
+//! Copyright (c)  2011, CooCox
 //! All rights reserved.
-//! 
-//! Redistribution and use in source and binary forms, with or without 
-//! modification, are permitted provided that the following conditions 
-//! are met: 
-//! 
-//!     * Redistributions of source code must retain the above copyright 
-//! notice, this list of conditions and the following disclaimer. 
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!     * Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
 //! notice, this list of conditions and the following disclaimer in the
-//! documentation and/or other materials provided with the distribution. 
-//!     * Neither the name of the <ORGANIZATION> nor the names of its 
-//! contributors may be used to endorse or promote products derived 
-//! from this software without specific prior written permission. 
-//! 
+//! documentation and/or other materials provided with the distribution.
+//!     * Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
 //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
 //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 //! THE POSSIBILITY OF SUCH DAMAGE.
 //
 //*****************************************************************************
@@ -84,7 +83,7 @@ static const unsigned long g_pulRegs[] =
 };
 
 //Note: Commented by cedar 2013-5-27
-//      To avoid the compiler warning: 
+//      To avoid the compiler warning:
 //      "Warning[Pe177]: function "IntDefaultHandler" was declared but never referenced"
 #if 0
 //*****************************************************************************
@@ -110,7 +109,7 @@ IntDefaultHandler(void)
     {
     }
 }
-#endif 
+#endif
 
 //*****************************************************************************
 //
@@ -779,7 +778,7 @@ xIntPrioritySet(unsigned long ulInterrupt, unsigned char ucPriority)
     //
     // Check the arguments.
     //
-    xASSERT(((ulInterrupt & 0xFF) == 0) || (((ulInterrupt & 0xFF) >= 4) && 
+    xASSERT(((ulInterrupt & 0xFF) == 0) || (((ulInterrupt & 0xFF) >= 4) &&
             ((ulInterrupt & 0xFF) < NUM_INTERRUPTS)));
 
     if((ulInterrupt & 0xFF) != 0)
@@ -794,7 +793,7 @@ xIntPrioritySet(unsigned long ulInterrupt, unsigned char ucPriority)
     }
     else if(ulInterrupt == INT_TIM1)
     {
-        ulTemp = ucPriority | (ucPriority << 8) | (ucPriority << 16) | 
+        ulTemp = ucPriority | (ucPriority << 8) | (ucPriority << 16) |
                  (ucPriority << 24);
         xHWREG(NVIC_PRI6) = ulTemp;
     }
@@ -804,7 +803,7 @@ xIntPrioritySet(unsigned long ulInterrupt, unsigned char ucPriority)
         ulTemp &= 0x0000FFFF;
         ulTemp = (ucPriority << 16) | (ucPriority << 24);
         xHWREG(NVIC_PRI1) = ulTemp;
-        
+
         ulTemp = xHWREG(NVIC_PRI2);
         ulTemp &= 0xFF000000;
         ulTemp = (ucPriority << 8) | (ucPriority << 16) | (ucPriority << 24);
@@ -826,22 +825,22 @@ xIntPrioritySet(unsigned long ulInterrupt, unsigned char ucPriority)
         ulTemp &= 0x00FFFFFF;
         ulTemp = (ucPriority << 24);
         xHWREG(NVIC_PRI2) = ulTemp;
-        
-        ulTemp = ucPriority | (ucPriority << 8) | (ucPriority << 16) | 
+
+        ulTemp = ucPriority | (ucPriority << 8) | (ucPriority << 16) |
                  (ucPriority << 24);
         xHWREG(NVIC_PRI3) = ulTemp;
-        
+
         ulTemp = xHWREG(NVIC_PRI4);
         ulTemp &= 0xFFFF0000;
         ulTemp = ucPriority | (ucPriority << 8);
         xHWREG(NVIC_PRI4) = ulTemp;
     }
     else if(ulInterrupt == INT_DMA2)
-    {        
-        ulTemp = ucPriority | (ucPriority << 8) | (ucPriority << 16) | 
+    {
+        ulTemp = ucPriority | (ucPriority << 8) | (ucPriority << 16) |
                  (ucPriority << 24);
         xHWREG(NVIC_PRI14) = ulTemp;
-        
+
         ulTemp = xHWREG(NVIC_PRI15);
         ulTemp &= 0xFFFFFF00;
         ulTemp = ucPriority;
@@ -868,7 +867,7 @@ xIntPriorityGet(unsigned long ulInterrupt)
     //
     // Check the arguments.
     //
-    xASSERT(((ulInterrupt & 0xFF) == 0) || (((ulInterrupt & 0xFF) >= 4) && 
+    xASSERT(((ulInterrupt & 0xFF) == 0) || (((ulInterrupt & 0xFF) >= 4) &&
             ((ulInterrupt & 0xFF) < NUM_INTERRUPTS)));
 
     if((ulInterrupt & 0xFF) != 0)
@@ -950,13 +949,13 @@ xIntEnable(unsigned long ulInterrupt)
         //
         xHWREG(NVIC_ST_CTRL) |= NVIC_ST_CTRL_INTEN;
     }
-    else if(((ulInterrupt & 0xFF) >= 16) && 
+    else if(((ulInterrupt & 0xFF) >= 16) &&
             ((ulInterrupt & 0xFF) < xNUM_INTERRUPTS))
     {
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_EN0 + (((ulInterrupt & 0xFF)-16)/32)*4) 
+        xHWREG(NVIC_EN0 + (((ulInterrupt & 0xFF)-16)/32)*4)
         = 1 << (((ulInterrupt & 0xFF)-16)%32);
     }
     else if((((ulInterrupt >> 8) & 0xFF) >= 16) &&
@@ -965,7 +964,7 @@ xIntEnable(unsigned long ulInterrupt)
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_EN0 + ((((ulInterrupt >> 8) & 0xFF)-16)/32)*4) 
+        xHWREG(NVIC_EN0 + ((((ulInterrupt >> 8) & 0xFF)-16)/32)*4)
         = 1 << ((((ulInterrupt >> 8) & 0xFF)-16)%32);
     }
     else if(ulInterrupt == INT_TIM1)
@@ -1057,13 +1056,13 @@ xIntDisable(unsigned long ulInterrupt)
         //
         xHWREG(NVIC_ST_CTRL) &= ~(NVIC_ST_CTRL_INTEN);
     }
-    else if(((ulInterrupt & 0xFF) >= 16) && 
+    else if(((ulInterrupt & 0xFF) >= 16) &&
             ((ulInterrupt & 0xFF) < xNUM_INTERRUPTS))
     {
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_DIS0 + ((ulInterrupt & 0xFF)/32)*4) 
+        xHWREG(NVIC_DIS0 + ((ulInterrupt & 0xFF)/32)*4)
         = 1 << ((ulInterrupt & 0xFF)%32);
     }
     else if((((ulInterrupt >> 8) & 0xFF) >= 16) &&
@@ -1072,7 +1071,7 @@ xIntDisable(unsigned long ulInterrupt)
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_DIS0 + (((ulInterrupt >> 8) & 0xFF)/32)*4) 
+        xHWREG(NVIC_DIS0 + (((ulInterrupt >> 8) & 0xFF)/32)*4)
         = 1 << (((ulInterrupt >> 8) & 0xFF)%32);
     }
     else if(ulInterrupt == INT_TIM1)
@@ -1161,13 +1160,13 @@ xIntPendSet(unsigned long ulInterrupt)
         //
         xHWREG(NVIC_INT_CTRL) |= NVIC_INT_CTRL_PENDSTSET;
     }
-    else if(((ulInterrupt & 0xFF) >= 16) && 
+    else if(((ulInterrupt & 0xFF) >= 16) &&
             ((ulInterrupt & 0xFF) < xNUM_INTERRUPTS))
     {
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_PEND0 + ((ulInterrupt & 0xFF)/32)*4) 
+        xHWREG(NVIC_PEND0 + ((ulInterrupt & 0xFF)/32)*4)
         = 1 << ((ulInterrupt & 0xFF)%32);
     }
     else if((((ulInterrupt >> 8) & 0xFF) >= 16) &&
@@ -1176,7 +1175,7 @@ xIntPendSet(unsigned long ulInterrupt)
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_PEND0 + (((ulInterrupt >> 8) & 0xFF)/32)*4) 
+        xHWREG(NVIC_PEND0 + (((ulInterrupt >> 8) & 0xFF)/32)*4)
         = 1 << (((ulInterrupt >> 8) & 0xFF)%32);
     }
     else if(ulInterrupt == INT_TIM1)
@@ -1255,13 +1254,13 @@ xIntPendClear(unsigned long ulInterrupt)
         //
         xHWREG(NVIC_INT_CTRL) |= NVIC_INT_CTRL_PENDSTCLR;
     }
-    else if(((ulInterrupt & 0xFF) >= 16) && 
+    else if(((ulInterrupt & 0xFF) >= 16) &&
             ((ulInterrupt & 0xFF) < xNUM_INTERRUPTS))
     {
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_UNPEND0 + ((ulInterrupt & 0xFF)/32)*4) 
+        xHWREG(NVIC_UNPEND0 + ((ulInterrupt & 0xFF)/32)*4)
         = 1 << ((ulInterrupt & 0xFF)%32);
     }
     else if((((ulInterrupt >> 8) & 0xFF) >= 16) &&
@@ -1270,7 +1269,7 @@ xIntPendClear(unsigned long ulInterrupt)
         //
         // Enable the general interrupt.
         //
-        xHWREG(NVIC_UNPEND0 + (((ulInterrupt >> 8) & 0xFF)/32)*4) 
+        xHWREG(NVIC_UNPEND0 + (((ulInterrupt >> 8) & 0xFF)/32)*4)
         = 1 << (((ulInterrupt >> 8) & 0xFF)%32);
     }
     else if(ulInterrupt == INT_TIM1)

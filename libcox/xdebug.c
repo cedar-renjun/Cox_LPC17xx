@@ -4,7 +4,7 @@
 //! \brief Drivers for assisting debug of the peripheral library.
 //! \version V2.1.1.0
 //! \date 11/14/2011
-//! \todo Upddate this time information.
+//! \todo Update this time information.
 //! \author CooCox
 //! \copy
 //!
@@ -14,7 +14,6 @@
 //! Redistribution and use in source and binary forms, with or without
 //! modification, are permitted provided that the following conditions
 //! are met:
-//!
 //!     * Redistributions of source code must retain the above copyright
 //! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright

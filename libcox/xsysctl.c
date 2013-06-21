@@ -7,32 +7,31 @@
 //! \author CooCox
 //! \copy
 //!
-//! Copyright (c)  2011, CooCox 
+//! Copyright (c)  2011, CooCox
 //! All rights reserved.
-//! 
-//! Redistribution and use in source and binary forms, with or without 
-//! modification, are permitted provided that the following conditions 
-//! are met: 
-//! 
-//!     * Redistributions of source code must retain the above copyright 
-//! notice, this list of conditions and the following disclaimer. 
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!     * Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
 //! notice, this list of conditions and the following disclaimer in the
-//! documentation and/or other materials provided with the distribution. 
-//!     * Neither the name of the <ORGANIZATION> nor the names of its 
-//! contributors may be used to endorse or promote products derived 
-//! from this software without specific prior written permission. 
-//! 
+//! documentation and/or other materials provided with the distribution.
+//!     * Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
 //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
 //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 //! THE POSSIBILITY OF SUCH DAMAGE.
 //
 //*****************************************************************************
@@ -53,7 +52,7 @@ static unsigned long s_ulExtClockMHz = 12;
 //! Peripheral Base and ID Table structure type
 //
 //*****************************************************************************
-typedef struct 
+typedef struct
 {
     unsigned long ulPeripheralBase;
     unsigned long ulPeripheralID;
@@ -167,7 +166,7 @@ SysCtlPeripheralValid(unsigned long ulPeripheral)
 //! device will be prevented by the hardware.
 //!
 //! The PLL is disabled with the \b xSYSCTL_PLL_PWRDN.
-//! 
+//!
 //! More info please refrence \ref Stellaris_SysCtl_Clock_Config.
 //!
 //! \return None.
@@ -180,7 +179,7 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     unsigned long ulOscFreq, ulSysDiv;
 
     xASSERT(ulSysClk > 0 && ulSysClk <= 100000000);
-     
+
     //
     // Calc oscillator freq
     //
@@ -188,7 +187,7 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     {
         case xSYSCTL_OSC_MAIN:
         {
-            xASSERT(!(ulConfig & xSYSCTL_MAIN_OSC_DIS)); 
+            xASSERT(!(ulConfig & xSYSCTL_MAIN_OSC_DIS));
             xHWREG(SYSCTL_CLKSRCSEL) = SYSCTL_CLKSRCSEL_MAINOSC;
             switch(ulConfig & SYSCTL_RCC_XTAL_M)
             {
@@ -237,12 +236,12 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
                     s_ulExtClockMHz = 16;
                     break;
                 }
-				case xSYSCTL_XTAL_24MHZ:
+                case xSYSCTL_XTAL_24MHZ:
                 {
                     s_ulExtClockMHz = 24;
                     break;
                 }
-				case xSYSCTL_XTAL_25MHZ:
+                case xSYSCTL_XTAL_25MHZ:
                 {
                     s_ulExtClockMHz = 25;
                     break;
@@ -252,15 +251,15 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
                     xASSERT(0);
                     break;
                 }
-            } 
-            ulOscFreq = s_ulExtClockMHz * 1000000;			
+            }
+            ulOscFreq = s_ulExtClockMHz * 1000000;
             break;
         }
 
         case xSYSCTL_OSC_INT:
         {
-            xASSERT(!(ulConfig & xSYSCTL_INT_OSC_DIS));   
-            xHWREG(SYSCTL_CLKSRCSEL) = SYSCTL_CLKSRCSEL_INTRC;			
+            xASSERT(!(ulConfig & xSYSCTL_INT_OSC_DIS));
+            xHWREG(SYSCTL_CLKSRCSEL) = SYSCTL_CLKSRCSEL_INTRC;
             ulOscFreq = 4000000;
             break;
         }
@@ -275,21 +274,21 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
             xASSERT(0);
             break;
         }
-                
+
     }
-    
+
     if(ulSysClk == ulOscFreq)
     {
         xHWREG(SYSCTL_PLL0CON) &= ~(SYSCTL_PLL0CON_PLLE0 | SYSCTL_PLL0CON_PLLC0);
-		xHWREG(SYSCTL_CLKCFG) = 0;
+        xHWREG(SYSCTL_CLKCFG) = 0;
     }
     else if (ulSysClk <= ulOscFreq)
     {
         //
         // Calc the SysDiv
-        //    
+        //
         xASSERT(ulSysClk <= ulOscFreq);
-            
+
         for(ulSysDiv = 1; ulSysDiv < 256; ulSysDiv++)
         {
             if((ulOscFreq / (ulSysDiv + 1)) <= ulSysClk)
@@ -298,8 +297,8 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
             }
         }
         xASSERT(ulSysDiv < 256);
-        
-		xHWREG(SYSCTL_CLKCFG) = ulSysDiv;      
+
+        xHWREG(SYSCTL_CLKCFG) = ulSysDiv;
     }
     else
     {
@@ -315,7 +314,7 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
                 break;
             }
         }
-		
+
         for(ulSysDiv = 2; ulSysDiv <= 255; ulSysDiv++)
         {
             if((400000000 / ulSysDiv) <= ulSysClk)
@@ -323,19 +322,19 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
                 break;
             }
         }
-        
+
         xASSERT(ulSysDiv <= 255);
 
         if(ulSysDiv % 2)
         {
             //
             // RCC2.SYSDIV2 : SYSDIV2LSB(28:23)=(ulSysDiv - 1)
-            // 
-            ulRCC2 |= SYSCTL_RCC2_USERCC2 | (ulSysDiv - 1) << 22 | 
+            //
+            ulRCC2 |= SYSCTL_RCC2_USERCC2 | (ulSysDiv - 1) << 22 |
                 SYSCTL_RCC2_DIV400;
 
             ulRCC |= SYSCTL_RCC_USESYSDIV;
-            
+
         }
         else
         {
@@ -384,7 +383,7 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     //
     // Delay for a little bit so that the system divider takes effect.
     //
-    SysCtlDelay(16); 
+    SysCtlDelay(16);
 
 }
 
@@ -392,7 +391,7 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 //
 //! \brief Enables a peripheral.
 //!
-//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be 
+//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be
 //! enabled.Details please refer to \ref xLowLayer_Peripheral_Memmap.
 //!
 //! Peripherals are enabled with this function.  At power-up, all peripherals
@@ -405,7 +404,7 @@ xSysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 //! \return None.
 //
 //*****************************************************************************
-void 
+void
 xSysCtlPeripheralEnable2(unsigned long ulPeripheralBase)
 {
     unsigned long i;
@@ -418,12 +417,12 @@ xSysCtlPeripheralEnable2(unsigned long ulPeripheralBase)
         }
     }
 }
-        
+
 //*****************************************************************************
 //
 //! \brief Disables a peripheral.
 //!
-//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be 
+//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be
 //! enabled.Details please refer to \ref xLowLayer_Peripheral_Memmap.
 //!
 //! Peripherals are disabled with this function.  At power-up, all peripherals
@@ -436,11 +435,11 @@ xSysCtlPeripheralEnable2(unsigned long ulPeripheralBase)
 //! \return None.
 //
 //*****************************************************************************
-void 
+void
 xSysCtlPeripheralDisable2(unsigned long ulPeripheralBase)
 {
     unsigned long i;
-    
+
     for(i = 0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
     {
         if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
@@ -450,12 +449,12 @@ xSysCtlPeripheralDisable2(unsigned long ulPeripheralBase)
         }
     }
 }
-        
+
 //*****************************************************************************
 //
 //! \brief Reset a peripheral.
 //!
-//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be 
+//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be
 //! Reset.Details please refer to \ref xLowLayer_Peripheral_Memmap.
 //!
 //! Peripherals are Reset with this function.  At power-up, all peripherals
@@ -468,11 +467,11 @@ xSysCtlPeripheralDisable2(unsigned long ulPeripheralBase)
 //! \return None.
 //
 //*****************************************************************************
-void 
+void
 xSysCtlPeripheralReset2(unsigned long ulPeripheralBase)
 {
     unsigned long i;
-    
+
     for(i = 0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
     {
         if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
@@ -487,21 +486,21 @@ xSysCtlPeripheralReset2(unsigned long ulPeripheralBase)
 //
 //! \brief Get the peripheral interrupt number through peripheral base.
 //!
-//! \param ulPeripheral The peripheral's base  
+//! \param ulPeripheral The peripheral's base
 //!
-//! \note It's especially useful to enable the short pin's corresponding 
-//! peripheral interrupt: Use the short pin to Get the GPIO base through 
+//! \note It's especially useful to enable the short pin's corresponding
+//! peripheral interrupt: Use the short pin to Get the GPIO base through
 //! \ref xGPIOSPinToPort function, and then use this function to enable the GPIO
 //! interrupt.
 //!
 //! \return None.
 //
 //*****************************************************************************
-unsigned long 
+unsigned long
 xSysCtlPeripheralIntNumGet(unsigned long ulPeripheralBase)
 {
     unsigned long i;
-                
+
     for(i = 0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
     {
         if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
@@ -509,7 +508,7 @@ xSysCtlPeripheralIntNumGet(unsigned long ulPeripheralBase)
             return g_pPeripherals[i].ulPeripheralIntNum;
         }
     }
-    
+
     return 0;
 }
 
@@ -517,17 +516,17 @@ xSysCtlPeripheralIntNumGet(unsigned long ulPeripheralBase)
 //
 //! \brief Get the peripheral ID through peripheral base.
 //!
-//! \param ulPeripheralBase The peripheral's base  
+//! \param ulPeripheralBase The peripheral's base
 //!
 //!
 //! \return None.
 //
 //*****************************************************************************
-unsigned long 
+unsigned long
 xSysCtlPeripheralIdGet(unsigned long ulPeripheralBase)
 {
     unsigned long i;
-                
+
     for(i = 0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
     {
         if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
@@ -535,7 +534,7 @@ xSysCtlPeripheralIdGet(unsigned long ulPeripheralBase)
             return g_pPeripherals[i].ulPeripheralID;
         }
     }
-    
+
     return 0;
 }
 
@@ -833,7 +832,7 @@ SysCtlDeepSleep(void)
 //! This function will return the reason(s) for a reset.  Since the reset
 //! reasons are sticky until either cleared by software or an external reset,
 //! multiple reset reasons may be returned if multiple resets have occurred.
-//! The reset reason will be a logical OR of \b SYSCTL_CAUSE_WDOG, 
+//! The reset reason will be a logical OR of \b SYSCTL_CAUSE_WDOG,
 //! \b SYSCTL_CAUSE_BOR, \b SYSCTL_CAUSE_POR, and/or \b SYSCTL_CAUSE_EXT.
 //!
 //! \return Returns the reason(s) for a reset.
@@ -1217,10 +1216,10 @@ SysCtlClockGet(void)
 {
     unsigned long ulRCC, ulMSEL, ulNSEL, ulDiv, ulClk;
 
-	//
-	// Get the base clock rate.
-	//
-	ulRCC = xHWREG(SYSCTL_CLKSRCSEL) & SYSCTL_CLKSRCSEL_M;
+    //
+    // Get the base clock rate.
+    //
+    ulRCC = xHWREG(SYSCTL_CLKSRCSEL) & SYSCTL_CLKSRCSEL_M;
 
     switch(ulRCC & SYSCTL_CLKSRCSEL_CLKSRC_M)
     {
@@ -1239,11 +1238,11 @@ SysCtlClockGet(void)
         //
         case SYSCTL_CLKSRCSEL_INTRC:
         {
-            
+
             ulClk = 4000000;
             break;
         }
-    
+
         //
         // The 32 KHz clock from the hibernate module is the source clock.
         //
@@ -1268,18 +1267,18 @@ SysCtlClockGet(void)
     //
     if(xHWREG(SYSCTL_PLL0CON) & SYSCTL_PLL0CON_PLLE0)
     {
-	    //
+        //
         // Get the PLL configuration.
         //
         ulMSEL = (xHWREG(SYSCTL_PLL0STAT) & SYSCTL_PLL0STAT_MSEL0_M) >> SYSCTL_PLL0STAT_MSEL0_S;
         ulNSEL = (xHWREG(SYSCTL_PLL0STAT) & SYSCTL_PLL0STAT_NSEL0_M) >> SYSCTL_PLL0STAT_NSEL0_S;
-        
-        ulClk = (2 * (ulMSEL + 1) * ulClk) / (ulNSEL + 1);       
+
+        ulClk = (2 * (ulMSEL + 1) * ulClk) / (ulNSEL + 1);
     }
 
     ulDiv = xHWREG(SYSCTL_CLKCFG);
-	
-	ulClk = ulClk / (ulDiv + 1);
+
+    ulClk = ulClk / (ulDiv + 1);
 
     //
     // Return the computed clock rate.
@@ -1310,14 +1309,14 @@ SysCtlPeripheralClockSourceSet(unsigned long ulPeripheralSrc,
     // Check the arguments.
     //
     xASSERT(SysCtlPeripheralValid(ulPeripheral));
-	xASSERT((ulDivide == SYSCTL_SYSDIV_1) ||
-	        (ulDivide == SYSCTL_SYSDIV_2) ||
-			(ulDivide == SYSCTL_SYSDIV_4) ||
-			(ulDivide == SYSCTL_SYSDIV_6) ||
-			(ulDivide == SYSCTL_SYSDIV_8));
-    xASSERT(((ulPeripheralSrc ==SYSCTL_PERIPH_CAN1) || 
+    xASSERT((ulDivide == SYSCTL_SYSDIV_1) ||
+            (ulDivide == SYSCTL_SYSDIV_2) ||
+            (ulDivide == SYSCTL_SYSDIV_4) ||
+            (ulDivide == SYSCTL_SYSDIV_6) ||
+            (ulDivide == SYSCTL_SYSDIV_8));
+    xASSERT(((ulPeripheralSrc ==SYSCTL_PERIPH_CAN1) ||
              (ulPeripheralSrc == SYSCTL_PERIPH_CAN2)) &&
-            (ulDivide != SYSCTL_SYSDIV_8)); 	
+            (ulDivide != SYSCTL_SYSDIV_8));
 
     //
     // Set the peripheral clock source
