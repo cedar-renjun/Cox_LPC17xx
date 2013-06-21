@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<Component>
+    <Name>CoX.Peripheral.LPC17xx.xStartup</Name>
+    <Description>CoX LPC Startup Code</Description>
+    <Category>Peripheral.CoX</Category>
+    <Version>2.0.0</Version>
+    <Tags>Startup, Boot</Tags>
+
+    <Files>
+        <File>..\..\startup\startup_coide.c</File>
+    </Files>
+
+    <FilesCoIDE>
+        <File>$PROJECT_ROOT$\startup_coide.c</File>
+    </FilesCoIDE>
+
+    <Dependencys>
+    </Dependencys>
+
+    <SupportDevices>
+        <Series>
+            <Serie exclude="">LPC17xx</Serie>
+        </Series>
+        <Devices>
+            <Device> LPC175x</Device>
+            <Device> LPC176x</Device>
+            <Device> LPC177x</Device>
+            <Device> LPC178x</Device>
+        </Devices>
+    </SupportDevices>
+
+    <Micros>
+        <Comm>
+            <Define>LPC_175x</Define>
+            <Define>LPC_176x</Define>
+            <Define>LPC_177x</Define>
+            <Define>LPC_178x</Define>
+        </Comm>
+        <Device name="">
+            <Define></Define>
+        </Device>   
+    </Micros>
+
+    <Help></Help>
+
+</Component>
