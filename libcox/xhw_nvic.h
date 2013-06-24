@@ -81,306 +81,312 @@
 //
 //! Interrupt Controller Type Reg
 //
-#define NVIC_INT_TYPE           ((unsigned long)0xE000E004)
+#define NVIC_INT_TYPE                  ((unsigned long)0xE000E004)
 
 //
 //! Auxiliary Control
 //
-#define NVIC_ACTLR              ((unsigned long)0xE000E008)
+#define NVIC_ACTLR                     ((unsigned long)0xE000E008)
 
 //
 //! SysTick Control and Status Register
 //
-#define NVIC_ST_CTRL            ((unsigned long)0xE000E010)
+#define NVIC_ST_CTRL                   ((unsigned long)0xE000E010)
 
 //
 //! SysTick Reload Value Register
 //
-#define NVIC_ST_RELOAD          ((unsigned long)0xE000E014)
+#define NVIC_ST_RELOAD                 ((unsigned long)0xE000E014)
 
 //
 //! SysTick Current Value Register
 //
-#define NVIC_ST_CURRENT         ((unsigned long)0xE000E018)
+#define NVIC_ST_CURRENT                ((unsigned long)0xE000E018)
 
 //
 //! SysTick Calibration Value Reg
 //
-#define NVIC_ST_CAL             ((unsigned long)0xE000E01C)
+#define NVIC_ST_CAL                    ((unsigned long)0xE000E01C)
 
 
 ////////////////////////////// Int enable register ////////////////////////////
 //! Int Enable Register 0   --> 31
-#define NVIC_EN0                ((unsigned long)0xE000E100)
+#define NVIC_EN0                       ((unsigned long)0xE000E100)
 
 //! Int Enable Register 32  --> 63
-#define NVIC_EN1                ((unsigned long)0xE000E104)
+#define NVIC_EN1                       ((unsigned long)0xE000E104)
 
 //! Int Enable Register 64  --> 95
-#define NVIC_EN2                ((unsigned long)0xE000E108)
+#define NVIC_EN2                       ((unsigned long)0xE000E108)
 
 //! Int Enable Register 96  --> 127
-#define NVIC_EN3                ((unsigned long)0xE000E10C)
+#define NVIC_EN3                       ((unsigned long)0xE000E10C)
 
 //! Int Enable Register 128 --> 159
-#define NVIC_EN4                ((unsigned long)0xE000E110)
+#define NVIC_EN4                       ((unsigned long)0xE000E110)
 
 //! Int Enable Register 160 --> 191
-#define NVIC_EN5                ((unsigned long)0xE000E114)
+#define NVIC_EN5                       ((unsigned long)0xE000E114)
 
 //! Int Enable Register 192 --> 223
-#define NVIC_EN6                ((unsigned long)0xE000E118)
+#define NVIC_EN6                       ((unsigned long)0xE000E118)
 
 //! Int Enable Register 224 --> 239
-#define NVIC_EN7                ((unsigned long)0xE000E11C)
+#define NVIC_EN7                       ((unsigned long)0xE000E11C)
 
 ////////////////////////////// Int disable register ////////////////////////////
 //! Int Disable Register 0   --> 31
-#define NVIC_DIS0               ((unsigned long)0xE000E180)
+#define NVIC_DIS0                      ((unsigned long)0xE000E180)
 
 //! Int Disable Register 32  --> 63
-#define NVIC_DIS1               ((unsigned long)0xE000E184)
+#define NVIC_DIS1                      ((unsigned long)0xE000E184)
 
 //! Int Disable Register 64  --> 95
-#define NVIC_DIS2               ((unsigned long)0xE000E188)
+#define NVIC_DIS2                      ((unsigned long)0xE000E188)
 
 //! Int Disable Register 96  --> 127
-#define NVIC_DIS3               ((unsigned long)0xE000E18C)
+#define NVIC_DIS3                      ((unsigned long)0xE000E18C)
 
 //! Int Disable Register 128 --> 159
-#define NVIC_DIS4               ((unsigned long)0xE000E190)
+#define NVIC_DIS4                      ((unsigned long)0xE000E190)
 
 //! Int Disable Register 160 --> 191
-#define NVIC_DIS5               ((unsigned long)0xE000E194)
+#define NVIC_DIS5                      ((unsigned long)0xE000E194)
 
 //! Int Disable Register 192 --> 223
-#define NVIC_DIS6               ((unsigned long)0xE000E198)
+#define NVIC_DIS6                      ((unsigned long)0xE000E198)
 
 //! Int Disable Register 224 --> 239
-#define NVIC_DIS7               ((unsigned long)0xE000E19C)
+#define NVIC_DIS7                      ((unsigned long)0xE000E19C)
 
 ////////////////////////////// Int set pending register ////////////////////////////
 //! Int Set Pending Register 0   --> 31
-#define NVIC_SET_PEND0               ((unsigned long)0xE000E200)
+#define NVIC_SET_PEND0                 ((unsigned long)0xE000E200)
 
 //! Int Set Pending Register 32  --> 63
-#define NVIC_SET_PEND1               ((unsigned long)0xE000E204)
+#define NVIC_SET_PEND1                 ((unsigned long)0xE000E204)
 
 //! Int Set Pending Register 64  --> 95
-#define NVIC_SET_PEND2               ((unsigned long)0xE000E208)
+#define NVIC_SET_PEND2                 ((unsigned long)0xE000E208)
 
 //! Int Set Pending Register 96  --> 127
-#define NVIC_SET_PEND3               ((unsigned long)0xE000E20C)
+#define NVIC_SET_PEND3                 ((unsigned long)0xE000E20C)
 
 //! Int Set Pending Register 128 --> 159
-#define NVIC_SET_PEND4               ((unsigned long)0xE000E210)
+#define NVIC_SET_PEND4                 ((unsigned long)0xE000E210)
 
 //! Int Set Pending Register 160 --> 191
-#define NVIC_SET_PEND5               ((unsigned long)0xE000E214)
+#define NVIC_SET_PEND5                 ((unsigned long)0xE000E214)
 
 //! Int Set Pending Register 192 --> 223
-#define NVIC_SET_PEND6               ((unsigned long)0xE000E218)
+#define NVIC_SET_PEND6                 ((unsigned long)0xE000E218)
 
 //! Int Set Pending Register 224 --> 239
-#define NVIC_SET_PEND7               ((unsigned long)0xE000E21C)
+#define NVIC_SET_PEND7                 ((unsigned long)0xE000E21C)
 
 ////////////////////////////// Int clear pending register ////////////////////////////
 //! Int Clear Pending Register 0   --> 31
-#define NVIC_CLR_PEND0               ((unsigned long)0xE000E280)
+#define NVIC_CLR_PEND0                 ((unsigned long)0xE000E280)
 
 //! Int Clear Pending Register 32  --> 63
-#define NVIC_CLR_PEND1               ((unsigned long)0xE000E284)
+#define NVIC_CLR_PEND1                 ((unsigned long)0xE000E284)
 
 //! Int Clear Pending Register 64  --> 95
-#define NVIC_CLR_PEND2               ((unsigned long)0xE000E288)
+#define NVIC_CLR_PEND2                 ((unsigned long)0xE000E288)
 
 //! Int Clear Pending Register 96  --> 127
-#define NVIC_CLR_PEND3               ((unsigned long)0xE000E28C)
+#define NVIC_CLR_PEND3                 ((unsigned long)0xE000E28C)
 
 //! Int Clear Pending Register 128 --> 159
-#define NVIC_CLR_PEND4               ((unsigned long)0xE000E290)
+#define NVIC_CLR_PEND4                 ((unsigned long)0xE000E290)
 
 //! Int Clear Pending Register 160 --> 191
-#define NVIC_CLR_PEND5               ((unsigned long)0xE000E294)
+#define NVIC_CLR_PEND5                 ((unsigned long)0xE000E294)
 
 //! Int Clear Pending Register 192 --> 223
-#define NVIC_CLR_PEND6               ((unsigned long)0xE000E298)
+#define NVIC_CLR_PEND6                 ((unsigned long)0xE000E298)
 
 //! Int Clear Pending Register 224 --> 239
-#define NVIC_CLR_PEND7               ((unsigned long)0xE000E29C)
+#define NVIC_CLR_PEND7                 ((unsigned long)0xE000E29C)
 
 ////////////////////////////// Int Active bit register ////////////////////////////
 //! Int Active Bit Register 0   --> 31
-#define NVIC_ACT_BIT0               ((unsigned long)0xE000E300)
+#define NVIC_ACT_BIT0                  ((unsigned long)0xE000E300)
 
 //! Int Active Bit Register 32  --> 63
-#define NVIC_ACT_BIT1               ((unsigned long)0xE000E304)
+#define NVIC_ACT_BIT1                  ((unsigned long)0xE000E304)
 
 //! Int Active Bit Register 64  --> 95
-#define NVIC_ACT_BIT2               ((unsigned long)0xE000E308)
+#define NVIC_ACT_BIT2                  ((unsigned long)0xE000E308)
 
 //! Int Active Bit Register 96  --> 127
-#define NVIC_ACT_BIT3               ((unsigned long)0xE000E30C)
+#define NVIC_ACT_BIT3                  ((unsigned long)0xE000E30C)
 
 //! Int Active Bit Register 128 --> 159
-#define NVIC_ACT_BIT4               ((unsigned long)0xE000E310)
+#define NVIC_ACT_BIT4                  ((unsigned long)0xE000E310)
 
 //! Int Active Bit Register 160 --> 191
-#define NVIC_ACT_BIT5               ((unsigned long)0xE000E314)
+#define NVIC_ACT_BIT5                  ((unsigned long)0xE000E314)
 
 //! Int Active Bit Register 192 --> 223
-#define NVIC_ACT_BIT6               ((unsigned long)0xE000E318)
+#define NVIC_ACT_BIT6                  ((unsigned long)0xE000E318)
 
 //! Int Active Bit Register 224 --> 239
-#define NVIC_ACT_BIT7               ((unsigned long)0xE000E31C)
+#define NVIC_ACT_BIT7                  ((unsigned long)0xE000E31C)
 
 ////////////////////////// Int Priority Register ///////////////////////////////
 
-//
-//! Interrupt 0-3 Priority
-//
-#define NVIC_PRI0               0xE000E400
-
-#define NVIC_PRI0                0xE000E400
-#define NVIC_PRI1                0xE000E400
-#define NVIC_PRI2                0xE000E400
-#define NVIC_PRI3                0xE000E400
-#define NVIC_PRI4                0xE000E400
-#define NVIC_PRI5                0xE000E400
-#define NVIC_PRI6                0xE000E400
-#define NVIC_PRI7                0xE000E400
-#define NVIC_PRI8                0xE000E400
-#define NVIC_PRI9                0xE000E400
-#define NVIC_PRI10               0xE000E400
-#define NVIC_PRI11               0xE000E400
-#define NVIC_PRI12               0xE000E400
-#define NVIC_PRI13               0xE000E400
-#define NVIC_PRI14               0xE000E400
-#define NVIC_PRI15               0xE000E400
-#define NVIC_PRI16               0xE000E400
-#define NVIC_PRI17               0xE000E400
-#define NVIC_PRI18               0xE000E400
-#define NVIC_PRI19               0xE000E400
-#define NVIC_PRI20               0xE000E400
-#define NVIC_PRI21               0xE000E400
-#define NVIC_PRI22               0xE000E400
-#define NVIC_PRI23               0xE000E400
-#define NVIC_PRI24               0xE000E400
-#define NVIC_PRI25               0xE000E400
-#define NVIC_PRI26               0xE000E400
-#define NVIC_PRI27               0xE000E400
-#define NVIC_PRI28               0xE000E400
-#define NVIC_PRI29               0xE000E400
-#define NVIC_PRI30               0xE000E400
-#define NVIC_PRI31               0xE000E400
-#define NVIC_PRI32               0xE000E400
-#define NVIC_PRI33               0xE000E400
-#define NVIC_PRI34               0xE000E400
-#define NVIC_PRI35               0xE000E400
-#define NVIC_PRI36               0xE000E400
-#define NVIC_PRI37               0xE000E400
-#define NVIC_PRI38               0xE000E400
-#define NVIC_PRI39               0xE000E400
-#define NVIC_PRI40               0xE000E400
-#define NVIC_PRI41               0xE000E400
-#define NVIC_PRI42               0xE000E400
-#define NVIC_PRI43               0xE000E400
-#define NVIC_PRI44               0xE000E400
-#define NVIC_PRI45               0xE000E400
-#define NVIC_PRI46               0xE000E400
-#define NVIC_PRI47               0xE000E400
-#define NVIC_PRI48               0xE000E400
-#define NVIC_PRI49               0xE000E400
-#define NVIC_PRI50               0xE000E400
-#define NVIC_PRI51               0xE000E400
-#define NVIC_PRI52               0xE000E400
-#define NVIC_PRI53               0xE000E400
-#define NVIC_PRI54               0xE000E400
-#define NVIC_PRI55               0xE000E400
-#define NVIC_PRI56               0xE000E400
-#define NVIC_PRI57               0xE000E400
-#define NVIC_PRI58               0xE000E400
-#define NVIC_PRI59               0xE000E400
-#define NVIC_PRI60               0xE000E400
-#define NVIC_PRI61               0xE000E400
-#define NVIC_PRI62               0xE000E400
-#define NVIC_PRI63               0xE000E400
-
-
+//! Only suit for Int priority
+//! NOT for system falut
+#define NVIC_PRI0                      ((unsigned long)0XE000E400)
+#define NVIC_PRI1                      ((unsigned long)0XE000E404)
+#define NVIC_PRI2                      ((unsigned long)0XE000E408)
+#define NVIC_PRI3                      ((unsigned long)0XE000E40C)
+#define NVIC_PRI4                      ((unsigned long)0XE000E410)
+#define NVIC_PRI5                      ((unsigned long)0XE000E414)
+#define NVIC_PRI6                      ((unsigned long)0XE000E418)
+#define NVIC_PRI7                      ((unsigned long)0XE000E41C)
+#define NVIC_PRI8                      ((unsigned long)0XE000E420)
+#define NVIC_PRI9                      ((unsigned long)0XE000E424)
+#define NVIC_PRI10                     ((unsigned long)0XE000E428)
+#define NVIC_PRI11                     ((unsigned long)0XE000E42C)
+#define NVIC_PRI12                     ((unsigned long)0XE000E430)
+#define NVIC_PRI13                     ((unsigned long)0XE000E434)
+#define NVIC_PRI14                     ((unsigned long)0XE000E438)
+#define NVIC_PRI15                     ((unsigned long)0XE000E43C)
+#define NVIC_PRI16                     ((unsigned long)0XE000E440)
+#define NVIC_PRI17                     ((unsigned long)0XE000E444)
+#define NVIC_PRI18                     ((unsigned long)0XE000E448)
+#define NVIC_PRI19                     ((unsigned long)0XE000E44C)
+#define NVIC_PRI20                     ((unsigned long)0XE000E450)
+#define NVIC_PRI21                     ((unsigned long)0XE000E454)
+#define NVIC_PRI22                     ((unsigned long)0XE000E458)
+#define NVIC_PRI23                     ((unsigned long)0XE000E45C)
+#define NVIC_PRI24                     ((unsigned long)0XE000E460)
+#define NVIC_PRI25                     ((unsigned long)0XE000E464)
+#define NVIC_PRI26                     ((unsigned long)0XE000E468)
+#define NVIC_PRI27                     ((unsigned long)0XE000E46C)
+#define NVIC_PRI28                     ((unsigned long)0XE000E470)
+#define NVIC_PRI29                     ((unsigned long)0XE000E474)
+#define NVIC_PRI30                     ((unsigned long)0XE000E478)
+#define NVIC_PRI31                     ((unsigned long)0XE000E47C)
+#define NVIC_PRI32                     ((unsigned long)0XE000E480)
+#define NVIC_PRI33                     ((unsigned long)0XE000E484)
+#define NVIC_PRI34                     ((unsigned long)0XE000E488)
+#define NVIC_PRI35                     ((unsigned long)0XE000E48C)
+#define NVIC_PRI36                     ((unsigned long)0XE000E490)
+#define NVIC_PRI37                     ((unsigned long)0XE000E494)
+#define NVIC_PRI38                     ((unsigned long)0XE000E498)
+#define NVIC_PRI39                     ((unsigned long)0XE000E49C)
+#define NVIC_PRI40                     ((unsigned long)0XE000E4A0)
+#define NVIC_PRI41                     ((unsigned long)0XE000E4A4)
+#define NVIC_PRI42                     ((unsigned long)0XE000E4A8)
+#define NVIC_PRI43                     ((unsigned long)0XE000E4AC)
+#define NVIC_PRI44                     ((unsigned long)0XE000E4B0)
+#define NVIC_PRI45                     ((unsigned long)0XE000E4B4)
+#define NVIC_PRI46                     ((unsigned long)0XE000E4B8)
+#define NVIC_PRI47                     ((unsigned long)0XE000E4BC)
+#define NVIC_PRI48                     ((unsigned long)0XE000E4C0)
+#define NVIC_PRI49                     ((unsigned long)0XE000E4C4)
+#define NVIC_PRI50                     ((unsigned long)0XE000E4C8)
+#define NVIC_PRI51                     ((unsigned long)0XE000E4CC)
+#define NVIC_PRI52                     ((unsigned long)0XE000E4D0)
+#define NVIC_PRI53                     ((unsigned long)0XE000E4D4)
+#define NVIC_PRI54                     ((unsigned long)0XE000E4D8)
+#define NVIC_PRI55                     ((unsigned long)0XE000E4DC)
+#define NVIC_PRI56                     ((unsigned long)0XE000E4E0)
+#define NVIC_PRI57                     ((unsigned long)0XE000E4E4)
+#define NVIC_PRI58                     ((unsigned long)0XE000E4E8)
+#define NVIC_PRI59                     ((unsigned long)0XE000E4EC)
 
 //
 //! CPU ID Base
 //
-#define NVIC_CPUID              0xE000ED00
+#define NVIC_CPUID                     ((unsigned long)0xE000ED00)
 
 //
 //! Interrupt Control and State
 //
-#define NVIC_INT_CTRL           0xE000ED04
+#define NVIC_INT_CTRL                  ((unsigned long)0xE000ED04)
+
+//
+//! Vector Table Offset Register
+//
+#define NVIC_VTOR                      ((unsigned long)0xE000ED08)
 
 //
 //! Application Interrupt and Reset Control
 //
-#define NVIC_APINT              0xE000ED0C
+#define NVIC_APINT                     ((unsigned long)0xE000ED0C)
 //
 //! System Control
 //
-#define NVIC_SYS_CTRL           0xE000ED10
+#define NVIC_SYS_CTRL                  ((unsigned long)0xE000ED10)
 
 //
 //! Configuration and Control
 //
-#define NVIC_CFG_CTRL           0xE000ED14
+#define NVIC_CFG_CTRL                  ((unsigned long)0xE000ED14)
 
 //
-//! System Handler Priority 1
+//! System Handler 4-7 Priority Register
 //
-#define NVIC_SYS_PRI1           0xE000ED18
+#define NVIC_SYS_PRI1                  ((unsigned long)0xE000ED18)
 
 //
-//! System Handler Priority 2
+//! System Handler 8-11 Priority Register
 //
-#define NVIC_SYS_PRI2           0xE000ED1C
+#define NVIC_SYS_PRI2                  ((unsigned long)0xE000ED1C)
 
 //
-//! System Handler Priority 3
+//! System Handler 12-15 Priority Register
 //
-#define NVIC_SYS_PRI3           0xE000ED20
+#define NVIC_SYS_PRI3                  ((unsigned long)0xE000ED20)
 
 //
 //! System Handler Control and State
 //
-#define NVIC_SYS_HND_CTRL       0xE000ED24
+#define NVIC_SYS_HND_CTRL              ((unsigned long)0xE000ED24)
+
+//
+//! Configure Fault Status Registers
+//
+#define NVIC_CFSR                      ((unsigned long)0xE000ED28)
+
+//
+//! Hard Fault Status Register
+//
+#define NVIC_HFSR                      ((unsigned long)0xE000ED2C)
 
 //
 //! Debug Status Register
 //
-#define NVIC_DEBUG_STAT         0xE000ED30
+#define NVIC_DEBUG_STAT                ((unsigned long)0xE000ED30)
 
 //
 //! Debug Control and Status Reg
 //
-#define NVIC_DBG_CTRL           0xE000EDF0
+#define NVIC_DBG_CTRL                  ((unsigned long)0xE000EDF0)
 
 //
 //! Debug Core Reg. Transfer Select
 //
-#define NVIC_DBG_XFER           0xE000EDF4
+#define NVIC_DBG_XFER                  ((unsigned long)0xE000EDF4)
 
 //
 //! Debug Core Register Data
 //
-#define NVIC_DBG_DATA           0xE000EDF8
+#define NVIC_DBG_DATA                  ((unsigned long)0xE000EDF8)
 
 //
 //! Debug Reset Interrupt Control
 //
-#define NVIC_DBG_INT            0xE000EDFC
+#define NVIC_DBG_INT                   ((unsigned long)0xE000EDFC)
 
 //
 //! Software Trigger Interrupt
 //
-#define NVIC_SW_TRIG            0xE000EF00
+#define NVIC_SW_TRIG                   ((unsigned long)0xE000EF00)
 
 //*****************************************************************************
 //
@@ -399,8 +405,18 @@
 //
 //! Number of interrupt lines (x32)
 //
-#define NVIC_INT_TYPE_LINES_M   0x0000001F
-#define NVIC_INT_TYPE_LINES_S   0
+#define NVIC_INT_TYPE_LINES_M          ((unsigned long)0x0000001F)
+#define NVIC_INT_TYPE_LINES_S          0
+
+//! Total number of interrupt lines in groups of 32
+#define NVIC_INT_LINE_0_32             ((unsigned long)0x00000000)
+#define NVIC_INT_LINE_33_64            ((unsigned long)0x00000001)
+#define NVIC_INT_LINE_65_96            ((unsigned long)0x00000002)
+#define NVIC_INT_LINE_97_128           ((unsigned long)0x00000003)
+#define NVIC_INT_LINE_129_160          ((unsigned long)0x00000004)
+#define NVIC_INT_LINE_161_192          ((unsigned long)0x00000005)
+#define NVIC_INT_LINE_193_224          ((unsigned long)0x00000006)
+#define NVIC_INT_LINE_224_256          ((unsigned long)0x00000007)
 
 //*****************************************************************************
 //
@@ -419,17 +435,17 @@
 //
 //! Disable IT Folding
 //
-#define NVIC_ACTLR_DISFOLD      0x00000004
+#define NVIC_ACTLR_DISFOLD             ((unsigned long)0x00000004)
 
 //
 //! Disable Write Buffer
 //
-#define NVIC_ACTLR_DISWBUF      0x00000002
+#define NVIC_ACTLR_DISWBUF             ((unsigned long)0x00000002)
 
 //
 //! Disable Interrupts of Multiple Cycle Instructions
 //
-#define NVIC_ACTLR_DISMCYC      0x00000001
+#define NVIC_ACTLR_DISMCYC             ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
@@ -448,22 +464,22 @@
 //
 //! Count Flag
 //
-#define NVIC_ST_CTRL_COUNT      0x00010000
+#define NVIC_ST_CTRL_COUNT             ((unsigned long)0x00010000)
 
 //
 //! Clock Source
 //
-#define NVIC_ST_CTRL_CLK_SRC    0x00000004
+#define NVIC_ST_CTRL_CLK_SRC           ((unsigned long)0x00000004)
 
 //
 //! Interrupt Enable
 //
-#define NVIC_ST_CTRL_INTEN      0x00000002
+#define NVIC_ST_CTRL_INTEN             ((unsigned long)0x00000002)
 
 //
 //! Enable
 //
-#define NVIC_ST_CTRL_ENABLE     0x00000001
+#define NVIC_ST_CTRL_ENABLE            ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
@@ -482,8 +498,8 @@
 //
 //! Reload Value
 //
-#define NVIC_ST_RELOAD_M        0x00FFFFFF
-#define NVIC_ST_RELOAD_S        0
+#define NVIC_ST_RELOAD_M               ((unsigned long)0x00FFFFFF)
+#define NVIC_ST_RELOAD_S               0
 
 //*****************************************************************************
 //
@@ -502,8 +518,8 @@
 //
 //! Current Value
 //
-#define NVIC_ST_CURRENT_M       0x00FFFFFF
-#define NVIC_ST_CURRENT_S       0
+#define NVIC_ST_CURRENT_M              ((unsigned long)0x00FFFFFF)
+#define NVIC_ST_CURRENT_S              0
 
 //*****************************************************************************
 //
@@ -522,18 +538,18 @@
 //
 //! No reference clock
 //
-#define NVIC_ST_CAL_NOREF       0x80000000
+#define NVIC_ST_CAL_NOREF              ((unsigned long)0x80000000)
 
 //
 //! Clock skew
 //
-#define NVIC_ST_CAL_SKEW        0x40000000
+#define NVIC_ST_CAL_SKEW               ((unsigned long)0x40000000)
 
 //
-//! 1ms reference value
+//! 10ms reference value
 //
-#define NVIC_ST_CAL_ONEMS_M     0x00FFFFFF
-#define NVIC_ST_CAL_ONEMS_S     0
+#define NVIC_ST_CAL_TNEMS_M            ((unsigned long)0x00FFFFFF)
+#define NVIC_ST_CAL_TNEMS_S            0
 
 //*****************************************************************************
 //
@@ -552,165 +568,165 @@
 //
 //! Interrupt Enable
 //
-#define NVIC_EN0_INT_M          0xFFFFFFFF
+#define NVIC_EN0_INT_M                 ((unsigned long)0xFFFFFFFF)
 
 //
 //! Interrupt 0 enable
 //
-#define NVIC_EN0_INT0           0x00000001
+#define NVIC_EN0_INT0                  ((unsigned long)0x00000001)
 
 //
 //! Interrupt 1 enable
 //
-#define NVIC_EN0_INT1           0x00000002
+#define NVIC_EN0_INT1                  ((unsigned long)0x00000002)
 
 //
 //! Interrupt 2 enable
 //
-#define NVIC_EN0_INT2           0x00000004
+#define NVIC_EN0_INT2                  ((unsigned long)0x00000004)
 
 //
 //! Interrupt 3 enable
 //
-#define NVIC_EN0_INT3           0x00000008
+#define NVIC_EN0_INT3                  ((unsigned long)0x00000008)
 
 //
 //! Interrupt 4 enable
 //
-#define NVIC_EN0_INT4           0x00000010
+#define NVIC_EN0_INT4                  ((unsigned long)0x00000010)
 
 //
 //! Interrupt 5 enable
 //
-#define NVIC_EN0_INT5           0x00000020
+#define NVIC_EN0_INT5                  ((unsigned long)0x00000020)
 
 //
 //! Interrupt 6 enable
 //
-#define NVIC_EN0_INT6           0x00000040
+#define NVIC_EN0_INT6                  ((unsigned long)0x00000040)
 
 //
 //! Interrupt 7 enable
 //
-#define NVIC_EN0_INT7           0x00000080
+#define NVIC_EN0_INT7                  ((unsigned long)0x00000080)
 
 //
 //! Interrupt 8 enable
 //
-#define NVIC_EN0_INT8           0x00000100
+#define NVIC_EN0_INT8                  ((unsigned long)0x00000100)
 
 //
 //! Interrupt 9 enable
 //
-#define NVIC_EN0_INT9           0x00000200
+#define NVIC_EN0_INT9                  ((unsigned long)0x00000200)
 
 //
 //! Interrupt 10 enable
 //
-#define NVIC_EN0_INT10          0x00000400
+#define NVIC_EN0_INT10                 ((unsigned long)0x00000400)
 
 //
 //! Interrupt 11 enable
 //
-#define NVIC_EN0_INT11          0x00000800
+#define NVIC_EN0_INT11                 ((unsigned long)0x00000800)
 
 //
 //! Interrupt 12 enable
 //
-#define NVIC_EN0_INT12          0x00001000
+#define NVIC_EN0_INT12                 ((unsigned long)0x00001000)
 
 //
 //! Interrupt 13 enable
 //
-#define NVIC_EN0_INT13          0x00002000
+#define NVIC_EN0_INT13                 ((unsigned long)0x00002000)
 
 //
 //! Interrupt 14 enable
 //
-#define NVIC_EN0_INT14          0x00004000
+#define NVIC_EN0_INT14                 ((unsigned long)0x00004000)
 
 //
 //! Interrupt 15 enable
 //
-#define NVIC_EN0_INT15          0x00008000
+#define NVIC_EN0_INT15                 ((unsigned long)0x00008000)
 
 //
 //! Interrupt 16 enable
 //
-#define NVIC_EN0_INT16          0x00010000
+#define NVIC_EN0_INT16                 ((unsigned long)0x00010000)
 
 //
 //! Interrupt 17 enable
 //
-#define NVIC_EN0_INT17          0x00020000
+#define NVIC_EN0_INT17                 ((unsigned long)0x00020000)
 
 //
 //! Interrupt 18 enable
 //
-#define NVIC_EN0_INT18          0x00040000
+#define NVIC_EN0_INT18                 ((unsigned long)0x00040000)
 
 //
 //! Interrupt 19 enable
 //
-#define NVIC_EN0_INT19          0x00080000
+#define NVIC_EN0_INT19                 ((unsigned long)0x00080000)
 
 //
 //! Interrupt 20 enable
 //
-#define NVIC_EN0_INT20          0x00100000
+#define NVIC_EN0_INT20                 ((unsigned long)0x00100000)
 
 //
 //! Interrupt 21 enable
 //
-#define NVIC_EN0_INT21          0x00200000
+#define NVIC_EN0_INT21                 ((unsigned long)0x00200000)
 
 //
 //! Interrupt 22 enable
 //
-#define NVIC_EN0_INT22          0x00400000
+#define NVIC_EN0_INT22                 ((unsigned long)0x00400000)
 
 //
 //! Interrupt 23 enable
 //
-#define NVIC_EN0_INT23          0x00800000
+#define NVIC_EN0_INT23                 ((unsigned long)0x00800000)
 
 //
 //! Interrupt 24 enable
 //
-#define NVIC_EN0_INT24          0x01000000
+#define NVIC_EN0_INT24                 ((unsigned long)0x01000000)
 
 //
 //! Interrupt 25 enable
 //
-#define NVIC_EN0_INT25          0x02000000
+#define NVIC_EN0_INT25                 ((unsigned long)0x02000000)
 //
 //! Interrupt 26 enable
 //
-#define NVIC_EN0_INT26          0x04000000
+#define NVIC_EN0_INT26                 ((unsigned long)0x04000000)
 
 //
 //! Interrupt 27 enable
 //
-#define NVIC_EN0_INT27          0x08000000
+#define NVIC_EN0_INT27                 ((unsigned long)0x08000000)
 
 //
 //! Interrupt 28 enable
 //
-#define NVIC_EN0_INT28          0x10000000
+#define NVIC_EN0_INT28                 ((unsigned long)0x10000000)
 //
 //! Interrupt 29 enable
 //
-#define NVIC_EN0_INT29          0x20000000
+#define NVIC_EN0_INT29                 ((unsigned long)0x20000000)
 
 //
 //! Interrupt 30 enable
 //
-#define NVIC_EN0_INT30          0x40000000
+#define NVIC_EN0_INT30                 ((unsigned long)0x40000000)
 
 //
 //! Interrupt 31 enable
 //
-#define NVIC_EN0_INT31          0x80000000
+#define NVIC_EN0_INT31                 ((unsigned long)0x80000000)
 
 //*****************************************************************************
 //
@@ -729,167 +745,167 @@
 //
 //! Interrupt Disable
 //
-#define NVIC_DIS0_INT_M         0xFFFFFFFF
+#define NVIC_DIS0_INT_M                ((unsigned long)0xFFFFFFFF)
 
 //
 //! Interrupt 0 disable
 //
-#define NVIC_DIS0_INT0          0x00000001
+#define NVIC_DIS0_INT0                 ((unsigned long)0x00000001)
 
 //
 //! Interrupt 1 disable
 //
-#define NVIC_DIS0_INT1          0x00000002
+#define NVIC_DIS0_INT1                 ((unsigned long)0x00000002)
 
 //
 //! Interrupt 2 disable
 //
-#define NVIC_DIS0_INT2          0x00000004
+#define NVIC_DIS0_INT2                 ((unsigned long)0x00000004)
 
 //
 //! Interrupt 3 disable
 //
-#define NVIC_DIS0_INT3          0x00000008
+#define NVIC_DIS0_INT3                 ((unsigned long)0x00000008)
 
 //
 //! Interrupt 4 disable
 //
-#define NVIC_DIS0_INT4          0x00000010
+#define NVIC_DIS0_INT4                 ((unsigned long)0x00000010)
 
 //
 //! Interrupt 5 disable
 //
-#define NVIC_DIS0_INT5          0x00000020
+#define NVIC_DIS0_INT5                 ((unsigned long)0x00000020)
 
 //
 //! Interrupt 6 disable
 //
-#define NVIC_DIS0_INT6          0x00000040
+#define NVIC_DIS0_INT6                 ((unsigned long)0x00000040)
 
 //
 //! Interrupt 7 disable
 //
-#define NVIC_DIS0_INT7          0x00000080
+#define NVIC_DIS0_INT7                 ((unsigned long)0x00000080)
 
 //
 //! Interrupt 8 disable
 //
-#define NVIC_DIS0_INT8          0x00000100
+#define NVIC_DIS0_INT8                 ((unsigned long)0x00000100)
 
 //
 //! Interrupt 9 disable
 //
-#define NVIC_DIS0_INT9          0x00000200
+#define NVIC_DIS0_INT9                 ((unsigned long)0x00000200)
 
 //
 //! Interrupt 10 disable
 //
-#define NVIC_DIS0_INT10         0x00000400
+#define NVIC_DIS0_INT10                ((unsigned long)0x00000400)
 
 //
 //! Interrupt 11 disable
 //
-#define NVIC_DIS0_INT11         0x00000800
+#define NVIC_DIS0_INT11                ((unsigned long)0x00000800)
 
 //
 //! Interrupt 12 disable
 //
-#define NVIC_DIS0_INT12         0x00001000
+#define NVIC_DIS0_INT12                ((unsigned long)0x00001000)
 
 //
 //! Interrupt 13 disable
 //
-#define NVIC_DIS0_INT13         0x00002000
+#define NVIC_DIS0_INT13                ((unsigned long)0x00002000)
 
 //
 //! Interrupt 14 disable
 //
-#define NVIC_DIS0_INT14         0x00004000
+#define NVIC_DIS0_INT14                ((unsigned long)0x00004000)
 
 //
 //! Interrupt 15 disable
 //
-#define NVIC_DIS0_INT15         0x00008000
+#define NVIC_DIS0_INT15                ((unsigned long)0x00008000)
 
 //
 //! Interrupt 16 disable
 //
-#define NVIC_DIS0_INT16         0x00010000
+#define NVIC_DIS0_INT16                ((unsigned long)0x00010000)
 
 //
 //! Interrupt 17 disable
 //
-#define NVIC_DIS0_INT17         0x00020000
+#define NVIC_DIS0_INT17                ((unsigned long)0x00020000)
 
 //
 //! Interrupt 18 disable
 //
-#define NVIC_DIS0_INT18         0x00040000
+#define NVIC_DIS0_INT18                ((unsigned long)0x00040000)
 
 //
 //! Interrupt 19 disable
 //
-#define NVIC_DIS0_INT19         0x00080000
+#define NVIC_DIS0_INT19                ((unsigned long)0x00080000)
 
 //
 //! Interrupt 20 disable
 //
-#define NVIC_DIS0_INT20         0x00100000
+#define NVIC_DIS0_INT20                ((unsigned long)0x00100000)
 
 //
 //! Interrupt 21 disable
 //
-#define NVIC_DIS0_INT21         0x00200000
+#define NVIC_DIS0_INT21                ((unsigned long)0x00200000)
 
 //
 //! Interrupt 22 disable
 //
-#define NVIC_DIS0_INT22         0x00400000
+#define NVIC_DIS0_INT22                ((unsigned long)0x00400000)
 
 //
 //! Interrupt 23 disable
 //
-#define NVIC_DIS0_INT23         0x00800000
+#define NVIC_DIS0_INT23                ((unsigned long)0x00800000)
 
 //
 //! Interrupt 24 disable
 //
-#define NVIC_DIS0_INT24         0x01000000
+#define NVIC_DIS0_INT24                ((unsigned long)0x01000000)
 
 //
 //! Interrupt 25 disable
 //
-#define NVIC_DIS0_INT25         0x02000000
+#define NVIC_DIS0_INT25                ((unsigned long)0x02000000)
 
 //
 //! Interrupt 26 disable
 //
-#define NVIC_DIS0_INT26         0x04000000
+#define NVIC_DIS0_INT26                ((unsigned long)0x04000000)
 
 //
 //! Interrupt 27 disable
 //
-#define NVIC_DIS0_INT27         0x08000000
+#define NVIC_DIS0_INT27                ((unsigned long)0x08000000)
 
 //
 //! Interrupt 28 disable
 //
-#define NVIC_DIS0_INT28         0x10000000
+#define NVIC_DIS0_INT28                ((unsigned long)0x10000000)
 
 //
 //! Interrupt 29 disable
 //
-#define NVIC_DIS0_INT29         0x20000000
+#define NVIC_DIS0_INT29                ((unsigned long)0x20000000)
 
 //
 // Interrupt 30 disable
 //
-#define NVIC_DIS0_INT30         0x40000000
+#define NVIC_DIS0_INT30                ((unsigned long)0x40000000)
 
 //
 //! Interrupt 31 disable
 //
-#define NVIC_DIS0_INT31         0x80000000
+#define NVIC_DIS0_INT31                ((unsigned long)0x80000000)
 
 //*****************************************************************************
 //
@@ -908,167 +924,167 @@
 //
 //! Interrupt Set Pending
 //
-#define NVIC_PEND0_INT_M        0xFFFFFFFF
+#define NVIC_PEND0_INT_M               ((unsigned long)0xFFFFFFFF)
 
 //
 //! Interrupt 0 pend
 //
-#define NVIC_PEND0_INT0         0x00000001
+#define NVIC_PEND0_INT0                ((unsigned long)0x00000001)
 
 //
 //! Interrupt 1 pend
 //
-#define NVIC_PEND0_INT1         0x00000002
+#define NVIC_PEND0_INT1                ((unsigned long)0x00000002)
 
 //
 //! Interrupt 2 pend
 //
-#define NVIC_PEND0_INT2         0x00000004
+#define NVIC_PEND0_INT2                ((unsigned long)0x00000004)
 
 //
 //! Interrupt 3 pend
 //
-#define NVIC_PEND0_INT3         0x00000008
+#define NVIC_PEND0_INT3                ((unsigned long)0x00000008)
 
 //
 //! Interrupt 4 pend
 //
-#define NVIC_PEND0_INT4         0x00000010
+#define NVIC_PEND0_INT4                ((unsigned long)0x00000010)
 
 //
 //! Interrupt 5 pend
 //
-#define NVIC_PEND0_INT5         0x00000020
+#define NVIC_PEND0_INT5                ((unsigned long)0x00000020)
 
 //
 //! Interrupt 6 pend
 //
-#define NVIC_PEND0_INT6         0x00000040
+#define NVIC_PEND0_INT6                ((unsigned long)0x00000040)
 
 //
 //! Interrupt 7 pend
 //
-#define NVIC_PEND0_INT7         0x00000080
+#define NVIC_PEND0_INT7                ((unsigned long)0x00000080)
 
 //
 //! Interrupt 8 pend
 //
-#define NVIC_PEND0_INT8         0x00000100
+#define NVIC_PEND0_INT8                ((unsigned long)0x00000100)
 
 //
 //! Interrupt 9 pend
 //
-#define NVIC_PEND0_INT9         0x00000200
+#define NVIC_PEND0_INT9                ((unsigned long)0x00000200)
 
 //
 //! Interrupt 10 pend
 //
-#define NVIC_PEND0_INT10        0x00000400
+#define NVIC_PEND0_INT10               ((unsigned long)0x00000400)
 
 //
 //! Interrupt 11 pend
 //
-#define NVIC_PEND0_INT11        0x00000800
+#define NVIC_PEND0_INT11               ((unsigned long)0x00000800)
 
 //
 //! Interrupt 12 pend
 //
-#define NVIC_PEND0_INT12        0x00001000
+#define NVIC_PEND0_INT12               ((unsigned long)0x00001000)
 
 //
 //! Interrupt 13 pend
 //
-#define NVIC_PEND0_INT13        0x00002000
+#define NVIC_PEND0_INT13               ((unsigned long)0x00002000)
 
 //
 //! Interrupt 14 pend
 //
-#define NVIC_PEND0_INT14        0x00004000
+#define NVIC_PEND0_INT14               ((unsigned long)0x00004000)
 
 //
 //! Interrupt 15 pend
 //
-#define NVIC_PEND0_INT15        0x00008000
+#define NVIC_PEND0_INT15               ((unsigned long)0x00008000)
 
 //
 //! Interrupt 16 pend
 //
-#define NVIC_PEND0_INT16        0x00010000
+#define NVIC_PEND0_INT16               ((unsigned long)0x00010000)
 
 //
 //! Interrupt 17 pend
 //
-#define NVIC_PEND0_INT17        0x00020000
+#define NVIC_PEND0_INT17               ((unsigned long)0x00020000)
 
 //
 //! Interrupt 18 pend
 //
-#define NVIC_PEND0_INT18        0x00040000
+#define NVIC_PEND0_INT18               ((unsigned long)0x00040000)
 
 //
 //! Interrupt 19 pend
 //
-#define NVIC_PEND0_INT19        0x00080000
+#define NVIC_PEND0_INT19               ((unsigned long)0x00080000)
 
 //
 //! Interrupt 20 pend
 //
-#define NVIC_PEND0_INT20        0x00100000
+#define NVIC_PEND0_INT20               ((unsigned long)0x00100000)
 
 //
 //! Interrupt 21 pend
 //
-#define NVIC_PEND0_INT21        0x00200000
+#define NVIC_PEND0_INT21               ((unsigned long)0x00200000)
 
 //
 //! Interrupt 22 pend
 //
-#define NVIC_PEND0_INT22        0x00400000
+#define NVIC_PEND0_INT22               ((unsigned long)0x00400000)
 
 //
 //! Interrupt 23 pend
 //
-#define NVIC_PEND0_INT23        0x00800000
+#define NVIC_PEND0_INT23               ((unsigned long)0x00800000)
 
 //
 //! Interrupt 24 pend
 //
-#define NVIC_PEND0_INT24        0x01000000
+#define NVIC_PEND0_INT24               ((unsigned long)0x01000000)
 
 //
 //! Interrupt 25 pend
 //
-#define NVIC_PEND0_INT25        0x02000000
+#define NVIC_PEND0_INT25               ((unsigned long)0x02000000)
 
 //
 //! Interrupt 26 pend
 //
-#define NVIC_PEND0_INT26        0x04000000
+#define NVIC_PEND0_INT26               ((unsigned long)0x04000000)
 
 //
 //! Interrupt 27 pend
 //
-#define NVIC_PEND0_INT27        0x08000000
+#define NVIC_PEND0_INT27               ((unsigned long)0x08000000)
 
 //
 //! Interrupt 28 pend
 //
-#define NVIC_PEND0_INT28        0x10000000
+#define NVIC_PEND0_INT28               ((unsigned long)0x10000000)
 
 //
 //! Interrupt 29 pend
 //
-#define NVIC_PEND0_INT29        0x20000000
+#define NVIC_PEND0_INT29               ((unsigned long)0x20000000)
 
 //
 //! Interrupt 30 pend
 //
-#define NVIC_PEND0_INT30        0x40000000
+#define NVIC_PEND0_INT30               ((unsigned long)0x40000000)
 
 //
 //! Interrupt 31 pend
 //
-#define NVIC_PEND0_INT31        0x80000000
+#define NVIC_PEND0_INT31               ((unsigned long)0x80000000)
 
 //*****************************************************************************
 //
@@ -1087,166 +1103,166 @@
 //
 //! Interrupt Clear Pending
 //
-#define NVIC_UNPEND0_INT_M      0xFFFFFFFF
+#define NVIC_UNPEND0_INT_M             ((unsigned long)0xFFFFFFFF)
 
 //
 //! Interrupt 0 unpend
 //
-#define NVIC_UNPEND0_INT0       0x00000001
+#define NVIC_UNPEND0_INT0              ((unsigned long)0x00000001)
 
 //
 //! Interrupt 1 unpend
 //
-#define NVIC_UNPEND0_INT1       0x00000002
+#define NVIC_UNPEND0_INT1              ((unsigned long)0x00000002)
 
 //
 //! Interrupt 2 unpend
 //
-#define NVIC_UNPEND0_INT2       0x00000004
+#define NVIC_UNPEND0_INT2              ((unsigned long)0x00000004)
 
 //
 //! Interrupt 3 unpend
 //
-#define NVIC_UNPEND0_INT3       0x00000008
+#define NVIC_UNPEND0_INT3              ((unsigned long)0x00000008)
 
 //
 //! Interrupt 4 unpend
 //
-#define NVIC_UNPEND0_INT4       0x00000010
+#define NVIC_UNPEND0_INT4              ((unsigned long)0x00000010)
 
 //
 //! Interrupt 5 unpend
 //
-#define NVIC_UNPEND0_INT5       0x00000020
+#define NVIC_UNPEND0_INT5              ((unsigned long)0x00000020)
 
 //
 //! Interrupt 6 unpend
 //
-#define NVIC_UNPEND0_INT6       0x00000040
+#define NVIC_UNPEND0_INT6              ((unsigned long)0x00000040)
 
 //
 //! Interrupt 7 unpend
 //
-#define NVIC_UNPEND0_INT7       0x00000080
+#define NVIC_UNPEND0_INT7              ((unsigned long)0x00000080)
 
 //
 //! Interrupt 8 unpend
 //
-#define NVIC_UNPEND0_INT8       0x00000100
+#define NVIC_UNPEND0_INT8              ((unsigned long)0x00000100)
 //
 //! Interrupt 9 unpend
 //
-#define NVIC_UNPEND0_INT9       0x00000200
+#define NVIC_UNPEND0_INT9              ((unsigned long)0x00000200)
 
 //
 //! Interrupt 10 unpend
 //
-#define NVIC_UNPEND0_INT10      0x00000400
+#define NVIC_UNPEND0_INT10             ((unsigned long)0x00000400)
 
 //
 //! Interrupt 11 unpend
 //
-#define NVIC_UNPEND0_INT11      0x00000800
+#define NVIC_UNPEND0_INT11             ((unsigned long)0x00000800)
 
 //
 //! Interrupt 12 unpend
 //
-#define NVIC_UNPEND0_INT12      0x00001000
+#define NVIC_UNPEND0_INT12             ((unsigned long)0x00001000)
 
 //
 //! Interrupt 13 unpend
 //
-#define NVIC_UNPEND0_INT13      0x00002000
+#define NVIC_UNPEND0_INT13             ((unsigned long)0x00002000)
 
 //
 //! Interrupt 14 unpend
 //
-#define NVIC_UNPEND0_INT14      0x00004000
+#define NVIC_UNPEND0_INT14             ((unsigned long)0x00004000)
 
 //
 //! Interrupt 15 unpend
 //
-#define NVIC_UNPEND0_INT15      0x00008000
+#define NVIC_UNPEND0_INT15             ((unsigned long)0x00008000)
 
 //
 //! Interrupt 16 unpend
 //
-#define NVIC_UNPEND0_INT16      0x00010000
+#define NVIC_UNPEND0_INT16             ((unsigned long)0x00010000)
 
 //
 //! Interrupt 17 unpend
 //
-#define NVIC_UNPEND0_INT17      0x00020000
+#define NVIC_UNPEND0_INT17             ((unsigned long)0x00020000)
 
 //
 //! Interrupt 18 unpend
 //
-#define NVIC_UNPEND0_INT18      0x00040000
+#define NVIC_UNPEND0_INT18             ((unsigned long)0x00040000)
 
 //
 //! Interrupt 19 unpend
 //
-#define NVIC_UNPEND0_INT19      0x00080000
+#define NVIC_UNPEND0_INT19             ((unsigned long)0x00080000)
 
 //
 //! Interrupt 20 unpend
 //
-#define NVIC_UNPEND0_INT20      0x00100000
+#define NVIC_UNPEND0_INT20             ((unsigned long)0x00100000)
 
 //
 //! Interrupt 21 unpend
 //
-#define NVIC_UNPEND0_INT21      0x00200000
+#define NVIC_UNPEND0_INT21             ((unsigned long)0x00200000)
 
 //
 //! Interrupt 22 unpend
 //
-#define NVIC_UNPEND0_INT22      0x00400000
+#define NVIC_UNPEND0_INT22             ((unsigned long)0x00400000)
 
 //
 //! Interrupt 23 unpend
 //
-#define NVIC_UNPEND0_INT23      0x00800000
+#define NVIC_UNPEND0_INT23             ((unsigned long)0x00800000)
 
 //
 //! Interrupt 24 unpend
 //
-#define NVIC_UNPEND0_INT24      0x01000000
+#define NVIC_UNPEND0_INT24             ((unsigned long)0x01000000)
 
 //
 //! Interrupt 25 unpend
 //
-#define NVIC_UNPEND0_INT25      0x02000000
+#define NVIC_UNPEND0_INT25             ((unsigned long)0x02000000)
 
 //
 //! Interrupt 26 unpend
 //
-#define NVIC_UNPEND0_INT26      0x04000000
+#define NVIC_UNPEND0_INT26             ((unsigned long)0x04000000)
 
 //
 //! Interrupt 27 unpend
 //
-#define NVIC_UNPEND0_INT27      0x08000000
+#define NVIC_UNPEND0_INT27             ((unsigned long)0x08000000)
 
 //
 //! Interrupt 28 unpend
 //
-#define NVIC_UNPEND0_INT28      0x10000000
+#define NVIC_UNPEND0_INT28             ((unsigned long)0x10000000)
 
 //
 //! Interrupt 29 unpend
 //
-#define NVIC_UNPEND0_INT29      0x20000000
+#define NVIC_UNPEND0_INT29             ((unsigned long)0x20000000)
 
 //
 //! Interrupt 30 unpend
 //
-#define NVIC_UNPEND0_INT30      0x40000000
+#define NVIC_UNPEND0_INT30             ((unsigned long)0x40000000)
 
 //
 //! Interrupt 31 unpend
 //
-#define NVIC_UNPEND0_INT31      0x80000000
+#define NVIC_UNPEND0_INT31             ((unsigned long)0x80000000)
 
 //*****************************************************************************
 //
@@ -1265,26 +1281,26 @@
 //
 //! Interrupt 3 Priority Mask
 //
-#define NVIC_PRI0_INT3_M        0xC0000000
+#define NVIC_PRI0_INT3_M               ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 2 Priority Mask
 //
-#define NVIC_PRI0_INT2_M        0x00C00000
+#define NVIC_PRI0_INT2_M               ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 1 Priority Mask
 //
-#define NVIC_PRI0_INT1_M        0x0000C000
+#define NVIC_PRI0_INT1_M               ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 0 Priority Mask
 //
-#define NVIC_PRI0_INT0_M        0x000000C0
-#define NVIC_PRI0_INT3_S        30
-#define NVIC_PRI0_INT2_S        22
-#define NVIC_PRI0_INT1_S        14
-#define NVIC_PRI0_INT0_S        6
+#define NVIC_PRI0_INT0_M               ((unsigned long)0x000000C0)
+#define NVIC_PRI0_INT3_S               30
+#define NVIC_PRI0_INT2_S               22
+#define NVIC_PRI0_INT1_S               14
+#define NVIC_PRI0_INT0_S               6
 
 //*****************************************************************************
 //
@@ -1303,26 +1319,26 @@
 //
 //! Interrupt 7 Priority Mask
 //
-#define NVIC_PRI1_INT7_M        0xC0000000
+#define NVIC_PRI1_INT7_M               ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 6 Priority Mask
 //
-#define NVIC_PRI1_INT6_M        0x00C00000
+#define NVIC_PRI1_INT6_M               ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 5 Priority Mask
 //
-#define NVIC_PRI1_INT5_M        0x0000C000
+#define NVIC_PRI1_INT5_M               ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 4 Priority Mask
 //
-#define NVIC_PRI1_INT4_M        0x000000C0
-#define NVIC_PRI1_INT7_S        30
-#define NVIC_PRI1_INT6_S        22
-#define NVIC_PRI1_INT5_S        14
-#define NVIC_PRI1_INT4_S        6
+#define NVIC_PRI1_INT4_M               ((unsigned long)0x000000C0)
+#define NVIC_PRI1_INT7_S               30
+#define NVIC_PRI1_INT6_S               22
+#define NVIC_PRI1_INT5_S               14
+#define NVIC_PRI1_INT4_S               6
 
 //*****************************************************************************
 //
@@ -1341,26 +1357,26 @@
 //
 //! Interrupt 11 Priority Mask
 //
-#define NVIC_PRI2_INT11_M       0xC0000000
+#define NVIC_PRI2_INT11_M              ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 10 Priority Mask
 //
-#define NVIC_PRI2_INT10_M       0x00C00000
+#define NVIC_PRI2_INT10_M              ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 9 Priority Mask
 //
-#define NVIC_PRI2_INT9_M        0x0000C000
+#define NVIC_PRI2_INT9_M               ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 8 Priority Mask
 //
-#define NVIC_PRI2_INT8_M        0x000000C0
-#define NVIC_PRI2_INT11_S       30
-#define NVIC_PRI2_INT10_S       22
-#define NVIC_PRI2_INT9_S        14
-#define NVIC_PRI2_INT8_S        6
+#define NVIC_PRI2_INT8_M               ((unsigned long)0x000000C0)
+#define NVIC_PRI2_INT11_S              30
+#define NVIC_PRI2_INT10_S              22
+#define NVIC_PRI2_INT9_S               14
+#define NVIC_PRI2_INT8_S               6
 
 //*****************************************************************************
 //
@@ -1379,26 +1395,26 @@
 //
 //! Interrupt 15 Priority Mask
 //
-#define NVIC_PRI3_INT15_M       0xC0000000
+#define NVIC_PRI3_INT15_M              ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 14 Priority Mask
 //
-#define NVIC_PRI3_INT14_M       0x00C00000
+#define NVIC_PRI3_INT14_M              ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 13 Priority Mask
 //
-#define NVIC_PRI3_INT13_M       0x0000C000
+#define NVIC_PRI3_INT13_M              ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 12 Priority Mask
 //
-#define NVIC_PRI3_INT12_M       0x000000C0
-#define NVIC_PRI3_INT15_S       30
-#define NVIC_PRI3_INT14_S       22
-#define NVIC_PRI3_INT13_S       14
-#define NVIC_PRI3_INT12_S       6
+#define NVIC_PRI3_INT12_M              ((unsigned long)0x000000C0)
+#define NVIC_PRI3_INT15_S              30
+#define NVIC_PRI3_INT14_S              22
+#define NVIC_PRI3_INT13_S              14
+#define NVIC_PRI3_INT12_S              6
 
 //*****************************************************************************
 //
@@ -1417,26 +1433,26 @@
 //
 //! Interrupt 19 Priority Mask
 //
-#define NVIC_PRI4_INT19_M       0xC0000000
+#define NVIC_PRI4_INT19_M              ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 18 Priority Mask
 //
-#define NVIC_PRI4_INT18_M       0x00C00000
+#define NVIC_PRI4_INT18_M              ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 17 Priority Mask
 //
-#define NVIC_PRI4_INT17_M       0x0000C000
+#define NVIC_PRI4_INT17_M              ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 16 Priority Mask
 //
-#define NVIC_PRI4_INT16_M       0x000000C0
-#define NVIC_PRI4_INT19_S       30
-#define NVIC_PRI4_INT18_S       22
-#define NVIC_PRI4_INT17_S       14
-#define NVIC_PRI4_INT16_S       6
+#define NVIC_PRI4_INT16_M              ((unsigned long)0x000000C0)
+#define NVIC_PRI4_INT19_S              30
+#define NVIC_PRI4_INT18_S              22
+#define NVIC_PRI4_INT17_S              14
+#define NVIC_PRI4_INT16_S              6
 
 //*****************************************************************************
 //
@@ -1455,26 +1471,26 @@
 //
 //! Interrupt 23 Priority Mask
 //
-#define NVIC_PRI5_INT23_M       0xC0000000
+#define NVIC_PRI5_INT23_M              ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 22 Priority Mask
 //
-#define NVIC_PRI5_INT22_M       0x00C00000
+#define NVIC_PRI5_INT22_M              ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 21 Priority Mask
 //
-#define NVIC_PRI5_INT21_M       0x0000C000
+#define NVIC_PRI5_INT21_M              ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 20 Priority Mask
 //
-#define NVIC_PRI5_INT20_M       0x000000C0
-#define NVIC_PRI5_INT23_S       30
-#define NVIC_PRI5_INT22_S       22
-#define NVIC_PRI5_INT21_S       14
-#define NVIC_PRI5_INT20_S       6
+#define NVIC_PRI5_INT20_M              ((unsigned long)0x000000C0)
+#define NVIC_PRI5_INT23_S              30
+#define NVIC_PRI5_INT22_S              22
+#define NVIC_PRI5_INT21_S              14
+#define NVIC_PRI5_INT20_S              6
 
 //*****************************************************************************
 //
@@ -1493,26 +1509,26 @@
 //
 //! Interrupt 27 Priority Mask
 //
-#define NVIC_PRI6_INT27_M       0xC0000000
+#define NVIC_PRI6_INT27_M              ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 26 Priority Mask
 //
-#define NVIC_PRI6_INT26_M       0x00C00000
+#define NVIC_PRI6_INT26_M              ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 25 Priority Mask
 //
-#define NVIC_PRI6_INT25_M       0x0000C000
+#define NVIC_PRI6_INT25_M              ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 24 Priority Mask
 //
-#define NVIC_PRI6_INT24_M       0x000000C0
-#define NVIC_PRI6_INT27_S       30
-#define NVIC_PRI6_INT26_S       22
-#define NVIC_PRI6_INT25_S       14
-#define NVIC_PRI6_INT24_S       6
+#define NVIC_PRI6_INT24_M              ((unsigned long)0x000000C0)
+#define NVIC_PRI6_INT27_S              30
+#define NVIC_PRI6_INT26_S              22
+#define NVIC_PRI6_INT25_S              14
+#define NVIC_PRI6_INT24_S              6
 
 //*****************************************************************************
 //
@@ -1531,32 +1547,33 @@
 //
 //! Interrupt 31 Priority Mask
 //
-#define NVIC_PRI7_INT31_M       0xC0000000
+#define NVIC_PRI7_INT31_M              ((unsigned long)0xC0000000)
 
 //
 //! Interrupt 30 Priority Mask
 //
-#define NVIC_PRI7_INT30_M       0x00C00000
+#define NVIC_PRI7_INT30_M              ((unsigned long)0x00C00000)
 
 //
 //! Interrupt 29 Priority Mask
 //
-#define NVIC_PRI7_INT29_M       0x0000C000
+#define NVIC_PRI7_INT29_M              ((unsigned long)0x0000C000)
 
 //
 //! Interrupt 28 Priority Mask
 //
-#define NVIC_PRI7_INT28_M       0x000000C0
-#define NVIC_PRI7_INT31_S       30
-#define NVIC_PRI7_INT30_S       22
-#define NVIC_PRI7_INT29_S       14
-#define NVIC_PRI7_INT28_S       6
+#define NVIC_PRI7_INT28_M              ((unsigned long)0x000000C0)
+#define NVIC_PRI7_INT31_S              30
+#define NVIC_PRI7_INT30_S              22
+#define NVIC_PRI7_INT29_S              14
+#define NVIC_PRI7_INT28_S              6
 
 //*****************************************************************************
 //
 //! @}
 //
 //*****************************************************************************
+
 
 //*****************************************************************************
 //
@@ -1569,37 +1586,37 @@
 //
 //! Implementer Code
 //
-#define NVIC_CPUID_IMP_M        0xFF000000
+#define NVIC_CPUID_IMP_M               ((unsigned long)0xFF000000)
 
 //
 //! ARM
 //
-#define NVIC_CPUID_IMP_ARM      0x41000000
+#define NVIC_CPUID_IMP_ARM             ((unsigned long)0x41000000)
 
 //
 //! Variant Number
 //
-#define NVIC_CPUID_VAR_M        0x00F00000
+#define NVIC_CPUID_VAR_M               ((unsigned long)0x00F00000)
 
 //
 //! Constant
 //
-#define NVIC_CPUID_CON_M        0x000F0000
+#define NVIC_CPUID_CON_M               ((unsigned long)0x000F0000)
 
 //
 //! Part Number
 //
-#define NVIC_CPUID_PARTNO_M     0x0000FFF0
+#define NVIC_CPUID_PARTNO_M            ((unsigned long)0x0000FFF0)
 
 //
 //! Cortex-M3 processor
 //
-#define NVIC_CPUID_PARTNO_CM3   0x0000C230
+#define NVIC_CPUID_PARTNO_CM3          ((unsigned long)0x0000C230)
 
 //
 //! Revision Number
 //
-#define NVIC_CPUID_REV_M        0x0000000F
+#define NVIC_CPUID_REV_M               ((unsigned long)0x0000000F)
 
 //*****************************************************************************
 //
@@ -1618,108 +1635,129 @@
 //
 //! NMI Set Pending
 //
-#define NVIC_INT_CTRL_NMI_SET   0x80000000
+#define NVIC_INT_CTRL_NMI_PEND_SET     ((unsigned long)0x80000000)
 
 //
 //! PendSV Set Pending
 //
-#define NVIC_INT_CTRL_PEND_SV   0x10000000
+#define NVIC_INT_CTRL_SV_PEND_SET      ((unsigned long)0x10000000)
 
 //
 //! PendSV Clear Pending
 //
-#define NVIC_INT_CTRL_UNPEND_SV 0x08000000
+#define NVIC_INT_CTRL_SV_PEND_CLR      ((unsigned long)0x08000000)
 
 //
 //! SysTick Set Pending
 //
-#define NVIC_INT_CTRL_PENDSTSET 0x04000000
+#define NVIC_INT_CTRL_ST_PEND_SET      ((unsigned long)0x04000000)
 
 //
 //! SysTick Clear Pending
 //
-#define NVIC_INT_CTRL_PENDSTCLR 0x02000000
+#define NVIC_INT_CTRL_ST_PEND_CLR      ((unsigned long)0x02000000)
 
 //
 //! Debug Interrupt Handling
 //
-#define NVIC_INT_CTRL_ISR_PRE   0x00800000
+#define NVIC_INT_CTRL_ISR_PRE          ((unsigned long)0x00800000)
 
 //
 //! Interrupt Pending
 //
-#define NVIC_INT_CTRL_ISR_PEND  0x00400000
+#define NVIC_INT_CTRL_ISR_PENDING      ((unsigned long)0x00400000)
 
 //
 //! Interrupt Pending Vector Number
 //
-#define NVIC_INT_CTRL_VEC_PEN_M 0x0007F000
+#define NVIC_INT_CTRL_VEC_PEN_M        ((unsigned long)0x0007F000)
+
+#define NVIC_INT_CTRL_VEC_PEN_S        12
 
 //
 //! NMI
 //
-#define NVIC_INT_CTRL_VEC_PEN_NMI \
-                                0x00002000
+#define NVIC_INT_CTRL_VEC_PEN_NMI      ((unsigned long)0x00002000)
 
 //
 //! Hard fault
 //
-#define NVIC_INT_CTRL_VEC_PEN_HARD \
-                                0x00003000
+#define NVIC_INT_CTRL_VEC_PEN_HARD     ((unsigned long)0x00003000)
 
 //
 //! Memory management fault
 //
-#define NVIC_INT_CTRL_VEC_PEN_MEM \
-                                0x00004000
+#define NVIC_INT_CTRL_VEC_PEN_MEM      ((unsigned long)0x00004000)
 
 //
 //! Bus fault
 //
-#define NVIC_INT_CTRL_VEC_PEN_BUS \
-                                0x00005000
+#define NVIC_INT_CTRL_VEC_PEN_BUS      ((unsigned long)0x00005000)
 
 //
 //! Usage fault
 //
-#define NVIC_INT_CTRL_VEC_PEN_USG \
-                                0x00006000
+#define NVIC_INT_CTRL_VEC_PEN_USG      ((unsigned long)0x00006000)
 
 //
 //! SVCall
 //
-#define NVIC_INT_CTRL_VEC_PEN_SVC \
-                                0x0000B000
+#define NVIC_INT_CTRL_VEC_PEN_SVC      ((unsigned long)0x0000B000)
 
 //
 //! PendSV
 //
-#define NVIC_INT_CTRL_VEC_PEN_PNDSV \
-                                0x0000C000
+#define NVIC_INT_CTRL_VEC_PEN_PNDSV    ((unsigned long)0x0000C000)
 
 //
 //! SysTick
 //
-#define NVIC_INT_CTRL_VEC_PEN_TICK \
-                                0x0000F000
+#define NVIC_INT_CTRL_VEC_PEN_TICK     ((unsigned long)0x0000F000)
 
 //
 //! Return to Base
 //
-#define NVIC_INT_CTRL_RET_BASE  0x00000800
+#define NVIC_INT_CTRL_RET_BASE         ((unsigned long)0x00000800)
 
 //
 //! Interrupt Pending Vector Number
 //
-#define NVIC_INT_CTRL_VEC_ACT_M 0x0000007F
-#define NVIC_INT_CTRL_VEC_PEN_S 12
-#define NVIC_INT_CTRL_VEC_ACT_S 0
+#define NVIC_INT_CTRL_VEC_ACT_M        ((unsigned long)0x000001FF)
+#define NVIC_INT_CTRL_VEC_ACT_S        0
 
 //*****************************************************************************
 //
 //! @}
 //
 //*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup NVIC_Register_VTOR NVIC Vector Table Offset Register.
+//! \brief Defines for the bit fields in the NVIC_VTOR register.
+//! @{
+//
+//*****************************************************************************
+
+//
+//! Table base is in Code(0) or RAM(1)
+//
+#define NVIC_CTOR_TBLBASE              ((unsigned long)0x20000000)
+
+//
+//!  Vector table base offset field. Contains the offset of the table base from
+//!  the bottom of the SRAM or CODE space.
+//
+#define NVIC_CTOR_TBLOFF_M             ((unsigned long)0x1FFFFF80)
+#define NVIC_CTOR_TBLOFF_S             6
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
 
 //*****************************************************************************
 //
@@ -1732,77 +1770,77 @@
 //
 //! Register Key
 //
-#define NVIC_APINT_VECTKEY_M    0xFFFF0000
+#define NVIC_APINT_VECTKEY_M           ((unsigned long)0xFFFF0000)
 
 //
 //! Vector key
 //
-#define NVIC_APINT_VECTKEY      0x05FA0000
+#define NVIC_APINT_VECTKEY             ((unsigned long)0x05FA0000)
 
 //
 //! Data Endianess
 //
-#define NVIC_APINT_ENDIANESS    0x00008000
+#define NVIC_APINT_ENDIANESS           ((unsigned long)0x00008000)
 
 //
 //! Interrupt Priority Grouping
 //
-#define NVIC_APINT_PRIGROUP_M   0x00000700
+#define NVIC_APINT_PRIGROUP_M          ((unsigned long)0x00000700)
 
 //
 //! Priority group 7.1 split
 //
-#define NVIC_APINT_PRIGROUP_7_1 0x00000000
+#define NVIC_APINT_PRIGROUP_7_1        ((unsigned long)0x00000000)
 
 //
 //! Priority group 6.2 split
 //
-#define NVIC_APINT_PRIGROUP_6_2 0x00000100
+#define NVIC_APINT_PRIGROUP_6_2        ((unsigned long)0x00000100)
 
 //
 //! Priority group 5.3 split
 //
-#define NVIC_APINT_PRIGROUP_5_3 0x00000200
+#define NVIC_APINT_PRIGROUP_5_3        ((unsigned long)0x00000200)
 
 //
 //! Priority group 4.4 split
 //
-#define NVIC_APINT_PRIGROUP_4_4 0x00000300
+#define NVIC_APINT_PRIGROUP_4_4        ((unsigned long)0x00000300)
 
 //
 //! Priority group 3.5 split
 //
-#define NVIC_APINT_PRIGROUP_3_5 0x00000400
+#define NVIC_APINT_PRIGROUP_3_5        ((unsigned long)0x00000400)
 
 //
 //! Priority group 2.6 split
 //
-#define NVIC_APINT_PRIGROUP_2_6 0x00000500
+#define NVIC_APINT_PRIGROUP_2_6        ((unsigned long)0x00000500)
 
 //
 //! Priority group 1.7 split
 //
-#define NVIC_APINT_PRIGROUP_1_7 0x00000600
+#define NVIC_APINT_PRIGROUP_1_7        ((unsigned long)0x00000600)
 
 //
 //! Priority group 0.8 split
 //
-#define NVIC_APINT_PRIGROUP_0_8 0x00000700
+#define NVIC_APINT_PRIGROUP_0_8        ((unsigned long)0x00000700)
 
 //
 //! System Reset Request
 //
-#define NVIC_APINT_SYSRESETREQ  0x00000004
+#define NVIC_APINT_SYSRESETREQ         ((unsigned long)0x00000004)
 
 //
 //! Clear Active NMI / Fault
 //
-#define NVIC_APINT_VECT_CLR_ACT 0x00000002
+#define NVIC_APINT_VECT_CLR_ACT        ((unsigned long)0x00000002)
 
 //
 //! System Reset
 //
-#define NVIC_APINT_VECT_RESET   0x00000001
+#define NVIC_APINT_VECT_RESET          ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
@@ -1821,17 +1859,17 @@
 //
 //! Wake Up on Pending
 //
-#define NVIC_SYS_CTRL_SEVONPEND 0x00000010
+#define NVIC_SYS_CTRL_SEVONPEND        ((unsigned long)0x00000010)
 
 //
 //! Deep Sleep Enable
 //
-#define NVIC_SYS_CTRL_SLEEPDEEP 0x00000004
+#define NVIC_SYS_CTRL_SLEEPDEEP        ((unsigned long)0x00000004)
 
 //
 //! Sleep on ISR Exit
 //
-#define NVIC_SYS_CTRL_SLEEPEXIT 0x00000002
+#define NVIC_SYS_CTRL_SLEEPEXIT        ((unsigned long)0x00000002)
 
 //*****************************************************************************
 //
@@ -1850,32 +1888,32 @@
 //
 //! Stack Alignment on Exception Entry
 //
-#define NVIC_CFG_CTRL_STKALIGN  0x00000200
+#define NVIC_CFG_CTRL_STKALIGN         ((unsigned long)0x00000200)
 
 //
 //! Ignore Bus Fault in NMI and Fault
 //
-#define NVIC_CFG_CTRL_BFHFNMIGN 0x00000100
+#define NVIC_CFG_CTRL_BFHFNMIGN        ((unsigned long)0x00000100)
 
 //
 //! Trap on Divide by 0
 //
-#define NVIC_CFG_CTRL_DIV0      0x00000010
+#define NVIC_CFG_CTRL_DIV0             ((unsigned long)0x00000010)
 
 //
 //! Trap on Unaligned Access
 //
-#define NVIC_CFG_CTRL_UNALIGNED 0x00000008
+#define NVIC_CFG_CTRL_UNALIGNED        ((unsigned long)0x00000008)
 
 //
 //! Allow Main Interrupt Trigger
 //
-#define NVIC_CFG_CTRL_MAIN_PEND 0x00000002
+#define NVIC_CFG_CTRL_MAIN_PEND        ((unsigned long)0x00000002)
 
 //
 //! Thread State Control
 //
-#define NVIC_CFG_CTRL_BASE_THR  0x00000001
+#define NVIC_CFG_CTRL_BASE_THR         ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
@@ -1894,8 +1932,8 @@
 //
 //! SVCall Priority
 //
-#define NVIC_SYS_PRI2_SVC_M     0xC0000000
-#define NVIC_SYS_PRI2_SVC_S     29
+#define NVIC_SYS_PRI2_SVC_M            ((unsigned long)0xC0000000)
+#define NVIC_SYS_PRI2_SVC_S            29
 
 //*****************************************************************************
 //
@@ -1914,20 +1952,20 @@
 //
 //! SysTick Exception Priority
 //
-#define NVIC_SYS_PRI3_TICK_M    0xC0000000
+#define NVIC_SYS_PRI3_TICK_M           ((unsigned long)0xC0000000)
 
 //
 //! PendSV Priority
 //
-#define NVIC_SYS_PRI3_PENDSV_M  0x00C00000
+#define NVIC_SYS_PRI3_PENDSV_M         ((unsigned long)0x00C00000)
 
 //
 //! Debug Priority
 //
-#define NVIC_SYS_PRI3_DEBUG_M   0x000000C0
-#define NVIC_SYS_PRI3_TICK_S    29
-#define NVIC_SYS_PRI3_PENDSV_S  21
-#define NVIC_SYS_PRI3_DEBUG_S   5
+#define NVIC_SYS_PRI3_DEBUG_M          ((unsigned long)0x000000C0)
+#define NVIC_SYS_PRI3_TICK_S           29
+#define NVIC_SYS_PRI3_PENDSV_S         21
+#define NVIC_SYS_PRI3_DEBUG_S          5
 
 //*****************************************************************************
 //
@@ -1946,73 +1984,72 @@
 //
 //! Usage Fault Enable
 //
-#define NVIC_SYS_HND_CTRL_USAGE 0x00040000
+#define NVIC_SHCSR_USG_FAULT_EN        ((unsigned long)0x00040000)
 
 //
 //! Bus Fault Enable
 //
-#define NVIC_SYS_HND_CTRL_BUS   0x00020000
+#define NVIC_SHCSR_BUS_FAULT_EN        ((unsigned long)0x00020000)
 
 //
 //! Memory Management Fault Enable
 //
-#define NVIC_SYS_HND_CTRL_MEM   0x00010000
+#define NVIC_SHCSR_MEM_FAULT_EN        ((unsigned long)0x00010000)
 
 //
 //! SVC Call Pending
 //
-#define NVIC_SYS_HND_CTRL_SVC   0x00008000
+#define NVIC_SHCSR_SVC_PENDED          ((unsigned long)0x00008000)
 
 //
 //! Bus Fault Pending
 //
-#define NVIC_SYS_HND_CTRL_BUSP  0x00004000
+#define NVIC_SHCSR_BUS_FAULT_PENDED    ((unsigned long)0x00004000)
 
 //
 //! Memory Management Fault Pending
 //
-#define NVIC_SYS_HND_CTRL_MEMP  0x00002000
+#define NVIC_SHCSR_MEM_FAULT_PENDED    ((unsigned long)0x00002000)
 
 //
 //! Usage Fault Pending
 //
-#define NVIC_SYS_HND_CTRL_USAGEP \
-                                0x00001000
+#define NVIC_SHCSR_USG_FAULT_PENDED    ((unsigned long)0x00001000)
 
 //
 //! SysTick Exception Active
 //
-#define NVIC_SYS_HND_CTRL_TICK  0x00000800
+#define NVIC_SHCSR_ST_ACT              ((unsigned long)0x00000800)
 
 //
 //! PendSV Exception Active
 //
-#define NVIC_SYS_HND_CTRL_PNDSV 0x00000400
+#define NVIC_SHCSR_PENDSV_ACT          ((unsigned long)0x00000400)
 
 //
 //! Debug Monitor Active
 //
-#define NVIC_SYS_HND_CTRL_MON   0x00000100
+#define NVIC_SHCSR_MONITOR_ACT         ((unsigned long)0x00000100)
 
 //
 //! SVC Call Active
 //
-#define NVIC_SYS_HND_CTRL_SVCA  0x00000080
+#define NVIC_SHCSR_SVC_ACT             ((unsigned long)0x00000080)
 
 //
 //! Usage Fault Active
 //
-#define NVIC_SYS_HND_CTRL_USGA  0x00000008
+#define NVIC_SHCSR_USG_FAULT_ACT       ((unsigned long)0x00000008)
 
 //
 //! Bus Fault Active
 //
-#define NVIC_SYS_HND_CTRL_BUSA  0x00000002
+#define NVIC_SHCSR_BUS_FAULT_ACT       ((unsigned long)0x00000002)
 
 //
 //! Memory Management Fault Active
 //
-#define NVIC_SYS_HND_CTRL_MEMA  0x00000001
+#define NVIC_SHCSR_MEM_FAULT_ACT       ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
@@ -2031,27 +2068,27 @@
 //
 //! EDBGRQ asserted
 //
-#define NVIC_DEBUG_STAT_EXTRNL  0x00000010
+#define NVIC_DEBUG_STAT_EXTRNL         ((unsigned long)0x00000010)
 
 //
 //! Vector catch
 //
-#define NVIC_DEBUG_STAT_VCATCH  0x00000008
+#define NVIC_DEBUG_STAT_VCATCH         ((unsigned long)0x00000008)
 
 //
 //! DWT match
 //
-#define NVIC_DEBUG_STAT_DWTTRAP 0x00000004
+#define NVIC_DEBUG_STAT_DWTTRAP        ((unsigned long)0x00000004)
 
 //
 //! Breakpoint instruction
 //
-#define NVIC_DEBUG_STAT_BKPT    0x00000002
+#define NVIC_DEBUG_STAT_BKPT           ((unsigned long)0x00000002)
 
 //
 //! Halt request
 //
-#define NVIC_DEBUG_STAT_HALTED  0x00000001
+#define NVIC_DEBUG_STAT_HALTED         ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
@@ -2070,70 +2107,67 @@
 //
 //! Debug key mask
 //
-#define NVIC_DBG_CTRL_DBGKEY_M  0xFFFF0000
+#define NVIC_DBG_CTRL_DBGKEY_M         ((unsigned long)0xFFFF0000)
 
 //
 //! Debug key
 //
-#define NVIC_DBG_CTRL_DBGKEY    0xA05F0000
+#define NVIC_DBG_CTRL_DBGKEY           ((unsigned long)0xA05F0000)
 
 //
 //! Core has reset since last read
 //
-#define NVIC_DBG_CTRL_S_RESET_ST \
-                                0x02000000
+#define NVIC_DBG_CTRL_S_RESET_ST       ((unsigned long)0x02000000)
 
 //
 //! Core has executed insruction since last read
 //
-#define NVIC_DBG_CTRL_S_RETIRE_ST \
-                                0x01000000
+#define NVIC_DBG_CTRL_S_RETIRE_ST      ((unsigned long)0x01000000)
 
 //
 //! Core is locked up
 //
-#define NVIC_DBG_CTRL_S_LOCKUP  0x00080000
+#define NVIC_DBG_CTRL_S_LOCKUP         ((unsigned long)0x00080000)
 
 //
 //! Core is sleeping
 //
-#define NVIC_DBG_CTRL_S_SLEEP   0x00040000
+#define NVIC_DBG_CTRL_S_SLEEP          ((unsigned long)0x00040000)
 
 //
 //! Core status on halt
 //
-#define NVIC_DBG_CTRL_S_HALT    0x00020000
+#define NVIC_DBG_CTRL_S_HALT           ((unsigned long)0x00020000)
 
 //
 //! Register read/write available
 //
-#define NVIC_DBG_CTRL_S_REGRDY  0x00010000
+#define NVIC_DBG_CTRL_S_REGRDY         ((unsigned long)0x00010000)
 
 //
 //! Breaks a stalled load/store
 //
-#define NVIC_DBG_CTRL_C_SNAPSTALL \
-                                0x00000020
+#define NVIC_DBG_CTRL_C_SNAPSTALL      ((unsigned long)0x00000020)
 
 //
 //! Mask interrupts when stepping
 //
-#define NVIC_DBG_CTRL_C_MASKINT 0x00000008
+#define NVIC_DBG_CTRL_C_MASKINT        ((unsigned long)0x00000008)
 
 //
 //! Step the core
 //
-#define NVIC_DBG_CTRL_C_STEP    0x00000004
+#define NVIC_DBG_CTRL_C_STEP           ((unsigned long)0x00000004)
 
 //
 //! Halt the core
 //
-#define NVIC_DBG_CTRL_C_HALT    0x00000002
+#define NVIC_DBG_CTRL_C_HALT           ((unsigned long)0x00000002)
 
 //
 //! Enable debug
 //
-#define NVIC_DBG_CTRL_C_DEBUGEN 0x00000001
+#define NVIC_DBG_CTRL_C_DEBUGEN        ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
@@ -2152,117 +2186,117 @@
 //
 //! Write or not read
 //
-#define NVIC_DBG_XFER_REG_WNR   0x00010000
+#define NVIC_DBG_XFER_REG_WNR          ((unsigned long)0x00010000)
 
 //
 //! Register
 //
-#define NVIC_DBG_XFER_REG_SEL_M 0x0000001F
+#define NVIC_DBG_XFER_REG_SEL_M        ((unsigned long)0x0000001F)
 
 //
 //! Register R0
 //
-#define NVIC_DBG_XFER_REG_R0    0x00000000
+#define NVIC_DBG_XFER_REG_R0           ((unsigned long)0x00000000)
 
 //
 //! Register R1
 //
-#define NVIC_DBG_XFER_REG_R1    0x00000001
+#define NVIC_DBG_XFER_REG_R1           ((unsigned long)0x00000001)
 
 //
 //! Register R2
 //
-#define NVIC_DBG_XFER_REG_R2    0x00000002
+#define NVIC_DBG_XFER_REG_R2           ((unsigned long)0x00000002)
 
 //
 //! Register R3
 //
-#define NVIC_DBG_XFER_REG_R3    0x00000003
+#define NVIC_DBG_XFER_REG_R3           ((unsigned long)0x00000003)
 
 //
 //! Register R4
 //
-#define NVIC_DBG_XFER_REG_R4    0x00000004
+#define NVIC_DBG_XFER_REG_R4           ((unsigned long)0x00000004)
 
 //
 //! Register R5
 //
-#define NVIC_DBG_XFER_REG_R5    0x00000005
+#define NVIC_DBG_XFER_REG_R5           ((unsigned long)0x00000005)
 
 //
 //! Register R6
 //
-#define NVIC_DBG_XFER_REG_R6    0x00000006
+#define NVIC_DBG_XFER_REG_R6           ((unsigned long)0x00000006)
 
 //
 //! Register R7
 //
-#define NVIC_DBG_XFER_REG_R7    0x00000007
+#define NVIC_DBG_XFER_REG_R7           ((unsigned long)0x00000007)
 
 //
 //! Register R8
 //
-#define NVIC_DBG_XFER_REG_R8    0x00000008
+#define NVIC_DBG_XFER_REG_R8           ((unsigned long)0x00000008)
 
 //
 //! Register R9
 //
-#define NVIC_DBG_XFER_REG_R9    0x00000009
+#define NVIC_DBG_XFER_REG_R9           ((unsigned long)0x00000009)
 
 //
 //! Register R10
 //
-#define NVIC_DBG_XFER_REG_R10   0x0000000A
+#define NVIC_DBG_XFER_REG_R10          ((unsigned long)0x0000000A)
 
 //
 //! Register R11
 //
-#define NVIC_DBG_XFER_REG_R11   0x0000000B
+#define NVIC_DBG_XFER_REG_R11          ((unsigned long)0x0000000B)
 
 //
 //! Register R12
 //
-#define NVIC_DBG_XFER_REG_R12   0x0000000C
+#define NVIC_DBG_XFER_REG_R12          ((unsigned long)0x0000000C)
 
 //
 //! Register R13
 //
-#define NVIC_DBG_XFER_REG_R13   0x0000000D
+#define NVIC_DBG_XFER_REG_R13          ((unsigned long)0x0000000D)
 
 //
 //! Register R14
 //
-#define NVIC_DBG_XFER_REG_R14   0x0000000E
+#define NVIC_DBG_XFER_REG_R14          ((unsigned long)0x0000000E)
 
 //
 //! Register R15
 //
-#define NVIC_DBG_XFER_REG_R15   0x0000000F
+#define NVIC_DBG_XFER_REG_R15          ((unsigned long)0x0000000F)
 
 //
 //! xPSR/Flags register
 //
-#define NVIC_DBG_XFER_REG_FLAGS 0x00000010
+#define NVIC_DBG_XFER_REG_FLAGS        ((unsigned long)0x00000010)
 
 //
 //! Main SP
 //
-#define NVIC_DBG_XFER_REG_MSP   0x00000011
+#define NVIC_DBG_XFER_REG_MSP          ((unsigned long)0x00000011)
 
 //
 //! Process SP
 //
-#define NVIC_DBG_XFER_REG_PSP   0x00000012
+#define NVIC_DBG_XFER_REG_PSP          ((unsigned long)0x00000012)
 
 //
 //! Deep SP
 //
-#define NVIC_DBG_XFER_REG_DSP   0x00000013
+#define NVIC_DBG_XFER_REG_DSP          ((unsigned long)0x00000013)
 
 //
 //! Control/Fault/BasePri/PriMask
 //
-#define NVIC_DBG_XFER_REG_CFBP  0x00000014
+#define NVIC_DBG_XFER_REG_CFBP         ((unsigned long)0x00000014)
 
 //*****************************************************************************
 //
@@ -2272,7 +2306,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup NVIC_Register_NVIC_DBG_DATA NVIC Debug Data Register(NVIC_DBG_DATA)
+//! \addtogroup NVIC_Register_NVIC_DBG_DATA NVIC Debug Data Register       (NVIC_DBG_DATA)
 //! \brief Defines for the bit fields in the NVIC_DBG_DATA register.
 //! @{
 //
@@ -2281,8 +2315,8 @@
 //
 //! Data temporary cache
 //
-#define NVIC_DBG_DATA_M         0xFFFFFFFF
-#define NVIC_DBG_DATA_S         0
+#define NVIC_DBG_DATA_M                ((unsigned long)0xFFFFFFFF)
+#define NVIC_DBG_DATA_S                0
 
 //*****************************************************************************
 //
@@ -2301,57 +2335,57 @@
 //
 //! Debug trap on hard fault
 //
-#define NVIC_DBG_INT_HARDERR    0x00000400
+#define NVIC_DBG_INT_HARDERR           ((unsigned long)0x00000400)
 
 //
 //! Debug trap on interrupt errors
 //
-#define NVIC_DBG_INT_INTERR     0x00000200
+#define NVIC_DBG_INT_INTERR            ((unsigned long)0x00000200)
 
 //
 //! Debug trap on bus error
 //
-#define NVIC_DBG_INT_BUSERR     0x00000100
+#define NVIC_DBG_INT_BUSERR            ((unsigned long)0x00000100)
 
 //
 //! Debug trap on usage fault state
 //
-#define NVIC_DBG_INT_STATERR    0x00000080
+#define NVIC_DBG_INT_STATERR           ((unsigned long)0x00000080)
 
 //
 //! Debug trap on usage fault check
 //
-#define NVIC_DBG_INT_CHKERR     0x00000040
+#define NVIC_DBG_INT_CHKERR            ((unsigned long)0x00000040)
 
 //
 //! Debug trap on coprocessor error
 //
-#define NVIC_DBG_INT_NOCPERR    0x00000020
+#define NVIC_DBG_INT_NOCPERR           ((unsigned long)0x00000020)
 
 //
 //! Debug trap on mem manage fault
 //
-#define NVIC_DBG_INT_MMERR      0x00000010
+#define NVIC_DBG_INT_MMERR             ((unsigned long)0x00000010)
 
 //
 //! Core reset status
 //
-#define NVIC_DBG_INT_RESET      0x00000008
+#define NVIC_DBG_INT_RESET             ((unsigned long)0x00000008)
 
 //
 //! Clear pending core reset
 //
-#define NVIC_DBG_INT_RSTPENDCLR 0x00000004
+#define NVIC_DBG_INT_RSTPENDCLR        ((unsigned long)0x00000004)
 
 //
 //! Core reset is pending
 //
-#define NVIC_DBG_INT_RSTPENDING 0x00000002
+#define NVIC_DBG_INT_RSTPENDING        ((unsigned long)0x00000002)
 
 //
 //! Reset vector catch
 //
-#define NVIC_DBG_INT_RSTVCATCH  0x00000001
+#define NVIC_DBG_INT_RSTVCATCH         ((unsigned long)0x00000001)
 
 //*****************************************************************************
 //
