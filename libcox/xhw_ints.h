@@ -196,7 +196,7 @@
 #define INT_ETH                              44 // Ethernet
 #if defined(LPC_175x) || defined(LPC_176x)
 #define INT_RIT                              45 // RIT
-#if defined(LPC_177x) || defined(LPC_178x)
+#elif defined(LPC_177x) || defined(LPC_178x)
 #define INT_SD                               45 // SD Card
 #endif
 #define INT_MCPWM                            46 // Motor Control PWM

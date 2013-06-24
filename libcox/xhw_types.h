@@ -40,6 +40,9 @@
 #ifndef __xHW_TYPES_H__
 #define __xHW_TYPES_H__
 
+#include <stdio.h>
+
+
 //*****************************************************************************
 //
 //! \addtogroup CoX_Peripheral_Lib

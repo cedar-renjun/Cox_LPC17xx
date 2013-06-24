@@ -346,7 +346,7 @@
 //
 //! System Handler Control and State
 //
-#define NVIC_SYS_HND_CTRL              ((unsigned long)0xE000ED24)
+#define NVIC_SHCSR                     ((unsigned long)0xE000ED24)
 
 //
 //! Configure Fault Status Registers
@@ -470,6 +470,16 @@
 //! Clock Source
 //
 #define NVIC_ST_CTRL_CLK_SRC           ((unsigned long)0x00000004)
+
+//
+//! System tick clock souce: exteranl reference clock
+//
+#define SYSTICK_SRC_EXT                ((unsigned long)0x00000000)
+
+//
+//! System tick clock souce: core clock
+//
+#define SYSTICK_SRC_CORE               ((unsigned long)0x00000004)
 
 //
 //! Interrupt Enable

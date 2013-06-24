@@ -60,73 +60,73 @@ __heap_limit
                 EXPORT  __Vectors
 
 __Vectors       DCD     __initial_sp              ; Top of Stack
-                DCD     Reset_Handler             ; Reset Handler
-                DCD     NMI_Handler               ; NMI Handler
-                DCD     HardFault_Handler         ; Hard Fault Handler
-                DCD     MemManage_Handler         ; MPU Fault Handler
-                DCD     BusFault_Handler          ; Bus Fault Handler
-                DCD     UsageFault_Handler        ; Usage Fault Handler
+                DCD     ResetIntHandler             ; Reset Handler
+                DCD     NMIIntHandler               ; NMI Handler
+                DCD     HardFaultIntHandler         ; Hard Fault Handler
+                DCD     MemManageIntHandler         ; MPU Fault Handler
+                DCD     BusFaultIntHandler          ; Bus Fault Handler
+                DCD     UsageFaultIntHandler        ; Usage Fault Handler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     SVC_Handler               ; SVCall Handler
-                DCD     DebugMon_Handler          ; Debug Monitor Handler
+                DCD     SVCIntHandler               ; SVCall Handler
+                DCD     DebugMonIntHandler          ; Debug Monitor Handler
                 DCD     0                         ; Reserved
-                DCD     PendSV_Handler            ; PendSV Handler
-                DCD     SysTick_Handler           ; SysTick Handler
+                DCD     PendSVIntHandler            ; PendSV Handler
+                DCD     SysTickIntHandler           ; SysTick Handler
 
                 ; External Interrupts
-                DCD     WDT_IRQHandler            ; 16: Watchdog Timer
-                DCD     TIMER0_IRQHandler         ; 17: Timer0
-                DCD     TIMER1_IRQHandler         ; 18: Timer1
-                DCD     TIMER2_IRQHandler         ; 19: Timer2
-                DCD     TIMER3_IRQHandler         ; 20: Timer3
-                DCD     UART0_IRQHandler          ; 21: UART0
-                DCD     UART1_IRQHandler          ; 22: UART1
-                DCD     UART2_IRQHandler          ; 23: UART2
-                DCD     UART3_IRQHandler          ; 24: UART3
-                DCD     PWM1_IRQHandler           ; 25: PWM1
-                DCD     I2C0_IRQHandler           ; 26: I2C0
-                DCD     I2C1_IRQHandler           ; 27: I2C1
-                DCD     I2C2_IRQHandler           ; 28: I2C2
-                DCD     SPI_IRQHandler            ; 29: SPI
-                DCD     SSP0_IRQHandler           ; 30: SSP0
-                DCD     SSP1_IRQHandler           ; 31: SSP1
-                DCD     PLL0_IRQHandler           ; 32: PLL0 Lock (Main PLL)
-                DCD     RTC_IRQHandler            ; 33: Real Time Clock
-                DCD     EINT0_IRQHandler          ; 34: External Interrupt 0
-                DCD     EINT1_IRQHandler          ; 35: External Interrupt 1
-                DCD     EINT2_IRQHandler          ; 36: External Interrupt 2
-                DCD     EINT3_IRQHandler          ; 37: External Interrupt 3
-                DCD     ADC_IRQHandler            ; 38: A/D Converter
-                DCD     BOD_IRQHandler            ; 39: Brown-Out Detect
-                DCD     USB_IRQHandler            ; 40: USB
-                DCD     CAN_IRQHandler            ; 41: CAN
-                DCD     DMA_IRQHandler            ; 42: General Purpose DMA
-                DCD     I2S_IRQHandler            ; 43: I2S
-                DCD     ENET_IRQHandler           ; 44: Ethernet
+                DCD     WDTIntHandler            ; 16: Watchdog Timer
+                DCD     TIMER0IntHandler         ; 17: Timer0
+                DCD     TIMER1IntHandler         ; 18: Timer1
+                DCD     TIMER2IntHandler         ; 19: Timer2
+                DCD     TIMER3IntHandler         ; 20: Timer3
+                DCD     UART0IntHandler          ; 21: UART0
+                DCD     UART1IntHandler          ; 22: UART1
+                DCD     UART2IntHandler          ; 23: UART2
+                DCD     UART3IntHandler          ; 24: UART3
+                DCD     PWM1IntHandler           ; 25: PWM1
+                DCD     I2C0IntHandler           ; 26: I2C0
+                DCD     I2C1IntHandler           ; 27: I2C1
+                DCD     I2C2IntHandler           ; 28: I2C2
+                DCD     SPIIntHandler            ; 29: SPI
+                DCD     SSP0IntHandler           ; 30: SSP0
+                DCD     SSP1IntHandler           ; 31: SSP1
+                DCD     PLL0IntHandler           ; 32: PLL0 Lock (Main PLL)
+                DCD     RTCIntHandler            ; 33: Real Time Clock
+                DCD     EINT0IntHandler          ; 34: External Interrupt 0
+                DCD     EINT1IntHandler          ; 35: External Interrupt 1
+                DCD     EINT2IntHandler          ; 36: External Interrupt 2
+                DCD     EINT3IntHandler          ; 37: External Interrupt 3
+                DCD     ADCIntHandler            ; 38: A/D Converter
+                DCD     BODIntHandler            ; 39: Brown-Out Detect
+                DCD     USBIntHandler            ; 40: USB
+                DCD     CANIntHandler            ; 41: CAN
+                DCD     DMAIntHandler            ; 42: General Purpose DMA
+                DCD     I2SIntHandler            ; 43: I2S
+                DCD     ENETIntHandler           ; 44: Ethernet
 #if defined(LPC_175x) || defined (LPC_176x)
-                DCD     RIT_IRQHandler            ; 45: Repetitive Interrupt Timer
+                DCD     RITIntHandler            ; 45: Repetitive Interrupt Timer
 #elif defined(LPC_177x) || defined (LPC_178x)
-                DCD     MCI_IRQHandler            ; 45: SD/MMC card I/F
+                DCD     MCIIntHandler            ; 45: SD/MMC card I/F
 #else
 #error Please select your LPC MCU first!             \
        This value can be one of the following value: \
        LPC_175x or LPC_176x or LPC_177x or LPC_178x
 #endif
-                DCD     RIT_IRQHandler            ; 45: Repetitive Interrupt Timer
-                DCD     MCPWM_IRQHandler          ; 46: Motor Control PWM
-                DCD     QEI_IRQHandler            ; 47: Quadrature Encoder Interface
-                DCD     PLL1_IRQHandler           ; 48: PLL1 Lock (USB PLL)
-                DCD     USBActivity_IRQHandler    ; 49: USB Activity interrupt to wakeup
-                DCD     CANActivity_IRQHandler    ; 50: CAN Activity interrupt to wakeup
-                DCD     UART4_IRQHandler          ; 51: UART4
-                DCD     SSP2_IRQHandler           ; 52: SSP2
-                DCD     LCD_IRQHandler            ; 53: LCD
-                DCD     GPIO_IRQHandler           ; 54: GPIO
-                DCD     PWM0_IRQHandler           ; 55: PWM0
-                DCD     EEPROM_IRQHandler         ; 56: EEPROM
+                DCD     RITIntHandler            ; 45: Repetitive Interrupt Timer
+                DCD     MCPWMIntHandler          ; 46: Motor Control PWM
+                DCD     QEIIntHandler            ; 47: Quadrature Encoder Interface
+                DCD     PLL1IntHandler           ; 48: PLL1 Lock (USB PLL)
+                DCD     USBActivityIntHandler    ; 49: USB Activity interrupt to wakeup
+                DCD     CANActivityIntHandler    ; 50: CAN Activity interrupt to wakeup
+                DCD     UART4IntHandler          ; 51: UART4
+                DCD     SSP2IntHandler           ; 52: SSP2
+                DCD     LCDIntHandler            ; 53: LCD
+                DCD     GPIOIntHandler           ; 54: GPIO
+                DCD     PWM0IntHandler           ; 55: PWM0
+                DCD     EEPROMIntHandler         ; 56: EEPROM
 
 
                 IF      :LNOT::DEF:NO_CRP
@@ -140,8 +140,8 @@ CRP_Key         DCD     0xFFFFFFFF
 
 ; Reset Handler
 
-Reset_Handler   PROC
-                EXPORT  Reset_Handler             [WEAK]
+ResetIntHandler   PROC
+                EXPORT  ResetIntHandler             [WEAK]
                 IMPORT  __main
                 LDR     R0, =__main
                 BX      R0
@@ -150,151 +150,151 @@ Reset_Handler   PROC
 
 ; Dummy Exception Handlers (infinite loops which can be modified)
 
-NMI_Handler     PROC
-                EXPORT  NMI_Handler               [WEAK]
+NMIIntHandler     PROC
+                EXPORT  NMIIntHandler               [WEAK]
                 B       .
                 ENDP
-HardFault_Handler\
+HardFaultIntHandler\
                 PROC
-                EXPORT  HardFault_Handler         [WEAK]
+                EXPORT  HardFaultIntHandler         [WEAK]
                 B       .
                 ENDP
-MemManage_Handler\
+MemManageIntHandler\
                 PROC
-                EXPORT  MemManage_Handler         [WEAK]
+                EXPORT  MemManageIntHandler         [WEAK]
                 B       .
                 ENDP
-BusFault_Handler\
+BusFaultIntHandler\
                 PROC
-                EXPORT  BusFault_Handler          [WEAK]
+                EXPORT  BusFaultIntHandler          [WEAK]
                 B       .
                 ENDP
-UsageFault_Handler\
+UsageFaultIntHandler\
                 PROC
-                EXPORT  UsageFault_Handler        [WEAK]
+                EXPORT  UsageFaultIntHandler        [WEAK]
                 B       .
                 ENDP
-SVC_Handler     PROC
-                EXPORT  SVC_Handler               [WEAK]
+SVCIntHandler     PROC
+                EXPORT  SVCIntHandler               [WEAK]
                 B       .
                 ENDP
-DebugMon_Handler\
+DebugMonIntHandler\
                 PROC
-                EXPORT  DebugMon_Handler          [WEAK]
+                EXPORT  DebugMonIntHandler          [WEAK]
                 B       .
                 ENDP
-PendSV_Handler  PROC
-                EXPORT  PendSV_Handler            [WEAK]
+PendSVIntHandler  PROC
+                EXPORT  PendSVIntHandler            [WEAK]
                 B       .
                 ENDP
-SysTick_Handler PROC
-                EXPORT  SysTick_Handler           [WEAK]
+SysTickIntHandler PROC
+                EXPORT  SysTickIntHandler           [WEAK]
                 B       .
                 ENDP
 
-Default_Handler PROC
+DefaultIntHandler PROC
 
-                EXPORT  WDT_IRQHandler            [WEAK]
-                EXPORT  TIMER0_IRQHandler         [WEAK]
-                EXPORT  TIMER1_IRQHandler         [WEAK]
-                EXPORT  TIMER2_IRQHandler         [WEAK]
-                EXPORT  TIMER3_IRQHandler         [WEAK]
-                EXPORT  UART0_IRQHandler          [WEAK]
-                EXPORT  UART1_IRQHandler          [WEAK]
-                EXPORT  UART2_IRQHandler          [WEAK]
-                EXPORT  UART3_IRQHandler          [WEAK]
-                EXPORT  PWM1_IRQHandler           [WEAK]
-                EXPORT  I2C0_IRQHandler           [WEAK]
-                EXPORT  I2C1_IRQHandler           [WEAK]
-                EXPORT  I2C2_IRQHandler           [WEAK]
-                EXPORT  SPI_IRQHandler            [WEAK]
-                EXPORT  SSP0_IRQHandler           [WEAK]
-                EXPORT  SSP1_IRQHandler           [WEAK]
-                EXPORT  PLL0_IRQHandler           [WEAK]
-                EXPORT  RTC_IRQHandler            [WEAK]
-                EXPORT  EINT0_IRQHandler          [WEAK]
-                EXPORT  EINT1_IRQHandler          [WEAK]
-                EXPORT  EINT2_IRQHandler          [WEAK]
-                EXPORT  EINT3_IRQHandler          [WEAK]
-                EXPORT  ADC_IRQHandler            [WEAK]
-                EXPORT  BOD_IRQHandler            [WEAK]
-                EXPORT  USB_IRQHandler            [WEAK]
-                EXPORT  CAN_IRQHandler            [WEAK]
-                EXPORT  DMA_IRQHandler            [WEAK]
-                EXPORT  I2S_IRQHandler            [WEAK]
-                EXPORT  ENET_IRQHandler           [WEAK]
+                EXPORT  WDTIntHandler            [WEAK]
+                EXPORT  TIMER0IntHandler         [WEAK]
+                EXPORT  TIMER1IntHandler         [WEAK]
+                EXPORT  TIMER2IntHandler         [WEAK]
+                EXPORT  TIMER3IntHandler         [WEAK]
+                EXPORT  UART0IntHandler          [WEAK]
+                EXPORT  UART1IntHandler          [WEAK]
+                EXPORT  UART2IntHandler          [WEAK]
+                EXPORT  UART3IntHandler          [WEAK]
+                EXPORT  PWM1IntHandler           [WEAK]
+                EXPORT  I2C0IntHandler           [WEAK]
+                EXPORT  I2C1IntHandler           [WEAK]
+                EXPORT  I2C2IntHandler           [WEAK]
+                EXPORT  SPIIntHandler            [WEAK]
+                EXPORT  SSP0IntHandler           [WEAK]
+                EXPORT  SSP1IntHandler           [WEAK]
+                EXPORT  PLL0IntHandler           [WEAK]
+                EXPORT  RTCIntHandler            [WEAK]
+                EXPORT  EINT0IntHandler          [WEAK]
+                EXPORT  EINT1IntHandler          [WEAK]
+                EXPORT  EINT2IntHandler          [WEAK]
+                EXPORT  EINT3IntHandler          [WEAK]
+                EXPORT  ADCIntHandler            [WEAK]
+                EXPORT  BODIntHandler            [WEAK]
+                EXPORT  USBIntHandler            [WEAK]
+                EXPORT  CANIntHandler            [WEAK]
+                EXPORT  DMAIntHandler            [WEAK]
+                EXPORT  I2SIntHandler            [WEAK]
+                EXPORT  ENETIntHandler           [WEAK]
 #if defined(LPC_175x) || defined (LPC_176x)
-                EXPORT  RIT_IRQHandler            [WEAK]
+                EXPORT  RITIntHandler            [WEAK]
 
 #elif defined(LPC_177x) || defined (LPC_178x)
-                EXPORT  MCI_IRQHandler            [WEAK]
+                EXPORT  MCIIntHandler            [WEAK]
 #else
 #error Please select your LPC MCU first!             \
        This value can be one of the following value: \
        LPC_175x or LPC_176x or LPC_177x or LPC_178x
 #endif
-                EXPORT  MCI_IRQHandler            [WEAK]
-                EXPORT  MCPWM_IRQHandler          [WEAK]
-                EXPORT  QEI_IRQHandler            [WEAK]
-                EXPORT  PLL1_IRQHandler           [WEAK]
-                EXPORT  USBActivity_IRQHandler    [WEAK]
-                EXPORT  CANActivity_IRQHandler    [WEAK]
-                EXPORT  UART4_IRQHandler          [WEAK]
-                EXPORT  SSP2_IRQHandler           [WEAK]
-                EXPORT  LCD_IRQHandler            [WEAK]
-                EXPORT  GPIO_IRQHandler           [WEAK]
-                EXPORT  PWM0_IRQHandler           [WEAK]
-                EXPORT  EEPROM_IRQHandler         [WEAK]
+                EXPORT  MCIIntHandler            [WEAK]
+                EXPORT  MCPWMIntHandler          [WEAK]
+                EXPORT  QEIIntHandler            [WEAK]
+                EXPORT  PLL1IntHandler           [WEAK]
+                EXPORT  USBActivityIntHandler    [WEAK]
+                EXPORT  CANActivityIntHandler    [WEAK]
+                EXPORT  UART4IntHandler          [WEAK]
+                EXPORT  SSP2IntHandler           [WEAK]
+                EXPORT  LCDIntHandler            [WEAK]
+                EXPORT  GPIOIntHandler           [WEAK]
+                EXPORT  PWM0IntHandler           [WEAK]
+                EXPORT  EEPROMIntHandler         [WEAK]
 
-WDT_IRQHandler
-TIMER0_IRQHandler
-TIMER1_IRQHandler
-TIMER2_IRQHandler
-TIMER3_IRQHandler
-UART0_IRQHandler
-UART1_IRQHandler
-UART2_IRQHandler
-UART3_IRQHandler
-PWM1_IRQHandler
-I2C0_IRQHandler
-I2C1_IRQHandler
-I2C2_IRQHandler
-SPI_IRQHandler
-SSP0_IRQHandler
-SSP1_IRQHandler
-PLL0_IRQHandler
-RTC_IRQHandler
-EINT0_IRQHandler
-EINT1_IRQHandler
-EINT2_IRQHandler
-EINT3_IRQHandler
-ADC_IRQHandler
-BOD_IRQHandler
-USB_IRQHandler
-CAN_IRQHandler
-DMA_IRQHandler
-I2S_IRQHandler
-ENET_IRQHandler
+WDTIntHandler
+TIMER0IntHandler
+TIMER1IntHandler
+TIMER2IntHandler
+TIMER3IntHandler
+UART0IntHandler
+UART1IntHandler
+UART2IntHandler
+UART3IntHandler
+PWM1IntHandler
+I2C0IntHandler
+I2C1IntHandler
+I2C2IntHandler
+SPIIntHandler
+SSP0IntHandler
+SSP1IntHandler
+PLL0IntHandler
+RTCIntHandler
+EINT0IntHandler
+EINT1IntHandler
+EINT2IntHandler
+EINT3IntHandler
+ADCIntHandler
+BODIntHandler
+USBIntHandler
+CANIntHandler
+DMAIntHandler
+I2SIntHandler
+ENETIntHandler
 #if defined(LPC_175x) || defined (LPC_176x)
-    RIT_IRQHandler
+    RITIntHandler
 #elif defined(LPC_177x) || defined (LPC_178x)
-    MCI_IRQHandler
+    MCIIntHandler
 #else
 #error Please select your LPC MCU first!             \
        This value can be one of the following value: \
        LPC_175x or LPC_176x or LPC_177x or LPC_178x
 #endif
-MCPWM_IRQHandler
-QEI_IRQHandler
-PLL1_IRQHandler
-USBActivity_IRQHandler
-CANActivity_IRQHandler
-UART4_IRQHandler
-SSP2_IRQHandler
-LCD_IRQHandler
-GPIO_IRQHandler
-PWM0_IRQHandler
-EEPROM_IRQHandler
+MCPWMIntHandler
+QEIIntHandler
+PLL1IntHandler
+USBActivityIntHandler
+CANActivityIntHandler
+UART4IntHandler
+SSP2IntHandler
+LCDIntHandler
+GPIOIntHandler
+PWM0IntHandler
+EEPROMIntHandler
 
                 B       .
 
