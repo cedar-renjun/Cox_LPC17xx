@@ -140,6 +140,7 @@ extern void          xSysTickIntDisable(void);
 extern void          xSysTickPeriodSet(unsigned long ulPeriod);
 extern unsigned long xSysTickPeriodGet(void);
 extern unsigned long xSysTickValueGet(void);
+extern void          xSysTickClkSrcSelect(unsigned long ulClkSrc);
 extern unsigned long xSysTickIntCallbackInit(xtEventCallback pfnCallback);
 
 //*****************************************************************************
