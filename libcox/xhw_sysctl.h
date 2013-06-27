@@ -41,6 +41,11 @@
 #ifndef __XHW_SYSCTL_H__
 #define __XHW_SYSCTL_H__
 
+#include "xhw_types.h"
+#include "xhw_memmap.h"
+
+
+
 //*****************************************************************************
 //
 //! \addtogroup CoX_Peripheral_Lib
@@ -157,113 +162,113 @@
 
 //! Flash Accelerator Configuration Register Controls flash access timing.
 //  SYSCTL_BASE --> 0x400FC000
-#define FLASHCFG                (SYSCTL + ((unsigned long)0x000)
+#define FLASHCFG                (SYSCTL_BASE + (unsigned long)0x000)
 
 //! PLL0 Control
-#define PLL0CON                 (SYSCTL + ((unsigned long)0x080)
+#define PLL0CON                 (SYSCTL_BASE + (unsigned long)0x080)
 
 //! PLL0 Configuration 
-#define PLL0CFG                 (SYSCTL + ((unsigned long)0x084)
+#define PLL0CFG                 (SYSCTL_BASE + (unsigned long)0x084)
 
 //! PLL0 Status 
-#define PLL0STAT                (SYSCTL + ((unsigned long)0x088)
+#define PLL0STAT                (SYSCTL_BASE + (unsigned long)0x088)
 
 //! PLL0 Feed 
-#define PLL0FEED                (SYSCTL + ((unsigned long)0x08C)
+#define PLL0FEED                (SYSCTL_BASE + (unsigned long)0x08C)
 
 //! PLL1 Control                
-#define PLL1CON                 (SYSCTL + ((unsigned long)0x0A0)
+#define PLL1CON                 (SYSCTL_BASE + (unsigned long)0x0A0)
 
 //! PLL1 Configuration 
-#define PLL1CFG                 (SYSCTL + ((unsigned long)0x0A4)
+#define PLL1CFG                 (SYSCTL_BASE + (unsigned long)0x0A4)
 
 //! PLL1 Status 
-#define PLL1STAT                (SYSCTL + ((unsigned long)0x0A8)
+#define PLL1STAT                (SYSCTL_BASE + (unsigned long)0x0A8)
 
 //! PLL1 Feed 
-#define PLL1FEED                (SYSCTL + ((unsigned long)0x0AC)
+#define PLL1FEED                (SYSCTL_BASE + (unsigned long)0x0AC)
 
 //! Power Control 
-#define PCON                    (SYSCTL + ((unsigned long)0x0C0)
+#define PCON                    (SYSCTL_BASE + (unsigned long)0x0C0)
 
 //! Power Control for Peripherals
-#define PCONP                   (SYSCTL + ((unsigned long)0x0C4)
+#define PCONP                   (SYSCTL_BASE + (unsigned long)0x0C4)
 
 //! External Memory Controller Clock Selection 
-#define EMCCLKSEL               (SYSCTL + ((unsigned long)0x100)
+#define EMCCLKSEL               (SYSCTL_BASE + (unsigned long)0x100)
 
 //! CPU Clock Selection 
-#define CCLKSEL                 (SYSCTL + ((unsigned long)0x104)
+#define CCLKSEL                 (SYSCTL_BASE + (unsigned long)0x104)
 
 //! USB Clock Selection 
-#define USBCLKSEL               (SYSCTL + ((unsigned long)0x108)
+#define USBCLKSEL               (SYSCTL_BASE + (unsigned long)0x108)
 
 //! Clock Source Select Register
-#define CLKSRCSEL               (SYSCTL + ((unsigned long)0x10C)
+#define CLKSRCSEL               (SYSCTL_BASE + (unsigned long)0x10C)
 
 //! Allows clearing the current CAN channel sleep state
 //! as well as reading that state.
-#define CANSLEEPCLR             (SYSCTL + ((unsigned long)0x110)
+#define CANSLEEPCLR             (SYSCTL_BASE + (unsigned long)0x110)
 
 //! Allows reading the wake-up state of the CAN channels.
-#define CANWAKEFLAGS            (SYSCTL + ((unsigned long)0x114)
+#define CANWAKEFLAGS            (SYSCTL_BASE + (unsigned long)0x114)
 
 //! External Interrupt Flag Register
-#define EXTINT                  (SYSCTL + ((unsigned long)0x140)
+#define EXTINT                  (SYSCTL_BASE + (unsigned long)0x140)
 
 //! External Interrupt Mode 
-#define EXTMODE                 (SYSCTL + ((unsigned long)0x148)
+#define EXTMODE                 (SYSCTL_BASE + (unsigned long)0x148)
 
 //! External Interrupt Polarity Register
-#define EXTPOLAR                (SYSCTL + ((unsigned long)0x14C)
+#define EXTPOLAR                (SYSCTL_BASE + (unsigned long)0x14C)
 
 //! Reset Source Ident ification Register
-#define RSID                    (SYSCTL + ((unsigned long)0x180)
+#define RSID                    (SYSCTL_BASE + (unsigned long)0x180)
 
 //! Matrix arbitration           
-#define MATRIXARB               (SYSCTL + ((unsigned long)0x188)
+#define MATRIXARB               (SYSCTL_BASE + (unsigned long)0x188)
 
 //! System Control and Status
-#define SCS                     (SYSCTL + ((unsigned long)0x1A0)
+#define SCS                     (SYSCTL_BASE + (unsigned long)0x1A0)
 
 //! Peripheral Clock Selection. For LPC 17_7x_8x
-#define PCLKSEL                 (SYSCTL + ((unsigned long)0x1A8)
+#define PCLKSEL                 (SYSCTL_BASE + (unsigned long)0x1A8)
 
 //! Peripheral Clock Selection 0. For LPC 17_nx (n = 5/6/7/8)
-#define PCLKSEL0                (SYSCTL + ((unsigned long)0x1A8)
+#define PCLKSEL0                (SYSCTL_BASE + (unsigned long)0x1A8)
 
 //! Peripheral Clock Selection 1. For LPC 17_5x_6x
-#define PCLKSEL1                (SYSCTL + ((unsigned long)0x1AC)
+#define PCLKSEL1                (SYSCTL_BASE + (unsigned long)0x1AC)
 
 //! Power boost 
-#define PBOOST                  (SYSCTL + ((unsigned long)0x1B0)
+#define PBOOST                  (SYSCTL_BASE + (unsigned long)0x1B0)
 
 //! SPIFI Clock Selection 
-#define SPIFICLKSEL             (SYSCTL + ((unsigned long)0x1B4)
+#define SPIFICLKSEL             (SYSCTL_BASE + (unsigned long)0x1B4)
 
 //! LCD Clock configuration 
-#define LCD_CFG                 (SYSCTL + ((unsigned long)0x1B8)
+#define LCD_CFG                 (SYSCTL_BASE + (unsigned long)0x1B8)
 
 //! USB Interrupt Status
-#define USBINTST                (SYSCTL + ((unsigned long)0x1C0)
+#define USBINTST                (SYSCTL_BASE + (unsigned long)0x1C0)
 
 //! Selects between alternative requests on DMA channels 0 through 7 and 10 through 15
-#define DMAREQSEL               (SYSCTL + ((unsigned long)0x1C4)
+#define DMAREQSEL               (SYSCTL_BASE + (unsigned long)0x1C4)
 
 //! Clock Output Configuration 
-#define CLKOUTCFG               (SYSCTL + ((unsigned long)0x1C8)
+#define CLKOUTCFG               (SYSCTL_BASE + (unsigned long)0x1C8)
 
 //! Individual peripheral reset control bits
-#define RSTCON0                 (SYSCTL + ((unsigned long)0x1CC)
+#define RSTCON0                 (SYSCTL_BASE + (unsigned long)0x1CC)
 
 //! Individual peripheral reset control bits
-#define RSTCON1                 (SYSCTL + ((unsigned long)0x1D0)
+#define RSTCON1                 (SYSCTL_BASE + (unsigned long)0x1D0)
 
 //! Values for the four programmable delays associated with SDRAM operation.
-#define EMCDLYCTL               (SYSCTL + ((unsigned long)0x1DC)
+#define EMCDLYCTL               (SYSCTL_BASE + (unsigned long)0x1DC)
 
 //! Controls the calibration counter for programmable delays and returns the result value.
-#define EMCCAL                  (SYSCTL + ((unsigned long)0x1E0)
+#define EMCCAL                  (SYSCTL_BASE + (unsigned long)0x1E0)
 
 
 //FLASHCFG {{
@@ -613,7 +618,7 @@
 #define RSID_BODR               BIT_32_3
 
 //! System reset requet reset
-#define RSID_BODR               BIT_32_4
+#define RSID_SYSRESET           BIT_32_4
 
 //! Lockup reset
 #define RSID_LOCKUP             BIT_32_5
@@ -670,6 +675,8 @@
 
 //! Main oscillator status
 #define SCS_OSCSTAT             BIT_32_6
+#define SCS_OSCSTAT_RDY         BIT_32_6
+#define SCS_OSCSTAT_NOTRDY      BIT_32_ALL_0
 
 //SCS }}
 
@@ -1043,7 +1050,6 @@
 //! USB interface reset control bit
 #define RSTCON0_RSTUSB                 BIT_32_31 
 
-#define 
 //RSTCON0 }}
 
 
