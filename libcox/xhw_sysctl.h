@@ -7,32 +7,32 @@
 //! \author CooCox
 //! \copy
 //!
-//! Copyright (c)  2011, CooCox 
+//! Copyright (c)  2011, CooCox
 //! All rights reserved.
-//! 
-//! Redistribution and use in source and binary forms, with or without 
-//! modification, are permitted provided that the following conditions 
-//! are met: 
-//! 
-//!     * Redistributions of source code must retain the above copyright 
-//! notice, this list of conditions and the following disclaimer. 
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!
+//!     * Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
 //! notice, this list of conditions and the following disclaimer in the
-//! documentation and/or other materials provided with the distribution. 
-//!     * Neither the name of the <ORGANIZATION> nor the names of its 
-//! contributors may be used to endorse or promote products derived 
-//! from this software without specific prior written permission. 
-//! 
+//! documentation and/or other materials provided with the distribution.
+//!     * Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
 //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
 //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 //! THE POSSIBILITY OF SUCH DAMAGE.
 //
 //*****************************************************************************
@@ -44,7 +44,14 @@
 #include "xhw_types.h"
 #include "xhw_memmap.h"
 
-
+//! Detect MCU Type.
+#if defined(LPC_175x) || defined (LPC_176x) || \
+    defined(LPC_177x) || defined (LPC_178x)
+#else
+#error Please select your LPC MCU first!             \
+       This value can be one of the following value: \
+       LPC_175x or LPC_176x or LPC_177x or LPC_178x
+#endif
 
 //*****************************************************************************
 //
@@ -63,7 +70,7 @@
 //*****************************************************************************
 //
 //! \addtogroup STM32F1xx_SysCtl_Register STM32F1xx SysCtl Register
-//! \brief Here are the detailed info of SysCtl registers. 
+//! \brief Here are the detailed info of SysCtl registers.
 //!
 //! it contains:
 //! - Register offset.
@@ -79,14 +86,14 @@
 //*****************************************************************************
 //
 //! \addtogroup STM32F1xx_SysCtl_Register_Offsets STM32F1xx SysCtl Register Offsets(Map)
-//! \brief Defines for the system control register addresses.through 
+//! \brief Defines for the system control register addresses.through
 //! <b>SysCtl_BASE + offset</b>.
 //! @{
 //
 //*****************************************************************************
 
 //
-//! Flash Access control register 
+//! Flash Access control register
 //
 #define FLASH_ACR               0x40022000
 
@@ -167,41 +174,53 @@
 //! PLL0 Control
 #define PLL0CON                 (SYSCTL_BASE + (unsigned long)0x080)
 
-//! PLL0 Configuration 
+//! PLL0 Configuration
 #define PLL0CFG                 (SYSCTL_BASE + (unsigned long)0x084)
 
-//! PLL0 Status 
+//! PLL0 Status
 #define PLL0STAT                (SYSCTL_BASE + (unsigned long)0x088)
 
-//! PLL0 Feed 
+//! PLL0 Feed
 #define PLL0FEED                (SYSCTL_BASE + (unsigned long)0x08C)
 
-//! PLL1 Control                
+//! PLL1 Control
 #define PLL1CON                 (SYSCTL_BASE + (unsigned long)0x0A0)
 
-//! PLL1 Configuration 
+//! PLL1 Configuration
 #define PLL1CFG                 (SYSCTL_BASE + (unsigned long)0x0A4)
 
-//! PLL1 Status 
+//! PLL1 Status
 #define PLL1STAT                (SYSCTL_BASE + (unsigned long)0x0A8)
 
-//! PLL1 Feed 
+//! PLL1 Feed
 #define PLL1FEED                (SYSCTL_BASE + (unsigned long)0x0AC)
 
-//! Power Control 
+//! Power Control
 #define PCON                    (SYSCTL_BASE + (unsigned long)0x0C0)
 
 //! Power Control for Peripherals
 #define PCONP                   (SYSCTL_BASE + (unsigned long)0x0C4)
 
-//! External Memory Controller Clock Selection 
+//! External Memory Controller Clock Selection
 #define EMCCLKSEL               (SYSCTL_BASE + (unsigned long)0x100)
 
-//! CPU Clock Selection 
+//! CPU Clock Selection
+#define CCLKCFG                 (SYSCTL_BASE + (unsigned long)0x104)
+
+//! CPU Clock Selection
 #define CCLKSEL                 (SYSCTL_BASE + (unsigned long)0x104)
 
-//! USB Clock Selection 
+#if defined(LPC_175x) | defined(LPC_176x)
+
+//! USB Clock Configure register
+#define USBCLKCFG               (SYSCTL_BASE + (unsigned long)0x108)
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+
+//! USB Clock Selection
 #define USBCLKSEL               (SYSCTL_BASE + (unsigned long)0x108)
+
+#endif
 
 //! Clock Source Select Register
 #define CLKSRCSEL               (SYSCTL_BASE + (unsigned long)0x10C)
@@ -216,7 +235,7 @@
 //! External Interrupt Flag Register
 #define EXTINT                  (SYSCTL_BASE + (unsigned long)0x140)
 
-//! External Interrupt Mode 
+//! External Interrupt Mode
 #define EXTMODE                 (SYSCTL_BASE + (unsigned long)0x148)
 
 //! External Interrupt Polarity Register
@@ -225,7 +244,7 @@
 //! Reset Source Ident ification Register
 #define RSID                    (SYSCTL_BASE + (unsigned long)0x180)
 
-//! Matrix arbitration           
+//! Matrix arbitration
 #define MATRIXARB               (SYSCTL_BASE + (unsigned long)0x188)
 
 //! System Control and Status
@@ -240,13 +259,13 @@
 //! Peripheral Clock Selection 1. For LPC 17_5x_6x
 #define PCLKSEL1                (SYSCTL_BASE + (unsigned long)0x1AC)
 
-//! Power boost 
+//! Power boost
 #define PBOOST                  (SYSCTL_BASE + (unsigned long)0x1B0)
 
-//! SPIFI Clock Selection 
+//! SPIFI Clock Selection
 #define SPIFICLKSEL             (SYSCTL_BASE + (unsigned long)0x1B4)
 
-//! LCD Clock configuration 
+//! LCD Clock configuration
 #define LCD_CFG                 (SYSCTL_BASE + (unsigned long)0x1B8)
 
 //! USB Interrupt Status
@@ -255,7 +274,7 @@
 //! Selects between alternative requests on DMA channels 0 through 7 and 10 through 15
 #define DMAREQSEL               (SYSCTL_BASE + (unsigned long)0x1C4)
 
-//! Clock Output Configuration 
+//! Clock Output Configuration
 #define CLKOUTCFG               (SYSCTL_BASE + (unsigned long)0x1C8)
 
 //! Individual peripheral reset control bits
@@ -290,48 +309,84 @@
 
 //FLASHCFG }}
 
-
-//PLL0CON {{
-#define PLL0CON_EN              ((unsigned long)0x00000001)
-//PLL0CON }}
-
-//PLL1CON {{
-#define PLL1CON_EN              ((unsigned long)0x00000001)
-//PLL1CON }}
-
 //PLLCON {{
-#define PLLCON_EN              ((unsigned long)0x00000001)
+#define PLL0CON_PLLE           BIT_32_0
+#define PLL0CON_PLLC           BIT_32_1
+
+#define PLL1CON_PLLE           BIT_32_0
+#define PLL1CON_PLLC           BIT_32_1
+
+#define PLLCON_PLLE            BIT_32_0
+#define PLLCON_PLLC            BIT_32_1
 //PLLCON }}
 
 //PLLCFG {{
 
+#if defined(LPC_175x) | defined(LPC_176x)
+
 //! PLL Multiplier value. Supplies the value "M" in the PLL frequency calculations.
 //! The value stored here is the M value minus 1.
-#define PLLCFG_MSEL_M          ((unsigned long)0x0000001F)
-#define PLLCFG_MSEL_S          ((unsigned long)0x00000000)
+#define PLL0CFG_MSEL_M          BIT_MASK(32, 14, 0)
+#define PLL0CFG_MSEL_S          0
+
+//! PLL Multiplier value. Supplies the value "M" in the PLL frequency calculations.
+//! The value stored here is the M value minus 1.
+#define PLL1CFG_MSEL_M          BIT_MASK(32, 6, 5)
+#define PLL1CFG_MSEL_S          0
 
 //! PLL Divider value. Supplies the value "P" in the PLL frequency calculations.
 //! The value is encodec as follows:
-//! 00  --> divide by 1
-//! 01  --> divide by 2
-//! 10  --> divide by 4
-//! 11  --> divide by 8
-#define PLLCFG_PSEL_M          ((unsigned long)0x00000060)
-#define PLLCFG_PSEL_S          ((unsigned long)0x00000005)
+#define PLL0CFG_PSEL_M          BIT_MASK(32, 23, 16)
+#define PLL0CFG_PSEL_S          16
 
-#define PLLCFG_PSEL_DIV_1      BIT_32_ALL_0
-#define PLLCFG_PSEL_DIV_2      BIT_32_5
-#define PLLCFG_PSEL_DIV_4      BIT_32_6
-#define PLLCFG_PSEL_DIV_8      (BIT_32_5 | BIT_32_6)
+#define PLL1CFG_PSEL_M          BIT_MASK(32, 6, 5)
+#define PLL1CFG_PSEL_S          5
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+//! PLL Multiplier value. Supplies the value "M" in the PLL frequency calculations.
+//! The value stored here is the M value minus 1.
+#define PLL0CFG_MSEL_M          BIT_MASK(32, 4, 0)
+#define PLL0CFG_MSEL_S          0
+
+#define PLL1CFG_MSEL_M          BIT_MASK(32, 4, 0)
+#define PLL1CFG_MSEL_S          0
+
+//! PLL Divider value. Supplies the value "P" in the PLL frequency calculations.
+//! The value is encodec as follows:
+#define PLL0CFG_PSEL_M          BIT_MASK(32, 6, 5)
+#define PLL0CFG_PSEL_S          5
+
+#define PLL1CFG_PSEL_M          BIT_MASK(32, 6, 5)
+#define PLL1CFG_PSEL_S          5
+
+#endif
 
 //PLLCFG }}
 
 //PLLSTAT {{
 
+#if defined(LPC_175x) | defined(LPC_176x)
+
+#define PLL0STAT_MSEL_M         BIT_MASK(32, 14, 0)
+#define PLL0STAT_PSEL_M         BIT_MASK(32, 23, 16)
+#define PLL0STAT_PLLE_STAT      BIT_32_24
+#define PLL0STAT_PLLC_STAT      BIT_32_25
+#define PLL0STAT_PLOCK          BIT_32_26
+
+#define PLL1STAT_MSEL_M         BIT_MASK(32, 4, 0)
+#define PLL1STAT_PSEL_M         BIT_MASK(32, 6, 5)
+#define PLL1STAT_PLLE_STAT      BIT_32_8
+#define PLL1STAT_PLLC_STAT      BIT_32_9
+#define PLL1STAT_PLOCK          BIT_32_10
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+
 #define PLLSTAT_MSEL_M         BIT_MASK(32, 4, 0)
 #define PLLSTAT_PSEL_M         BIT_MASK(32, 6, 5)
 #define PLLSTAT_PLLE_STAT      BIT_32_8
 #define PLLSTAT_PLOCK          BIT_32_10
+
+#endif
 
 //PLLSTAT }}
 
@@ -375,11 +430,12 @@
 
 //PCON }}
 
-
 //PCONP {{
 
+#if defined(LPC_177x) | defined(LPC_178x)
 //! LCD Controller power/clock control bit.
 #define PCONP_PCLCD             BIT_32_0
+#endif
 
 //! Timer/Counter 0 power/clock control bit.
 #define PCONP_PCTIM0            BIT_32_1
@@ -402,77 +458,97 @@
 //! I2C0 Interface Power/Clock control bit.
 #define PCONP_PCI2C0            BIT_32_7
 
-//! UART4 power/clock control bit. 0
-#define PCONP_PCUART4 BIT_32_8 
+#if defined(LPC_175x) | defined(LPC_176x)
+//! The SPI interface power/clock control bit.
+#define PCONP_PCSPI             BIT_32_8
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+//! UART4 power/clock control bit.
+#define PCONP_PCUART4           BIT_32_8
+
+#endif
 
 //! RTC and Event Monitor/Recorder power/clock control bit.
-#define PCONP_PCRTC             BIT_32_9  
+#define PCONP_PCRTC             BIT_32_9
 
 //! SSP 1 interface power/clock control bit.
-#define PCONP_PCSSP1            BIT_32_10 
+#define PCONP_PCSSP1            BIT_32_10
 
+#if defined(LPC_177x) | defined(LPC_178x)
 //! External Memory Controller power/clock control bit.
-#define PCONP_PCEMC             BIT_32_11 
+#define PCONP_PCEMC             BIT_32_11
+#endif
 
 //! A/D converter (ADC) power/clock control bit.
-#define PCONP_PCADC             BIT_32_12 
+#define PCONP_PCADC             BIT_32_12
 
 //! CAN Controller 1 power/clock control bit.
-#define PCONP_PCCAN1            BIT_32_13 
+#define PCONP_PCCAN1            BIT_32_13
 
 //! CAN Controller 2 power/clock control bit.
-#define PCONP_PCCAN2            BIT_32_14 
+#define PCONP_PCCAN2            BIT_32_14
 
 //! Power/clock control bit for IOCON, GPIO, and GPIO interrupts.
-#define PCONP_PCGPIO            BIT_32_15 
+#define PCONP_PCGPIO            BIT_32_15
 
-//! SPI Flash Interface power/clock control bit (LPC1773 only).
-#define PCONP_PCSPIFI           BIT_32_16 
+#if defined(LPC_175x) | defined(LPC_176x)
+//! Repetitive Interrupt Timer power/clock control bit.
+#define PCONP_PCRIT             BIT_32_16
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+//! SPI Flash Interface power/clock control bit.
+#define PCONP_PCSPIFI           BIT_32_16
+
+#endif
 
 //! Motor Control PWM power/clock control bit.
-#define PCONP_PCMCPWM           BIT_32_17 
+#define PCONP_PCMCPWM           BIT_32_17
 
 //! Quadrature Encoder Interface power/clock control bit.
-#define PCONP_PCQEI             BIT_32_18 
+#define PCONP_PCQEI             BIT_32_18
 
 //! I2C1 interface power/clock control bit.
-#define PCONP_PCI2C1            BIT_32_19 
+#define PCONP_PCI2C1            BIT_32_19
 
+#if defined(LPC_177x) | defined(LPC_178x)
 //! SSP2 interface power/clock control bit.
-#define PCONP_PCSSP2            BIT_32_20 
+#define PCONP_PCSSP2            BIT_32_20
+#endif
 
 //! SSP0 interface power/clock control bit.
-#define PCONP_PCSSP0            BIT_32_21 
+#define PCONP_PCSSP0            BIT_32_21
 
 //! Timer 2 power/clock control bit.
-#define PCONP_PCTIM2            BIT_32_22 
+#define PCONP_PCTIM2            BIT_32_22
 
 //! Timer 3 power/clock control bit.
-#define PCONP_PCTIM3            BIT_32_23 
+#define PCONP_PCTIM3            BIT_32_23
 
 //! UART 2 power/clock control bit.
-#define PCONP_PCUART2           BIT_32_24 
+#define PCONP_PCUART2           BIT_32_24
 
 //! UART 3 power/clock control bit.
-#define PCONP_PCUART3           BIT_32_25 
+#define PCONP_PCUART3           BIT_32_25
 
 //! I2C interface 2 power/clock control bit.
-#define PCONP_PCI2C2            BIT_32_26 
+#define PCONP_PCI2C2            BIT_32_26
 
 //! I2S interface power/clock control bit.
-#define PCONP_PCI2S             BIT_32_27 
+#define PCONP_PCI2S             BIT_32_27
 
+#if defined(LPC_177x) | defined(LPC_178x)
 //! SD Card interface power/clock control bit.
-#define PCONP_PCSDC             BIT_32_28 
+#define PCONP_PCSDC             BIT_32_28
+#endif
 
 //! GPDMA function power/clock control bit.
-#define PCONP_PCGPDMA           BIT_32_29 
+#define PCONP_PCGPDMA           BIT_32_29
 
 //! Ethernet block power/clock control bit.
-#define PCONP_PCENET            BIT_32_30 
+#define PCONP_PCENET            BIT_32_30
 
 //! USB interface power/clock control bit.
-#define PCONP_PCUSB             BIT_32_31 
+#define PCONP_PCUSB             BIT_32_31
 
 //PCONP }}
 
@@ -483,7 +559,17 @@
 
 //EMCCLKSEL }}
 
+#if defined(LPC_175x) | defined(LPC_176x)
+//CCLKCFG {{
+
+//! Selects the divide value for creating the CPU clock (CCLK) from the PLL0 output.
+#define CCLKCFG_CCLKSEL_M       BIT_MASK(32, 7, 0)
+
+//CCLKCFG }}
+#endif
+
 //CCLKSEL {{
+#if defined(LPC_177x) | defined(LPC_178x)
 
 //! Selects the divide value for creating the CPU clock (CCLK) from the selected
 //! clock source.
@@ -492,22 +578,64 @@
 //! Selects the input clock for the CPU clock divider.
 #define CCLKSEL_CCLKSEL         BIT_32_8
 
+#endif
 //CCLKSEL }}
 
-//USBCLKSEL {{
 
-//! Selects the divide value for creating the USB clock from the selected PLL output.
-#define USBCLKSEL_USBDIV        BIT_MASK(32, 4, 0)
+//USBCLKSEL {{
+#if   defined(LPC_175x) | defined(LPC_176x)
 
 //! Selects the input clock for the USB clock divider.
-#define USBCLKSEL_USBSEL        BIT_MASK(32, 9, 8)
+#define USBCLKCFG_USBSEL_M      BIT_MASK(32, 3, 0)
+#define USBCLKCFG_USBSEL_S      0
 
+#elif defined(LPC_177x) | defined(LPC_178x)
+
+//! Selects the divide value for creating the USB clock from the selected PLL output.
+#define USBCLKSEL_USBDIV_M      BIT_MASK(32, 4, 0)
+#define USBCLKSEL_USBDIV_S      0
+
+//! Turn off USB Subsystem clock
+#define USBCLKSEL_USBDIV_OFF    BIT_32_ALL_0
+
+//! The selected PLL output is used directly. The PLL output must be 48 MHz.
+#define USBCLKSEL_USBDIV_DIV_1  BIT_32_0
+
+//! The selected PLL output is used directly. The PLL output must be 48 MHz.
+#define USBCLKSEL_USBDIV_DIV_2  BIT_32_1
+
+//! The selected PLL output is used directly. The PLL output must be 48 MHz.
+#define USBCLKSEL_USBDIV_DIV_3  (BIT_32_1 | BIT_32_1)
+
+//! Selects the input clock for the USB clock divider.
+#define USBCLKSEL_USBSEL_M      BIT_MASK(32, 9, 8)
+#define USBCLKSEL_USBSEL_S      8
+
+//! Sysclk is used as the input to the USB clock divider.
+#define USBCLKSEL_USBSEL_SYSCLK BIT_32_ALL_0
+
+//! The output of the Main PLL is used as the input to the USB clock divider.
+#define USBCLKSEL_USBSEL_M_PLL  BIT_32_8
+
+//! The output of the Alt PLL is used as the input to the USB clock divider.
+#define USBCLKSEL_USBSEL_A_PLLK BIT_32_9
+
+#endif
 //USBCLKSEL }}
 
 //CLKSRCSEL {{
 
 //! Select the clock source for sysclk and PLL0
-#define CLKSRCSEL_CLKSRC        BIT_32_0
+#define CLKSRCSEL_CLKSRC_M      BIT_MASK(32, 1, 0)
+
+//! Select Internal RC oscillator as the PLL0 clock source.
+#define CLKSRCSEL_CLKSRC_IRC    BIT_32_ALL_0
+
+//! Select main oscillator as the PLL0 clock source.
+#define CLKSRCSEL_CLKSRC_OSC    BIT_32_0
+
+//! Select Internal RC oscillator as the PLL0 clock source.
+#define CLKSRCSEL_CLKSRC_RTC    BIT_32_1
 
 //CLKSRCSEL }}
 
@@ -717,19 +845,19 @@
 #define PCLKSEL0_SSP1_M        BIT_MASK(32, 21, 20)
 
 //! Peripheral clock selection for DAC.
-#define PCLKSEL0_DAC_M         BIT_MASK(32, 23, 22) 
+#define PCLKSEL0_DAC_M         BIT_MASK(32, 23, 22)
 
 //! Peripheral clock selection for ADC.
-#define PCLKSEL0_ADC_M         BIT_MASK(32, 25, 24) 
+#define PCLKSEL0_ADC_M         BIT_MASK(32, 25, 24)
 
 //! Peripheral clock selection for CAN1.
-#define PCLKSEL0_CAN1_M        BIT_MASK(32, 27, 26) 
+#define PCLKSEL0_CAN1_M        BIT_MASK(32, 27, 26)
 
 //! Peripheral clock selection for CAN2.
-#define PCLKSEL0_CAN2_M        BIT_MASK(32, 29, 28) 
+#define PCLKSEL0_CAN2_M        BIT_MASK(32, 29, 28)
 
 //! Peripheral clock selection for CAN acceptance filtering.
-#define PCLKSEL0_ACF_M         BIT_MASK(32, 31, 30) 
+#define PCLKSEL0_ACF_M         BIT_MASK(32, 31, 30)
 
 //PCLKSEL0 }}
 
@@ -737,46 +865,46 @@
 //PCLKSEL1 {{
 
 //! Peripheral clock selection for the Quadrature Encoder Interface.
-#define PCLKSEL1_QEI_M         BIT_MASK(32, 1 , 0) 
+#define PCLKSEL1_QEI_M         BIT_MASK(32, 1 , 0)
 
 //! Peripheral clock selection for GPIO interrupts
-#define PCLKSEL1_GPIOINT_M     BIT_MASK(32, 3 , 2) 
+#define PCLKSEL1_GPIOINT_M     BIT_MASK(32, 3 , 2)
 
 //! Peripheral clock selection for the Pin Connect block
-#define PCLKSEL1_PCB_M         BIT_MASK(32, 5 , 4) 
+#define PCLKSEL1_PCB_M         BIT_MASK(32, 5 , 4)
 
 //! Peripheral clock selection for I2C1
-#define PCLKSEL1_I2C1_M        BIT_MASK(32, 7 , 6) 
+#define PCLKSEL1_I2C1_M        BIT_MASK(32, 7 , 6)
 
 //! Peripheral clock selection for SSP0
-#define PCLKSEL1_SSP0_M        BIT_MASK(32, 11,10) 
+#define PCLKSEL1_SSP0_M        BIT_MASK(32, 11,10)
 
 //! Peripheral clock selection for TIMER2
-#define PCLKSEL1_TIMER2_M      BIT_MASK(32, 13,12) 
+#define PCLKSEL1_TIMER2_M      BIT_MASK(32, 13,12)
 
 //! Peripheral clock selection for TIMER3
-#define PCLKSEL1_TIMER3_M      BIT_MASK(32, 15,14) 
+#define PCLKSEL1_TIMER3_M      BIT_MASK(32, 15,14)
 
 //! Peripheral clock selection for UART2
-#define PCLKSEL1_UART2_M       BIT_MASK(32, 17,16) 
+#define PCLKSEL1_UART2_M       BIT_MASK(32, 17,16)
 
 //! Peripheral clock selection for UART3
-#define PCLKSEL1_UART3_M       BIT_MASK(32, 19,18) 
+#define PCLKSEL1_UART3_M       BIT_MASK(32, 19,18)
 
 //! Peripheral clock selection for I2C2
-#define PCLKSEL1_I2C2_M        BIT_MASK(32, 21,20) 
+#define PCLKSEL1_I2C2_M        BIT_MASK(32, 21,20)
 
 //! Peripheral clock selection for I2S
-#define PCLKSEL1_I2S_M         BIT_MASK(32, 23,22) 
+#define PCLKSEL1_I2S_M         BIT_MASK(32, 23,22)
 
 //! Peripheral clock selection for Repetitive Interrupt Timer
-#define PCLKSEL1_RIT_M         BIT_MASK(32, 27,26) 
+#define PCLKSEL1_RIT_M         BIT_MASK(32, 27,26)
 
 //! Peripheral clock selection for the System Control block
-#define PCLKSEL1_SYSCON_M      BIT_MASK(32, 29,28) 
+#define PCLKSEL1_SYSCON_M      BIT_MASK(32, 29,28)
 
 //! Peripheral clock selection for the Motor Control PWM
-#define PCLKSEL1_MC_M          BIT_MASK(32, 31,30) 
+#define PCLKSEL1_MC_M          BIT_MASK(32, 31,30)
 
 //PCLKSEL1 }}
 
@@ -821,24 +949,24 @@
 //LCD_CFG }}
 
 //USBINTST {{
-//! Low priority interrupt line status. 
-#define USBINTST_USB_INT_REQ_LP  BIT_32_0  
+//! Low priority interrupt line status.
+#define USBINTST_USB_INT_REQ_LP  BIT_32_0
 //! High priority interrupt line status.
-#define USBINTST_USB_INT_REQ_HP  BIT_32_1  
+#define USBINTST_USB_INT_REQ_HP  BIT_32_1
 //! DMA interrupt line status.
-#define USBINTST_USB_INT_REQ_DMA BIT_32_2  
+#define USBINTST_USB_INT_REQ_DMA BIT_32_2
 //! USB host interrupt line status.
-#define USBINTST_USB_HOST_INT    BIT_32_3  
+#define USBINTST_USB_HOST_INT    BIT_32_3
 //! External ATX interrupt line status.
-#define USBINTST_USB_ATX_INT     BIT_32_4  
+#define USBINTST_USB_ATX_INT     BIT_32_4
 //! OTG interrupt line status.
-#define USBINTST_USB_OTG_INT     BIT_32_5  
+#define USBINTST_USB_OTG_INT     BIT_32_5
 //! I2C module interrupt line status.
-#define USBINTST_USB_I2C_INT     BIT_32_6  
+#define USBINTST_USB_I2C_INT     BIT_32_6
 //! USB need clock indicator.
-#define USBINTST_USB_NEED_CLK    BIT_32_8  
+#define USBINTST_USB_NEED_CLK    BIT_32_8
 //! Enable all USB interrupts.
-#define USBINTST_EN_USB_INTS     BIT_32_31 
+#define USBINTST_EN_USB_INTS     BIT_32_31
 
 //USBINTST }}
 
@@ -919,7 +1047,7 @@
 //CLKOUTCFG {{
 
 //! Selects the clock source for the CLKOUT function.
-#define CLKOUTCFG_CLKOUTSEL_M   BIT_MASK(32, 3, 0)
+#define CLKOUTCFG_CLKOUTSEL_M        BIT_MASK(32, 3, 0)
 
 //! Selects the CPU clock as the CLKOUT source.
 #define CLKOUTCFG_CLKOUTSEL_CPU      BIT_32_ALL_0
@@ -936,11 +1064,13 @@
 //! Selects the RTC oscillator as the CLKOUT source.
 #define CLKOUTCFG_CLKOUTSEL_RTC      BIT_32_2
 
+#if defined(LPC_177x) | defined(LPC_178x)
 //! Selects the SPIFI clock as the CLKOUT source.
 #define CLKOUTCFG_CLKOUTSEL_SPIFI    (BIT_32_2 | BIT_32_0)
 
 //! Selects the Watchdog oscillator as the CLKOUT source.
 #define CLKOUTCFG_CLKOUTSEL_WDT      (BIT_32_2 | BIT_32_1)
+#endif
 
 //! Integer value to divide the output clock by, minus one.
 #define CLKOUTCFG_CLKOUTDIV_M        BIT_MASK(32, 7, 4)
@@ -955,100 +1085,100 @@
 
 //RSTCON0 {{
 //! LCD controller reset control bit
-#define RSTCON0_RSTLCD                 BIT_32_0  
+#define RSTCON0_RSTLCD                 BIT_32_0
 
 //! Timer/Counter 0 reset control bit
-#define RSTCON0_RSTTIM0                BIT_32_1  
+#define RSTCON0_RSTTIM0                BIT_32_1
 
 //! Timer/Counter 1 reset control bit
-#define RSTCON0_RSTTIM1                BIT_32_2  
+#define RSTCON0_RSTTIM1                BIT_32_2
 
 //! UART0 reset control bit
-#define RSTCON0_RSTUART0               BIT_32_3  
+#define RSTCON0_RSTUART0               BIT_32_3
 
 //! UART1 reset control bit
-#define RSTCON0_RSTUART1               BIT_32_4  
+#define RSTCON0_RSTUART1               BIT_32_4
 
 //! PWM0 reset control bit
-#define RSTCON0_RSTPWM0                BIT_32_5  
+#define RSTCON0_RSTPWM0                BIT_32_5
 
 //! PWM1 reset control bit
-#define RSTCON0_RSTPWM1                BIT_32_6  
+#define RSTCON0_RSTPWM1                BIT_32_6
 
 //! The I2C0 interface reset control bit
-#define RSTCON0_RSTI2C0                BIT_32_7  
+#define RSTCON0_RSTI2C0                BIT_32_7
 
 //! UART4 reset control bit
-#define RSTCON0_RSTUART4               BIT_32_8  
+#define RSTCON0_RSTUART4               BIT_32_8
 
 //! RTC and Event Monitor/Recorder reset control bit
-#define RSTCON0_RSTRTC                 BIT_32_9  
+#define RSTCON0_RSTRTC                 BIT_32_9
 
 //! The SSP 1 interface reset control bit
-#define RSTCON0_RSTSSP1                BIT_32_10 
+#define RSTCON0_RSTSSP1                BIT_32_10
 
 //! External Memory Controller reset control bit
-#define RSTCON0_RSTEMC                 BIT_32_11 
+#define RSTCON0_RSTEMC                 BIT_32_11
 
 //! A/D converter (ADC) reset control bit
-#define RSTCON0_RSTADC                 BIT_32_12 
+#define RSTCON0_RSTADC                 BIT_32_12
 
 //! CAN Controller 1 reset control bit
-#define RSTCON0_RSTCAN1                BIT_32_13 
+#define RSTCON0_RSTCAN1                BIT_32_13
 
 //! CAN Controller 2 reset control bit
-#define RSTCON0_RSTCAN2                BIT_32_14 
+#define RSTCON0_RSTCAN2                BIT_32_14
 
 //! Reset control bit for GPIO, and GPIO interrupts
-#define RSTCON0_RSTGPIO                BIT_32_15 
+#define RSTCON0_RSTGPIO                BIT_32_15
 
 //! SPI Flash Interface reset control bit (LPC1773 only)
-#define RSTCON0_RSTSPIFI               BIT_32_16 
+#define RSTCON0_RSTSPIFI               BIT_32_16
 
 //! Motor Control PWM reset control bit
-#define RSTCON0_RSTMCPWM               BIT_32_17 
+#define RSTCON0_RSTMCPWM               BIT_32_17
 
 //! Quadrature Encoder Interface reset control bit
-#define RSTCON0_RSTQEI                 BIT_32_18 
+#define RSTCON0_RSTQEI                 BIT_32_18
 
 //! The I2C1 interface reset control bit
-#define RSTCON0_RSTI2C1                BIT_32_19 
+#define RSTCON0_RSTI2C1                BIT_32_19
 
 //! The SSP2 interface reset control bit
-#define RSTCON0_RSTSSP2                BIT_32_20 
+#define RSTCON0_RSTSSP2                BIT_32_20
 
 //! The SSP0 interface reset control bit
-#define RSTCON0_RSTSSP0                BIT_32_21 
+#define RSTCON0_RSTSSP0                BIT_32_21
 
 //! Timer 2 reset control bit
-#define RSTCON0_RSTTIM2                BIT_32_22 
+#define RSTCON0_RSTTIM2                BIT_32_22
 
 //! Timer 3 reset control bit
-#define RSTCON0_RSTTIM3                BIT_32_23 
+#define RSTCON0_RSTTIM3                BIT_32_23
 
 //! UART 2 reset control bit
-#define RSTCON0_RSTUART2               BIT_32_24 
+#define RSTCON0_RSTUART2               BIT_32_24
 
 //! UART 3 reset control bit
-#define RSTCON0_RSTUART3               BIT_32_25 
+#define RSTCON0_RSTUART3               BIT_32_25
 
 //! I2C interface 2 reset control bit
-#define RSTCON0_RSTI2C2                BIT_32_26 
+#define RSTCON0_RSTI2C2                BIT_32_26
 
 //! I2S interface reset control bit
-#define RSTCON0_RSTI2S                 BIT_32_27 
+#define RSTCON0_RSTI2S                 BIT_32_27
 
 //! SD Card interface reset control bit
-#define RSTCON0_RSTSDC                 BIT_32_28 
+#define RSTCON0_RSTSDC                 BIT_32_28
 
 //! GPDMA function reset control bit
-#define RSTCON0_RSTGPDMA               BIT_32_29 
+#define RSTCON0_RSTGPDMA               BIT_32_29
 
 //! Ethernet block reset control bit
-#define RSTCON0_RSTENET                BIT_32_30 
+#define RSTCON0_RSTENET                BIT_32_30
 
 //! USB interface reset control bit
-#define RSTCON0_RSTUSB                 BIT_32_31 
+#define RSTCON0_RSTUSB                 BIT_32_31
 
 //RSTCON0 }}
 
