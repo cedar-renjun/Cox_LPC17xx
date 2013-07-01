@@ -20,3 +20,41 @@ void SysCtlPowerFlagClear(unsigned long ulFlag);
 
 //! POWER }}
 
+//! System Clock Configure {{
+
+//! ulSysClk --> SYSCTL_XTAL_nMHZ
+void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
+
+
+
+
+
+
+//! System Clock Configure }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

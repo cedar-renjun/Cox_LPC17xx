@@ -293,19 +293,19 @@
 //FLASHCFG {{
 
 //! Flash access time MASK
-#define FLASHCFG_FLASHTIM_M     ((unsigned long)0x0000F000)
+#define FLASHCFG_FLASHTIM_M     BIT_MASK(32, 15, 12)
 //! Flash accesses use 1 CPU clock. Use for up to 20MHz Cpu clock with power boost off.
-#define FLASHCFG_FLASHTIM_20M   ((unsigned long)0x00000000)
+#define FLASHCFG_FLASHTIM_20M   BIT_32_ALL_0
 //! Flash accesses use 2 CPU clock. Use for up to 40MHz Cpu clock with power boost off.
-#define FLASHCFG_FLASHTIM_40M   ((unsigned long)0x00001000)
+#define FLASHCFG_FLASHTIM_40M   BIT_32_12
 //! Flash accesses use 3 CPU clock. Use for up to 60MHz Cpu clock with power boost off.
-#define FLASHCFG_FLASHTIM_60M   ((unsigned long)0x00002000)
+#define FLASHCFG_FLASHTIM_60M   BIT_32_13
 //! Flash accesses use 4 CPU clock. Use for up to 80MHz Cpu clock with power boost off.
-#define FLASHCFG_FLASHTIM_80M   ((unsigned long)0x00003000)
+#define FLASHCFG_FLASHTIM_80M   (BIT_32_13 | BIT_32_12)
 //! Flash accesses use 5 CPU clock. Use for up to 100MHz Cpu clock with power boost off.
-#define FLASHCFG_FLASHTIM_100M  ((unsigned long)0x00004000)
+#define FLASHCFG_FLASHTIM_100M  BIT_32_14
 //! Flash accesses use 6 CPU clock. Safe setting for any allowed conditions.
-#define FLASHCFG_FLASHTIM_ANY   ((unsigned long)0x00005000)
+#define FLASHCFG_FLASHTIM_ANY   (BIT_32_14 | BIT_32_12)
 
 //FLASHCFG }}
 
