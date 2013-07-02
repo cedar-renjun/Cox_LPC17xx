@@ -149,10 +149,11 @@
 
 //! \todo
 //LPC17_5x_6x AHB
+#if defined(LPC_175x) || defined(LPC_176x)
 #define ETH_BASE                ((unsigned long)0x50000000)
 #define DMA_BASE                ((unsigned long)0x50004000)
 #define USB_BASE                ((unsigned long)0x50004000)
-//! \todo
+#elif defined(LPC_177x) || defined(LPC_178x)
 //LPC17_7x_8x AHB)
 #define DMA_BASE                ((unsigned long)0x20080000)
 #define ETH_BASE                ((unsigned long)0x20084000)
@@ -161,6 +162,7 @@
 #define CRC_BASE                ((unsigned long)0x20090000)
 #define GPIO_BASE               ((unsigned long)0x20098000)
 #define EMC_BASE                ((unsigned long)0x2009C000)
+#endif
 //! \todo
 
 //LPC17nx APB0 (n = 5/6/7/8))

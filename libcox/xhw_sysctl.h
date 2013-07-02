@@ -78,6 +78,7 @@
 //! - Enum and mask of the registers.
 //! .
 //! Users can read or write the registers through xHWREG().
+//! \todo Remove all STM32 information.
 //!
 //! @{
 //

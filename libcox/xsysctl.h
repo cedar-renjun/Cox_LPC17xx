@@ -4,7 +4,7 @@
 void   SysCtlMcoCfg(unsigned long ulCfg);
 void   SysCtlMcoEnable(void);
 void   SysCtlMcoDisable(void);
-xtbool SysCtlMcoStatus(void);
+xtBoolean SysCtlMcoStatus(void);
 //! MCO }}
 
 
@@ -23,10 +23,7 @@ void SysCtlPowerFlagClear(unsigned long ulFlag);
 //! System Clock Configure {{
 
 //! ulSysClk --> SYSCTL_XTAL_nMHZ
-void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
-
-
-
+void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig);
 
 
 
