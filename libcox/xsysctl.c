@@ -1,116 +1,60 @@
+#include "xhw_types.h"
+#include "xhw_ints.h"
+#include "xhw_memmap.h"
+#include "xhw_nvic.h"
+#include "xdebug.h"
+#include "xcore.h"
+#include "xhw_sysctl.h"
+#include "xsysctl.h"
+
+
 //! \file xsysctl.c
 
 static unsigned long PLLMNCal(unsigned long Fin,
-        unsigned long Fout, unsigned long * pM, unsigned long *pN);
+        unsigned long Fout, unsigned long * pM, unsigned long *pN, unsigned long *pDiv);
 
-
-
-
-
-
-//! \addtogroup SysCtlClockSet_ulConfig The input parameter ulConfig
-//!  set of SysCtlClockSet function.
-//! @{
-
-//! Clock Frequency bit[4:0] mask.
-//! \note This macro is used for \ref SysCtlClockSet function.
-#define SYSCTL_XTAL_nMHZ_MASK                    BIT_MASK(32, 4, 0)
-
-//! Main Oscillator 1 Mhz.
-#define SYSCTL_XTAL_1_MHZ                        1                                
-
-//! Main Oscillator 2 Mhz
-#define SYSCTL_XTAL_2_MHZ                        2                                
-
-//! Main Oscillator 3 Mhz
-#define SYSCTL_XTAL_3_MHZ                        3                                
-
-//! Main Oscillator 4 Mhz
-#define SYSCTL_XTAL_4_MHZ                        4                                
-
-//! Main Oscillator 5 Mhz
-#define SYSCTL_XTAL_5_MHZ                        5                                
-
-//! Main Oscillator 6 Mhz
-#define SYSCTL_XTAL_6_MHZ                        6                                
-
-//! Main Oscillator 7 Mhz
-#define SYSCTL_XTAL_7_MHZ                        7                                
-
-//! Main Oscillator 8 Mhz
-#define SYSCTL_XTAL_8_MHZ                        8                                
-
-//! Main Oscillator 9 Mhz
-#define SYSCTL_XTAL_9_MHZ                        9                                
-
-//! Main Oscillator 10 Mhz
-#define SYSCTL_XTAL_10_MHZ                       10                               
-
-//! Main Oscillator 11 Mhz
-#define SYSCTL_XTAL_11_MHZ                       11                               
-
-//! Main Oscillator 12 Mhz
-#define SYSCTL_XTAL_12_MHZ                       12                               
-
-//! Main Oscillator 13 Mhz
-#define SYSCTL_XTAL_13_MHZ                       13                               
-
-//! Main Oscillator 14 Mhz
-#define SYSCTL_XTAL_14_MHZ                       14                               
-
-//! Main Oscillator 15 Mhz
-#define SYSCTL_XTAL_15_MHZ                       15                               
-
-//! Main Oscillator 16 Mhz
-#define SYSCTL_XTAL_16_MHZ                       16                               
-
-//! Main Oscillator 17 Mhz
-#define SYSCTL_XTAL_17_MHZ                       17                               
-
-//! Main Oscillator 18 Mhz
-#define SYSCTL_XTAL_18_MHZ                       18                               
-
-//! Main Oscillator 19 Mhz
-#define SYSCTL_XTAL_19_MHZ                       19                               
-
-//! Main Oscillator 20 Mhz
-#define SYSCTL_XTAL_20_MHZ                       20                               
-
-//! Main Oscillator 21 Mhz
-#define SYSCTL_XTAL_21_MHZ                       21                               
-
-//! Main Oscillator 22 Mhz
-#define SYSCTL_XTAL_22_MHZ                       22                               
-
-//! Main Oscillator 23 Mhz
-#define SYSCTL_XTAL_23_MHZ                       23                               
-
-//! Main Oscillator 24 Mhz
-#define SYSCTL_XTAL_24_MHZ                       24                               
-
-//! Main Oscillator 25Mhz
-#define SYSCTL_XTAL_25_MHZ                       25                               
-
-//! Device Maximum Clock Speed,120Mhz for LPC1759/LPC1759, 100MHz for others Device.
-#define SYSTEM_CLOCK_MAX                         ((unsigned long)120000000)
-
-
-//! Use Main Oscillator as input clock source.
-#define SYSCTL_OSC_MAIN                          BIT_32_5
-
-//! Use Internal Oscillator as input clock source.
-#define SYSCTL_OSC_INT                           BIT_32_6
-
-//! Disable Internal Oscillator.
-#define SYSCTL_INT_OSC_DIS                       BIT_32_7
-
-//! Disable Main Oscillator.
-#define SYSCTL_MAIN_OSC_DIS                      BIT_32_8
-
-//! Power Down PLL Module.
-#define SYSCTL_PLL_PWRDN                         BIT_32_9
-
-//! @}
+//*****************************************************************************
+//
+//! \brief Provides a small delay.
+//!
+//! \param ulCount is the number of delay loop iterations to perform.
+//!
+//! This function provides a means of generating a constant length delay.  It
+//! is written in assembly to keep the delay consistent across tool chains,
+//! avoiding the need to tune the delay based on the tool chain in use.
+//!
+//! The loop takes 3 cycles/loop.
+//!
+//! \return None.
+//
+//*****************************************************************************
+#if defined(gcc) || defined(__GNUC__)
+void __attribute__((naked))
+SysCtlDelay(unsigned long ulCount)
+{
+    __asm("    subs    r0, #1\n"
+          "    bne     SysCtlDelay\n"
+          "    bx      lr");
+}
+#endif
+#if defined(ewarm) || defined(__ICCARM__)
+void
+SysCtlDelay(unsigned long ulCount)
+{
+    __asm("    subs    r0, #1\n"
+          "    bne.n   SysCtlDelay\n"
+          "    bx      lr");
+}
+#endif
+#if defined(rvmdk) || defined(__CC_ARM)
+__asm void
+SysCtlDelay(unsigned long ulCount)
+{
+    subs    r0, #1;
+    bne     SysCtlDelay;
+    bx      lr;
+}
+#endif
 
 //*****************************************************************************
 //
@@ -157,6 +101,8 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     unsigned long ulRes    = 0;      // Store Result value
     unsigned long ulM      = 0;      // PLL Multiplier
     unsigned long ulN      = 0;      // PLL Divider
+    unsigned long ulDiv    = 0;      // System clock divider
+    unsigned long ulFin    = 0;      // Input Clock frequency
 
     /************** Check input parameters valid ********************/
     // ulSysClk clock range: 0 --> 12MHz 
@@ -173,10 +119,42 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     ulTmpReg |=  FLASHCFG_FLASHTIM_ANY;
     xHWREG(FLASHCFG) = ulTmpReg;
 
+
     /************** Configure Main Oscillator    ********************/
     // Need Enable Main Oscillator ?
     if(ulConfig & SYSCTL_OSC_MAIN)              // Enable Main Osc
     {
+
+        // Get Input Frequency (unit: Hz)
+        ulTmpReg = (ulConfig & SYSCTL_XTAL_nMHZ_MASK) * 1000000;
+
+        // Configure Main Osc Frequency Range
+        if(ulTmpReg > 20000000)
+        {
+            ulTmpReg = xHWREG(SCS);
+            if((ulTmpReg & SCS_OSCRS) == 0)    // Wrong Range: 1 --> 20 MHz
+            {
+                if(ulTmpReg & SCS_OSCEN)       // Main Osc Have Been enabled
+                {
+                    //Disable Main Osc then Configure Osc Range
+                    ulTmpReg &= ~SCS_OSCEN;
+                    xHWREG(SCS) = ulTmpReg;
+
+                    // Waiting for Main Osc Disabled
+                    do
+                    {
+                        ulTmpReg = xHWREG(SCS);
+                        ulTmpReg &= SCS_OSCEN;
+                    }while(ulTmpReg != 0);
+
+                    // Configure Osc Range
+                    ulTmpReg = xHWREG(SCS);
+                    ulTmpReg |= SCS_OSCRS;
+                    xHWREG(SCS) = ulTmpReg;
+                }
+            }
+        }
+
         ulTmpReg = xHWREG(SCS);
         if((ulTmpReg & SCS_OSCSTAT) != SCS_OSCSTAT_RDY)
         {
@@ -191,6 +169,15 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
                 ulTmpReg &= SCS_OSCSTAT;
             }while(ulTmpReg != SCS_OSCSTAT_RDY);
         }
+        
+        //Select Main Osc as PLL Input
+        ulTmpReg = xHWREG(CLKSRCSEL);
+        ulTmpReg &= ~CLKSRCSEL_CLKSRC_M;
+        ulTmpReg |= CLKSRCSEL_CLKSRC_OSC;
+        xHWREG(CLKSRCSEL) = ulTmpReg;
+
+        // Get Input Frequency (unit: Hz)
+        ulFin = (ulConfig & SYSCTL_XTAL_nMHZ_MASK) * 1000000;
     }
 
     /************** Configure Internal oscillator ********************/
@@ -199,10 +186,22 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     // 1) SYSCTL_OSC_INT
     // 2) SYSCTL_INT_OSC_DIS
     //
-    // if(ulConfig & SYSCTL_OSC_INT)             // Enable Internal Osc
-    // {
-    //     //Do Nothing Here.
-    // }
+    if(ulConfig & SYSCTL_OSC_INT)             // Enable Internal Osc
+    {
+        //Need not Enable Internal RC
+
+        //Select Internal RC as PLL Input
+        ulTmpReg = xHWREG(CLKSRCSEL);
+        ulTmpReg &= ~CLKSRCSEL_CLKSRC_M;
+        ulTmpReg |= CLKSRCSEL_CLKSRC_IRC;
+        xHWREG(CLKSRCSEL) = ulTmpReg;
+
+        // Get Input Frequency (unit: Hz)
+        // For IRC, there is 4MHz
+        ulFin = 4 * 1000000;
+
+    }
+
     // 
     // if(ulConfig & SYSCTL_INT_OSC_DIS)        // Disable Internal Osc
     // {
@@ -216,9 +215,7 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     //     //Do Nothing Here
     // }
 
-    // Get Input Frequency (unit: Hz)
-    ulTmpReg = (ulConfig & SYSCTL_XTAL_nMHZ_MASK) * 1000000;
-    ulRes = PLLMNCal(ulTmpReg, ulSysClk, &ulM, &ulN);
+    ulRes = PLLMNCal(ulFin, ulSysClk, &ulM, &ulN, &ulDiv);
     if(!ulRes)                                  // Configure Failure
     {
         while(1);
@@ -234,29 +231,97 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     {
         // Disconnect PLL
         ulTmpReg = xHWREG(PLL0CON);
-        ulTmpReg &= PLL0CON_PLLC;
+        ulTmpReg &= ~PLL0CON_PLLC;
         xHWREG(PLL0CON) = ulTmpReg;
 
         // Write key to PLL Feed register
         xHWREG(PLL0FEED) = (unsigned long)0xAA;
         xHWREG(PLL0FEED) = (unsigned long)0x55;
 
-        // waiting for disconnect.
+        // waiting for disconnect
+        do
+        {
+            ulTmpReg = xHWREG(PLL0STAT);
+            ulTmpReg &= PLL0STAT_PLLC_STAT;
+        }while(ulTmpReg);
 
     }
 
     // PLL Enable ?
-    if()
+    ulTmpReg = xHWREG(PLL0STAT);
+    if(ulTmpReg & PLL0STAT_PLLE_STAT) // PLL Have Been Enabled, we need to Disable it.
+    {
+        // Disable PLL
+        ulTmpReg =  xHWREG(PLL0CON);
+        ulTmpReg &= ~PLL0CON_PLLE;
+        xHWREG(PLL0CON) = ulTmpReg;
 
+        // Write key to PLL Feed register
+        xHWREG(PLL0FEED) = (unsigned long)0xAA;
+        xHWREG(PLL0FEED) = (unsigned long)0x55;
 
+        // Waitting for Disable
+        do
+        {
+            ulTmpReg = xHWREG(PLL0STAT);
+            ulTmpReg &= PLL0STAT_PLLE_STAT;
+        }while(ulTmpReg);
+    }
 
-    // Default: F(system) = Fcco/4
 #if defined(LPC_175x) | defined(LPC_176x)
-    xHWREG(CCLKCFG) = (unsigned long) 3;
+    xHWREG(CCLKCFG) = (ulDiv - 1);
 #elif defined(LPC_177x) | defined(LPC_178x)
-    xHWREG(CCLKSEL) = ((unsigned long) 4 | CCLKSEL_CCLKSEL);
+    xHWREG(CCLKSEL) = (ulDiv | CCLKSEL_CCLKSEL);
 #endif
-    // 
+
+    // Configure PLL Multiplier/Divider
+    ulM -= 1;
+    ulN -= 1;
+    ulTmpReg = (ulN << PLL0CFG_PSEL_S) | ulM;
+    xHWREG(PLL0CFG) = ulTmpReg;
+
+    // Write key to PLL Feed register
+    xHWREG(PLL0FEED) = (unsigned long)0xAA;
+    xHWREG(PLL0FEED) = (unsigned long)0x55;
+
+    //ReEnable PLL and Wait Locked
+    ulTmpReg =  xHWREG(PLL0CON);
+    ulTmpReg |= PLL0CON_PLLE;
+    xHWREG(PLL0CON) = ulTmpReg;
+
+    // Write key to PLL Feed register
+    xHWREG(PLL0FEED) = (unsigned long)0xAA;
+    xHWREG(PLL0FEED) = (unsigned long)0x55;
+
+    // Waitting for Enable
+    do
+    {
+        ulTmpReg = xHWREG(PLL0STAT);
+        ulTmpReg &= PLL0STAT_PLLE_STAT;
+    }while(ulTmpReg == 0);
+
+    // Waitting for Locked
+    do
+    {
+        ulTmpReg = xHWREG(PLL0STAT);
+        ulTmpReg &= PLL0STAT_PLOCK;
+    }while(ulTmpReg == 0);
+
+    // Connect It
+    ulTmpReg =  xHWREG(PLL0CON);
+    ulTmpReg |= PLL0CON_PLLC;
+    xHWREG(PLL0CON) = ulTmpReg;
+
+    // Write key to PLL Feed register
+    xHWREG(PLL0FEED) = (unsigned long)0xAA;
+    xHWREG(PLL0FEED) = (unsigned long)0x55;
+
+    // Waitting for Enable
+    do
+    {
+        ulTmpReg = xHWREG(PLL0STAT);
+        ulTmpReg &= PLL0STAT_PLLC_STAT;
+    }while(ulTmpReg == 0);
 }
 
 
@@ -267,6 +332,7 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 //! \param [in]  Fout is the target clock frequency, Maximum value is 120Mhz.
 //! \param [out] pM is the Calculate result of multipler.
 //! \param [out] pN is the Calculate result of divider.
+//! \param [out] pDiv is the system divider.
 //! \return      the result of calculate
 //!              - 0 Failure
 //!              - 1 Success
@@ -278,11 +344,13 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 //
 //*****************************************************************************
 static unsigned long PLLMNCal(unsigned long Fin,
-        unsigned long Fout, unsigned long * pM, unsigned long *pN)
+        unsigned long Fout, unsigned long * pM, unsigned long *pN, unsigned long *pDiv)
 {
     unsigned long M    = 0;   // PLL Multiplier Value
     unsigned long N    = 0;   // PLL Divider Value
     unsigned long Fcco = 0;   // PLL Fcco Output frequency
+    unsigned long Fclk = 0;   // System Clock frequency
+    unsigned long i    = 0;   // Counter
 
     /************ Check Input parameters ****************/
     // Input Frequency Range: 1 --> 25 Mhz
@@ -327,23 +395,371 @@ static unsigned long PLLMNCal(unsigned long Fin,
                 continue;
             }
 
-            // Calculate System clock
-            // Note: default divider is 4
-            Fcco /= 4;
-
-            // Fcco and Fout Maximum different is 10K
-            if( ((Fcco - Fout) <= 10000) || ((Fout - Fcco) <= 10000) )
+            for(i = 1; i < 256; i++)
             {
-                // Find suitable Multiplier/Divider value.
-                *pM = M;
-                *pN = N;
+                Fclk = Fcco/i;
+#if defined(LPC_175x) | defined(LPC_176x)
+                if(Fclk > 120000000)
+#elif defined(LPC_177x) | defined(LPC_178x)
+                if(Fclk > 100000000)
+#endif
+                {
+                    continue;
+                }
 
-                return (1);
+                // Fclk and Fout Maximum different is 10K
+                if( ((Fclk - Fout) <= 10000) || ((Fout - Fclk) <= 10000) )
+                {
+                    // Find suitable Multiplier/Divider value.
+                    *pM   = M;
+                    *pN   = N;
+                    *pDiv = i;
+                    return (1);
+                }
             }
+
         }
     }
 
     // Can not find suitable Multiplier/Divider value.
     return (0);
+}
+
+
+#define EXT_INT_0
+#define EXT_INT_1
+#define EXT_INT_2
+#define EXT_INT_3
+
+#define EXT_INT_MASK                   BIT_MASK(32, 3, 0)
+
+#define EXT_INT_LV_H                   BIT_32_0
+#define EXT_INT_LV_L                   BIT_32_1
+#define EXT_INT_EG_R                   BIT_32_2
+#define EXT_INT_EG_F                   BIT_32_3
+
+
+void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
+{
+    unsigned long i         = 0;
+    unsigned long ulTmpReg1 = 0;
+    unsigned long ulTmpReg2 = 0;
+
+    // Check input parameters
+    xASSERT( (ulPin & EXT_INT_MASK) == 0 );
+    xASSERT( (ulCfg & EXT_INT_MASK) == 0 );
+    
+    ulTmpReg1 = xHWREG(EXTMODE);              // External Interrupt Mode register
+    ulTmpReg2 = xHWREG(EXTPOLAR);             // External Interrupt Polar register
+
+    for(i = 0; i < 4; i++)
+    {
+        if(ulPin & (0x01 << i))
+        {
+            switch(ulCfg)
+            {
+                case EXT_INT_LV_H:            // High Level Triggle
+                    {
+                        ulTmpReg1 &= ~(0x01 << i);
+                        ulTmpReg2 |=  (0x01 << i);
+                        break;
+                    }
+                case EXT_INT_LV_L:           // Low Level Triggle
+                    {
+                        ulTmpReg1 &= ~(0x01 << i);
+                        ulTmpReg2 &= ~(0x01 << i);
+                        break;
+                    }
+                case EXT_INT_EG_R:           // Rising Triggle
+                    {
+                        ulTmpReg1 |=  (0x01 << i);
+                        ulTmpReg2 |=  (0x01 << i);
+                        break;
+                    }
+                case EXT_INT_EG_F:           // Falling Triggle
+                    {
+                        ulTmpReg1 |=  (0x01 << i);
+                        ulTmpReg2 &= ~(0x01 << i);
+                        break;
+                    }
+            }
+        }
+    }
+
+    // Write back to mode/polar register
+    xHWREG(EXTMODE) = ulTmpReg1;             // Mode register
+    xHWREG(EXTMODE) = ulTmpReg2;             // Polar register
+
+}
+
+#define EXT_INT_0
+#define EXT_INT_1
+#define EXT_INT_2
+#define EXT_INT_3
+unsigned long SysCtlExtIntFlagGet(void)
+{
+    return xHWREG(EXTINT);
+}
+
+
+xtBoolean SysCtlExtIntFlagCheck(unsigned long ulFlag)
+{
+    unsigned long ulTmpReg = 0;
+
+    ulTmpReg = xHWREG(EXTINT);
+
+    if(ulTmpReg & ulFlag)
+    {
+        return (xtrue);
+    }
+    else
+    {
+        return (xfalse);
+    }
+}
+
+
+//! Power on reset
+#define RESET_FLAG_POR                RSID_POR
+
+//! External reset signal
+#define RESET_FLAG_EXTR               RSID_EXTR               
+
+//! Watchdog Timer reset
+#define RESET_FLAG_WDTR               RSID_WDTR               
+
+//! Brown-out reset
+#define RESET_FLAG_BODR               RSID_BODR               
+
+//! System reset requet reset
+#define RESET_FLAG_SYSRESET           RSID_SYSRESET           
+
+//! Lockup reset
+#define RESET_FLAG_LOCKUP             RSID_LOCKUP             
+
+//! return one of the following value
+unsigned long SysCtlResetFlagGet(void)
+{
+   return xHWREG(RSID); 
+}
+
+
+
+//! \todo Add PLL0 function
+
+#define PCLKSEL_WDT           PCLKSEL0_WDT_S    
+                                                
+#define PCLKSEL_TIMER0        PCLKSEL0_TIMER0_S 
+                                                
+#define PCLKSEL_TIMER1        PCLKSEL0_TIMER1_S 
+                                                
+#define PCLKSEL_UART0         PCLKSEL0_UART0_S  
+                                                
+#define PCLKSEL_UART1         PCLKSEL0_UART1_S  
+                                                
+#define PCLKSEL_PWM1          PCLKSEL0_PWM1_S   
+                                                
+#define PCLKSEL_I2C0          PCLKSEL0_I2C0_S   
+                                                
+#define PCLKSEL_SPI           PCLKSEL0_SPI_S    
+                                                
+#define PCLKSEL_SSP1          PCLKSEL0_SSP1_S   
+                                                
+#define PCLKSEL_DAC           PCLKSEL0_DAC_S    
+                                                
+#define PCLKSEL_ADC           PCLKSEL0_ADC_S    
+                                                
+#define PCLKSEL_CAN1          PCLKSEL0_CAN1_S   
+                                                
+#define PCLKSEL_CAN2          PCLKSEL0_CAN2_S   
+                                                
+#define PCLKSEL_ACF           PCLKSEL0_ACF_S    
+                                                 
+#define PCLKSEL_QEI           (PCLKSEL1_QEI_S     + 32)                                
+                                                       
+#define PCLKSEL_GPIOINT       (PCLKSEL1_GPIOINT_S + 32)                                
+                                                       
+#define PCLKSEL_PCB           (PCLKSEL1_PCB_S     + 32)                                
+                                                       
+#define PCLKSEL_I2C1          (PCLKSEL1_I2C1_S    + 32)                                
+
+#define PCLKSEL_SSP0          (PCLKSEL1_SSP0_S    + 32)                                
+
+#define PCLKSEL_TIMER2        (PCLKSEL1_TIMER2_S  + 32)                                
+
+#define PCLKSEL_TIMER3        (PCLKSEL1_TIMER3_S  + 32)                                
+
+#define PCLKSEL_UART2         (PCLKSEL1_UART2_S   + 32)                                
+
+#define PCLKSEL_UART3         (PCLKSEL1_UART3_S   + 32)                                
+
+#define PCLKSEL_I2C2          (PCLKSEL1_I2C2_S    + 32)                                
+
+#define PCLKSEL_I2S           (PCLKSEL1_I2S_S     + 32)                                
+
+#define PCLKSEL_RIT           (PCLKSEL1_RIT_S     + 32)                                
+
+#define PCLKSEL_SYSCON        (PCLKSEL1_SYSCON_S  + 32)                                
+
+#define PCLKSEL_MC            (PCLKSEL1_MC_S      + 32)                                
+                                                                           
+
+#define PCLK_CCLK_DIV_1       BIT_32_0
+#define PCLK_CCLK_DIV_2       BIT_32_1
+#define PCLK_CCLK_DIV_4       BIT_32_ALL_0
+#define PCLK_CCLK_DIV_6       (BIT_32_1 | BIT_32_0)
+#define PCLK_CCLK_DIV_8       (BIT_32_1 | BIT_32_0)
+
+
+void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg)
+{
+    unsigned long ulTmpReg = 0;
+
+    if(ulCfg < 32)
+    {
+        ulTmpReg = xHWREG(PCLKSEL0);
+        ulTmpReg &= ~(PCLKSEL_PPP_M << ulPeri);
+        ulTmpReg |= ulCfg << ulPeri;
+        xHWREG(PCLKSEL0) = ulTmpReg;
+    }
+    else
+    {
+        ulPeri -= 32;
+        ulTmpReg = xHWREG(PCLKSEL1);
+        ulTmpReg &= ~(PCLKSEL_PPP_M << ulPeri);
+        ulTmpReg |= ulCfg << ulPeri;
+        xHWREG(PCLKSEL1) = ulTmpReg;
+    }
+
+
+}
+
+#if defined(LPC_177x) | defined(LPC_178x)
+//! LCD Controller power/clock control bit.
+#define SYSCTL_PERIPH_ LCD             PCONP_PCLCD
+#endif
+
+//! Timer/Counter 0 power/clock control bit.
+#define SYSCTL_PERIPH_TIM0             PCONP_PCTIM0            BIT_32_1
+
+//! Timer/Counter 1 power/clock control bit.
+#define SYSCTL_PERIPH_TIM1             PCONP_PCTIM1            BIT_32_2
+
+//! UART0 Power/clock control bit.
+#define SYSCTL_PERIPH_UART0           PCONP_PCUART0           
+
+//! UART1 Power/clock control bit.
+#define SYSCTL_PERIPH_UART1           PCONP_PCUART1           
+
+//! PWM0 Power/Clock control bit.
+#define SYSCTL_PERIPH_PWM0            PCONP_PCPWM0            
+
+//! PWM1 Power/Clock control bit.
+#define SYSCTL_PERIPH_PWM1            PCONP_PCPWM1            
+
+//! I2C0 Interface Power/Clock control bit.
+#define SYSCTL_PERIPH_I2C0            PCONP_PCI2C0            
+
+#if defined(LPC_175x) | defined(LPC_176x)
+//! The SPI interface power/clock control bit.
+#define SYSCTL_PERIPH_SPI             PCONP_PCSPI             
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+//! UART4 power/clock control bit.
+#define SYSCTL_PERIPH_UART4           PCONP_PCUART4           
+
+#endif
+
+//! RTC and Event Monitor/Recorder power/clock control bit.
+#define SYSCTL_PERIPH_RTC             PCONP_PCRTC             
+
+//! SSP 1 interface power/clock control bit.
+#define SYSCTL_PERIPH_SSP1            PCONP_PCSSP1            
+
+#if defined(LPC_177x) | defined(LPC_178x)
+//! External Memory Controller power/clock control bit.
+#define SYSCTL_PERIPH_EMC             PCONP_PCEMC             
+#endif
+
+//! A/D converter (ADC) power/clock control bit.
+#define SYSCTL_PERIPH_ADC             PCONP_PCADC             
+
+//! CAN Controller 1 power/clock control bit.
+#define SYSCTL_PERIPH_CAN1            PCONP_PCCAN1            
+
+//! CAN Controller 2 power/clock control bit.
+#define SYSCTL_PERIPH_CAN2            PCONP_PCCAN2            
+
+//! Power/clock control bit for IOCON, GPIO, and GPIO interrupts.
+#define SYSCTL_PERIPH_GPIO            PCONP_PCGPIO            
+
+#if defined(LPC_175x) | defined(LPC_176x)
+//! Repetitive Interrupt Timer power/clock control bit.
+#define SYSCTL_PERIPH_RIT             PCONP_PCRIT             
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+//! SPI Flash Interface power/clock control bit.
+#define SYSCTL_PERIPH_SPIFI           PCONP_PCSPIFI           
+
+#endif
+
+//! Motor Control PWM power/clock control bit.
+#define SYSCTL_PERIPH_MCPWM           PCONP_PCMCPWM           
+
+//! Quadrature Encoder Interface power/clock control bit.
+#define SYSCTL_PERIPH_QEI             PCONP_PCQEI             
+
+//! I2C1 interface power/clock control bit.
+#define SYSCTL_PERIPH_I2C1            PCONP_PCI2C1            
+
+#if defined(LPC_177x) | defined(LPC_178x)
+//! SSP2 interface power/clock control bit.
+#define SYSCTL_PERIPH_SSP2            PCONP_PCSSP2            
+#endif
+
+//! SSP0 interface power/clock control bit.
+#define SYSCTL_PERIPH_SSP0            PCONP_PCSSP0            
+
+//! Timer 2 power/clock control bit.
+#define SYSCTL_PERIPH_TIM2            PCONP_PCTIM2            
+
+//! Timer 3 power/clock control bit.
+#define SYSCTL_PERIPH_TIM3            PCONP_PCTIM3            
+
+//! UART 2 power/clock control bit.
+#define SYSCTL_PERIPH_UART2           PCONP_PCUART2           
+
+//! UART 3 power/clock control bit.
+#define SYSCTL_PERIPH_UART3           PCONP_PCUART3           
+
+//! I2C interface 2 power/clock control bit.
+#define SYSCTL_PERIPH_I2C2            PCONP_PCI2C2            
+
+//! I2S interface power/clock control bit.
+#define SYSCTL_PERIPH_I2S             PCONP_PCI2S             
+
+#if defined(LPC_177x) | defined(LPC_178x)
+//! SD Card interface power/clock control bit.
+#define SYSCTL_PERIPH_SDC             PCONP_PCSDC             
+#endif
+
+//! GPDMA function power/clock control bit.
+#define SYSCTL_PERIPH_GPDMA           PCONP_PCGPDMA           
+
+//! Ethernet block power/clock control bit.
+#define SYSCTL_PERIPH_ETH             PCONP_PCENET            
+
+//! USB interface power/clock control bit.
+#define SYSCTL_PERIPH_USB             PCONP_PCUSB             
+
+
+void SysCtlPeripheralReset(unsigned long ulPeripheral);
+void SysCtlPeripheralEnable(unsigned long ulPeripheral)
+{
+    xHWREG(PCONP) |= ulPeripheral;
+}
+void SysCtlPeripheralDisable(unsigned long ulPeripheral);
+{
+    xHWREG(PCONP) &= ~ulPeripheral;
 }
 

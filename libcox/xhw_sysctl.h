@@ -818,47 +818,63 @@
 
 //PCLKSEL0 {{ For LPC 17_5x_6x
 
+#define PCLKSEL_PPP_M          BIT_MASK(32, 1, 0)
+
 //! Peripheral clock selection for WDT.
 #define PCLKSEL0_WDT_M         BIT_MASK(32, 1, 0)
+#define PCLKSEL0_WDT_S         0
 
 //! Peripheral clock selection for TIMER0.
 #define PCLKSEL0_TIMER0_M      BIT_MASK(32, 3, 2)
+#define PCLKSEL0_TIMER0_S      2
 
 //! Peripheral clock selection for TIMER1.
 #define PCLKSEL0_TIMER1_M      BIT_MASK(32, 5, 4)
+#define PCLKSEL0_TIMER1_S      4
 
 //! Peripheral clock selection for UART0.
 #define PCLKSEL0_UART0_M       BIT_MASK(32, 7, 6)
+#define PCLKSEL0_UART0_S       6
 
 //! Peripheral clock selection for UART1.
 #define PCLKSEL0_UART1_M       BIT_MASK(32, 9, 8)
+#define PCLKSEL0_UART1_S       8
 
 //! Peripheral clock selection for PWM1.
 #define PCLKSEL0_PWM1_M        BIT_MASK(32, 13, 12)
+#define PCLKSEL0_PWM1_S        12
 
 //! Peripheral clock selection for I2C0.
 #define PCLKSEL0_I2C0_M        BIT_MASK(32, 15, 14)
+#define PCLKSEL0_I2C0_S        14
 
 //! Peripheral clock selection for SPI.
 #define PCLKSEL0_SPI_M         BIT_MASK(32, 17, 16)
+#define PCLKSEL0_SPI_S         16
 
 //! Peripheral clock selection for SSP1.
 #define PCLKSEL0_SSP1_M        BIT_MASK(32, 21, 20)
+#define PCLKSEL0_SSP1_S        20
 
 //! Peripheral clock selection for DAC.
 #define PCLKSEL0_DAC_M         BIT_MASK(32, 23, 22)
+#define PCLKSEL0_DAC_S         22
 
 //! Peripheral clock selection for ADC.
 #define PCLKSEL0_ADC_M         BIT_MASK(32, 25, 24)
+#define PCLKSEL0_ADC_S         24
 
 //! Peripheral clock selection for CAN1.
 #define PCLKSEL0_CAN1_M        BIT_MASK(32, 27, 26)
+#define PCLKSEL0_CAN1_S        26
 
 //! Peripheral clock selection for CAN2.
 #define PCLKSEL0_CAN2_M        BIT_MASK(32, 29, 28)
+#define PCLKSEL0_CAN2_S        28
 
 //! Peripheral clock selection for CAN acceptance filtering.
 #define PCLKSEL0_ACF_M         BIT_MASK(32, 31, 30)
+#define PCLKSEL0_ACF_S         30
 
 //PCLKSEL0 }}
 
@@ -867,45 +883,59 @@
 
 //! Peripheral clock selection for the Quadrature Encoder Interface.
 #define PCLKSEL1_QEI_M         BIT_MASK(32, 1 , 0)
+#define PCLKSEL1_QEI_S         0
 
 //! Peripheral clock selection for GPIO interrupts
 #define PCLKSEL1_GPIOINT_M     BIT_MASK(32, 3 , 2)
+#define PCLKSEL1_GPIOINT_S     2
 
 //! Peripheral clock selection for the Pin Connect block
 #define PCLKSEL1_PCB_M         BIT_MASK(32, 5 , 4)
+#define PCLKSEL1_PCB_S         4
 
 //! Peripheral clock selection for I2C1
 #define PCLKSEL1_I2C1_M        BIT_MASK(32, 7 , 6)
+#define PCLKSEL1_I2C1_S        6
 
 //! Peripheral clock selection for SSP0
 #define PCLKSEL1_SSP0_M        BIT_MASK(32, 11,10)
+#define PCLKSEL1_SSP0_S        10
 
 //! Peripheral clock selection for TIMER2
 #define PCLKSEL1_TIMER2_M      BIT_MASK(32, 13,12)
+#define PCLKSEL1_TIMER2_S      12
 
 //! Peripheral clock selection for TIMER3
 #define PCLKSEL1_TIMER3_M      BIT_MASK(32, 15,14)
+#define PCLKSEL1_TIMER3_S      14
 
 //! Peripheral clock selection for UART2
 #define PCLKSEL1_UART2_M       BIT_MASK(32, 17,16)
+#define PCLKSEL1_UART2_S       16
 
 //! Peripheral clock selection for UART3
 #define PCLKSEL1_UART3_M       BIT_MASK(32, 19,18)
+#define PCLKSEL1_UART3_S       18
 
 //! Peripheral clock selection for I2C2
 #define PCLKSEL1_I2C2_M        BIT_MASK(32, 21,20)
+#define PCLKSEL1_I2C2_S        20
 
 //! Peripheral clock selection for I2S
 #define PCLKSEL1_I2S_M         BIT_MASK(32, 23,22)
+#define PCLKSEL1_I2S_S         22
 
 //! Peripheral clock selection for Repetitive Interrupt Timer
 #define PCLKSEL1_RIT_M         BIT_MASK(32, 27,26)
+#define PCLKSEL1_RIT_S         26
 
 //! Peripheral clock selection for the System Control block
 #define PCLKSEL1_SYSCON_M      BIT_MASK(32, 29,28)
+#define PCLKSEL1_SYSCON_S      28
 
 //! Peripheral clock selection for the Motor Control PWM
 #define PCLKSEL1_MC_M          BIT_MASK(32, 31,30)
+#define PCLKSEL1_MC_S          30
 
 //PCLKSEL1 }}
 
