@@ -13,6 +13,12 @@
 static unsigned long PLLMNCal(unsigned long Fin,
         unsigned long Fout, unsigned long * pM, unsigned long *pN, unsigned long *pDiv);
 
+static unsigned long g_ulSystemClk = 0;
+static unsigned long g_ulAHBClk    = 0;
+static unsigned long g_ulAPB1Clk   = 0;
+static unsigned long g_ulAPB2Clk   = 0;
+
+
 //*****************************************************************************
 //
 //! \brief Provides a small delay.
@@ -118,6 +124,20 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     ulTmpReg &= ~FLASHCFG_FLASHTIM_M;
     ulTmpReg |=  FLASHCFG_FLASHTIM_ANY;
     xHWREG(FLASHCFG) = ulTmpReg;
+
+
+
+    /************** Configure Power Boost register ******************/
+#if defined(LPC_177x) | defined(LPC_178x)
+    if(ulSysClk >= 100000000)                         // Maximum 120 Mhz
+    {
+        xHWREG(PBOOST) = PBOOST_BOOST_ON;
+    }
+    else                                              // Maximum 100 Mhz
+    {
+        xHWREG(PBOOST) = PBOOST_BOOST_OFF;
+    }
+#endif
 
 
     /************** Configure Main Oscillator    ********************/
@@ -270,8 +290,24 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 
 #if defined(LPC_175x) | defined(LPC_176x)
     xHWREG(CCLKCFG) = (ulDiv - 1);
+    xHWREG(PCLKSEL0) = (unsigned long)0;           // APB clock is equal to AHB/4
+    xHWREG(PCLKSEL1) = (unsigned long)0;
+
+    // Updata private clock data.
+    g_ulSystemClk = ulSysClk;
+    g_ulAHBClk    = ulSysClk;
+    g_ulAPB1Clk   = ulSysClk/4;
+    g_ulAPB2Clk   = g_ulAPB1Clk;
+
 #elif defined(LPC_177x) | defined(LPC_178x)
     xHWREG(CCLKSEL) = (ulDiv | CCLKSEL_CCLKSEL);
+    xHWREG(PCLKSEL) = (unsigned long)0x01;         // APB clock is equal to AHB
+
+    // Updata private clock data.
+    g_ulSystemClk = ulSysClk;
+    g_ulAHBClk    = ulSysClk;
+    g_ulAPB1Clk   = ulSysClk;
+    g_ulAPB2Clk   = g_ulAPB1Clk;
 #endif
 
     // Configure PLL Multiplier/Divider
@@ -426,17 +462,7 @@ static unsigned long PLLMNCal(unsigned long Fin,
 }
 
 
-#define EXT_INT_0
-#define EXT_INT_1
-#define EXT_INT_2
-#define EXT_INT_3
 
-#define EXT_INT_MASK                   BIT_MASK(32, 3, 0)
-
-#define EXT_INT_LV_H                   BIT_32_0
-#define EXT_INT_LV_L                   BIT_32_1
-#define EXT_INT_EG_R                   BIT_32_2
-#define EXT_INT_EG_F                   BIT_32_3
 
 
 void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
@@ -446,8 +472,8 @@ void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
     unsigned long ulTmpReg2 = 0;
 
     // Check input parameters
-    xASSERT( (ulPin & EXT_INT_MASK) == 0 );
-    xASSERT( (ulCfg & EXT_INT_MASK) == 0 );
+    xASSERT( (ulPin & EXT_INT_MASK) != 0 );
+    xASSERT( (ulCfg & EXT_INT_MASK) != 0 );
     
     ulTmpReg1 = xHWREG(EXTMODE);              // External Interrupt Mode register
     ulTmpReg2 = xHWREG(EXTPOLAR);             // External Interrupt Polar register
@@ -492,10 +518,6 @@ void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
 
 }
 
-#define EXT_INT_0
-#define EXT_INT_1
-#define EXT_INT_2
-#define EXT_INT_3
 unsigned long SysCtlExtIntFlagGet(void)
 {
     return xHWREG(EXTINT);
@@ -634,132 +656,159 @@ void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg)
 
 }
 
-#if defined(LPC_177x) | defined(LPC_178x)
-//! LCD Controller power/clock control bit.
-#define SYSCTL_PERIPH_ LCD             PCONP_PCLCD
-#endif
+void SysCtlPeripheralReset(unsigned long ulPeripheral)
+{
+    unsigned long ulTmpReg = 0;
 
-//! Timer/Counter 0 power/clock control bit.
-#define SYSCTL_PERIPH_TIM0             PCONP_PCTIM0            BIT_32_1
+    // Note: Not for LPC 17nx (n=5/6)
 
-//! Timer/Counter 1 power/clock control bit.
-#define SYSCTL_PERIPH_TIM1             PCONP_PCTIM1            BIT_32_2
+    if(ulPeripheral < 32)    // Reset register 0
+    {
+        // Reset Peripheral by write 1 to respond bit.
+        ulTmpReg = xHWREG(RSTCON0);
+        ulTmpReg |= ulPeripheral;
+        xHWREG(RSTCON0) = ulTmpReg;
 
-//! UART0 Power/clock control bit.
-#define SYSCTL_PERIPH_UART0           PCONP_PCUART0           
+        // Restore reset bit
+        ulTmpReg = xHWREG(RSTCON0);
+        ulTmpReg &= ~ulPeripheral;
+        xHWREG(RSTCON0) = ulTmpReg;
+    }
+    else                     // Reset register 1
+    {
+        ulPeripheral -= 1;
 
-//! UART1 Power/clock control bit.
-#define SYSCTL_PERIPH_UART1           PCONP_PCUART1           
+        // Reset Peripheral by write 1 to respond bit.
+        ulTmpReg = xHWREG(RSTCON1);
+        ulTmpReg |= ulPeripheral;
+        xHWREG(RSTCON1) = ulTmpReg;
 
-//! PWM0 Power/Clock control bit.
-#define SYSCTL_PERIPH_PWM0            PCONP_PCPWM0            
-
-//! PWM1 Power/Clock control bit.
-#define SYSCTL_PERIPH_PWM1            PCONP_PCPWM1            
-
-//! I2C0 Interface Power/Clock control bit.
-#define SYSCTL_PERIPH_I2C0            PCONP_PCI2C0            
-
-#if defined(LPC_175x) | defined(LPC_176x)
-//! The SPI interface power/clock control bit.
-#define SYSCTL_PERIPH_SPI             PCONP_PCSPI             
-
-#elif defined(LPC_177x) | defined(LPC_178x)
-//! UART4 power/clock control bit.
-#define SYSCTL_PERIPH_UART4           PCONP_PCUART4           
-
-#endif
-
-//! RTC and Event Monitor/Recorder power/clock control bit.
-#define SYSCTL_PERIPH_RTC             PCONP_PCRTC             
-
-//! SSP 1 interface power/clock control bit.
-#define SYSCTL_PERIPH_SSP1            PCONP_PCSSP1            
-
-#if defined(LPC_177x) | defined(LPC_178x)
-//! External Memory Controller power/clock control bit.
-#define SYSCTL_PERIPH_EMC             PCONP_PCEMC             
-#endif
-
-//! A/D converter (ADC) power/clock control bit.
-#define SYSCTL_PERIPH_ADC             PCONP_PCADC             
-
-//! CAN Controller 1 power/clock control bit.
-#define SYSCTL_PERIPH_CAN1            PCONP_PCCAN1            
-
-//! CAN Controller 2 power/clock control bit.
-#define SYSCTL_PERIPH_CAN2            PCONP_PCCAN2            
-
-//! Power/clock control bit for IOCON, GPIO, and GPIO interrupts.
-#define SYSCTL_PERIPH_GPIO            PCONP_PCGPIO            
-
-#if defined(LPC_175x) | defined(LPC_176x)
-//! Repetitive Interrupt Timer power/clock control bit.
-#define SYSCTL_PERIPH_RIT             PCONP_PCRIT             
-
-#elif defined(LPC_177x) | defined(LPC_178x)
-//! SPI Flash Interface power/clock control bit.
-#define SYSCTL_PERIPH_SPIFI           PCONP_PCSPIFI           
-
-#endif
-
-//! Motor Control PWM power/clock control bit.
-#define SYSCTL_PERIPH_MCPWM           PCONP_PCMCPWM           
-
-//! Quadrature Encoder Interface power/clock control bit.
-#define SYSCTL_PERIPH_QEI             PCONP_PCQEI             
-
-//! I2C1 interface power/clock control bit.
-#define SYSCTL_PERIPH_I2C1            PCONP_PCI2C1            
-
-#if defined(LPC_177x) | defined(LPC_178x)
-//! SSP2 interface power/clock control bit.
-#define SYSCTL_PERIPH_SSP2            PCONP_PCSSP2            
-#endif
-
-//! SSP0 interface power/clock control bit.
-#define SYSCTL_PERIPH_SSP0            PCONP_PCSSP0            
-
-//! Timer 2 power/clock control bit.
-#define SYSCTL_PERIPH_TIM2            PCONP_PCTIM2            
-
-//! Timer 3 power/clock control bit.
-#define SYSCTL_PERIPH_TIM3            PCONP_PCTIM3            
-
-//! UART 2 power/clock control bit.
-#define SYSCTL_PERIPH_UART2           PCONP_PCUART2           
-
-//! UART 3 power/clock control bit.
-#define SYSCTL_PERIPH_UART3           PCONP_PCUART3           
-
-//! I2C interface 2 power/clock control bit.
-#define SYSCTL_PERIPH_I2C2            PCONP_PCI2C2            
-
-//! I2S interface power/clock control bit.
-#define SYSCTL_PERIPH_I2S             PCONP_PCI2S             
-
-#if defined(LPC_177x) | defined(LPC_178x)
-//! SD Card interface power/clock control bit.
-#define SYSCTL_PERIPH_SDC             PCONP_PCSDC             
-#endif
-
-//! GPDMA function power/clock control bit.
-#define SYSCTL_PERIPH_GPDMA           PCONP_PCGPDMA           
-
-//! Ethernet block power/clock control bit.
-#define SYSCTL_PERIPH_ETH             PCONP_PCENET            
-
-//! USB interface power/clock control bit.
-#define SYSCTL_PERIPH_USB             PCONP_PCUSB             
-
-
-void SysCtlPeripheralReset(unsigned long ulPeripheral);
+        // Restore reset bit
+        ulTmpReg = xHWREG(RSTCON1);
+        ulTmpReg &= ~ulPeripheral;
+        xHWREG(RSTCON1) = ulTmpReg;
+    }
+}
 void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 {
     xHWREG(PCONP) |= ulPeripheral;
 }
-void SysCtlPeripheralDisable(unsigned long ulPeripheral);
+void SysCtlPeripheralDisable(unsigned long ulPeripheral)
 {
     xHWREG(PCONP) &= ~ulPeripheral;
 }
+
+unsigned long SysCtlHClockGet(void)
+{
+    return (g_ulAHBClk);
+}
+
+unsigned long SysCtlAPB1ClockGet(void)
+{
+    return (g_ulAPB1Clk);
+}
+
+unsigned long SysCtlAPB2ClockGet(void)
+{
+    return (g_ulAPB2Clk);
+}
+
+
+
+
+#define DMAREQSEL_00_UNUSED       BIT_32_16
+#define DMAREQSEL_00_TIMER0_M0    BIT_32_0
+
+#define DMAREQSEL_01_SD           BIT_32_17
+#define DMAREQSEL_01_TIMER0_M1    BIT_32_1
+
+#define DMAREQSEL_02_SSP0_TX      BIT_32_18
+#define DMAREQSEL_02_TIMER1_M0    BIT_32_2
+
+#define DMAREQSEL_03_SSP0_RX      BIT_32_19
+#define DMAREQSEL_03_TIMER1_M1    BIT_32_3
+
+#define DMAREQSEL_04_SSP1_TX      BIT_32_20
+#define DMAREQSEL_04_TIMER2_M0    BIT_32_4
+
+#define DMAREQSEL_05_SSP1_RX      BIT_32_21
+#define DMAREQSEL_05_TIMER2_M1    BIT_32_5
+
+#define DMAREQSEL_06_SSP2_TX      BIT_32_22
+#define DMAREQSEL_06_I2C_CH0      BIT_32_6
+
+#define DMAREQSEL_07_SSP2_RX      BIT_32_23
+#define DMAREQSEL_07_I2C_CH1      BIT_32_7
+
+#define DMAREQSEL_10_UART0_TX     BIT_32_26
+#define DMAREQSEL_10_UART3_TX     BIT_32_10
+
+#define DMAREQSEL_11_UART0_RX     BIT_32_27
+#define DMAREQSEL_11_UART3_RX     BIT_32_11
+
+#define DMAREQSEL_12_UART1_TX     BIT_32_28
+#define DMAREQSEL_12_UART4_TX     BIT_32_12
+
+#define DMAREQSEL_13_UART1_RX     BIT_32_29
+#define DMAREQSEL_13_UART4_RX     BIT_32_13
+
+#define DMAREQSEL_14_UART2_TX     BIT_32_30
+#define DMAREQSEL_14_TIMER3_M0    BIT_32_14
+
+#define DMAREQSEL_15_UART2_RX     BIT_32_31
+#define DMAREQSEL_15_TIMER3_M1    BIT_32_15
+void SysCtlDMAReqCfg(unsigned long ulCfg)
+{
+    unsigned long ulTmpReg = 0;
+
+    ulTmpReg = xHWREG(DMAREQSEL);
+    ulTmpReg &= ~(ulCfg>>16);
+    ulTmpReg |= ulCfg;
+    xHWREG(DMAREQSEL) = ulTmpReg;
+}
+
+
+
+//! I-code bus priority.
+//! \note Should be lower than PRI_DCODE for proper operation.
+#define MATRIXARB_ICODE     0
+
+//! D-Code bus priority.
+#define MATRIXARB_DCODE     2
+
+//! System bus priority
+#define MATRIXARB_SYS       4
+
+//! General Purpose DMA controller priority
+#define MATRIXARB_GPDMA     6
+
+//! Ethernet DMA priority
+#define MATRIXARB_ETH       8
+
+//! LCD DMA priority
+#define MATRIXARB_LCD       10
+
+//! USB DMA priority
+#define MATRIXARB_USB       12
+
+//! \note This function is suit for LPC1
+void SysCtlMatrixPriSet(unsigned long ulModule, unsigned long ulPri)
+{
+    unsigned long ulTmpReg = 0;
+
+    ulTmpReg = xHWREG(MATRIXARB);
+    ulTmpReg &= ~(0x03 << ulModule);
+    ulTmpReg |= (ulPri << ulModule);
+    xHWREG(MATRIXARB) = ulTmpReg;
+}
+
+
+
+//! EMC about function. {{
+//! EMC about function. }}:w
+//
+
+
+
+
 

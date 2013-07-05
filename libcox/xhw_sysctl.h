@@ -811,7 +811,7 @@
 
 //PCLKSEL {{
 
-//! Selects the divide value for the clock used for all APB peripherals.
+//! Selects the divde value for the clock used for all APB peripherals.
 #define PCLKSEL_PCLKDIV_M       BIT_MASK(32, 4, 0)
 
 //PCLKSEL }}

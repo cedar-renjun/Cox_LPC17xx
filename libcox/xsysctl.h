@@ -160,18 +160,154 @@ void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg);
 unsigned long SysCtlResetFlagGet(void);
 
 
+#if defined(LPC_177x) | defined(LPC_178x)
+//! LCD Controller power/clock control bit.
+#define SYSCTL_PERIPH_ LCD             PCONP_PCLCD
+#endif
+
+//! Timer/Counter 0 power/clock control bit.
+#define SYSCTL_PERIPH_TIM0             PCONP_PCTIM0
+
+//! Timer/Counter 1 power/clock control bit.
+#define SYSCTL_PERIPH_TIM1             PCONP_PCTIM1
+
+//! UART0 Power/clock control bit.
+#define SYSCTL_PERIPH_UART0           PCONP_PCUART0           
+
+//! UART1 Power/clock control bit.
+#define SYSCTL_PERIPH_UART1           PCONP_PCUART1           
+
+//! PWM0 Power/Clock control bit.
+#define SYSCTL_PERIPH_PWM0            PCONP_PCPWM0            
+
+//! PWM1 Power/Clock control bit.
+#define SYSCTL_PERIPH_PWM1            PCONP_PCPWM1            
+
+//! I2C0 Interface Power/Clock control bit.
+#define SYSCTL_PERIPH_I2C0            PCONP_PCI2C0            
+
+#if defined(LPC_175x) | defined(LPC_176x)
+//! The SPI interface power/clock control bit.
+#define SYSCTL_PERIPH_SPI             PCONP_PCSPI             
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+//! UART4 power/clock control bit.
+#define SYSCTL_PERIPH_UART4           PCONP_PCUART4           
+
+#endif
+
+//! RTC and Event Monitor/Recorder power/clock control bit.
+#define SYSCTL_PERIPH_RTC             PCONP_PCRTC             
+
+//! SSP 1 interface power/clock control bit.
+#define SYSCTL_PERIPH_SSP1            PCONP_PCSSP1            
+
+#if defined(LPC_177x) | defined(LPC_178x)
+//! External Memory Controller power/clock control bit.
+#define SYSCTL_PERIPH_EMC             PCONP_PCEMC             
+#endif
+
+//! A/D converter (ADC) power/clock control bit.
+#define SYSCTL_PERIPH_ADC             PCONP_PCADC             
+
+//! CAN Controller 1 power/clock control bit.
+#define SYSCTL_PERIPH_CAN1            PCONP_PCCAN1            
+
+//! CAN Controller 2 power/clock control bit.
+#define SYSCTL_PERIPH_CAN2            PCONP_PCCAN2            
+
+//! Power/clock control bit for IOCON, GPIO, and GPIO interrupts.
+#define SYSCTL_PERIPH_GPIO            PCONP_PCGPIO            
+
+#if defined(LPC_175x) | defined(LPC_176x)
+//! Repetitive Interrupt Timer power/clock control bit.
+#define SYSCTL_PERIPH_RIT             PCONP_PCRIT             
+
+#elif defined(LPC_177x) | defined(LPC_178x)
+//! SPI Flash Interface power/clock control bit.
+#define SYSCTL_PERIPH_SPIFI           PCONP_PCSPIFI           
+
+#endif
+
+//! Motor Control PWM power/clock control bit.
+#define SYSCTL_PERIPH_MCPWM           PCONP_PCMCPWM           
+
+//! Quadrature Encoder Interface power/clock control bit.
+#define SYSCTL_PERIPH_QEI             PCONP_PCQEI             
+
+//! I2C1 interface power/clock control bit.
+#define SYSCTL_PERIPH_I2C1            PCONP_PCI2C1            
+
+#if defined(LPC_177x) | defined(LPC_178x)
+//! SSP2 interface power/clock control bit.
+#define SYSCTL_PERIPH_SSP2            PCONP_PCSSP2            
+#endif
+
+//! SSP0 interface power/clock control bit.
+#define SYSCTL_PERIPH_SSP0            PCONP_PCSSP0            
+
+//! Timer 2 power/clock control bit.
+#define SYSCTL_PERIPH_TIM2            PCONP_PCTIM2            
+
+//! Timer 3 power/clock control bit.
+#define SYSCTL_PERIPH_TIM3            PCONP_PCTIM3            
+
+//! UART 2 power/clock control bit.
+#define SYSCTL_PERIPH_UART2           PCONP_PCUART2           
+
+//! UART 3 power/clock control bit.
+#define SYSCTL_PERIPH_UART3           PCONP_PCUART3           
+
+//! I2C interface 2 power/clock control bit.
+#define SYSCTL_PERIPH_I2C2            PCONP_PCI2C2            
+
+//! I2S interface power/clock control bit.
+#define SYSCTL_PERIPH_I2S             PCONP_PCI2S             
+
+#if defined(LPC_177x) | defined(LPC_178x)
+//! SD Card interface power/clock control bit.
+#define SYSCTL_PERIPH_SDC             PCONP_PCSDC             
+#endif
+
+//! GPDMA function power/clock control bit.
+#define SYSCTL_PERIPH_GPDMA           PCONP_PCGPDMA           
+
+//! Ethernet block power/clock control bit.
+#define SYSCTL_PERIPH_ETH             PCONP_PCENET            
+
+//! USB interface power/clock control bit.
+#define SYSCTL_PERIPH_USB             PCONP_PCUSB             
+
+//! Reset control bit for the IOCON registers
+#define SYSCTL_PERIPH_IOCON           (RSTCON1_RSTIOCON + 32)
+
+//! D/A converter (DAC) reset control bit
+#define SYSCTL_PERIPH_DAC             (RSTCON1_RSTDAC + 32)
+
+//! CAN acceptance filter reset control bit
+#define SYSCTL_PERIPH_CANACC          (RSTCON1_RSTCANACC + 32)
+
+
+extern void SysCtlPeripheralEnable(unsigned long ulPeripheral);
+extern void SysCtlPeripheralDisable(unsigned long ulPeripheral);
+extern void SysCtlPeripheralReset(unsigned long ulPeripheral);
 
 
 
 
+#define EXT_INT_0                      BIT_32_0
+#define EXT_INT_1                      BIT_32_1
+#define EXT_INT_2                      BIT_32_2 
+#define EXT_INT_3                      BIT_32_3
 
+#define EXT_INT_MASK                   BIT_MASK(32, 3, 0)
 
+#define EXT_INT_LV_H                   BIT_32_0
+#define EXT_INT_LV_L                   BIT_32_1
+#define EXT_INT_EG_R                   BIT_32_2
+#define EXT_INT_EG_F                   BIT_32_3
 
-
-
-
-
-
+extern void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg);
 
 
 
