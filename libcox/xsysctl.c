@@ -65,7 +65,7 @@ SysCtlDelay(unsigned long ulCount)
 //*****************************************************************************
 //
 //! \brief Configure the system clock of the device.
-//! 
+//!
 //! This function configures the clock of the device.  The input crystal
 //! frequency, oscillator to be used, use of the PLL, and the system clock
 //! divider are all configured with this function.
@@ -78,9 +78,9 @@ SysCtlDelay(unsigned long ulCount)
 //!
 //! The external crystal frequency is chosen with one of the following values:
 //! - \ref SYSCTL_XTAL_1_MHZ
-//! - \ref SYSCTL_XTAL_2_MHZ  
+//! - \ref SYSCTL_XTAL_2_MHZ
 //! - ...
-//! - \ref SYSCTL_XTAL_25_MHZ  
+//! - \ref SYSCTL_XTAL_25_MHZ
 //!
 //! The oscillator source is chosen with one of the following values:
 //! - \ref SYSCTL_OSC_MAIN
@@ -89,11 +89,11 @@ SysCtlDelay(unsigned long ulCount)
 //! The internal and main oscillators and PLL are disabled with the
 //! - \ref SYSCTL_INT_OSC_DIS
 //! - \ref SYSCTL_MAIN_OSC_DIS
-//! - \ref SYSCTL_PLL_PWRDN 
-//! 
+//! - \ref SYSCTL_PLL_PWRDN
+//!
 //! \return None.
 //!
-//! \note 
+//! \note
 //!      The external oscillator must be enabled in order to use an external clock
 //!      source.  Note that attempts to disable the oscillator used to clock the
 //!      device will be prevented by the hardware.
@@ -111,7 +111,7 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     unsigned long ulFin    = 0;      // Input Clock frequency
 
     /************** Check input parameters valid ********************/
-    // ulSysClk clock range: 0 --> 12MHz 
+    // ulSysClk clock range: 0 --> 12MHz
     xASSERT( (ulSysClk > 0) && (ulSysClk <= SYSTEM_CLOCK_MAX) );
 
     // Check ulConfig valid
@@ -189,7 +189,7 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
                 ulTmpReg &= SCS_OSCSTAT;
             }while(ulTmpReg != SCS_OSCSTAT_RDY);
         }
-        
+
         //Select Main Osc as PLL Input
         ulTmpReg = xHWREG(CLKSRCSEL);
         ulTmpReg &= ~CLKSRCSEL_CLKSRC_M;
@@ -222,7 +222,7 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 
     }
 
-    // 
+    //
     // if(ulConfig & SYSCTL_INT_OSC_DIS)        // Disable Internal Osc
     // {
     //     //Do Nothing Here.
@@ -290,8 +290,8 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 
 #if defined(LPC_175x) | defined(LPC_176x)
     xHWREG(CCLKCFG) = (ulDiv - 1);
-    xHWREG(PCLKSEL0) = (unsigned long)0;           // APB clock is equal to AHB/4
-    xHWREG(PCLKSEL1) = (unsigned long)0;
+    xHWREG(PCLKSEL0) = (unsigned long)0x00;           // APB clock is equal to AHB/4
+    xHWREG(PCLKSEL1) = (unsigned long)0x00;
 
     // Updata private clock data.
     g_ulSystemClk = ulSysClk;
@@ -474,7 +474,7 @@ void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
     // Check input parameters
     xASSERT( (ulPin & EXT_INT_MASK) != 0 );
     xASSERT( (ulCfg & EXT_INT_MASK) != 0 );
-    
+
     ulTmpReg1 = xHWREG(EXTMODE);              // External Interrupt Mode register
     ulTmpReg2 = xHWREG(EXTPOLAR);             // External Interrupt Polar register
 
@@ -545,86 +545,86 @@ xtBoolean SysCtlExtIntFlagCheck(unsigned long ulFlag)
 #define RESET_FLAG_POR                RSID_POR
 
 //! External reset signal
-#define RESET_FLAG_EXTR               RSID_EXTR               
+#define RESET_FLAG_EXTR               RSID_EXTR
 
 //! Watchdog Timer reset
-#define RESET_FLAG_WDTR               RSID_WDTR               
+#define RESET_FLAG_WDTR               RSID_WDTR
 
 //! Brown-out reset
-#define RESET_FLAG_BODR               RSID_BODR               
+#define RESET_FLAG_BODR               RSID_BODR
 
 //! System reset requet reset
-#define RESET_FLAG_SYSRESET           RSID_SYSRESET           
+#define RESET_FLAG_SYSRESET           RSID_SYSRESET
 
 //! Lockup reset
-#define RESET_FLAG_LOCKUP             RSID_LOCKUP             
+#define RESET_FLAG_LOCKUP             RSID_LOCKUP
 
 //! return one of the following value
 unsigned long SysCtlResetFlagGet(void)
 {
-   return xHWREG(RSID); 
+   return xHWREG(RSID);
 }
 
 
 
 //! \todo Add PLL0 function
 
-#define PCLKSEL_WDT           PCLKSEL0_WDT_S    
-                                                
-#define PCLKSEL_TIMER0        PCLKSEL0_TIMER0_S 
-                                                
-#define PCLKSEL_TIMER1        PCLKSEL0_TIMER1_S 
-                                                
-#define PCLKSEL_UART0         PCLKSEL0_UART0_S  
-                                                
-#define PCLKSEL_UART1         PCLKSEL0_UART1_S  
-                                                
-#define PCLKSEL_PWM1          PCLKSEL0_PWM1_S   
-                                                
-#define PCLKSEL_I2C0          PCLKSEL0_I2C0_S   
-                                                
-#define PCLKSEL_SPI           PCLKSEL0_SPI_S    
-                                                
-#define PCLKSEL_SSP1          PCLKSEL0_SSP1_S   
-                                                
-#define PCLKSEL_DAC           PCLKSEL0_DAC_S    
-                                                
-#define PCLKSEL_ADC           PCLKSEL0_ADC_S    
-                                                
-#define PCLKSEL_CAN1          PCLKSEL0_CAN1_S   
-                                                
-#define PCLKSEL_CAN2          PCLKSEL0_CAN2_S   
-                                                
-#define PCLKSEL_ACF           PCLKSEL0_ACF_S    
-                                                 
-#define PCLKSEL_QEI           (PCLKSEL1_QEI_S     + 32)                                
-                                                       
-#define PCLKSEL_GPIOINT       (PCLKSEL1_GPIOINT_S + 32)                                
-                                                       
-#define PCLKSEL_PCB           (PCLKSEL1_PCB_S     + 32)                                
-                                                       
-#define PCLKSEL_I2C1          (PCLKSEL1_I2C1_S    + 32)                                
+#define PCLKSEL_WDT           PCLKSEL0_WDT_S
 
-#define PCLKSEL_SSP0          (PCLKSEL1_SSP0_S    + 32)                                
+#define PCLKSEL_TIMER0        PCLKSEL0_TIMER0_S
 
-#define PCLKSEL_TIMER2        (PCLKSEL1_TIMER2_S  + 32)                                
+#define PCLKSEL_TIMER1        PCLKSEL0_TIMER1_S
 
-#define PCLKSEL_TIMER3        (PCLKSEL1_TIMER3_S  + 32)                                
+#define PCLKSEL_UART0         PCLKSEL0_UART0_S
 
-#define PCLKSEL_UART2         (PCLKSEL1_UART2_S   + 32)                                
+#define PCLKSEL_UART1         PCLKSEL0_UART1_S
 
-#define PCLKSEL_UART3         (PCLKSEL1_UART3_S   + 32)                                
+#define PCLKSEL_PWM1          PCLKSEL0_PWM1_S
 
-#define PCLKSEL_I2C2          (PCLKSEL1_I2C2_S    + 32)                                
+#define PCLKSEL_I2C0          PCLKSEL0_I2C0_S
 
-#define PCLKSEL_I2S           (PCLKSEL1_I2S_S     + 32)                                
+#define PCLKSEL_SPI           PCLKSEL0_SPI_S
 
-#define PCLKSEL_RIT           (PCLKSEL1_RIT_S     + 32)                                
+#define PCLKSEL_SSP1          PCLKSEL0_SSP1_S
 
-#define PCLKSEL_SYSCON        (PCLKSEL1_SYSCON_S  + 32)                                
+#define PCLKSEL_DAC           PCLKSEL0_DAC_S
 
-#define PCLKSEL_MC            (PCLKSEL1_MC_S      + 32)                                
-                                                                           
+#define PCLKSEL_ADC           PCLKSEL0_ADC_S
+
+#define PCLKSEL_CAN1          PCLKSEL0_CAN1_S
+
+#define PCLKSEL_CAN2          PCLKSEL0_CAN2_S
+
+#define PCLKSEL_ACF           PCLKSEL0_ACF_S
+
+#define PCLKSEL_QEI           (PCLKSEL1_QEI_S     + 32)
+
+#define PCLKSEL_GPIOINT       (PCLKSEL1_GPIOINT_S + 32)
+
+#define PCLKSEL_PCB           (PCLKSEL1_PCB_S     + 32)
+
+#define PCLKSEL_I2C1          (PCLKSEL1_I2C1_S    + 32)
+
+#define PCLKSEL_SSP0          (PCLKSEL1_SSP0_S    + 32)
+
+#define PCLKSEL_TIMER2        (PCLKSEL1_TIMER2_S  + 32)
+
+#define PCLKSEL_TIMER3        (PCLKSEL1_TIMER3_S  + 32)
+
+#define PCLKSEL_UART2         (PCLKSEL1_UART2_S   + 32)
+
+#define PCLKSEL_UART3         (PCLKSEL1_UART3_S   + 32)
+
+#define PCLKSEL_I2C2          (PCLKSEL1_I2C2_S    + 32)
+
+#define PCLKSEL_I2S           (PCLKSEL1_I2S_S     + 32)
+
+#define PCLKSEL_RIT           (PCLKSEL1_RIT_S     + 32)
+
+#define PCLKSEL_SYSCON        (PCLKSEL1_SYSCON_S  + 32)
+
+#define PCLKSEL_MC            (PCLKSEL1_MC_S      + 32)
+
 
 #define PCLK_CCLK_DIV_1       BIT_32_0
 #define PCLK_CCLK_DIV_2       BIT_32_1
@@ -802,13 +802,181 @@ void SysCtlMatrixPriSet(unsigned long ulModule, unsigned long ulPri)
     xHWREG(MATRIXARB) = ulTmpReg;
 }
 
-
-
-//! EMC about function. {{
-//! EMC about function. }}:w
+//*****************************************************************************
 //
+//! \brief Configure MCU Power Mode.
+//!
+//! \param [in] ulMode is the power mode of LPC17xx, this value can be one of
+//!             the following value:
+//!             - PWR_MODE_SLEEP     Set Mcu into Sleep mode.
+//!             - PWR_MODE_SLEEP_D   Set Mcu into Deep Sleep mode.
+//!             - PWR_MODE_PWRDOWN   Set Mcu into Powerdown mode.
+//!             - PWR_MODE_PWRDOWN_D Set Mcu into Deep Powerdown mode.
+//!
+//! \return     the result of operation, can be one of the following value:
+//!             - 0 success
+//!             - 1 failure cause by incorrect input parameter.
+//! \note
+//!             -# Any enabled interrupt can wake up the CPU from Sleep mode.
+//!             Certain interrupts can wake up the processor if it is in either
+//!             Deep Sleep mode or Power-down mode.
+//!
+//!             -# Interrupts that can occur during Deep Sleep or Power-down mode will
+//!             wake up the CPU if the interrupt is enabled. After wake-up, execution
+//!             will continue to the appropriate interrupt service routine.
+//!             These interrupts are NMI, External Interrupts EINT0 through EINT3,
+//!             GPIO interrupts, Ethernet Wake-on-LAN interrupt, Brownout Detect,
+//!             RTC Alarm, CAN Activity Interrupt, and USB Activity Interrupt.
+//!             In addition, the watchdog timer can wake up the part from Deep Sleep
+//!             mode if the watchdog timer is being clocked by the IRC oscillator.
+//!             For the wake-up process to take place the corresponding interrupt must
+//!             be enabled in the NVIC. For pin-related peripheral functions,
+//!             the related functions must also be mapped to pins.
+//!
+//!             -# In Deep Power-down mode, internal power to most of the device is
+//!             removed, which limits the possibilities for waking up from this mode.
+//!             Wake-up from Deep Power-down mode will occur when an external reset
+//!             signal is applied, or the RTC interrupt is enabled and an RTC interrupt
+//!             is generated.
+//!
+//! \bug        -# Once you put mcu input DeepSleep or DeepPowerDown mode, mcu clock
+//!             is reset to default, that to say, PLL is disconnect and disable,
+//!             IRC is used as the main clock source.
+//!             However, you can't use SysCtlClockSet to reconfigure PLL.
+//!             This problem will be solved in the later.
+//!
+//*****************************************************************************
+unsigned long SysCtlPwrCfg(unsigned long ulMode)
+{
+
+    // Check input parameters valid.
+    xASSERT((ulMode == PWR_MODE_SLEEP    ) ||
+            (ulMode == PWR_MODE_SLEEP_D  ) ||
+            (ulMode == PWR_MODE_PWRDOWN  ) ||
+            (ulMode == PWR_MODE_PWRDOWN_D) );
+
+    switch(ulMode)
+    {
+        case PWR_MODE_SLEEP:           // Sleep Mode
+            {
+                xHWREG(PCON)          = (unsigned long)0x00;
+                xHWREG(NVIC_SYS_CTRL) = (unsigned long)0x00;
+                xCPUwfi();
+                return (0);
+            }
+        case PWR_MODE_SLEEP_D:        // Deep Sleep Mode
+            {
+                xHWREG(PCON)          = (unsigned long)0x00;
+                xHWREG(NVIC_SYS_CTRL) = (unsigned long)0x04;
+                xCPUwfi();
+                return (0);
+            }
+        case PWR_MODE_PWRDOWN:        // Power Down Mode
+            {
+                xHWREG(PCON)          = (unsigned long)0x01;
+                xHWREG(NVIC_SYS_CTRL) = (unsigned long)0x04;
+                xCPUwfi();
+                return (0);
+            }
+        case PWR_MODE_PWRDOWN_D:      // Deep Power Down Mode
+            {
+                xHWREG(PCON)          = (unsigned long)0x03;
+                xHWREG(NVIC_SYS_CTRL) = (unsigned long)0x04;
+                xCPUwfi();
+                return (0);
+            }
+        default:
+            {
+                return (1);           // Error
+            }
+    }
+}
 
 
+//*****************************************************************************
+//
+//! \brief Configure Brown-out module.
+//!
+//! \param [in] ulCfg is Brown-out Configure input parameter, this parameter is
+//!             the logical OR of several different values:
+//!             - BOD_REDUCE_PWR_EN   The Brown-Out Detect function remains active
+//!                                   during Power-down and Deep Sleep modes.
+//!
+//!             - BOD_REDUCE_PWR_DIS  The Brown-Out Detect circuitry will be turned
+//!                                   off when chip Power-down mode or Deep Sleep mode
+//!                                   is entered, resulting in a further reduction
+//!                                   in power usage. However, the possibility of
+//!                                   using Brown-Out Detect as a wake-up source
+//!                                   from the reduced power mode will be lost.
+//!
+//!             - BOD_GLOBAL_EN       The Brown-Out Detect circuitry is enabled.
+//!
+//!             - BOD_GLOBAL_DIS      The Brown-Out Detect circuitry is fully
+//!                                   disabled at all times, and does not consume
+//!                                   power.
+//!
+//!             - BOD_RESET_EN        Enable Brown-out reset function.
+//!             - BOD_RESET_DIS       Disable Brown-out reset function.
+//!
+//! \return     None.
+//! \note       When you call this function with one group parameter, e.g.
+//!             SysCtlBODCfg(BOD_GLOBAL_EN | BOD_GLOBAL_DIS)
+//!             it equals to
+//!             SysCtlBODCfg(BOD_GLOBAL_DIS).
+//!
+//*****************************************************************************
+void SysCtlBODCfg(unsigned long ulCfg)
+{
+    unsigned long ulTmpReg = 0;
+    unsigned long ulTmp    = 0;
+
+    xASSERT( ulCfg & (BOD_REDUCE_PWR_EN   | BOD_REDUCE_PWR_DIS |
+                       BOD_GLOBAL_EN      | BOD_GLOBAL_DIS     |
+                       BOD_RESET_EN       | BOD_RESET_DIS      ));
+
+    ulTmpReg = xHWREG(PCON);
+    ulTmp    = ( ulCfg & BIT_MASK(32, 31, 16) ) >> 16;
+    ulTmpReg &= ~(ulTmp);
+    ulTmpReg |= ulCfg & BIT_MASK(32, 15, 0);
+    xHWREG(PCON) = ulTmpReg;
+}
 
 
+#define PWR_FLAG_SLEEP                 BIT_32_8
+#define PWR_FLAG_SLEEP_D               BIT_32_9
+#define PWR_FLAG_PWRDOWN               BIT_32_10
+#define PWR_FLAG_PWRDOWN_D             BIT_32_11
+
+//*****************************************************************************
+//
+//! \brief Configure Brown-out module.
+//!
+//! \param [in] ulCfg is Brown-out Configure input parameter, this parameter is
+//!             the logical OR of several different values:
+//!             - PWR_FLAG_SLEEP                 
+//!             - PWR_FLAG_SLEEP_D               
+//!             - PWR_FLAG_PWRDOWN               
+//!             - PWR_FLAG_PWRDOWN_D             
+//!
+//! \return     None.
+//!
+//*****************************************************************************
+xtBoolean SysCtlPwrFlagCheck(unsigned long ulFlag)
+{
+    unsigned long ulTmpReg = 0;
+
+    // Check input parameters valid.
+    xASSERT( ulCfg & (PWR_FLAG_SLEEP   | PWR_FLAG_SLEEP_D   |
+                      PWR_FLAG_PWRDOWN | PWR_FLAG_PWRDOWN_D ));
+
+    ulTmpReg = xHWREG(PCON);
+    if(ulTmpReg & ulFlag)
+    {
+        return (xtrue);
+    }
+    else
+    {
+        return (xfalse);
+    }
+}
 

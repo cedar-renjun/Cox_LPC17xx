@@ -313,5 +313,24 @@ extern void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg);
 
 
 
+extern void SysCtlDelay(unsigned long ulCount);
 
+
+
+
+
+#define PWR_MODE_SLEEP               BIT_32_0
+#define PWR_MODE_SLEEP_D             BIT_32_1
+#define PWR_MODE_PWRDOWN             BIT_32_2
+#define PWR_MODE_PWRDOWN_D           BIT_32_3
+extern unsigned long SysCtlPwrCfg(unsigned long ulMode);
+
+
+#define BOD_REDUCE_PWR_EN         BIT_32_18
+#define BOD_REDUCE_PWR_DIS        BIT_32_2
+#define BOD_GLOBAL_EN             BIT_32_19
+#define BOD_GLOBAL_DIS            BIT_32_3
+#define BOD_RESET_EN              BIT_32_20
+#define BOD_RESET_DIS             BIT_32_4
+extern void SysCtlBODCfg(unsigned long ulCfg);
 
