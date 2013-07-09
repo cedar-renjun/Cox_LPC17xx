@@ -1,3 +1,5 @@
+//! \file xsysctl.c
+//
 #include "xhw_types.h"
 #include "xhw_ints.h"
 #include "xhw_memmap.h"
@@ -7,16 +9,113 @@
 #include "xhw_sysctl.h"
 #include "xsysctl.h"
 
-
-//! \file xsysctl.c
-
 static unsigned long PLLMNCal(unsigned long Fin,
         unsigned long Fout, unsigned long * pM, unsigned long *pN, unsigned long *pDiv);
 
-static unsigned long g_ulSystemClk = 0;
-static unsigned long g_ulAHBClk    = 0;
-static unsigned long g_ulAPB1Clk   = 0;
-static unsigned long g_ulAPB2Clk   = 0;
+static unsigned long g_ulSystemClk = 0;           // System Clock frequency
+static unsigned long g_ulAHBClk    = 0;           // AHB Clock frequency
+static unsigned long g_ulAPB1Clk   = 0;           // APB1 Clock frequency
+static unsigned long g_ulAPB2Clk   = 0;           // APB2 Clock frequency
+
+//*****************************************************************************
+//
+//! \brief       Calculate the PLL Multiplier/Diviver
+//! \param [in]  Fin is the input clock frequency (1Mhz --> 25Mhz).
+//! \param [in]  Fout is the target clock frequency, Maximum value is 120Mhz.
+//! \param [out] pM is the Calculate result of multipler.
+//! \param [out] pN is the Calculate result of divider.
+//! \param [out] pDiv is the system divider.
+//! \return      the result of calculate
+//!              - 0 Failure
+//!              - 1 Success
+//! \note
+//!              - This function is internal use, user MUST NOT call it.
+//!              - pM and pN is the pointer, must be point to a valid variable.
+//!              - This function only used for calculate internal RC and
+//!                oscillator, NOT supply RTC(32.768KHz).
+//
+//*****************************************************************************
+static unsigned long PLLMNCal(unsigned long Fin,
+        unsigned long Fout, unsigned long * pM, unsigned long *pN, unsigned long *pDiv)
+{
+    unsigned long M    = 0;   // PLL Multiplier Value
+    unsigned long N    = 0;   // PLL Divider Value
+    unsigned long Fcco = 0;   // PLL Fcco Output frequency
+    unsigned long Fclk = 0;   // System Clock frequency
+    unsigned long i    = 0;   // Counter
+
+    /************ Check Input parameters ****************/
+    // Input Frequency Range: 1 --> 25 Mhz
+    if((Fin < 1000000) || (Fin > 25000000))
+    {
+        return (0);
+    }
+
+    // Target Maximum Frequency Range: 10 --> 120Mhz
+    if( (Fout == 0) || (Fout >= 120000000) )
+    {
+        return (0);
+    }
+
+    // Check pN/pM Pointer valid
+    if((pN == 0) || (pM == 0))
+    {
+        return (0);
+    }
+
+    /************ Calculate Multiplier/Divider **********/
+    for(N = 1; N < 32; N++)
+    {
+
+        // The value of PLOCK0 may not be stable when the PLL reference frequency
+        // (FREF, the frequency of REFCLK, which is equal to the PLL input
+        // frequency divided by the pre-divider value) is less than 100 kHz or
+        // greater than 20 MHz
+        Fcco = Fin/N;
+        if((Fcco < 100000) || (Fcco > 20000000))
+        {
+            continue;
+        }
+
+        for(M = 6; M < 512; M++)
+        {
+            // Fcco Range: 275 --> 550 MHz
+            Fcco = Fin/N;
+            Fcco = 2*Fcco*M;
+            if( (Fcco < 275000000) || (Fcco > 550000000) )
+            {
+                continue;
+            }
+
+            for(i = 1; i < 256; i++)
+            {
+                Fclk = Fcco/i;
+#if defined(LPC_175x) | defined(LPC_176x)
+                if(Fclk > 120000000)
+#elif defined(LPC_177x) | defined(LPC_178x)
+                if(Fclk > 100000000)
+#endif
+                {
+                    continue;
+                }
+
+                // Fclk and Fout Maximum different is 10K
+                if( ((Fclk - Fout) <= 10000) || ((Fout - Fclk) <= 10000) )
+                {
+                    // Find suitable Multiplier/Divider value.
+                    *pM   = M;
+                    *pN   = N;
+                    *pDiv = i;
+                    return (1);
+                }
+            }
+
+        }
+    }
+
+    // Can not find suitable Multiplier/Divider value.
+    return (0);
+}   
 
 
 //*****************************************************************************
@@ -42,8 +141,7 @@ SysCtlDelay(unsigned long ulCount)
           "    bne     SysCtlDelay\n"
           "    bx      lr");
 }
-#endif
-#if defined(ewarm) || defined(__ICCARM__)
+#elif defined(ewarm) || defined(__ICCARM__)
 void
 SysCtlDelay(unsigned long ulCount)
 {
@@ -51,8 +149,7 @@ SysCtlDelay(unsigned long ulCount)
           "    bne.n   SysCtlDelay\n"
           "    bx      lr");
 }
-#endif
-#if defined(rvmdk) || defined(__CC_ARM)
+#elif defined(rvmdk) || defined(__CC_ARM)
 __asm void
 SysCtlDelay(unsigned long ulCount)
 {
@@ -77,19 +174,19 @@ SysCtlDelay(unsigned long ulCount)
 //! many of which are grouped into sets where only one can be chosen.
 //!
 //! The external crystal frequency is chosen with one of the following values:
-//! - \ref SYSCTL_XTAL_1_MHZ
-//! - \ref SYSCTL_XTAL_2_MHZ
-//! - ...
-//! - \ref SYSCTL_XTAL_25_MHZ
+//!     - \ref SYSCTL_XTAL_1_MHZ
+//!     - \ref SYSCTL_XTAL_2_MHZ
+//!     - ...
+//!     - \ref SYSCTL_XTAL_25_MHZ
 //!
 //! The oscillator source is chosen with one of the following values:
-//! - \ref SYSCTL_OSC_MAIN
-//! - \ref SYSCTL_OSC_INT
+//!     - \ref SYSCTL_OSC_MAIN
+//!     - \ref SYSCTL_OSC_INT
 //!
 //! The internal and main oscillators and PLL are disabled with the
-//! - \ref SYSCTL_INT_OSC_DIS
-//! - \ref SYSCTL_MAIN_OSC_DIS
-//! - \ref SYSCTL_PLL_PWRDN
+//!     - \ref SYSCTL_INT_OSC_DIS
+//!     - \ref SYSCTL_MAIN_OSC_DIS
+//!     - \ref SYSCTL_PLL_PWRDN
 //!
 //! \return None.
 //!
@@ -360,111 +457,28 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     }while(ulTmpReg == 0);
 }
 
-
 //*****************************************************************************
 //
-//! \brief       Calculate the PLL Multiplier/Diviver
-//! \param [in]  Fin is the input clock frequency (1Mhz --> 25Mhz).
-//! \param [in]  Fout is the target clock frequency, Maximum value is 120Mhz.
-//! \param [out] pM is the Calculate result of multipler.
-//! \param [out] pN is the Calculate result of divider.
-//! \param [out] pDiv is the system divider.
-//! \return      the result of calculate
-//!              - 0 Failure
-//!              - 1 Success
-//! \note
-//!              - This function is internal use, user MUST NOT call it.
-//!              - pM and pN is the pointer, must be point to a valid variable.
-//!              - This function only used for calculate internal RC and
-//!                oscillator, NOT supply RTC(32.768KHz).
+//! \brief      Configure External interrupt.
+//!
+//! \param [in] ulPin is the MCU External interrupt channel, this value can be
+//!             logical OR of the following value:
+//!             - \ref EXT_INT_0
+//!             - \ref EXT_INT_1
+//!             - \ref EXT_INT_2
+//!             - \ref EXT_INT_3
+//!
+//! \param [in] ulCfg is used to configure Interrupt Type, this value can be
+//!             one of the following value:
+//!            - \ref EXT_INT_LV_H         High Level
+//!            - \ref EXT_INT_LV_L         Low Level
+//!            - \ref EXT_INT_EG_R         Rising Edge
+//!            - \ref EXT_INT_EG_F         Falling Edge
+//!
+//! \return     None.
+//!
 //
 //*****************************************************************************
-static unsigned long PLLMNCal(unsigned long Fin,
-        unsigned long Fout, unsigned long * pM, unsigned long *pN, unsigned long *pDiv)
-{
-    unsigned long M    = 0;   // PLL Multiplier Value
-    unsigned long N    = 0;   // PLL Divider Value
-    unsigned long Fcco = 0;   // PLL Fcco Output frequency
-    unsigned long Fclk = 0;   // System Clock frequency
-    unsigned long i    = 0;   // Counter
-
-    /************ Check Input parameters ****************/
-    // Input Frequency Range: 1 --> 25 Mhz
-    if((Fin < 1000000) || (Fin > 25000000))
-    {
-        return (0);
-    }
-
-    // Target Maximum Frequency Range: 10 --> 120Mhz
-    if( (Fout == 0) || (Fout >= 120000000) )
-    {
-        return (0);
-    }
-
-    // Check pN/pM Pointer valid
-    if((pN == 0) || (pM == 0))
-    {
-        return (0);
-    }
-
-    /************ Calculate Multiplier/Divider **********/
-    for(N = 1; N < 32; N++)
-    {
-
-        // The value of PLOCK0 may not be stable when the PLL reference frequency
-        // (FREF, the frequency of REFCLK, which is equal to the PLL input
-        // frequency divided by the pre-divider value) is less than 100 kHz or
-        // greater than 20 MHz
-        Fcco = Fin/N;
-        if((Fcco < 100000) || (Fcco > 20000000))
-        {
-            continue;
-        }
-
-        for(M = 6; M < 512; M++)
-        {
-            // Fcco Range: 275 --> 550 MHz
-            Fcco = Fin/N;
-            Fcco = 2*Fcco*M;
-            if( (Fcco < 275000000) || (Fcco > 550000000) )
-            {
-                continue;
-            }
-
-            for(i = 1; i < 256; i++)
-            {
-                Fclk = Fcco/i;
-#if defined(LPC_175x) | defined(LPC_176x)
-                if(Fclk > 120000000)
-#elif defined(LPC_177x) | defined(LPC_178x)
-                if(Fclk > 100000000)
-#endif
-                {
-                    continue;
-                }
-
-                // Fclk and Fout Maximum different is 10K
-                if( ((Fclk - Fout) <= 10000) || ((Fout - Fclk) <= 10000) )
-                {
-                    // Find suitable Multiplier/Divider value.
-                    *pM   = M;
-                    *pN   = N;
-                    *pDiv = i;
-                    return (1);
-                }
-            }
-
-        }
-    }
-
-    // Can not find suitable Multiplier/Divider value.
-    return (0);
-}
-
-
-
-
-
 void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
 {
     unsigned long i         = 0;
@@ -518,15 +532,52 @@ void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
 
 }
 
+//*****************************************************************************
+//
+//! \brief  Get the External Interrupt source flag.
+//!
+//! \param  None.
+//!
+//! \return The External Interrupt flag, this value is logical OR of the
+//!         following value:
+//!             - \ref EXT_INT_0
+//!             - \ref EXT_INT_1
+//!             - \ref EXT_INT_2
+//!             - \ref EXT_INT_3
+//!
+//! \note   User can use \ref SysCtlExtIntFlagGet or \ref SysCtlExtIntFlagCheck
+//!         to check MCU External Int source.
+//
+//*****************************************************************************
 unsigned long SysCtlExtIntFlagGet(void)
 {
     return xHWREG(EXTINT);
 }
 
-
+//*****************************************************************************
+//
+//! \brief      Check the External Interrupt source flag.
+//!
+//! \param [in] ulFlag is the External Interrupt Channel, This parameter can be
+//!             one of the following value:
+//!             - \ref EXT_INT_0
+//!             - \ref EXT_INT_1
+//!             - \ref EXT_INT_2
+//!             - \ref EXT_INT_3
+//!
+//! \return     The status of the External Int flag.
+//!             - xtrue The Checked Flag has been set.
+//!             - xfalse The Checked Flag has not been set.
+//!
+//! \note   User can use \ref SysCtlExtIntFlagGet or \ref SysCtlExtIntFlagCheck
+//!         to check MCU External Int source.
+//
+//*****************************************************************************
 xtBoolean SysCtlExtIntFlagCheck(unsigned long ulFlag)
 {
     unsigned long ulTmpReg = 0;
+
+    xASSERT( (ulFlag & EXT_INT_MASK) != 0 );
 
     ulTmpReg = xHWREG(EXTINT);
 
@@ -540,99 +591,141 @@ xtBoolean SysCtlExtIntFlagCheck(unsigned long ulFlag)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief      Check the External Interrupt source flag.
+//!
+//! \param [in] ulFlag is the External Interrupt Channel, This parameter can be
+//!             one of the following value:
+//!             - \ref EXT_INT_0
+//!             - \ref EXT_INT_1
+//!             - \ref EXT_INT_2
+//!             - \ref EXT_INT_3
+//!
+//! \return     The status of the External Int flag.
+//!             - xtrue The Checked Flag has been set.
+//!             - xfalse The Checked Flag has not been set.
+//!
+//! \note   User can use \ref SysCtlExtIntFlagGet or \ref SysCtlExtIntFlagCheck
+//!         to check MCU External Int source.
+//
+//*****************************************************************************
+void SysCtlExtIntFlagClear(unsigned long ulFlag)
+{
 
-//! Power on reset
-#define RESET_FLAG_POR                RSID_POR
+    xASSERT( (ulFlag & EXT_INT_MASK) != 0 );
 
-//! External reset signal
-#define RESET_FLAG_EXTR               RSID_EXTR
+    xHWREG(EXTINT) |= ulFlag;
 
-//! Watchdog Timer reset
-#define RESET_FLAG_WDTR               RSID_WDTR
+}
 
-//! Brown-out reset
-#define RESET_FLAG_BODR               RSID_BODR
 
-//! System reset requet reset
-#define RESET_FLAG_SYSRESET           RSID_SYSRESET
 
-//! Lockup reset
-#define RESET_FLAG_LOCKUP             RSID_LOCKUP
-
-//! return one of the following value
+//*****************************************************************************
+//
+//! \brief  Get the reset source flag.
+//!
+//! \param  None.
+//!
+//! \return The reset flag, this value is logical OR of the following value:
+//!         - \ref RESET_FLAG_POR          Power On reset
+//!         - \ref RESET_FLAG_EXTR         External reset
+//!         - \ref RESET_FLAG_WDTR         Watchdog reset
+//!         - \ref RESET_FLAG_BODR         Brown-out reset
+//!         - \ref RESET_FLAG_SYSRESET     System Request reset
+//!         - \ref RESET_FLAG_LOCKUP       Lock up reset
+//!
+//! \note   User can use \ref SysCtlResetFlagGet or \ref SysCtlResetFlagCheck
+//!         to check MCU reset source.
+//
+//*****************************************************************************
 unsigned long SysCtlResetFlagGet(void)
 {
    return xHWREG(RSID);
 }
 
+//*****************************************************************************
+//
+//! \brief       Check the reset source flag.
+//!
+//! \param [in]  ulFlag is the reset flag, this value is logical OR of
+//!              the following value:
+//!              - \ref RESET_FLAG_POR          Power On reset
+//!              - \ref RESET_FLAG_EXTR         External reset
+//!              - \ref RESET_FLAG_WDTR         Watchdog reset
+//!              - \ref RESET_FLAG_BODR         Brown-out reset
+//!              - \ref RESET_FLAG_SYSRESET     System Request reset
+//!              - \ref RESET_FLAG_LOCKUP       Lock up reset
+//!
+//! \return      The status of the reset flag.
+//!              - xtrue The Checked Flag has been set.
+//!              - xfalse The Checked Flag has not been set.
+//
+//*****************************************************************************
+xtBoolean SysCtlResetFlagCheck(unsigned long ulFlag)
+{
+    unsigned long ulTmpReg = 0;
 
+    ulTmpReg = xHWREG(RSID);
 
-//! \todo Add PLL0 function
+    if(ulTmpReg & ulFlag)
+    {
+        return (xtrue);
+    }
+    else
+    {
+        return (xfalse);
+    }
+}
 
-#define PCLKSEL_WDT           PCLKSEL0_WDT_S
-
-#define PCLKSEL_TIMER0        PCLKSEL0_TIMER0_S
-
-#define PCLKSEL_TIMER1        PCLKSEL0_TIMER1_S
-
-#define PCLKSEL_UART0         PCLKSEL0_UART0_S
-
-#define PCLKSEL_UART1         PCLKSEL0_UART1_S
-
-#define PCLKSEL_PWM1          PCLKSEL0_PWM1_S
-
-#define PCLKSEL_I2C0          PCLKSEL0_I2C0_S
-
-#define PCLKSEL_SPI           PCLKSEL0_SPI_S
-
-#define PCLKSEL_SSP1          PCLKSEL0_SSP1_S
-
-#define PCLKSEL_DAC           PCLKSEL0_DAC_S
-
-#define PCLKSEL_ADC           PCLKSEL0_ADC_S
-
-#define PCLKSEL_CAN1          PCLKSEL0_CAN1_S
-
-#define PCLKSEL_CAN2          PCLKSEL0_CAN2_S
-
-#define PCLKSEL_ACF           PCLKSEL0_ACF_S
-
-#define PCLKSEL_QEI           (PCLKSEL1_QEI_S     + 32)
-
-#define PCLKSEL_GPIOINT       (PCLKSEL1_GPIOINT_S + 32)
-
-#define PCLKSEL_PCB           (PCLKSEL1_PCB_S     + 32)
-
-#define PCLKSEL_I2C1          (PCLKSEL1_I2C1_S    + 32)
-
-#define PCLKSEL_SSP0          (PCLKSEL1_SSP0_S    + 32)
-
-#define PCLKSEL_TIMER2        (PCLKSEL1_TIMER2_S  + 32)
-
-#define PCLKSEL_TIMER3        (PCLKSEL1_TIMER3_S  + 32)
-
-#define PCLKSEL_UART2         (PCLKSEL1_UART2_S   + 32)
-
-#define PCLKSEL_UART3         (PCLKSEL1_UART3_S   + 32)
-
-#define PCLKSEL_I2C2          (PCLKSEL1_I2C2_S    + 32)
-
-#define PCLKSEL_I2S           (PCLKSEL1_I2S_S     + 32)
-
-#define PCLKSEL_RIT           (PCLKSEL1_RIT_S     + 32)
-
-#define PCLKSEL_SYSCON        (PCLKSEL1_SYSCON_S  + 32)
-
-#define PCLKSEL_MC            (PCLKSEL1_MC_S      + 32)
-
-
-#define PCLK_CCLK_DIV_1       BIT_32_0
-#define PCLK_CCLK_DIV_2       BIT_32_1
-#define PCLK_CCLK_DIV_4       BIT_32_ALL_0
-#define PCLK_CCLK_DIV_6       (BIT_32_1 | BIT_32_0)
-#define PCLK_CCLK_DIV_8       (BIT_32_1 | BIT_32_0)
-
-
+//*****************************************************************************
+//
+//! \brief Configure Peripheral Clock.
+//!
+//! \param [in] ulPeri is the LPC17nx(n=5/6) peripherals, the parameter can be
+//!             logical OR of the following value:
+//!             - \ref PCLKSEL_WDT
+//!             - \ref PCLKSEL_TIMER0
+//!             - \ref PCLKSEL_TIMER1
+//!             - \ref PCLKSEL_UART0
+//!             - \ref PCLKSEL_UART1
+//!             - \ref PCLKSEL_PWM1
+//!             - \ref PCLKSEL_I2C0
+//!             - \ref PCLKSEL_SPI
+//!             - \ref PCLKSEL_SSP1
+//!             - \ref PCLKSEL_DAC
+//!             - \ref PCLKSEL_ADC
+//!             - \ref PCLKSEL_CAN1
+//!             - \ref PCLKSEL_CAN2
+//!             - \ref PCLKSEL_ACF
+//!             - \ref PCLKSEL_QEI
+//!             - \ref PCLKSEL_GPIOINT
+//!             - \ref PCLKSEL_PCB
+//!             - \ref PCLKSEL_I2C1
+//!             - \ref PCLKSEL_SSP0
+//!             - \ref PCLKSEL_TIMER2
+//!             - \ref PCLKSEL_TIMER3
+//!             - \ref PCLKSEL_UART2
+//!             - \ref PCLKSEL_UART3
+//!             - \ref PCLKSEL_I2C2
+//!             - \ref PCLKSEL_I2S
+//!             - \ref PCLKSEL_RIT
+//!             - \ref PCLKSEL_SYSCON
+//!             - \ref PCLKSEL_MC
+//!
+//! \param [in] ulCfg is the Divider of Cclk, Pclk = Cclk/Divider.
+//!             This value can be one of the following value:
+//!             - \ref PCLK_CCLK_DIV_1
+//!             - \ref PCLK_CCLK_DIV_2
+//!             - \ref PCLK_CCLK_DIV_4
+//!             - \ref PCLK_CCLK_DIV_6
+//!             - \ref PCLK_CCLK_DIV_8
+//!
+//! \return     None.
+//! \note       PCLK_CCLK_DIV_6 is only suit for CAN1, CAN2.
+//!
+//
+//*****************************************************************************
 void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -652,16 +745,65 @@ void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg)
         ulTmpReg |= ulCfg << ulPeri;
         xHWREG(PCLKSEL1) = ulTmpReg;
     }
-
-
 }
 
+//*****************************************************************************
+//
+//! \brief Reset MCU Periperal.
+//!
+//! \param [in] ulPeripheral is the LPC17nx(n=7/8) peripherals, the parameter
+//!             can be one of the following value:
+//!             - \ref SYSCTL_PERIPH_ LCD     
+//!             - \ref SYSCTL_PERIPH_TIM0
+//!             - \ref SYSCTL_PERIPH_TIM1
+//!             - \ref SYSCTL_PERIPH_UART0
+//!             - \ref SYSCTL_PERIPH_UART1
+//!             - \ref SYSCTL_PERIPH_PWM0
+//!             - \ref SYSCTL_PERIPH_PWM1
+//!             - \ref SYSCTL_PERIPH_I2C0
+//!             - \ref SYSCTL_PERIPH_UART4    
+//!             - \ref SYSCTL_PERIPH_RTC
+//!             - \ref SYSCTL_PERIPH_SSP1
+//!             - \ref SYSCTL_PERIPH_EMC      
+//!             - \ref SYSCTL_PERIPH_ADC
+//!             - \ref SYSCTL_PERIPH_CAN1
+//!             - \ref SYSCTL_PERIPH_CAN2
+//!             - \ref SYSCTL_PERIPH_GPIO
+//!             - \ref SYSCTL_PERIPH_RIT     
+//!             - \ref SYSCTL_PERIPH_MCPWM
+//!             - \ref SYSCTL_PERIPH_QEI
+//!             - \ref SYSCTL_PERIPH_I2C1
+//!             - \ref SYSCTL_PERIPH_SSP2     
+//!             - \ref SYSCTL_PERIPH_SSP0
+//!             - \ref SYSCTL_PERIPH_TIM2
+//!             - \ref SYSCTL_PERIPH_TIM3
+//!             - \ref SYSCTL_PERIPH_UART2
+//!             - \ref SYSCTL_PERIPH_UART3
+//!             - \ref SYSCTL_PERIPH_I2C2
+//!             - \ref SYSCTL_PERIPH_I2S
+//!             - \ref SYSCTL_PERIPH_SDC      
+//!             - \ref SYSCTL_PERIPH_GPDMA
+//!             - \ref SYSCTL_PERIPH_ETH
+//!             - \ref SYSCTL_PERIPH_USB
+//!             - \ref SYSCTL_PERIPH_IOCON
+//!             - \ref SYSCTL_PERIPH_DAC
+//!             - \ref SYSCTL_PERIPH_CANACC
+//!
+//! \return     None.
+//!
+//! \note       This function is only suit for LPC177x or LPC178x.
+//
+//*****************************************************************************
 void SysCtlPeripheralReset(unsigned long ulPeripheral)
 {
-    unsigned long ulTmpReg = 0;
 
     // Note: Not for LPC 17nx (n=5/6)
 
+#if defined(LPC_175x) | defined(LPC_176x)
+    // Nothing
+#elif defined(LPC_177x) | defined(LPC_178x)
+
+    unsigned long ulTmpReg = 0;
     if(ulPeripheral < 32)    // Reset register 0
     {
         // Reset Peripheral by write 1 to respond bit.
@@ -688,118 +830,181 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
         ulTmpReg &= ~ulPeripheral;
         xHWREG(RSTCON1) = ulTmpReg;
     }
+#endif
 }
+//*****************************************************************************
+//
+//! \brief Enable MCU Periperal.
+//!
+//! \param [in] ulPeripheral is the LPC17nx(n=5/6/7/8) peripherals, the parameter
+//!             can be one of the following value:
+//!             - \ref SYSCTL_PERIPH_ LCD     //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_TIM0
+//!             - \ref SYSCTL_PERIPH_TIM1
+//!             - \ref SYSCTL_PERIPH_UART0
+//!             - \ref SYSCTL_PERIPH_UART1
+//!             - \ref SYSCTL_PERIPH_PWM0
+//!             - \ref SYSCTL_PERIPH_PWM1
+//!             - \ref SYSCTL_PERIPH_I2C0
+//!             - \ref SYSCTL_PERIPH_SPI      //Only For LPC17nx(n=5/6)
+//!             - \ref SYSCTL_PERIPH_UART4    //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_RTC
+//!             - \ref SYSCTL_PERIPH_SSP1
+//!             - \ref SYSCTL_PERIPH_EMC      //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_ADC
+//!             - \ref SYSCTL_PERIPH_CAN1
+//!             - \ref SYSCTL_PERIPH_CAN2
+//!             - \ref SYSCTL_PERIPH_GPIO
+//!             - \ref SYSCTL_PERIPH_RIT      //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_SPIFI    //Only For LPC17nx(n=5/6)
+//!             - \ref SYSCTL_PERIPH_MCPWM
+//!             - \ref SYSCTL_PERIPH_QEI
+//!             - \ref SYSCTL_PERIPH_I2C1
+//!             - \ref SYSCTL_PERIPH_SSP2     //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_SSP0
+//!             - \ref SYSCTL_PERIPH_TIM2
+//!             - \ref SYSCTL_PERIPH_TIM3
+//!             - \ref SYSCTL_PERIPH_UART2
+//!             - \ref SYSCTL_PERIPH_UART3
+//!             - \ref SYSCTL_PERIPH_I2C2
+//!             - \ref SYSCTL_PERIPH_I2S
+//!             - \ref SYSCTL_PERIPH_SDC      //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_GPDMA
+//!             - \ref SYSCTL_PERIPH_ETH
+//!             - \ref SYSCTL_PERIPH_USB
+//!             - \ref SYSCTL_PERIPH_IOCON
+//!             - \ref SYSCTL_PERIPH_DAC
+//!             - \ref SYSCTL_PERIPH_CANACC
+//!
+//! \return     None.
+//!
+//! \note       Those Modulle is only suit for LPC175x or LPC176x.
+//!                 - \ref SYSCTL_PERIPH_SPIFI
+//!                 - \ref SYSCTL_PERIPH_SPI
+//!
+//! \note       Those Module is only suit for LPC177x or LPC178x.
+//!                - \ref SYSCTL_PERIPH_UART4
+//!                - \ref SYSCTL_PERIPH_EMC
+//!                - \ref SYSCTL_PERIPH_RIT
+//!                - \ref SYSCTL_PERIPH_SSP2
+//!                - \ref SYSCTL_PERIPH_SDC
+//
+//*****************************************************************************
 void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 {
     xHWREG(PCONP) |= ulPeripheral;
 }
+
+//*****************************************************************************
+//
+//! \brief Disable MCU Periperal.
+//!
+//! \param [in] ulPeripheral is the LPC17nx(n=5/6/7/8) peripherals, the parameter
+//!             can be one of the following value:
+//!             - \ref SYSCTL_PERIPH_ LCD     //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_TIM0
+//!             - \ref SYSCTL_PERIPH_TIM1
+//!             - \ref SYSCTL_PERIPH_UART0
+//!             - \ref SYSCTL_PERIPH_UART1
+//!             - \ref SYSCTL_PERIPH_PWM0
+//!             - \ref SYSCTL_PERIPH_PWM1
+//!             - \ref SYSCTL_PERIPH_I2C0
+//!             - \ref SYSCTL_PERIPH_SPI      //Only For LPC17nx(n=5/6)
+//!             - \ref SYSCTL_PERIPH_UART4    //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_RTC
+//!             - \ref SYSCTL_PERIPH_SSP1
+//!             - \ref SYSCTL_PERIPH_EMC      //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_ADC
+//!             - \ref SYSCTL_PERIPH_CAN1
+//!             - \ref SYSCTL_PERIPH_CAN2
+//!             - \ref SYSCTL_PERIPH_GPIO
+//!             - \ref SYSCTL_PERIPH_RIT      //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_SPIFI    //Only For LPC17nx(n=5/6)
+//!             - \ref SYSCTL_PERIPH_MCPWM
+//!             - \ref SYSCTL_PERIPH_QEI
+//!             - \ref SYSCTL_PERIPH_I2C1
+//!             - \ref SYSCTL_PERIPH_SSP2     //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_SSP0
+//!             - \ref SYSCTL_PERIPH_TIM2
+//!             - \ref SYSCTL_PERIPH_TIM3
+//!             - \ref SYSCTL_PERIPH_UART2
+//!             - \ref SYSCTL_PERIPH_UART3
+//!             - \ref SYSCTL_PERIPH_I2C2
+//!             - \ref SYSCTL_PERIPH_I2S
+//!             - \ref SYSCTL_PERIPH_SDC      //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_GPDMA
+//!             - \ref SYSCTL_PERIPH_ETH
+//!             - \ref SYSCTL_PERIPH_USB
+//!             - \ref SYSCTL_PERIPH_IOCON
+//!             - \ref SYSCTL_PERIPH_DAC
+//!             - \ref SYSCTL_PERIPH_CANACC
+//!
+//! \return     None
+//!
+//! \note       Those Modulle is only suit for LPC175x or LPC176x.
+//!                 - \ref SYSCTL_PERIPH_SPIFI
+//!                 - \ref SYSCTL_PERIPH_SPI
+//!
+//! \note       Those Module is only suit for LPC177x or LPC178x.
+//!                - \ref SYSCTL_PERIPH_UART4
+//!                - \ref SYSCTL_PERIPH_EMC
+//!                - \ref SYSCTL_PERIPH_RIT
+//!                - \ref SYSCTL_PERIPH_SSP2
+//!                - \ref SYSCTL_PERIPH_SDC
+//
+//*****************************************************************************
 void SysCtlPeripheralDisable(unsigned long ulPeripheral)
 {
     xHWREG(PCONP) &= ~ulPeripheral;
 }
 
+//*****************************************************************************
+//
+//! \brief  Get AHB Clock frequency.
+//!
+//! \param  None.
+//!
+//! \return Return the AHB clock frequency.
+//!
+//
+//*****************************************************************************
 unsigned long SysCtlHClockGet(void)
 {
     return (g_ulAHBClk);
 }
 
+//*****************************************************************************
+//
+//! \brief  Get APB1 Clock frequency.
+//!
+//! \param  None.
+//!
+//! \return Return the APB1 clock frequency.
+//!
+//! \note   This APB1 Clock is set by Systen Initialize function.
+//!         Default: APB1 = APB2 = AHB/4.
+//
+//*****************************************************************************
 unsigned long SysCtlAPB1ClockGet(void)
 {
     return (g_ulAPB1Clk);
 }
 
+//*****************************************************************************
+//
+//! \brief  Get APB2 Clock frequency.
+//!
+//! \param  None.
+//!
+//! \return Return the APB2 clock frequency.
+//!
+//! \note   This APB2 Clock is set by Systen Initialize function.
+//!         Default: APB1 = APB2 = AHB/4.
+//
+//*****************************************************************************
 unsigned long SysCtlAPB2ClockGet(void)
 {
     return (g_ulAPB2Clk);
-}
-
-
-
-
-#define DMAREQSEL_00_UNUSED       BIT_32_16
-#define DMAREQSEL_00_TIMER0_M0    BIT_32_0
-
-#define DMAREQSEL_01_SD           BIT_32_17
-#define DMAREQSEL_01_TIMER0_M1    BIT_32_1
-
-#define DMAREQSEL_02_SSP0_TX      BIT_32_18
-#define DMAREQSEL_02_TIMER1_M0    BIT_32_2
-
-#define DMAREQSEL_03_SSP0_RX      BIT_32_19
-#define DMAREQSEL_03_TIMER1_M1    BIT_32_3
-
-#define DMAREQSEL_04_SSP1_TX      BIT_32_20
-#define DMAREQSEL_04_TIMER2_M0    BIT_32_4
-
-#define DMAREQSEL_05_SSP1_RX      BIT_32_21
-#define DMAREQSEL_05_TIMER2_M1    BIT_32_5
-
-#define DMAREQSEL_06_SSP2_TX      BIT_32_22
-#define DMAREQSEL_06_I2C_CH0      BIT_32_6
-
-#define DMAREQSEL_07_SSP2_RX      BIT_32_23
-#define DMAREQSEL_07_I2C_CH1      BIT_32_7
-
-#define DMAREQSEL_10_UART0_TX     BIT_32_26
-#define DMAREQSEL_10_UART3_TX     BIT_32_10
-
-#define DMAREQSEL_11_UART0_RX     BIT_32_27
-#define DMAREQSEL_11_UART3_RX     BIT_32_11
-
-#define DMAREQSEL_12_UART1_TX     BIT_32_28
-#define DMAREQSEL_12_UART4_TX     BIT_32_12
-
-#define DMAREQSEL_13_UART1_RX     BIT_32_29
-#define DMAREQSEL_13_UART4_RX     BIT_32_13
-
-#define DMAREQSEL_14_UART2_TX     BIT_32_30
-#define DMAREQSEL_14_TIMER3_M0    BIT_32_14
-
-#define DMAREQSEL_15_UART2_RX     BIT_32_31
-#define DMAREQSEL_15_TIMER3_M1    BIT_32_15
-void SysCtlDMAReqCfg(unsigned long ulCfg)
-{
-    unsigned long ulTmpReg = 0;
-
-    ulTmpReg = xHWREG(DMAREQSEL);
-    ulTmpReg &= ~(ulCfg>>16);
-    ulTmpReg |= ulCfg;
-    xHWREG(DMAREQSEL) = ulTmpReg;
-}
-
-
-
-//! I-code bus priority.
-//! \note Should be lower than PRI_DCODE for proper operation.
-#define MATRIXARB_ICODE     0
-
-//! D-Code bus priority.
-#define MATRIXARB_DCODE     2
-
-//! System bus priority
-#define MATRIXARB_SYS       4
-
-//! General Purpose DMA controller priority
-#define MATRIXARB_GPDMA     6
-
-//! Ethernet DMA priority
-#define MATRIXARB_ETH       8
-
-//! LCD DMA priority
-#define MATRIXARB_LCD       10
-
-//! USB DMA priority
-#define MATRIXARB_USB       12
-
-//! \note This function is suit for LPC1
-void SysCtlMatrixPriSet(unsigned long ulModule, unsigned long ulPri)
-{
-    unsigned long ulTmpReg = 0;
-
-    ulTmpReg = xHWREG(MATRIXARB);
-    ulTmpReg &= ~(0x03 << ulModule);
-    ulTmpReg |= (ulPri << ulModule);
-    xHWREG(MATRIXARB) = ulTmpReg;
 }
 
 //*****************************************************************************
@@ -808,10 +1013,10 @@ void SysCtlMatrixPriSet(unsigned long ulModule, unsigned long ulPri)
 //!
 //! \param [in] ulMode is the power mode of LPC17xx, this value can be one of
 //!             the following value:
-//!             - PWR_MODE_SLEEP     Set Mcu into Sleep mode.
-//!             - PWR_MODE_SLEEP_D   Set Mcu into Deep Sleep mode.
-//!             - PWR_MODE_PWRDOWN   Set Mcu into Powerdown mode.
-//!             - PWR_MODE_PWRDOWN_D Set Mcu into Deep Powerdown mode.
+//!             - \ref PWR_MODE_SLEEP     Set Mcu into Sleep mode.
+//!             - \ref PWR_MODE_SLEEP_D   Set Mcu into Deep Sleep mode.
+//!             - \ref PWR_MODE_PWRDOWN   Set Mcu into Powerdown mode.
+//!             - \ref PWR_MODE_PWRDOWN_D Set Mcu into Deep Powerdown mode.
 //!
 //! \return     the result of operation, can be one of the following value:
 //!             - 0 success
@@ -892,6 +1097,63 @@ unsigned long SysCtlPwrCfg(unsigned long ulMode)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Check Power-Manager Status.
+//!
+//! \param [in] ulCfg is Power-Manager Configure input parameter, this parameter is
+//!             the logical OR of several different values:
+//!             - \ref PWR_MODE_SLEEP       Sleep Flag
+//!             - \ref PWR_MODE_SLEEP_D     Deep Sleep Flag
+//!             - \ref PWR_MODE_PWRDOWN     Power Down Flag
+//!             - \ref PWR_MODE_PWRDOWN_D   Deep Power Down Flag
+//!
+//! \return     Return the status of Special Flag.
+//!             - xtrue  Flag that check has been set.
+//!             - xfalse Flag that check has NOT been set.
+//!
+//*****************************************************************************
+xtBoolean SysCtlPwrFlagCheck(unsigned long ulFlag)
+{
+    // Check input parameters valid.
+    xASSERT( ulFlag & (PWR_MODE_SLEEP   | PWR_MODE_SLEEP_D   |
+                      PWR_MODE_PWRDOWN | PWR_MODE_PWRDOWN_D ));
+
+    ulFlag = (ulFlag >> 8 ) & BIT_MASK(32, 3, 0);
+    if(xHWREG(PCON) & ulFlag)
+    {
+        return (xtrue);
+    }
+    else
+    {
+        return (xfalse);
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief Clear Power-Manager status Flag.
+//!
+//! \param [in] ulCfg is Brown-out Configure input parameter, this parameter is
+//!             the logical OR of several different values:
+//!             - \ref PWR_MODE_SLEEP       Sleep Flag
+//!             - \ref PWR_MODE_SLEEP_D     Deep Sleep Flag
+//!             - \ref PWR_MODE_PWRDOWN     Power Down Flag
+//!             - \ref PWR_MODE_PWRDOWN_D   Deep Power Down Flag
+//!
+//! \return     None.
+//!
+//
+//***************************************************************************** 
+void SysCtlPwrFlagClear(unsigned long ulFlag)
+{
+    // Check input parameters valid.
+    xASSERT( ulFlag & (PWR_MODE_SLEEP   | PWR_MODE_SLEEP_D   |
+                      PWR_MODE_PWRDOWN | PWR_MODE_PWRDOWN_D ));
+
+    ulFlag = (ulFlag >> 8 ) & BIT_MASK(32, 3, 0);
+    xHWREG(PCON) |= ulFlag;
+} 
 
 //*****************************************************************************
 //
@@ -899,24 +1161,24 @@ unsigned long SysCtlPwrCfg(unsigned long ulMode)
 //!
 //! \param [in] ulCfg is Brown-out Configure input parameter, this parameter is
 //!             the logical OR of several different values:
-//!             - BOD_REDUCE_PWR_EN   The Brown-Out Detect function remains active
+//!             - \ref BOD_REDUCE_PWR_EN   The Brown-Out Detect function remains active
 //!                                   during Power-down and Deep Sleep modes.
 //!
-//!             - BOD_REDUCE_PWR_DIS  The Brown-Out Detect circuitry will be turned
+//!             - \ref BOD_REDUCE_PWR_DIS  The Brown-Out Detect circuitry will be turned
 //!                                   off when chip Power-down mode or Deep Sleep mode
 //!                                   is entered, resulting in a further reduction
 //!                                   in power usage. However, the possibility of
 //!                                   using Brown-Out Detect as a wake-up source
 //!                                   from the reduced power mode will be lost.
 //!
-//!             - BOD_GLOBAL_EN       The Brown-Out Detect circuitry is enabled.
+//!             - \ref BOD_GLOBAL_EN       The Brown-Out Detect circuitry is enabled.
 //!
-//!             - BOD_GLOBAL_DIS      The Brown-Out Detect circuitry is fully
+//!             - \ref BOD_GLOBAL_DIS      The Brown-Out Detect circuitry is fully
 //!                                   disabled at all times, and does not consume
 //!                                   power.
 //!
-//!             - BOD_RESET_EN        Enable Brown-out reset function.
-//!             - BOD_RESET_DIS       Disable Brown-out reset function.
+//!             - \ref BOD_RESET_EN        Enable Brown-out reset function.
+//!             - \ref BOD_RESET_DIS       Disable Brown-out reset function.
 //!
 //! \return     None.
 //! \note       When you call this function with one group parameter, e.g.
@@ -939,44 +1201,5 @@ void SysCtlBODCfg(unsigned long ulCfg)
     ulTmpReg &= ~(ulTmp);
     ulTmpReg |= ulCfg & BIT_MASK(32, 15, 0);
     xHWREG(PCON) = ulTmpReg;
-}
-
-
-#define PWR_FLAG_SLEEP                 BIT_32_8
-#define PWR_FLAG_SLEEP_D               BIT_32_9
-#define PWR_FLAG_PWRDOWN               BIT_32_10
-#define PWR_FLAG_PWRDOWN_D             BIT_32_11
-
-//*****************************************************************************
-//
-//! \brief Configure Brown-out module.
-//!
-//! \param [in] ulCfg is Brown-out Configure input parameter, this parameter is
-//!             the logical OR of several different values:
-//!             - PWR_FLAG_SLEEP                 
-//!             - PWR_FLAG_SLEEP_D               
-//!             - PWR_FLAG_PWRDOWN               
-//!             - PWR_FLAG_PWRDOWN_D             
-//!
-//! \return     None.
-//!
-//*****************************************************************************
-xtBoolean SysCtlPwrFlagCheck(unsigned long ulFlag)
-{
-    unsigned long ulTmpReg = 0;
-
-    // Check input parameters valid.
-    xASSERT( ulCfg & (PWR_FLAG_SLEEP   | PWR_FLAG_SLEEP_D   |
-                      PWR_FLAG_PWRDOWN | PWR_FLAG_PWRDOWN_D ));
-
-    ulTmpReg = xHWREG(PCON);
-    if(ulTmpReg & ulFlag)
-    {
-        return (xtrue);
-    }
-    else
-    {
-        return (xfalse);
-    }
 }
 

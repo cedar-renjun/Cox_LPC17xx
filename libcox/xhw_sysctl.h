@@ -433,10 +433,8 @@
 
 //PCONP {{
 
-#if defined(LPC_177x) | defined(LPC_178x)
 //! LCD Controller power/clock control bit.
 #define PCONP_PCLCD             BIT_32_0
-#endif
 
 //! Timer/Counter 0 power/clock control bit.
 #define PCONP_PCTIM0            BIT_32_1
@@ -459,15 +457,11 @@
 //! I2C0 Interface Power/Clock control bit.
 #define PCONP_PCI2C0            BIT_32_7
 
-#if defined(LPC_175x) | defined(LPC_176x)
 //! The SPI interface power/clock control bit.
 #define PCONP_PCSPI             BIT_32_8
 
-#elif defined(LPC_177x) | defined(LPC_178x)
 //! UART4 power/clock control bit.
 #define PCONP_PCUART4           BIT_32_8
-
-#endif
 
 //! RTC and Event Monitor/Recorder power/clock control bit.
 #define PCONP_PCRTC             BIT_32_9
@@ -475,10 +469,8 @@
 //! SSP 1 interface power/clock control bit.
 #define PCONP_PCSSP1            BIT_32_10
 
-#if defined(LPC_177x) | defined(LPC_178x)
 //! External Memory Controller power/clock control bit.
 #define PCONP_PCEMC             BIT_32_11
-#endif
 
 //! A/D converter (ADC) power/clock control bit.
 #define PCONP_PCADC             BIT_32_12
@@ -492,15 +484,11 @@
 //! Power/clock control bit for IOCON, GPIO, and GPIO interrupts.
 #define PCONP_PCGPIO            BIT_32_15
 
-#if defined(LPC_175x) | defined(LPC_176x)
 //! Repetitive Interrupt Timer power/clock control bit.
 #define PCONP_PCRIT             BIT_32_16
 
-#elif defined(LPC_177x) | defined(LPC_178x)
 //! SPI Flash Interface power/clock control bit.
 #define PCONP_PCSPIFI           BIT_32_16
-
-#endif
 
 //! Motor Control PWM power/clock control bit.
 #define PCONP_PCMCPWM           BIT_32_17
@@ -511,10 +499,8 @@
 //! I2C1 interface power/clock control bit.
 #define PCONP_PCI2C1            BIT_32_19
 
-#if defined(LPC_177x) | defined(LPC_178x)
 //! SSP2 interface power/clock control bit.
 #define PCONP_PCSSP2            BIT_32_20
-#endif
 
 //! SSP0 interface power/clock control bit.
 #define PCONP_PCSSP0            BIT_32_21
@@ -537,10 +523,8 @@
 //! I2S interface power/clock control bit.
 #define PCONP_PCI2S             BIT_32_27
 
-#if defined(LPC_177x) | defined(LPC_178x)
 //! SD Card interface power/clock control bit.
 #define PCONP_PCSDC             BIT_32_28
-#endif
 
 //! GPDMA function power/clock control bit.
 #define PCONP_PCGPDMA           BIT_32_29
