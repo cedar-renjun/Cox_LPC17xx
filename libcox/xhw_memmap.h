@@ -42,7 +42,6 @@
 
 //! Detect MCU Type.
 #if defined(LPC_175x) || defined (LPC_176x) || \
-    defined(LPC_177x) || defined (LPC_178x)
 #else
 #error Please select your LPC MCU first!             \
        This value can be one of the following value: \
@@ -78,41 +77,46 @@
 //!
 //! They are always used as ulBase parameters in the peripheral library.
 //! The name of a macro for the base address of a peripheral is in  general
-//! format as $Namen$_BASE, e.g. UART0_BASE.
+//! format as x$Namen$_BASE, e.g. xUART0_BASE.
 //!
 //! \todo Finish GPIO Base address macro.
 //!
 //! @{
 //
 //*****************************************************************************
-
-#define xFLASH_BASE             FLASH_BASE
-#define xSRAM_BASE              SRAM_BASE
-//#define xGPIO_PORTA_BASE        GPIO_PORTA_BASE
-//#define xGPIO_PORTB_BASE        GPIO_PORTB_BASE
-//#define xGPIO_PORTC_BASE        GPIO_PORTC_BASE
-//#define xGPIO_PORTD_BASE        GPIO_PORTD_BASE
-//#define xGPIO_PORTE_BASE        GPIO_PORTE_BASE
-//#define xGPIO_PORTF_BASE        GPIO_PORTF_BASE
-#define xI2C0_BASE              I2C0_BASE
-#define xI2C1_BASE              I2C1_BASE
-#define xNVIC_BASE              NVIC_BASE
-#define xTIMER0_BASE            TIMER0_BASE
-#define xTIMER1_BASE            TIMER1_BASE
-#define xTIMER2_BASE            TIMER2_BASE
-#define xTIMER3_BASE            TIMER3_BASE
-#define xSPI0_BASE              SPI_BASE
-#define xSYSCTL_BASE            SYSCTL_BASE
-#define xUART0_BASE             UART0_BASE
-#define xUART1_BASE             UART1_BASE
-#define xUART2_BASE             UART2_BASE
-#define xUART3_BASE             UART3_BASE
-#define xUART4_BASE             UART4_BASE
-#define xWDT_BASE0              WDT_BASE
-#define xADC0_BASE              ADC_BASE
-#define xPWM0_BASE              PWM0_BASE
-#define xPWM1_BASE              PWM1_BASE
-#define xDMA0_BASE              DMA_BASE
+#define xETH_BASE               ETH_BASE                                     
+#define xDMA0_BASE              DMA_BASE                                     
+#define xUSB_BASE               USB_BASE                                     
+#define xGPIO_PORTA_BASE        GPIO_PORTA_BASE                              
+#define xGPIO_PORTB_BASE        GPIO_PORTB_BASE                              
+#define xGPIO_PORTC_BASE        GPIO_PORTC_BASE                              
+#define xGPIO_PORTD_BASE        GPIO_PORTD_BASE                              
+#define xGPIO_PORTE_BASE        GPIO_PORTE_BASE                              
+#define xWDT_BASE               WDT_BASE                                     
+#define xTIMER0_BASE            TIMER0_BASE                                  
+#define xTIMER1_BASE            TIMER1_BASE                                  
+#define xUART0_BASE             UART0_BASE                                   
+#define xUART1_BASE             UART1_BASE                                   
+#define xPWM1_BASE              PWM1_BASE                                    
+#define xI2C0_BASE              I2C0_BASE                                    
+#define xSPI0_BASE              SPI_BASE                                     
+#define xRTC_BASE               RTC_BASE                                     
+#define xSSP1_BASE              SSP1_BASE                                    
+#define xADC0_BASE              ADC_BASE                                     
+#define xCAN1_BASE              CAN1_BASE                                    
+#define xCAN2_BASE              CAN2_BASE                                    
+#define xI2C1_BASE              I2C1_BASE                                    
+#define xSSP0_BASE              SSP0_BASE                                    
+#define xDAC0_BASE              DAC_BASE                                     
+#define xTIMER2_BASE            TIMER2_BASE                                  
+#define xTIMER3_BASE            TIMER3_BASE                                  
+#define xUART2_BASE             UART2_BASE                                   
+#define xUART3_BASE             UART3_BASE                                   
+#define xI2C2_BASE              I2C2_BASE                                    
+#define xI2S_BASE               I2S_BASE                                     
+#define xRIT_BASE               RIT_BASE                                     
+#define xMCPWM_BASE             MCPWM_BASE                                   
+#define xQEI_BASE               QEI_BASE                                     
 
 //*****************************************************************************
 //
@@ -146,32 +150,22 @@
 
 #define FLASH_BASE              ((unsigned long)0x00000000)
 #define SRAM_BASE               ((unsigned long)0x20000000)
-
-//! \todo
-//LPC17_5x_6x AHB
-#if defined(LPC_175x) || defined(LPC_176x)
 #define ETH_BASE                ((unsigned long)0x50000000)
 #define DMA_BASE                ((unsigned long)0x50004000)
-#define USB_BASE                ((unsigned long)0x50004000)
-#elif defined(LPC_177x) || defined(LPC_178x)
-//LPC17_7x_8x AHB)
-#define DMA_BASE                ((unsigned long)0x20080000)
-#define ETH_BASE                ((unsigned long)0x20084000)
-#define LCD_BASE                ((unsigned long)0x20088000)
-#define USB_BASE                ((unsigned long)0x2008C000)
-#define CRC_BASE                ((unsigned long)0x20090000)
-#define GPIO_BASE               ((unsigned long)0x20098000)
-#define EMC_BASE                ((unsigned long)0x2009C000)
-#endif
-//! \todo
+#define USB_BASE                ((unsigned long)0x5000C000)
 
-//LPC17nx APB0 (n = 5/6/7/8))
+#define GPIO_PORTA_BASE         ((unsigned long)0x2009C000)
+#define GPIO_PORTB_BASE         ((unsigned long)0x2009C020)
+#define GPIO_PORTC_BASE         ((unsigned long)0x2009C040)
+#define GPIO_PORTD_BASE         ((unsigned long)0x2009C060)
+#define GPIO_PORTE_BASE         ((unsigned long)0x2009C080)
+
+//LPC17nx APB0 (n = 5/6)
 #define WDT_BASE                ((unsigned long)0x40000000)
 #define TIMER0_BASE             ((unsigned long)0x40004000)
 #define TIMER1_BASE             ((unsigned long)0x40008000)
 #define UART0_BASE              ((unsigned long)0x4000C000)
 #define UART1_BASE              ((unsigned long)0x40010000)
-#define PWM0_BASE               ((unsigned long)0x40014000)
 #define PWM1_BASE               ((unsigned long)0x40018000)
 #define I2C0_BASE               ((unsigned long)0x4001C000)
 #define SPI_BASE                ((unsigned long)0x40020000)
@@ -187,7 +181,7 @@
 #define CAN2_BASE               ((unsigned long)0x40048000)
 #define I2C1_BASE               ((unsigned long)0x4005C000)
 
-//LPC17nx APB1 (n = 5/6/7/8))
+//LPC17nx APB1 (n = 5/6)
 #define SSP0_BASE               ((unsigned long)0x40088000)
 #define DAC_BASE                ((unsigned long)0x4008C000)
 #define TIMER2_BASE             ((unsigned long)0x40090000)
@@ -195,16 +189,13 @@
 #define UART2_BASE              ((unsigned long)0x40098000)
 #define UART3_BASE              ((unsigned long)0x4009C000)
 #define I2C2_BASE               ((unsigned long)0x400A0000)
-#define UART4_BASE              ((unsigned long)0x400A4000)
 #define I2S_BASE                ((unsigned long)0x400A8000)
-#define SSP2_BASE               ((unsigned long)0x400AC000)
 #define RIT_BASE                ((unsigned long)0x400B0000)
 #define MCPWM_BASE              ((unsigned long)0x400B8000)
 #define QEI_BASE                ((unsigned long)0x400BC000)
-#define SD_BASE                 ((unsigned long)0x400C0000)
 #define SYSCTL_BASE             ((unsigned long)0x400FC000)
 
-//Core components)
+//Core components
 #define ITM_BASE                ((unsigned long)0xE0000000)
 #define DWT_BASE                ((unsigned long)0xE0001000)
 #define FPB_BASE                ((unsigned long)0xE0002000)

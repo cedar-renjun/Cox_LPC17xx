@@ -19,6 +19,31 @@ static unsigned long g_ulAPB2Clk   = 0;           // APB2 Clock frequency
 
 //*****************************************************************************
 //
+//! Peripheral Base and ID Table structure type
+//
+//*****************************************************************************
+typedef struct 
+{
+    unsigned long ulPeripheralBase;
+    unsigned long ulPeripheralID;
+    unsigned long ulPeripheralIntNum;
+}
+tPeripheralTable;
+
+//*****************************************************************************
+//
+// An array that maps the peripheral base and peripheral ID and interrupt number
+// together to enablea peripheral or peripheral interrupt by a peripheral base.
+//
+//*****************************************************************************
+static const tPeripheralTable g_pPeripherals[] =
+{
+    //{ADC1_BASE,xSYSCTL_PERIPH_ADC1,xINT_ADC0},  // e.g.
+    {0,0,0},
+};
+
+//*****************************************************************************
+//
 //! \brief       Calculate the PLL Multiplier/Diviver
 //! \param [in]  Fin is the input clock frequency (1Mhz --> 25Mhz).
 //! \param [in]  Fout is the target clock frequency, Maximum value is 120Mhz.
@@ -90,11 +115,7 @@ static unsigned long PLLMNCal(unsigned long Fin,
             for(i = 1; i < 256; i++)
             {
                 Fclk = Fcco/i;
-#if defined(LPC_175x) | defined(LPC_176x)
                 if(Fclk > 120000000)
-#elif defined(LPC_177x) | defined(LPC_178x)
-                if(Fclk > 100000000)
-#endif
                 {
                     continue;
                 }
@@ -221,21 +242,6 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     ulTmpReg &= ~FLASHCFG_FLASHTIM_M;
     ulTmpReg |=  FLASHCFG_FLASHTIM_ANY;
     xHWREG(FLASHCFG) = ulTmpReg;
-
-
-
-    /************** Configure Power Boost register ******************/
-#if defined(LPC_177x) | defined(LPC_178x)
-    if(ulSysClk >= 100000000)                         // Maximum 120 Mhz
-    {
-        xHWREG(PBOOST) = PBOOST_BOOST_ON;
-    }
-    else                                              // Maximum 100 Mhz
-    {
-        xHWREG(PBOOST) = PBOOST_BOOST_OFF;
-    }
-#endif
-
 
     /************** Configure Main Oscillator    ********************/
     // Need Enable Main Oscillator ?
@@ -385,7 +391,6 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
         }while(ulTmpReg);
     }
 
-#if defined(LPC_175x) | defined(LPC_176x)
     xHWREG(CCLKCFG) = (ulDiv - 1);
     xHWREG(PCLKSEL0) = (unsigned long)0x00;           // APB clock is equal to AHB/4
     xHWREG(PCLKSEL1) = (unsigned long)0x00;
@@ -395,17 +400,6 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     g_ulAHBClk    = ulSysClk;
     g_ulAPB1Clk   = ulSysClk/4;
     g_ulAPB2Clk   = g_ulAPB1Clk;
-
-#elif defined(LPC_177x) | defined(LPC_178x)
-    xHWREG(CCLKSEL) = (ulDiv | CCLKSEL_CCLKSEL);
-    xHWREG(PCLKSEL) = (unsigned long)0x01;         // APB clock is equal to AHB
-
-    // Updata private clock data.
-    g_ulSystemClk = ulSysClk;
-    g_ulAHBClk    = ulSysClk;
-    g_ulAPB1Clk   = ulSysClk;
-    g_ulAPB2Clk   = g_ulAPB1Clk;
-#endif
 
     // Configure PLL Multiplier/Divider
     ulM -= 1;
@@ -470,10 +464,10 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
 //!
 //! \param [in] ulCfg is used to configure Interrupt Type, this value can be
 //!             one of the following value:
-//!            - \ref EXT_INT_LV_H         High Level
-//!            - \ref EXT_INT_LV_L         Low Level
-//!            - \ref EXT_INT_EG_R         Rising Edge
-//!            - \ref EXT_INT_EG_F         Falling Edge
+//!             - \ref EXT_INT_LV_H         High Level
+//!             - \ref EXT_INT_LV_L         Low Level
+//!             - \ref EXT_INT_EG_R         Rising Edge
+//!             - \ref EXT_INT_EG_F         Falling Edge
 //!
 //! \return     None.
 //!
@@ -527,8 +521,8 @@ void SysCtlExtIntCfg(unsigned long ulPin, unsigned long ulCfg)
     }
 
     // Write back to mode/polar register
-    xHWREG(EXTMODE) = ulTmpReg1;             // Mode register
-    xHWREG(EXTMODE) = ulTmpReg2;             // Polar register
+    xHWREG(EXTMODE)  = ulTmpReg1;             // Mode register
+    xHWREG(EXTPOLAR) = ulTmpReg2;             // Polar register
 
 }
 
@@ -680,6 +674,31 @@ xtBoolean SysCtlResetFlagCheck(unsigned long ulFlag)
 
 //*****************************************************************************
 //
+//! \brief       Clear the reset source flag.
+//!
+//! \param [in]  ulFlag is the reset flag, this value is logical OR of
+//!              the following value:
+//!              - \ref RESET_FLAG_POR          Power On reset
+//!              - \ref RESET_FLAG_EXTR         External reset
+//!              - \ref RESET_FLAG_WDTR         Watchdog reset
+//!              - \ref RESET_FLAG_BODR         Brown-out reset
+//!              - \ref RESET_FLAG_SYSRESET     System Request reset
+//!              - \ref RESET_FLAG_LOCKUP       Lock up reset
+//!
+//! \return      None.
+//
+//*****************************************************************************
+void SysCtlResetFlagClear(unsigned long ulFlag)
+{
+    unsigned long ulTmpReg = 0;
+     xASSERT( ulFlag & (RESET_FLAG_POR     | RESET_FLAG_EXTR   |
+                       RESET_FLAG_WDTR     | RESET_FLAG_BODR   |
+                       RESET_FLAG_SYSRESET | RESET_FLAG_LOCKUP) );
+    xHWREG(RSID) |= ulFlag;
+} 
+
+//*****************************************************************************
+//
 //! \brief Configure Peripheral Clock.
 //!
 //! \param [in] ulPeri is the LPC17nx(n=5/6) peripherals, the parameter can be
@@ -726,7 +745,7 @@ xtBoolean SysCtlResetFlagCheck(unsigned long ulFlag)
 //!
 //
 //*****************************************************************************
-void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg)
+void SysCtlPeripheralClockSourceSet(unsigned long ulPeri, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
 
@@ -753,27 +772,23 @@ void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg)
 //!
 //! \param [in] ulPeripheral is the LPC17nx(n=7/8) peripherals, the parameter
 //!             can be one of the following value:
-//!             - \ref SYSCTL_PERIPH_ LCD     
 //!             - \ref SYSCTL_PERIPH_TIM0
 //!             - \ref SYSCTL_PERIPH_TIM1
 //!             - \ref SYSCTL_PERIPH_UART0
 //!             - \ref SYSCTL_PERIPH_UART1
-//!             - \ref SYSCTL_PERIPH_PWM0
 //!             - \ref SYSCTL_PERIPH_PWM1
 //!             - \ref SYSCTL_PERIPH_I2C0
-//!             - \ref SYSCTL_PERIPH_UART4    
+//!             - \ref SYSCTL_PERIPH_SPI
 //!             - \ref SYSCTL_PERIPH_RTC
 //!             - \ref SYSCTL_PERIPH_SSP1
-//!             - \ref SYSCTL_PERIPH_EMC      
 //!             - \ref SYSCTL_PERIPH_ADC
 //!             - \ref SYSCTL_PERIPH_CAN1
 //!             - \ref SYSCTL_PERIPH_CAN2
 //!             - \ref SYSCTL_PERIPH_GPIO
-//!             - \ref SYSCTL_PERIPH_RIT     
+//!             - \ref SYSCTL_PERIPH_RIT
 //!             - \ref SYSCTL_PERIPH_MCPWM
 //!             - \ref SYSCTL_PERIPH_QEI
 //!             - \ref SYSCTL_PERIPH_I2C1
-//!             - \ref SYSCTL_PERIPH_SSP2     
 //!             - \ref SYSCTL_PERIPH_SSP0
 //!             - \ref SYSCTL_PERIPH_TIM2
 //!             - \ref SYSCTL_PERIPH_TIM3
@@ -781,13 +796,9 @@ void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg)
 //!             - \ref SYSCTL_PERIPH_UART3
 //!             - \ref SYSCTL_PERIPH_I2C2
 //!             - \ref SYSCTL_PERIPH_I2S
-//!             - \ref SYSCTL_PERIPH_SDC      
 //!             - \ref SYSCTL_PERIPH_GPDMA
 //!             - \ref SYSCTL_PERIPH_ETH
 //!             - \ref SYSCTL_PERIPH_USB
-//!             - \ref SYSCTL_PERIPH_IOCON
-//!             - \ref SYSCTL_PERIPH_DAC
-//!             - \ref SYSCTL_PERIPH_CANACC
 //!
 //! \return     None.
 //!
@@ -801,6 +812,7 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
 
 #if defined(LPC_175x) | defined(LPC_176x)
     // Nothing
+    (void) ulPeripheral;
 #elif defined(LPC_177x) | defined(LPC_178x)
 
     unsigned long ulTmpReg = 0;
@@ -832,35 +844,30 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
     }
 #endif
 }
+
 //*****************************************************************************
 //
 //! \brief Enable MCU Periperal.
 //!
 //! \param [in] ulPeripheral is the LPC17nx(n=5/6/7/8) peripherals, the parameter
 //!             can be one of the following value:
-//!             - \ref SYSCTL_PERIPH_ LCD     //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_TIM0
 //!             - \ref SYSCTL_PERIPH_TIM1
 //!             - \ref SYSCTL_PERIPH_UART0
 //!             - \ref SYSCTL_PERIPH_UART1
-//!             - \ref SYSCTL_PERIPH_PWM0
 //!             - \ref SYSCTL_PERIPH_PWM1
 //!             - \ref SYSCTL_PERIPH_I2C0
-//!             - \ref SYSCTL_PERIPH_SPI      //Only For LPC17nx(n=5/6)
-//!             - \ref SYSCTL_PERIPH_UART4    //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_SPI
 //!             - \ref SYSCTL_PERIPH_RTC
 //!             - \ref SYSCTL_PERIPH_SSP1
-//!             - \ref SYSCTL_PERIPH_EMC      //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_ADC
 //!             - \ref SYSCTL_PERIPH_CAN1
 //!             - \ref SYSCTL_PERIPH_CAN2
 //!             - \ref SYSCTL_PERIPH_GPIO
-//!             - \ref SYSCTL_PERIPH_RIT      //Only For LPC17nx(n=7/8)
-//!             - \ref SYSCTL_PERIPH_SPIFI    //Only For LPC17nx(n=5/6)
+//!             - \ref SYSCTL_PERIPH_RIT
 //!             - \ref SYSCTL_PERIPH_MCPWM
 //!             - \ref SYSCTL_PERIPH_QEI
 //!             - \ref SYSCTL_PERIPH_I2C1
-//!             - \ref SYSCTL_PERIPH_SSP2     //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_SSP0
 //!             - \ref SYSCTL_PERIPH_TIM2
 //!             - \ref SYSCTL_PERIPH_TIM3
@@ -868,26 +875,12 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
 //!             - \ref SYSCTL_PERIPH_UART3
 //!             - \ref SYSCTL_PERIPH_I2C2
 //!             - \ref SYSCTL_PERIPH_I2S
-//!             - \ref SYSCTL_PERIPH_SDC      //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_GPDMA
 //!             - \ref SYSCTL_PERIPH_ETH
 //!             - \ref SYSCTL_PERIPH_USB
-//!             - \ref SYSCTL_PERIPH_IOCON
-//!             - \ref SYSCTL_PERIPH_DAC
-//!             - \ref SYSCTL_PERIPH_CANACC
 //!
 //! \return     None.
 //!
-//! \note       Those Modulle is only suit for LPC175x or LPC176x.
-//!                 - \ref SYSCTL_PERIPH_SPIFI
-//!                 - \ref SYSCTL_PERIPH_SPI
-//!
-//! \note       Those Module is only suit for LPC177x or LPC178x.
-//!                - \ref SYSCTL_PERIPH_UART4
-//!                - \ref SYSCTL_PERIPH_EMC
-//!                - \ref SYSCTL_PERIPH_RIT
-//!                - \ref SYSCTL_PERIPH_SSP2
-//!                - \ref SYSCTL_PERIPH_SDC
 //
 //*****************************************************************************
 void SysCtlPeripheralEnable(unsigned long ulPeripheral)
@@ -901,29 +894,23 @@ void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 //!
 //! \param [in] ulPeripheral is the LPC17nx(n=5/6/7/8) peripherals, the parameter
 //!             can be one of the following value:
-//!             - \ref SYSCTL_PERIPH_ LCD     //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_TIM0
 //!             - \ref SYSCTL_PERIPH_TIM1
 //!             - \ref SYSCTL_PERIPH_UART0
 //!             - \ref SYSCTL_PERIPH_UART1
-//!             - \ref SYSCTL_PERIPH_PWM0
 //!             - \ref SYSCTL_PERIPH_PWM1
 //!             - \ref SYSCTL_PERIPH_I2C0
-//!             - \ref SYSCTL_PERIPH_SPI      //Only For LPC17nx(n=5/6)
-//!             - \ref SYSCTL_PERIPH_UART4    //Only For LPC17nx(n=7/8)
+//!             - \ref SYSCTL_PERIPH_SPI
 //!             - \ref SYSCTL_PERIPH_RTC
 //!             - \ref SYSCTL_PERIPH_SSP1
-//!             - \ref SYSCTL_PERIPH_EMC      //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_ADC
 //!             - \ref SYSCTL_PERIPH_CAN1
 //!             - \ref SYSCTL_PERIPH_CAN2
 //!             - \ref SYSCTL_PERIPH_GPIO
-//!             - \ref SYSCTL_PERIPH_RIT      //Only For LPC17nx(n=7/8)
-//!             - \ref SYSCTL_PERIPH_SPIFI    //Only For LPC17nx(n=5/6)
+//!             - \ref SYSCTL_PERIPH_RIT
 //!             - \ref SYSCTL_PERIPH_MCPWM
 //!             - \ref SYSCTL_PERIPH_QEI
 //!             - \ref SYSCTL_PERIPH_I2C1
-//!             - \ref SYSCTL_PERIPH_SSP2     //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_SSP0
 //!             - \ref SYSCTL_PERIPH_TIM2
 //!             - \ref SYSCTL_PERIPH_TIM3
@@ -931,31 +918,67 @@ void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 //!             - \ref SYSCTL_PERIPH_UART3
 //!             - \ref SYSCTL_PERIPH_I2C2
 //!             - \ref SYSCTL_PERIPH_I2S
-//!             - \ref SYSCTL_PERIPH_SDC      //Only For LPC17nx(n=7/8)
 //!             - \ref SYSCTL_PERIPH_GPDMA
 //!             - \ref SYSCTL_PERIPH_ETH
 //!             - \ref SYSCTL_PERIPH_USB
-//!             - \ref SYSCTL_PERIPH_IOCON
-//!             - \ref SYSCTL_PERIPH_DAC
-//!             - \ref SYSCTL_PERIPH_CANACC
 //!
 //! \return     None
-//!
-//! \note       Those Modulle is only suit for LPC175x or LPC176x.
-//!                 - \ref SYSCTL_PERIPH_SPIFI
-//!                 - \ref SYSCTL_PERIPH_SPI
-//!
-//! \note       Those Module is only suit for LPC177x or LPC178x.
-//!                - \ref SYSCTL_PERIPH_UART4
-//!                - \ref SYSCTL_PERIPH_EMC
-//!                - \ref SYSCTL_PERIPH_RIT
-//!                - \ref SYSCTL_PERIPH_SSP2
-//!                - \ref SYSCTL_PERIPH_SDC
 //
 //*****************************************************************************
 void SysCtlPeripheralDisable(unsigned long ulPeripheral)
 {
     xHWREG(PCONP) &= ~ulPeripheral;
+}
+
+//*****************************************************************************
+//
+//! \brief Enables a peripheral by base address.
+//!
+//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be 
+//! enabled.Details please refer to \ref xLowLayer_Peripheral_Memmap.
+//!
+//! Peripherals are enabled with this function.  At power-up, all peripherals
+//! are disabled; they must be enabled in order to operate or respond to
+//! register reads/writes.
+//!
+//! The \e ulPeripheral parameter must be only one of the following values:
+//! Details please refer to \ref xLowLayer_Peripheral_Memmap.
+//!
+//! \note None.
+//!
+//! \return None.
+//
+//*****************************************************************************
+void 
+SysCtlPeripheralEnable2(unsigned long ulPeripheralBase)
+{
+    unsigned long i = 0;
+
+    for(i=0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
+    {
+        if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
+        {
+            SysCtlPeripheralEnable(g_pPeripherals[i].ulPeripheralID);
+            break;
+        }
+    }
+}
+
+
+
+//*****************************************************************************
+//
+//! \brief  Get System Clock frequency.
+//!
+//! \param  None.
+//!
+//! \return Return the System clock frequency.
+//!
+//
+//*****************************************************************************
+unsigned long SysCtlClockGet(void)
+{
+    return (g_ulSystemClk);
 }
 
 //*****************************************************************************
@@ -985,10 +1008,10 @@ unsigned long SysCtlHClockGet(void)
 //!         Default: APB1 = APB2 = AHB/4.
 //
 //*****************************************************************************
-unsigned long SysCtlAPB1ClockGet(void)
-{
-    return (g_ulAPB1Clk);
-}
+//unsigned long SysCtlAPB1ClockGet(void)
+//{
+//    return (g_ulAPB1Clk);
+//}
 
 //*****************************************************************************
 //
@@ -1002,10 +1025,10 @@ unsigned long SysCtlAPB1ClockGet(void)
 //!         Default: APB1 = APB2 = AHB/4.
 //
 //*****************************************************************************
-unsigned long SysCtlAPB2ClockGet(void)
-{
-    return (g_ulAPB2Clk);
-}
+//unsigned long SysCtlAPB2ClockGet(void)
+//{
+//    return (g_ulAPB2Clk);
+//}
 
 //*****************************************************************************
 //
@@ -1201,5 +1224,35 @@ void SysCtlBODCfg(unsigned long ulCfg)
     ulTmpReg &= ~(ulTmp);
     ulTmpReg |= ulCfg & BIT_MASK(32, 15, 0);
     xHWREG(PCON) = ulTmpReg;
+}
+
+//*****************************************************************************
+//
+//! \brief  Resets the device.
+//!
+//!         This function will perform a software reset of the entire device. 
+//!         The processor and all peripherals will be reset and all device
+//!         registers will return to their default values (with the exception of
+//!         the reset cause register, which will maintain its current value but
+//!         have the software reset bit set as well).
+//!
+//! \return None.
+//
+//*****************************************************************************
+void SysCtlReset(void)
+{
+    //
+    // Perform a software reset request.  This will cause the device to reset,
+    // no further code will be executed.
+    //
+    xHWREG(NVIC_APINT) = NVIC_APINT_VECTKEY | NVIC_APINT_SYSRESETREQ;
+
+    //
+    // The device should have reset, so this should never be reached.  Just in
+    // case, loop forever.
+    //
+    while(1)
+    {
+    }
 }
 

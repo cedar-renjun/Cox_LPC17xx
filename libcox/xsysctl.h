@@ -147,44 +147,39 @@ extern "C"
 //
 //*****************************************************************************
 
-#define xSYSCTL_PERIPH_ACMP0    0
-#define xSYSCTL_PERIPH_ADC1     0
-#define xSYSCTL_PERIPH_ADC2     0
-#define xSYSCTL_PERIPH_DMA1     0
-#define xSYSCTL_PERIPH_DMA2     0
-#define xSYSCTL_PERIPH_GPIOA    0
-#define xSYSCTL_PERIPH_GPIOB    0
-#define xSYSCTL_PERIPH_GPIOC    0
-#define xSYSCTL_PERIPH_GPIOD    0
-#define xSYSCTL_PERIPH_GPIOE    0
-#define xSYSCTL_PERIPH_I2C1     0
-#define xSYSCTL_PERIPH_I2C2     0
-#define xSYSCTL_PERIPH_PWMA     0
-#define xSYSCTL_PERIPH_PWMB     0                      
-#define xSYSCTL_PERIPH_PWMC     0                      
-#define xSYSCTL_PERIPH_PWMD     0                      
-#define xSYSCTL_PERIPH_PWME     0                      
-#define xSYSCTL_PERIPH_PWMF     0                      
-#define xSYSCTL_PERIPH_PWMG     0                      
-#define xSYSCTL_PERIPH_PWMH     0                      
-#define xSYSCTL_PERIPH_PWMI     0                      
-#define xSYSCTL_PERIPH_PWMJ     0                      
-#define xSYSCTL_PERIPH_PWMK     0                      
-#define xSYSCTL_PERIPH_PWML     0                      
-#define xSYSCTL_PERIPH_RTC      0                      
-#define xSYSCTL_PERIPH_SPI1     0                      
-#define xSYSCTL_PERIPH_SPI2     0
-#define xSYSCTL_PERIPH_SPI3     0
-#define xSYSCTL_PERIPH_TIMER1   0                 
-#define xSYSCTL_PERIPH_TIMER2   0                 
-#define xSYSCTL_PERIPH_TIMER3   0                 
-#define xSYSCTL_PERIPH_TIMER4   0                 
-#define xSYSCTL_PERIPH_UART1    0                  
-#define xSYSCTL_PERIPH_UART2    0                  
-#define xSYSCTL_PERIPH_UART3    0                  
-#define xSYSCTL_PERIPH_UART4    0                  
-#define xSYSCTL_PERIPH_UART5    0                  
-#define xSYSCTL_PERIPH_WDOG     0
+#define xSYSCTL_PERIPH_ETH             SYSCTL_PERIPH_ETH                                              
+#define xSYSCTL_PERIPH_DMA0            SYSCTL_PERIPH_GPDMA
+#define xSYSCTL_PERIPH_USB             SYSCTL_PERIPH_USB                                              
+#define xSYSCTL_PERIPH_GPIOA           SYSCTL_PERIPH_GPIOA                                       
+#define xSYSCTL_PERIPH_GPIOB           SYSCTL_PERIPH_GPIOB                                       
+#define xSYSCTL_PERIPH_GPIOC           SYSCTL_PERIPH_GPIOC                                       
+#define xSYSCTL_PERIPH_GPIOD           SYSCTL_PERIPH_GPIOD                                       
+#define xSYSCTL_PERIPH_GPIOE           SYSCTL_PERIPH_GPIOE                                       
+#define xSYSCTL_PERIPH_WDT             SYSCTL_PERIPH_WDT                                              
+#define xSYSCTL_PERIPH_TIMER0          SYSCTL_PERIPH_TIMER0                                           
+#define xSYSCTL_PERIPH_TIMER1          SYSCTL_PERIPH_TIMER1                                           
+#define xSYSCTL_PERIPH_UART0           SYSCTL_PERIPH_UART0                                            
+#define xSYSCTL_PERIPH_UART1           SYSCTL_PERIPH_UART1                                            
+#define xSYSCTL_PERIPH_PWM1            SYSCTL_PERIPH_PWM1                                             
+#define xSYSCTL_PERIPH_I2C0            SYSCTL_PERIPH_I2C0                                             
+#define xSYSCTL_PERIPH_SPI0            SYSCTL_PERIPH_SPI0                                             
+#define xSYSCTL_PERIPH_RTC             SYSCTL_PERIPH_RTC                                              
+#define xSYSCTL_PERIPH_SSP1            SYSCTL_PERIPH_SSP1                                             
+#define xSYSCTL_PERIPH_ADC0            SYSCTL_PERIPH_ADC0                                             
+#define xSYSCTL_PERIPH_CAN1            SYSCTL_PERIPH_CAN1                                             
+#define xSYSCTL_PERIPH_CAN2            SYSCTL_PERIPH_CAN2                                             
+#define xSYSCTL_PERIPH_I2C1            SYSCTL_PERIPH_I2C1                                             
+#define xSYSCTL_PERIPH_SSP0            SYSCTL_PERIPH_SSP0                                             
+#define xSYSCTL_PERIPH_DAC0            SYSCTL_PERIPH_DAC0                                             
+#define xSYSCTL_PERIPH_TIMER2          SYSCTL_PERIPH_TIMER2                                           
+#define xSYSCTL_PERIPH_TIMER3          SYSCTL_PERIPH_TIMER3                                           
+#define xSYSCTL_PERIPH_UART2           SYSCTL_PERIPH_UART2                                            
+#define xSYSCTL_PERIPH_UART3           SYSCTL_PERIPH_UART3                                            
+#define xSYSCTL_PERIPH_I2C2            SYSCTL_PERIPH_I2C2                                             
+#define xSYSCTL_PERIPH_I2S             SYSCTL_PERIPH_I2S                                              
+#define xSYSCTL_PERIPH_RIT             SYSCTL_PERIPH_RIT                                              
+#define xSYSCTL_PERIPH_MCPWM           SYSCTL_PERIPH_MCPWM                                            
+#define xSYSCTL_PERIPH_QEI             SYSCTL_PERIPH_QEI             
 
 //*****************************************************************************
 //
@@ -197,11 +192,11 @@ extern "C"
 //! \addtogroup xSysCtl_Clock_Set_Config xSysCtl Clock Set Configuration
 //! \brief Values that show xSysCtl Clock Set Configuration
 //!
-//! \section xSysCtl_Clock_Set_SConfig 1. Where to use this group
+//! \section xSysCtl_Clock_Set_Config 1. Where to use this group
 //! Values that can be passed to the xSysCtlClockSet() API as the
 //! \b ulConfig parameter.
 //!
-//! \section xSysCtl_Clock_Set_SConfig 2. ulConfig parameter description
+//! \section xSysCtl_Clock_Set_Config 2. ulConfig parameter description
 //! The ulConfig parameter is the logical OR of several different values, 
 //! many of which are grouped into sets where only one can be chosen. 
 //! ulConfig contains the external and internal crystal, main oscillators 
@@ -210,17 +205,13 @@ extern "C"
 //! \section xSysCtl_Clock_Set_Config_CoX 3.CoX Port Details
 //! \verbatim
 //! +--------------------------+----------------+--------------------------+
-//! |SysCtl Clock Set Configs  |       CoX      |       LPC17xx          |
+//! |SysCtl Clock Set Configs  |       CoX      |         LPC17xx          |
 //! |--------------------------|----------------|--------------------------|
 //! |xSYSCTL_OSC_MAIN          |    Mandatory   |             Y            |
 //! |--------------------------|----------------|--------------------------|
 //! |xSYSCTL_OSC_INT           |    Mandatory   |             Y            |
 //! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_OSC_INTSL         |  Non-Mandatory |             Y            |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_OSC_EXTSL         |  Non-Mandatory |             Y            |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_XTAL_nMHZ         |  Non-Mandatory |     xSYSCTL_XTAL_4MHZ    |
+//! |xSYSCTL_XTAL_nMHZ         |  Non-Mandatory |     xSYSCTL_XTAL_1MHZ    |
 //! |                          |                |--------------------------|
 //! |                          |                |            ...           |
 //! |                          |                |--------------------------|
@@ -234,12 +225,6 @@ extern "C"
 //! |                          |                |--------------------------|
 //! |                          |                |    xSYSCTL_XTAL_25MHZ    |
 //! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_INT_nMHZ          |  Non-Mandatory |     xSYSCTL_INT_22MHZ    |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_INTSL_nKHZ/HZ     |  Non-Mandatory |    xSYSCTL_INTSL_10KHZ   |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_XTALSL_nHZ        |  Non-Mandatory |  xSYSCTL_XTALSL_32768HZ  |
-//! |--------------------------|----------------|--------------------------|
 //! |xSYSCTL_INT_OSC_DIS       |  Non-Mandatory |             Y            |
 //! |--------------------------|----------------|--------------------------|
 //! |xSYSCTL_MAIN_OSC_DIS      |  Non-Mandatory |             Y            |
@@ -251,49 +236,37 @@ extern "C"
 //
 //*****************************************************************************
 
-#define xSYSCTL_OSC_MAIN        SYSCTL_OSC_MAIN | SYSCTL_PLL_MAIN
-#define xSYSCTL_OSC_INT         SYSCTL_OSC_INT | SYSCTL_PLL_INT
+#define xSYSCTL_OSC_MAIN        SYSCTL_OSC_MAIN
+#define xSYSCTL_OSC_INT         SYSCTL_OSC_INT
 
 //
 //! \brief XTAL Select
 //
-#define xSYSCTL_XTAL_4MHZ       SYSCTL_XTAL_4MHZ
-#define xSYSCTL_XTAL_5MHZ       SYSCTL_XTAL_5MHZ
-#define xSYSCTL_XTAL_6MHZ       SYSCTL_XTAL_6MHZ
-#define xSYSCTL_XTAL_7MHZ       SYSCTL_XTAL_7MHZ
-#define xSYSCTL_XTAL_8MHZ       SYSCTL_XTAL_8MHZ
-#define xSYSCTL_XTAL_9MHZ       SYSCTL_XTAL_9MHZ
-#define xSYSCTL_XTAL_10MHZ      SYSCTL_XTAL_10MHZ
-#define xSYSCTL_XTAL_11MHZ      SYSCTL_XTAL_11MHZ
-#define xSYSCTL_XTAL_12MHZ      SYSCTL_XTAL_12MHZ
-#define xSYSCTL_XTAL_13MHZ      SYSCTL_XTAL_13MHZ
-#define xSYSCTL_XTAL_14MHZ      SYSCTL_XTAL_14MHZ
-#define xSYSCTL_XTAL_15MHZ      SYSCTL_XTAL_15MHZ
-#define xSYSCTL_XTAL_16MHZ      SYSCTL_XTAL_16MHZ
-#define xSYSCTL_XTAL_17MHZ      SYSCTL_XTAL_17MHZ
-#define xSYSCTL_XTAL_18MHZ      SYSCTL_XTAL_18MHZ
-#define xSYSCTL_XTAL_19MHZ      SYSCTL_XTAL_19MHZ
-#define xSYSCTL_XTAL_20MHZ      SYSCTL_XTAL_20MHZ
-#define xSYSCTL_XTAL_21MHZ      SYSCTL_XTAL_21MHZ
-#define xSYSCTL_XTAL_22MHZ      SYSCTL_XTAL_22MHZ
-#define xSYSCTL_XTAL_23MHZ      SYSCTL_XTAL_23MHZ
-#define xSYSCTL_XTAL_24MHZ      SYSCTL_XTAL_24MHZ
-#define xSYSCTL_XTAL_25MHZ      SYSCTL_XTAL_25MHZ
-
-//
-//! Internal main clock is 8MHz
-//
-#define xSYSCTL_INT_8MHZ        0  
-
-//
-//! Internal slow clock  is 40KHz.
-//
-#define xSYSCTL_INTSL_40KHZ     0  
-
-//
-//! External slow clock crystal is 32.768KHz.
-//
-#define xSYSCTL_XTALSL_32768HZ  0  
+#define xSYSCTL_XTAL_1MHZ       SYSCTL_XTAL_1_MHZ
+#define xSYSCTL_XTAL_2MHZ       SYSCTL_XTAL_2_MHZ
+#define xSYSCTL_XTAL_3MHZ       SYSCTL_XTAL_3_MHZ
+#define xSYSCTL_XTAL_4MHZ       SYSCTL_XTAL_4_MHZ
+#define xSYSCTL_XTAL_5MHZ       SYSCTL_XTAL_5_MHZ
+#define xSYSCTL_XTAL_6MHZ       SYSCTL_XTAL_6_MHZ
+#define xSYSCTL_XTAL_7MHZ       SYSCTL_XTAL_7_MHZ
+#define xSYSCTL_XTAL_8MHZ       SYSCTL_XTAL_8_MHZ
+#define xSYSCTL_XTAL_9MHZ       SYSCTL_XTAL_9_MHZ
+#define xSYSCTL_XTAL_10MHZ      SYSCTL_XTAL_10_MHZ
+#define xSYSCTL_XTAL_11MHZ      SYSCTL_XTAL_11_MHZ
+#define xSYSCTL_XTAL_12MHZ      SYSCTL_XTAL_12_MHZ
+#define xSYSCTL_XTAL_13MHZ      SYSCTL_XTAL_13_MHZ
+#define xSYSCTL_XTAL_14MHZ      SYSCTL_XTAL_14_MHZ
+#define xSYSCTL_XTAL_15MHZ      SYSCTL_XTAL_15_MHZ
+#define xSYSCTL_XTAL_16MHZ      SYSCTL_XTAL_16_MHZ
+#define xSYSCTL_XTAL_17MHZ      SYSCTL_XTAL_17_MHZ
+#define xSYSCTL_XTAL_18MHZ      SYSCTL_XTAL_18_MHZ
+#define xSYSCTL_XTAL_19MHZ      SYSCTL_XTAL_19_MHZ
+#define xSYSCTL_XTAL_20MHZ      SYSCTL_XTAL_20_MHZ
+#define xSYSCTL_XTAL_21MHZ      SYSCTL_XTAL_21_MHZ
+#define xSYSCTL_XTAL_22MHZ      SYSCTL_XTAL_22_MHZ
+#define xSYSCTL_XTAL_23MHZ      SYSCTL_XTAL_23_MHZ
+#define xSYSCTL_XTAL_24MHZ      SYSCTL_XTAL_24_MHZ
+#define xSYSCTL_XTAL_25MHZ      SYSCTL_XTAL_25_MHZ
 
 //
 //! Disable internal oscillator
@@ -331,116 +304,161 @@ extern "C"
 //!
 //! \section xSysCtl_Peripheral_Src_Clk_CoX CoX Port Details
 //! \verbatim
-//! +-------------------------- +----------------+--------------------------+
-//! |Peripheral Source Clock Set|       CoX      |       LPC17xx          |
-//! |---------------------------|----------------|--------------------------|
-//! |Those are all Non-Mandatory|  Non-Mandatory |             Y            |
-//! | parameter,the Mandatory   |                |                          |
-//! | is variable naming        |                |                          |
-//! |ModuleName+n+SourceClock   |                |                          |
-//! |---------------------------|----------------|--------------------------|
-//! |xSYSCTL_WDT_HCLK_n         |  Non-Mandatory |             N            |
-//! |-------------------------- |----------------|--------------------------|
-//! |xSYSCTL_WDT_HCLK_2048      |  Non-Mandatory |             N            |
-//! |-------------------------- |----------------|--------------------------|
-//! |xSYSCTL_WDT_INTSL          |  Non-Mandatory |             N            |
-//! |-------------------------- |----------------|--------------------------|
-//! |xSYSCTL_ADC0_MAIN          |  Non-Mandatory |             Y            |
-//! |-------------------------- |----------------|--------------------------|
-//! |xSYSCTL_ADC0_PLL           |  Non-Mandatory |             N            |
-//! |-------------------------- |----------------|--------------------------|
-//! |......                     |  Non-Mandatory |             Y            |
-//! |-------------------------- |----------------|--------------------------|
-//! |xSYSCTL_PWMB_INT           |  Non-Mandatory |             Y            |
-//! |-------------------------- |----------------|--------------------------|
+//! +------------------------------+-----------------+--------------------------+
+//! | Peripheral Source Clock Set  |       CoX       |         LPC17xx          |
+//! |------------------------------|-----------------|--------------------------|
+//! | Those are all Non-Mandatory  |                 |                          |
+//! |  parameter,the Mandatory     |                 |                          |
+//! |  is variable naming          |  Non-Mandatory  |             Y            |
+//! | ModuleName+n+SourceClock     |                 |                          |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_WDT_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_WDT_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_TIMER0_HCLK          |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_TIMER1_HCLK          |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_UART0_HCLK           |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_UART1_HCLK           |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_PWM1_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_I2C0_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_SPI_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_SSP1_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_DAC_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_ADC_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_CAN1_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_CAN2_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_ACF_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_QEI_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_GPIOINT_HCLK         |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_PCB_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_I2C1_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_SSP0_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_TIMER2_HCLK          |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_TIMER3_HCLK          |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_UART2_HCLK           |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_UART3_HCLK           |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_I2C2_HCLK            |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_I2S_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_RIT_HCLK             |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_SYSCON_HCLK          |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! | xSYSCTL_MC_HCLK              |  Non-Mandatory  |             Y            |
+//! |------------------------------|-----------------|--------------------------|
+//! 
 //! \endverbatim
 //! @{
 //
 //*****************************************************************************
 
-//
-//!  HCLK used as xWDT clock
-//
-#define xSYSCTL_WDT_HCLK        0x00000000
-//
-//!  HCLK used as ADC clock
-//
-#define xSYSCTL_ADC0_MAIN       SYSCTL_ADC_HCLK
+//! Watch
+#define xSYSCTL_WDT_HCLK               PCLKSEL_WDT       
 
-//
-//! LSE oscillator clock used as RTC clock
-//
-#define xSYSCTL_RTC_LSE         SYSCTL_RTC_LSE
+//! Timer 0
+#define xSYSCTL_TIMER0_HCLK            PCLKSEL_TIMER0    
 
-//
-//! LSI oscillator clock used as RTC clock
-//
-#define xSYSCTL_RTC_LSI         SYSCTL_RTC_LSI
+//! Timer 1
+#define xSYSCTL_TIMER1_HCLK            PCLKSEL_TIMER1    
 
-//
-//! HSE oscillator clock divided by 128 used as RTC clock
-//
-#define xSYSCTL_RTC_LSE_128     SYSCTL_RTC_LSE_128
+//! UART 0
+#define xSYSCTL_UART0_HCLK             PCLKSEL_UART0     
 
-//
-//! Microcontroller clock output System clock (SYSCLK) selected
-//
-#define xSYSCTL_MCO_SYSCLK      SYSCTL_MCO_SYSCLK
+//! UART 1
+#define xSYSCTL_UART1_HCLK             PCLKSEL_UART1     
 
-//
-//! Microcontroller clock output HSI clock selected
-//
-#define xSYSCTL_MCO_HSI         SYSCTL_MCO_HSI
+//! PWM 1
+#define xSYSCTL_PWM1_HCLK              PCLKSEL_PWM1      
 
-//
-//! Microcontroller clock output HSE clock selected
-//
-#define xSYSCTL_MCO_HSE         SYSCTL_MCO_HSE
+//! I2C 0
+#define xSYSCTL_I2C0_HCLK              PCLKSEL_I2C0      
 
-//
-//! Microcontroller clock output PLL clock divided by 2 selected
-//
-#define xSYSCTL_MCO_PLL_2       SYSCTL_MCO_PLL_2
+//! SPI
+#define xSYSCTL_SPI_HCLK               PCLKSEL_SPI       
 
-//
-//! Microcontroller clock output PLL2 clock selected
-//
-#define xSYSCTL_MCO_PLL2        SYSCTL_MCO_PLL2
+//! SSP1 
+#define xSYSCTL_SSP1_HCLK              PCLKSEL_SSP1      
 
-//
-//! Microcontroller clock output PLL3 clock selected
-//
-#define xSYSCTL_MCO_PLL3_2      SYSCTL_MCO_PLL3_2
+//! DAC
+#define xSYSCTL_DAC_HCLK               PCLKSEL_DAC       
 
-//
-//! XT1 external 3-25 MHz oscillator clock selected (for Ethernet)
-//
-#define xSYSCTL_MCO_XT1         SYSCTL_MCO_XT1
+//! ADC
+#define xSYSCTL_ADC_HCLK               PCLKSEL_ADC       
 
-//
-//! Microcontroller clock output PLL3 clock selected (for Ethernet)
-//
-#define xSYSCTL_MCO_PLL3        SYSCTL_MCO_PLL3
+//! CAN1
+#define xSYSCTL_CAN1_HCLK              PCLKSEL_CAN1      
 
-//
-//! System clock (SYSCLK) selected as I2S3 clock entry
-//
-#define xSYSCTL_I2S3_SYSCLK     SYSCTL_I2S3_SYSCLK
+//! CAN2
+#define xSYSCTL_CAN2_HCLK              PCLKSEL_CAN2      
 
-//
-//! PLL3 VCO clock selected as I2S3 clock entry
-//
-#define xSYSCTL_I2S3_PLL3       SYSCTL_I2S3_PLL3
+//! ACF
+#define xSYSCTL_ACF_HCLK               PCLKSEL_ACF       
 
-//
-//! System clock (SYSCLK) selected as I2S2 clock entry
-//
-#define xSYSCTL_I2S2_SYSCLK     SYSCTL_I2S2_SYSCLK
+//!  Quadrature Encoder Interface
+#define xSYSCTL_QEI_HCLK               PCLKSEL_QEI       
 
-//
-//! PLL3 VCO clock selected as I2S2 clock entry
-//
-#define xSYSCTL_I2S2_PLL3       SYSCTL_I2S2_PLL3
+//! GPIO Interrupt
+#define xSYSCTL_GPIOINT_HCLK           PCLKSEL_GPIOINT   
+
+//! Pin Connect block
+#define xSYSCTL_PCB_HCLK               PCLKSEL_PCB       
+
+//! I2C1
+#define xSYSCTL_I2C1_HCLK              PCLKSEL_I2C1      
+
+//! SSP0
+#define xSYSCTL_SSP0_HCLK              PCLKSEL_SSP0      
+
+//! Timer 2
+#define xSYSCTL_TIMER2_HCLK            PCLKSEL_TIMER2    
+
+//! Timer 2
+#define xSYSCTL_TIMER3_HCLK            PCLKSEL_TIMER3    
+
+//! UART 2
+#define xSYSCTL_UART2_HCLK             PCLKSEL_UART2     
+
+//! UART 3
+#define xSYSCTL_UART3_HCLK             PCLKSEL_UART3     
+
+//! I2C 2
+#define xSYSCTL_I2C2_HCLK              PCLKSEL_I2C2      
+
+//! I2S
+#define xSYSCTL_I2S_HCLK               PCLKSEL_I2S       
+
+//! Repetitive Interrupt Timer
+#define xSYSCTL_RIT_HCLK               PCLKSEL_RIT       
+
+//! System Control block  
+#define xSYSCTL_SYSCON_HCLK            PCLKSEL_SYSCON    
+
+//! Motor Control PWM 
+#define xSYSCTL_MC_HCLK                PCLKSEL_MC        
 
 //*****************************************************************************
 //
@@ -463,7 +481,7 @@ extern "C"
 //! \section xSysCtl_Peripheral_Short_CoX CoX Port Details
 //! \verbatim
 //! +-------------------------- +----------------+--------------------------+
-//! |Peripheral Short name      |       CoX      |       LPC17xx          |
+//! |Peripheral Short name      |       CoX      |         LPC17xx          |
 //! |---------------------------|----------------|--------------------------|
 //! |ADCn                       |  Non-Mandatory |           ADC0           |
 //! |---------------------------|----------------|--------------------------|
@@ -499,7 +517,7 @@ extern "C"
 //! |-------------------------- |----------------|--------------------------|
 //!
 //! +-------------------------- +----------------+--------------------------+
-//! |Peripheral Clock source    |       CoX      |       LPC17xx          |
+//! |Peripheral Clock source    |       CoX      |         LPC17xx          |
 //! |---------------------------|----------------|--------------------------|
 //! |INT                        |    Mandatory   |             Y            |
 //! |---------------------------|----------------|--------------------------|
@@ -589,7 +607,7 @@ extern "C"
 //! \section xSysCtl_Exported_APIs_Port CoX Port Details
 //! \verbatim
 //! +--------------------------------+----------------+-----------+
-//! |xSysCtl API                     |       CoX      | LPC17xx |
+//! |xSysCtl API                     |       CoX      |  LPC17xx  |
 //! |--------------------------------|----------------|-----------|
 //! |xSysCtlPeripheralReset          |    Mandatory   |     Y     |
 //! |--------------------------------|----------------|-----------|
@@ -825,7 +843,7 @@ extern unsigned long xSysCtlPeripheraIntNumGet(unsigned long ulPeripheralBase);
 //
 //*****************************************************************************
 #define xSysCtlClockGet()                                                     \
-        SysCtlHClockGet()
+         SysCtlClockGet()
 
 //*****************************************************************************
 //
@@ -843,7 +861,7 @@ extern unsigned long xSysCtlPeripheraIntNumGet(unsigned long ulPeripheralBase);
 //
 //*****************************************************************************
 #define xSysCtlDelay(ulCount)                                                 \
-        SysCtlDelay(ulCount)
+         SysCtlDelay(ulCount)
 
 //*****************************************************************************
 //
@@ -1301,115 +1319,86 @@ extern unsigned long xSysCtlPeripheraIntNumGet(unsigned long ulPeripheralBase);
 //
 //***************************************************************************** 
 
-//! LCD Controller power/clock control bit.
-#define SYSCTL_PERIPH_LCD              PCONP_PCLCD
+//! Timer 0
+#define SYSCTL_PERIPH_TIM0             1
 
-//! Timer/Counter 0 power/clock control bit.
-#define SYSCTL_PERIPH_TIM0             PCONP_PCTIM0
+//! Timer 1
+#define SYSCTL_PERIPH_TIM1             2
 
-//! Timer/Counter 1 power/clock control bit.
-#define SYSCTL_PERIPH_TIM1             PCONP_PCTIM1
+//! UART 0
+#define SYSCTL_PERIPH_UART0            3
 
-//! UART0 Power/clock control bit.
-#define SYSCTL_PERIPH_UART0            PCONP_PCUART0
+//! UART 1
+#define SYSCTL_PERIPH_UART1            4
 
-//! UART1 Power/clock control bit.
-#define SYSCTL_PERIPH_UART1            PCONP_PCUART1
+//! PWM 1
+#define SYSCTL_PERIPH_PWM1             6
 
-//! PWM0 Power/Clock control bit.
-#define SYSCTL_PERIPH_PWM0             PCONP_PCPWM0
+//! I2C 0
+#define SYSCTL_PERIPH_I2C0             7
 
-//! PWM1 Power/Clock control bit.
-#define SYSCTL_PERIPH_PWM1             PCONP_PCPWM1
+//! The SPI
+#define SYSCTL_PERIPH_SPI              8
 
-//! I2C0 Interface Power/Clock control bit.
-#define SYSCTL_PERIPH_I2C0             PCONP_PCI2C0
+//! RTC
+#define SYSCTL_PERIPH_RTC              9
 
-//! The SPI interface power/clock control bit.
-#define SYSCTL_PERIPH_SPI              PCONP_PCSPI
+//! SSP 1
+#define SYSCTL_PERIPH_SSP1             10
 
-//! UART4 power/clock control bit.
-#define SYSCTL_PERIPH_UART4            PCONP_PCUART4
+//! ADC
+#define SYSCTL_PERIPH_ADC              12
 
-//! RTC and Event Monitor/Recorder power/clock control bit.
-#define SYSCTL_PERIPH_RTC              PCONP_PCRTC
+//! CAN 1
+#define SYSCTL_PERIPH_CAN1             13
 
-//! SSP 1 interface power/clock control bit.
-#define SYSCTL_PERIPH_SSP1             PCONP_PCSSP1
+//! CAN 2
+#define SYSCTL_PERIPH_CAN2             14
 
-//! External Memory Controller power/clock control bit.
-#define SYSCTL_PERIPH_EMC              PCONP_PCEMC
+//! GPIO
+#define SYSCTL_PERIPH_GPIO             15
 
-//! A/D converter (ADC) power/clock control bit.
-#define SYSCTL_PERIPH_ADC              PCONP_PCADC
+//! Repetitive Interrupt Timer
+#define SYSCTL_PERIPH_RIT              16
 
-//! CAN Controller 1 power/clock control bit.
-#define SYSCTL_PERIPH_CAN1             PCONP_PCCAN1
+//! Motor Control PWM power/clock
+#define SYSCTL_PERIPH_MCPWM            17
 
-//! CAN Controller 2 power/clock control bit.
-#define SYSCTL_PERIPH_CAN2             PCONP_PCCAN2
+//! Quadrature Encoder Interface
+#define SYSCTL_PERIPH_QEI              18
 
-//! Power/clock control bit for IOCON, GPIO, and GPIO interrupts.
-#define SYSCTL_PERIPH_GPIO             PCONP_PCGPIO
+//! I2C 1
+#define SYSCTL_PERIPH_I2C1             19
 
-//! Repetitive Interrupt Timer power/clock control bit.
-#define SYSCTL_PERIPH_RIT              PCONP_PCRIT
+//! SSP 0
+#define SYSCTL_PERIPH_SSP0             21
 
-//! SPI Flash Interface power/clock control bit.
-#define SYSCTL_PERIPH_SPIFI            PCONP_PCSPIFI
+//! Timer 2
+#define SYSCTL_PERIPH_TIM2             22
 
-//! Motor Control PWM power/clock control bit.
-#define SYSCTL_PERIPH_MCPWM            PCONP_PCMCPWM
+//! Timer 3
+#define SYSCTL_PERIPH_TIM3             23
 
-//! Quadrature Encoder Interface power/clock control bit.
-#define SYSCTL_PERIPH_QEI              PCONP_PCQEI
+//! UART 2
+#define SYSCTL_PERIPH_UART2            24
 
-//! I2C1 interface power/clock control bit.
-#define SYSCTL_PERIPH_I2C1             PCONP_PCI2C1
+//! UART 3
+#define SYSCTL_PERIPH_UART3            25
 
-//! SSP2 interface power/clock control bit.
-#define SYSCTL_PERIPH_SSP2             PCONP_PCSSP2
+//! I2C 2
+#define SYSCTL_PERIPH_I2C2             26
 
-//! SSP0 interface power/clock control bit.
+//! I2S 
+#define SYSCTL_PERIPH_I2S              27
 
-//! Timer 2 power/clock control bit.
-#define SYSCTL_PERIPH_TIM2             PCONP_PCTIM2
+//! General Purpose DMA
+#define SYSCTL_PERIPH_GPDMA            29
 
-//! Timer 3 power/clock control bit.
-#define SYSCTL_PERIPH_TIM3             PCONP_PCTIM3
+//! Ethernet
+#define SYSCTL_PERIPH_ETH              30
 
-//! UART 2 power/clock control bit.
-#define SYSCTL_PERIPH_UART2            PCONP_PCUART2
-
-//! UART 3 power/clock control bit.
-#define SYSCTL_PERIPH_UART3            PCONP_PCUART3
-
-//! I2C interface 2 power/clock control bit.
-#define SYSCTL_PERIPH_I2C2             PCONP_PCI2C2
-
-//! I2S interface power/clock control bit.
-#define SYSCTL_PERIPH_I2S              PCONP_PCI2S
-
-//! SD Card interface power/clock control bit.
-#define SYSCTL_PERIPH_SDC              PCONP_PCSDC
-
-//! GPDMA function power/clock control bit.
-#define SYSCTL_PERIPH_GPDMA            PCONP_PCGPDMA
-
-//! Ethernet block power/clock control bit.
-#define SYSCTL_PERIPH_ETH              PCONP_PCENET
-
-//! USB interface power/clock control bit.
-#define SYSCTL_PERIPH_USB              PCONP_PCUSB
-
-//! Reset control bit for the IOCON registers
-#define SYSCTL_PERIPH_IOCON            (RSTCON1_RSTIOCON + 32)
-
-//! D/A converter (DAC) reset control bit
-#define SYSCTL_PERIPH_DAC              (RSTCON1_RSTDAC + 32)
-
-//! CAN acceptance filter reset control bit
-#define SYSCTL_PERIPH_CANACC           (RSTCON1_RSTCANACC + 32)
+//! USB
+#define SYSCTL_PERIPH_USB              31
 
 //*****************************************************************************
 //
@@ -1501,17 +1490,20 @@ extern unsigned long SysCtlExtIntFlagGet(void);
 extern xtBoolean SysCtlExtIntFlagCheck(unsigned long ulFlag);
 extern void SysCtlExtIntFlagClear(unsigned long ulFlag);
 
+extern void SysCtlReset(void);
 extern unsigned long SysCtlResetFlagGet(void);
 extern xtBoolean SysCtlResetFlagCheck(unsigned long ulFlag);
+extern void SysCtlResetFlagClear(unsigned long ulFlag);
 
 extern void SysCtlPeripheralClockCfg(unsigned long ulPeri, unsigned long ulCfg);
 extern void SysCtlPeripheralReset(unsigned long ulPeripheral);
 extern void SysCtlPeripheralEnable(unsigned long ulPeripheral);
 extern void SysCtlPeripheralDisable(unsigned long ulPeripheral);
 
+extern unsigned long SysCtlClockGet(void);
 extern unsigned long SysCtlHClockGet(void);
-extern unsigned long SysCtlAPB1ClockGet(void);
-extern unsigned long SysCtlAPB2ClockGet(void);
+//extern unsigned long SysCtlAPB1ClockGet(void);
+//extern unsigned long SysCtlAPB2ClockGet(void);
 
 extern unsigned long SysCtlPwrCfg(unsigned long ulMode);
 extern void SysCtlBODCfg(unsigned long ulCfg);

@@ -42,8 +42,7 @@
 #define __xHW_INTS_H__
 
 //! Detect MCU Type.
-#if defined(LPC_175x) || defined (LPC_176x) ||       \
-    defined(LPC_177x) || defined (LPC_178x)
+#if defined(LPC_175x) || defined (LPC_176x)
 #else
 #error Please select your LPC MCU first!             \
        This value can be one of the following value: \
@@ -93,19 +92,43 @@
 #define xFAULT_PENDSV                        FAULT_PENDSV
 #define xFAULT_SYSTICK                       FAULT_SYSTICK
 
-#define xINT_ADC0                            INT_ADC0
-#define xINT_DMA                             INT_DMA
-//#define xINT_GPIOA                           INT_GPIO
-//#define xINT_GPIOB                           INT_GPIO
-//#define xINT_GPIOC                           INT_GPIO
-//#define xINT_GPIOD                           INT_GPIO
-//#define xINT_GPIOE                           INT_GPIO
-//#define xINT_GPIOF                           INT_GPIO
-#define xINT_SYSCTL                          INT_SYSCTL
-#define xINT_TIMER0                          INT_TIMER0
-#define xINT_TIMER1                          INT_TIMER1
-#define xINT_TIMER2                          INT_TIMER2
-#define xINT_TIMER3                          INT_TIMER3
+#define xINT_SYSCTL                          0
+#define xINT_WDT                             INT_WDT         16 // Watchdog timer
+#define xINT_TIMER0                          INT_TIMER0      17 // Timer 0
+#define xINT_TIMER1                          INT_TIMER1      18 // Timer 1
+#define xINT_TIMER2                          INT_TIMER2      19 // Timer 2
+#define xINT_TIMER3                          INT_TIMER3      20 // Timer 3
+#define xINT_UART0                           INT_UART0       21 // UART0 Rx and Tx
+#define xINT_UART1                           INT_UART1       22 // UART1 Rx and Tx
+#define xINT_UART2                           INT_UART2       23 // UART2 Rx and Tx
+#define xINT_UART3                           INT_UART3       24 // UART3 Rx and Tx
+#define xINT_PWM0                            INT_PWM1        25 // PWM Generator 1
+#define xINT_I2C0                            INT_I2C0        26 // I2C0 Master and Slave
+#define xINT_I2C1                            INT_I2C1        27 // I2C1 Master and Slave
+#define xINT_I2C2                            INT_I2C2        28 // I2C2 Master and Slave
+#define xINT_SPI0                            INT_SPI         29 // SPI
+#define xINT_SSP0                            INT_SSP0        30 // SSP0 Rx and Tx
+#define xINT_SSP1                            INT_SSP1        31 // SSP1 Rx and Tx
+#define xINT_PLL0                            INT_PLL0        32 // PLL0 Lock (PLOCK0)
+#define xINT_RTC                             INT_RTC         33 // RTC & EV0, EV1, EV2
+#define xINT_EINT0                           INT_EINT0       34 // External Interrupt 0
+#define xINT_EINT1                           INT_EINT1       35 // External Interrupt 1
+#define xINT_EINT2                           INT_EINT2       36 // External Interrupt 2
+#define xINT_EINT3                           INT_EINT3       37 // External Interrupt 3
+#define xINT_GPIOA                           INT_EINT3       37 // GPIO Int0, Share with External Int 3
+#define xINT_GPIOC                           INT_EINT3       37 // GPIO Int2, Share with External Int 3
+#define xINT_ADC                             INT_ADC         38 // ADC
+#define xINT_BOD                             INT_BOD         39 // Brown Out detect
+#define xINT_USB                             INT_USB         40 // USB Controller
+#define xINT_CAN0                            INT_CAN         41 // CAN 0
+#define xINT_DMA0                            INT_DMA         42 // DMA controller
+#define xINT_I2S                             INT_I2S         43 // I2S
+#define xINT_ETH                             INT_ETH         44 // Ethernet
+#define xINT_RIT                             INT_RIT         45 // RIT
+#define xINT_MCPWM                           INT_MCPWM       46 // Motor Control PWM
+#define xINT_QEI                             INT_QEI         47 // Quadrature Encoder Interface
+#define xINT_PLL1                            INT_PLL1        48 // PLL1 Lock (Alt PLL)
+#define xINT_USBACT                          INT_USBACT      49 // USB Activity Interrupt
 
 //*****************************************************************************
 //
@@ -186,7 +209,7 @@
 #define INT_EINT0                            34 // External Interrupt 0
 #define INT_EINT1                            35 // External Interrupt 1
 #define INT_EINT2                            36 // External Interrupt 2
-#define INT_EINT3                            37 // External Interrupt 3
+#define INT_EINT3                            37 // External Interrupt 3, Share with GPIO
 #define INT_ADC                              38 // ADC
 #define INT_BOD                              39 // Brown Out detect
 #define INT_USB                              40 // USB Controller
@@ -194,33 +217,19 @@
 #define INT_DMA                              42 // DMA controller
 #define INT_I2S                              43 // I2S
 #define INT_ETH                              44 // Ethernet
-#if defined(LPC_175x) || defined(LPC_176x)
 #define INT_RIT                              45 // RIT
-#elif defined(LPC_177x) || defined(LPC_178x)
-#define INT_SD                               45 // SD Card
-#endif
 #define INT_MCPWM                            46 // Motor Control PWM
 #define INT_QEI                              47 // Quadrature Encoder Interface
 #define INT_PLL1                             48 // PLL1 Lock (Alt PLL)
 #define INT_USBACT                           49 // USB Activity Interrupt
-#define INT_CANACT                           50 // CAN Activity Interrupt
-#define INT_UART4                            51 // UART4 Rx and Tx
-#define INT_SSP2                             52 // SSP2 Rx and Tx
-#define INT_LCD                              53 // LCD Controller
-#define INT_GPIO                             54 // GPIO Interrupts
-#define INT_PWM0                             55 // PWM Generator 0
-#define INT_EEPROM                           56 // FLASH & EEPROM
+
 
 //*****************************************************************************
 //
 //! \brief Defines for the total number of interrupts.
 //
 //*****************************************************************************
-#if defined(LPC_175x) || defined(LPC_176x)
 #define NUM_INTERRUPTS                       51
-#elif defined(LPC_177x) || defined (LPC_178x)
-#define NUM_INTERRUPTS                       57
-#endif
 
 //*****************************************************************************
 //
