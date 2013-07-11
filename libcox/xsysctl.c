@@ -1,12 +1,48 @@
-//! \file xsysctl.c
+//*****************************************************************************
 //
+//! \file xsysctl.c
+//! \brief Driver for the system controller
+//! \version V2.2.1.0
+//! \todo Update this time information.
+//! \date 11/20/2011
+//! \author CooCox
+//! \copy
+//!
+//! Copyright (c)  2011, CooCox
+//! All rights reserved.
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!     - Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
+//!     - Redistributions in binary form must reproduce the above copyright
+//! notice, this list of conditions and the following disclaimer in the
+//! documentation and/or other materials provided with the distribution.
+//!     - Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
+//! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+//! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+//! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+//! THE POSSIBILITY OF SUCH DAMAGE.
+//
+//*****************************************************************************
 #include "xhw_types.h"
 #include "xhw_ints.h"
+#include "xcore.h"
 #include "xhw_memmap.h"
 #include "xhw_nvic.h"
-#include "xdebug.h"
-#include "xcore.h"
 #include "xhw_sysctl.h"
+#include "xdebug.h"
 #include "xsysctl.h"
 
 static unsigned long PLLMNCal(unsigned long Fin,
@@ -14,15 +50,15 @@ static unsigned long PLLMNCal(unsigned long Fin,
 
 static unsigned long g_ulSystemClk = 0;           // System Clock frequency
 static unsigned long g_ulAHBClk    = 0;           // AHB Clock frequency
-static unsigned long g_ulAPB1Clk   = 0;           // APB1 Clock frequency
-static unsigned long g_ulAPB2Clk   = 0;           // APB2 Clock frequency
+//static unsigned long g_ulAPB1Clk   = 0;           // APB1 Clock frequency
+//static unsigned long g_ulAPB2Clk   = 0;           // APB2 Clock frequency
 
 //*****************************************************************************
 //
 //! Peripheral Base and ID Table structure type
 //
 //*****************************************************************************
-typedef struct 
+typedef struct
 {
     unsigned long ulPeripheralBase;
     unsigned long ulPeripheralID;
@@ -38,8 +74,40 @@ tPeripheralTable;
 //*****************************************************************************
 static const tPeripheralTable g_pPeripherals[] =
 {
-    //{ADC1_BASE,xSYSCTL_PERIPH_ADC1,xINT_ADC0},  // e.g.
-    {0,0,0},
+
+    { xTIMER0_BASE       , xSYSCTL_PERIPH_TIMER0  , 0 },
+    { xTIMER1_BASE       , xSYSCTL_PERIPH_TIMER1  , 0 },
+    { xUART0_BASE        , xSYSCTL_PERIPH_UART0   , 0 },
+    { xUART1_BASE        , xSYSCTL_PERIPH_UART1   , 0 },
+    { xPWM1_BASE         , xSYSCTL_PERIPH_PWM1    , 0 },
+    { xI2C0_BASE         , xSYSCTL_PERIPH_I2C0    , 0 },
+    { xSPI0_BASE         , xSYSCTL_PERIPH_SPI     , 0 },
+    { xRTC_BASE          , xSYSCTL_PERIPH_RTC     , 0 },
+    { xSSP1_BASE         , xSYSCTL_PERIPH_SSP1    , 0 },
+    { xADC0_BASE         , xSYSCTL_PERIPH_ADC0     , 0 },
+    { xCAN1_BASE         , xSYSCTL_PERIPH_CAN1    , 0 },
+    { xCAN2_BASE         , xSYSCTL_PERIPH_CAN2    , 0 },
+    { xGPIO_PORTA_BASE   , xSYSCTL_PERIPH_GPIOA   , 0 },
+    { xGPIO_PORTB_BASE   , xSYSCTL_PERIPH_GPIOB   , 0 },
+    { xGPIO_PORTC_BASE   , xSYSCTL_PERIPH_GPIOC   , 0 },
+    { xGPIO_PORTD_BASE   , xSYSCTL_PERIPH_GPIOD   , 0 },
+    { xGPIO_PORTE_BASE   , xSYSCTL_PERIPH_GPIOE   , 0 },
+    { xRIT_BASE          , xSYSCTL_PERIPH_RIT     , 0 },
+    { xMCPWM_BASE        , xSYSCTL_PERIPH_MCPWM   , 0 },
+    { xQEI_BASE          , xSYSCTL_PERIPH_QEI     , 0 },
+    { xI2C1_BASE         , xSYSCTL_PERIPH_I2C1    , 0 },
+    { xSSP0_BASE         , xSYSCTL_PERIPH_SSP0    , 0 },
+    { xTIMER2_BASE       , xSYSCTL_PERIPH_TIMER2  , 0 },
+    { xTIMER3_BASE       , xSYSCTL_PERIPH_TIMER3  , 0 },
+    { xUART2_BASE        , xSYSCTL_PERIPH_UART2   , 0 },
+    { xUART3_BASE        , xSYSCTL_PERIPH_UART3   , 0 },
+    { xI2C2_BASE         , xSYSCTL_PERIPH_I2C2    , 0 },
+    { xI2S_BASE          , xSYSCTL_PERIPH_I2S     , 0 },
+    { xDMA0_BASE         , xSYSCTL_PERIPH_DMA     , 0 },
+    { xETH_BASE          , xSYSCTL_PERIPH_ETH     , 0 },
+    { xUSB_BASE          , xSYSCTL_PERIPH_USB     , 0 },
+    { 0                  , 0                      , 0 },
+
 };
 
 //*****************************************************************************
@@ -136,7 +204,7 @@ static unsigned long PLLMNCal(unsigned long Fin,
 
     // Can not find suitable Multiplier/Divider value.
     return (0);
-}   
+}
 
 
 //*****************************************************************************
@@ -398,8 +466,8 @@ void SysCtlClockSet(unsigned long ulSysClk, unsigned long ulConfig)
     // Updata private clock data.
     g_ulSystemClk = ulSysClk;
     g_ulAHBClk    = ulSysClk;
-    g_ulAPB1Clk   = ulSysClk/4;
-    g_ulAPB2Clk   = g_ulAPB1Clk;
+    //g_ulAPB1Clk   = ulSysClk/4;
+    //g_ulAPB2Clk   = g_ulAPB1Clk;
 
     // Configure PLL Multiplier/Divider
     ulM -= 1;
@@ -690,12 +758,13 @@ xtBoolean SysCtlResetFlagCheck(unsigned long ulFlag)
 //*****************************************************************************
 void SysCtlResetFlagClear(unsigned long ulFlag)
 {
-    unsigned long ulTmpReg = 0;
+    //! Check input Parameters
      xASSERT( ulFlag & (RESET_FLAG_POR     | RESET_FLAG_EXTR   |
                        RESET_FLAG_WDTR     | RESET_FLAG_BODR   |
                        RESET_FLAG_SYSRESET | RESET_FLAG_LOCKUP) );
+
     xHWREG(RSID) |= ulFlag;
-} 
+}
 
 //*****************************************************************************
 //
@@ -749,7 +818,7 @@ void SysCtlPeripheralClockSourceSet(unsigned long ulPeri, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
 
-    if(ulCfg < 32)
+    if(ulPeri < 32)
     {
         ulTmpReg = xHWREG(PCLKSEL0);
         ulTmpReg &= ~(PCLKSEL_PPP_M << ulPeri);
@@ -772,8 +841,8 @@ void SysCtlPeripheralClockSourceSet(unsigned long ulPeri, unsigned long ulCfg)
 //!
 //! \param [in] ulPeripheral is the LPC17nx(n=7/8) peripherals, the parameter
 //!             can be one of the following value:
-//!             - \ref SYSCTL_PERIPH_TIM0
-//!             - \ref SYSCTL_PERIPH_TIM1
+//!             - \ref SYSCTL_PERIPH_TIMER0
+//!             - \ref SYSCTL_PERIPH_TIMER1
 //!             - \ref SYSCTL_PERIPH_UART0
 //!             - \ref SYSCTL_PERIPH_UART1
 //!             - \ref SYSCTL_PERIPH_PWM1
@@ -790,8 +859,8 @@ void SysCtlPeripheralClockSourceSet(unsigned long ulPeri, unsigned long ulCfg)
 //!             - \ref SYSCTL_PERIPH_QEI
 //!             - \ref SYSCTL_PERIPH_I2C1
 //!             - \ref SYSCTL_PERIPH_SSP0
-//!             - \ref SYSCTL_PERIPH_TIM2
-//!             - \ref SYSCTL_PERIPH_TIM3
+//!             - \ref SYSCTL_PERIPH_TIMER2
+//!             - \ref SYSCTL_PERIPH_TIMER3
 //!             - \ref SYSCTL_PERIPH_UART2
 //!             - \ref SYSCTL_PERIPH_UART3
 //!             - \ref SYSCTL_PERIPH_I2C2
@@ -851,8 +920,8 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
 //!
 //! \param [in] ulPeripheral is the LPC17nx(n=5/6/7/8) peripherals, the parameter
 //!             can be one of the following value:
-//!             - \ref SYSCTL_PERIPH_TIM0
-//!             - \ref SYSCTL_PERIPH_TIM1
+//!             - \ref SYSCTL_PERIPH_TIMER0
+//!             - \ref SYSCTL_PERIPH_TIMER1
 //!             - \ref SYSCTL_PERIPH_UART0
 //!             - \ref SYSCTL_PERIPH_UART1
 //!             - \ref SYSCTL_PERIPH_PWM1
@@ -869,8 +938,8 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
 //!             - \ref SYSCTL_PERIPH_QEI
 //!             - \ref SYSCTL_PERIPH_I2C1
 //!             - \ref SYSCTL_PERIPH_SSP0
-//!             - \ref SYSCTL_PERIPH_TIM2
-//!             - \ref SYSCTL_PERIPH_TIM3
+//!             - \ref SYSCTL_PERIPH_TIMER2
+//!             - \ref SYSCTL_PERIPH_TIMER3
 //!             - \ref SYSCTL_PERIPH_UART2
 //!             - \ref SYSCTL_PERIPH_UART3
 //!             - \ref SYSCTL_PERIPH_I2C2
@@ -885,7 +954,7 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
 //*****************************************************************************
 void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 {
-    xHWREG(PCONP) |= ulPeripheral;
+    xHWREG(PCONP) |= ((unsigned long)0x01 << ulPeripheral);
 }
 
 //*****************************************************************************
@@ -894,8 +963,8 @@ void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 //!
 //! \param [in] ulPeripheral is the LPC17nx(n=5/6/7/8) peripherals, the parameter
 //!             can be one of the following value:
-//!             - \ref SYSCTL_PERIPH_TIM0
-//!             - \ref SYSCTL_PERIPH_TIM1
+//!             - \ref SYSCTL_PERIPH_TIMER0
+//!             - \ref SYSCTL_PERIPH_TIMER1
 //!             - \ref SYSCTL_PERIPH_UART0
 //!             - \ref SYSCTL_PERIPH_UART1
 //!             - \ref SYSCTL_PERIPH_PWM1
@@ -912,8 +981,8 @@ void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 //!             - \ref SYSCTL_PERIPH_QEI
 //!             - \ref SYSCTL_PERIPH_I2C1
 //!             - \ref SYSCTL_PERIPH_SSP0
-//!             - \ref SYSCTL_PERIPH_TIM2
-//!             - \ref SYSCTL_PERIPH_TIM3
+//!             - \ref SYSCTL_PERIPH_TIMER2
+//!             - \ref SYSCTL_PERIPH_TIMER3
 //!             - \ref SYSCTL_PERIPH_UART2
 //!             - \ref SYSCTL_PERIPH_UART3
 //!             - \ref SYSCTL_PERIPH_I2C2
@@ -927,30 +996,66 @@ void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 //*****************************************************************************
 void SysCtlPeripheralDisable(unsigned long ulPeripheral)
 {
-    xHWREG(PCONP) &= ~ulPeripheral;
+    xHWREG(PCONP) &= ~((unsigned long)0x01 << ulPeripheral);
 }
 
 //*****************************************************************************
 //
-//! \brief Enables a peripheral by base address.
+//! \brief      Reset a peripheral by base address.
 //!
-//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be 
-//! enabled.Details please refer to \ref xLowLayer_Peripheral_Memmap.
+//!             Peripherals are Reset with this function.  At power-up, all
+//!             peripherals are disabled; they must be enabled in order to operate
+//!             or respond to register reads/writes.
 //!
-//! Peripherals are enabled with this function.  At power-up, all peripherals
-//! are disabled; they must be enabled in order to operate or respond to
-//! register reads/writes.
+//! \param [in] ulPeripheralBase a Peripheral base indicate which peripheral to be
+//!             enabled. it must be one of the following value:
+//!             - \ref ETH_BASE
+//!             - \ref DMA0_BASE
+//!             - \ref USB_BASE
+//!             - \ref GPIO_PORTA_BASE
+//!             ...
+//!             More information, please refer to
+//!                                     \ref LPC17xx_LowLayer_Peripheral_Memmap.
 //!
-//! The \e ulPeripheral parameter must be only one of the following values:
-//! Details please refer to \ref xLowLayer_Peripheral_Memmap.
-//!
-//! \note None.
-//!
-//! \return None.
+//! \return     None.
+//! \note       This function not suit for LPC17_5x or LPC17_6x
 //
 //*****************************************************************************
-void 
-SysCtlPeripheralEnable2(unsigned long ulPeripheralBase)
+void SysCtlPeripheralReset2(unsigned long ulPeripheralBase)
+{
+    unsigned long i = 0;
+    for(i=0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
+    {
+        if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
+        {
+            SysCtlPeripheralReset(g_pPeripherals[i].ulPeripheralID);
+            break;
+        }
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief      Enables a peripheral by base address.
+//!
+//!             Peripherals are enabled with this function.  At power-up, all
+//!             peripherals are disabled; they must be enabled in order to operate
+//!             or respond to register reads/writes.
+//!
+//! \param [in] ulPeripheralBase a Peripheral base indicate which peripheral to be
+//!             enabled. it must be one of the following value:
+//!             - \ref ETH_BASE
+//!             - \ref DMA0_BASE
+//!             - \ref USB_BASE
+//!             - \ref GPIO_PORTA_BASE
+//!             ...
+//!             More information, please refer to
+//!                                     \ref LPC17xx_LowLayer_Peripheral_Memmap.
+//!
+//! \return     None.
+//
+//*****************************************************************************
+void SysCtlPeripheralEnable2(unsigned long ulPeripheralBase)
 {
     unsigned long i = 0;
 
@@ -959,12 +1064,75 @@ SysCtlPeripheralEnable2(unsigned long ulPeripheralBase)
         if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
         {
             SysCtlPeripheralEnable(g_pPeripherals[i].ulPeripheralID);
-            break;
+            return ;
         }
     }
 }
 
+//*****************************************************************************
+//
+//! \brief      Disables a peripheral by base address.
+//!
+//!             Peripherals are Disabled with this function.  At power-up, all
+//!             peripherals are disabled; they must be enabled in order to operate
+//!             or respond to register reads/writes.
+//!
+//! \param [in] ulPeripheralBase a Peripheral base indicate which peripheral to be
+//!             enabled. it must be one of the following value:
+//!             - \ref ETH_BASE
+//!             - \ref DMA0_BASE
+//!             - \ref USB_BASE
+//!             - \ref GPIO_PORTA_BASE
+//!             ...
+//!             More information, please refer to \ref LPC17xx_LowLayer_Peripheral_Memmap.
+//!
+//! \return     None.
+//
+//*****************************************************************************
+void SysCtlPeripheralDisable2(unsigned long ulPeripheralBase)
+{
+    unsigned long i = 0;
+    for(i=0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
+    {
+        if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
+        {
+            SysCtlPeripheralDisable(g_pPeripherals[i].ulPeripheralID);
+            return ;
+        }
+    }
+}
 
+//*****************************************************************************
+//
+//! \brief      Get the peripheral interrupt number through peripheral base.
+//!
+//! \param [in] ulPeripheral The peripheral's base
+//!
+//! \return     None.
+//! \note       It's especially useful to enable the short pin's corresponding
+//!             peripheral interrupt: Use the short pin to Get the GPIO base
+//!             through \ref xGPIOSPinToPort function, and then use this function
+//!             to enable the GPIO interrupt.
+//!
+//
+//*****************************************************************************
+unsigned long SysCtlPeripheraIntNumGet(unsigned long ulPeripheralBase)
+{
+    unsigned long i = 0;
+
+    //
+    // Check the arguments.
+    //
+
+    for(i=0; g_pPeripherals[i].ulPeripheralBase != 0; i++)
+    {
+        if(ulPeripheralBase == g_pPeripherals[i].ulPeripheralBase)
+        {
+            break;
+        }
+    }
+    return g_pPeripherals[i].ulPeripheralIntNum;
+}
 
 //*****************************************************************************
 //
@@ -1167,7 +1335,7 @@ xtBoolean SysCtlPwrFlagCheck(unsigned long ulFlag)
 //! \return     None.
 //!
 //
-//***************************************************************************** 
+//*****************************************************************************
 void SysCtlPwrFlagClear(unsigned long ulFlag)
 {
     // Check input parameters valid.
@@ -1176,7 +1344,7 @@ void SysCtlPwrFlagClear(unsigned long ulFlag)
 
     ulFlag = (ulFlag >> 8 ) & BIT_MASK(32, 3, 0);
     xHWREG(PCON) |= ulFlag;
-} 
+}
 
 //*****************************************************************************
 //
@@ -1230,7 +1398,7 @@ void SysCtlBODCfg(unsigned long ulCfg)
 //
 //! \brief  Resets the device.
 //!
-//!         This function will perform a software reset of the entire device. 
+//!         This function will perform a software reset of the entire device.
 //!         The processor and all peripherals will be reset and all device
 //!         registers will return to their default values (with the exception of
 //!         the reset cause register, which will maintain its current value but
@@ -1254,5 +1422,111 @@ void SysCtlReset(void)
     while(1)
     {
     }
+}
+
+
+
+//*****************************************************************************
+//
+//! \brief  Configure MCO function.
+//!
+//! \param [in] ulCfg can be used to configure MCO Clock source and Clock divider.
+//!             The value can be divided into two groups:
+//!             -# Clock Source Select
+//!                This value can be one of the following value:
+//!                - \ref MCO_CLKSRC_CPU
+//!                - \ref MCO_CLKSRC_MAIN_OSC
+//!                - \ref MCO_CLKSRC_IRC
+//!                - \ref MCO_CLKSRC_USB
+//!                - \ref MCO_CLKSRC_RTC
+//!
+//!             -# Clock Source Divider
+//!                This value can be one of the following value:
+//!                - \ref MCO_CLKDIV_1
+//!                - \ref MCO_CLKDIV_2
+//!                  ...
+//!                - \ref MCO_CLKDIV_16
+//!
+//! \return None.
+//!
+//! \note   \ref MCO_CLKSRC_CPU and \ref MCO_CLKDIV_1 is default parameter.
+//!         That's to say, when you call this function with only one parameter,
+//!         then default parameter is used as another input parameter.
+//!
+//!         e.g. 1
+//!               SysCtlMCOCfg(MCO_CLKSRC_IRC)
+//!         is equal to
+//!             SysCtlMCOCfg(MCO_CLKSRC_IRC, MCO_CLKDIV_1)
+//!
+//!         e.g. 2
+//!               SysCtlMCOCfg(MCO_CLKDIV_4)
+//!         is equal to
+//!             SysCtlMCOCfg(MCO_CLKSRC_CPU, MCO_CLKDIV_4)
+//
+//*****************************************************************************
+void SysCtlMCOCfg(unsigned long ulCfg)
+{
+    // Check input parameter
+    xASSERT((ulCfg & BIT_MASK(32, 31, 8)) == 0);
+
+    xHWREG(CLKOUTCFG) = ulCfg;
+}
+
+//*****************************************************************************
+//
+//! \brief  Enable MCO Clock Output.
+//!
+//! \return None.
+//!
+//! \note   Before you call \ref SysCtlMCOEnable or \ref SysCtlMCODisable, you
+//!         MUST call \ref SysCtlMCOCfg to configure MCO clock source and clock
+//!         divider.
+//
+//*****************************************************************************
+void SysCtlMCOEnable(void)
+{
+    xHWREG(CLKOUTCFG) |= CLKOUTCFG_CLKOUT_EN;
+}
+
+//*****************************************************************************
+//
+//! \brief  Disable MCO Clock Output.
+//!
+//! \return None.
+//!
+//! \note   Before you call \ref SysCtlMCOEnable or \ref SysCtlMCODisable, you
+//!         MUST call \ref SysCtlMCOCfg to configure MCO clock source and clock
+//!         divider.
+//
+//*****************************************************************************
+void SysCtlMCODisable(void)
+{
+    xHWREG(CLKOUTCFG) &= ~CLKOUTCFG_CLKOUT_EN;
+}
+
+//*****************************************************************************
+//
+//! \brief  Disable MCO Clock Output.
+//!
+//! \return the MCO activity indication.
+//!         - xtrue  when CLKOUT is enabled.
+//!         - xfalse when CLKOUT has been disabled via the CLKOUT_EN bit and
+//!                  the clock has completed being stopped.
+//!
+//! \note   Before you call \ref SysCtlMCOStatusGet, you MUST call
+//!         \ref SysCtlMCOCfg to configure MCO clock source and clock divider.
+//
+//*****************************************************************************
+xtBoolean SysCtlMCOStatusGet(void)
+{
+    if (xHWREG(CLKOUTCFG) & CLKOUTCFG_CLKOUT_ACT)
+    {
+        return (xtrue);
+    }
+    else
+    {
+        return (xfalse);
+    }
+
 }
 

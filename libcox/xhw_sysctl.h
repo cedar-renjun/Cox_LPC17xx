@@ -13,7 +13,6 @@
 //! Redistribution and use in source and binary forms, with or without
 //! modification, are permitted provided that the following conditions
 //! are met:
-//!
 //!     * Redistributions of source code must retain the above copyright
 //! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
@@ -45,8 +44,7 @@
 #include "xhw_memmap.h"
 
 //! Detect MCU Type.
-#if defined(LPC_175x) || defined (LPC_176x) || \
-    defined(LPC_177x) || defined (LPC_178x)
+#if defined(LPC_175x) || defined (LPC_176x)
 #else
 #error Please select your LPC MCU first!             \
        This value can be one of the following value: \
@@ -69,7 +67,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_SysCtl_Register STM32F1xx SysCtl Register
+//! \addtogroup LPC17xx_SysCtl_Register LPC17xx SysCtl Register
 //! \brief Here are the detailed info of SysCtl registers.
 //!
 //! it contains:
@@ -86,88 +84,13 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_SysCtl_Register_Offsets STM32F1xx SysCtl Register Offsets(Map)
-//! \brief Defines for the system control register addresses.through
+//! \addtogroup LPC17xx_SysCtl_Register_Offsets LPC17xx SysCtl Register Offsets(Map)
+//! \brief Defines for the system control register addresses.
 //! <b>SysCtl_BASE + offset</b>.
 //! @{
 //
 //*****************************************************************************
-
-//
-//! Flash Access control register
-//
-#define FLASH_ACR               0x40022000
-
-//
-//! Clock control register
-//
-#define RCC_CR                  0x40021000
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-//*****************************************************************************
-//
-//! \addtogroup STM32F1xx_SysCtl_Register_RCC_CR SysCtl Register RCC_CR
-//! \brief Defines for the bit fields in the GCR_PDID register.
-//! @{
-//
-//*****************************************************************************
-
-//
-//! PLL3 clock ready flag
-//
-#define RCC_CR_PLL3RDY          0x20000000
-
-//
-//! PLL3 enable
-//
-#define RCC_CR_PLL3ON           0x10000000
-
-//
-//! PLL2 clock ready flag
-//
-#define RCC_CR_PLL2RDY          0x08000000
-
-//
-//! PLL2 enable
-//
-#define RCC_CR_PLL2ON           0x04000000
-
-//
-//! PLL clock ready flag
-//
-#define RCC_CR_PLLRDY           0x02000000
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-#endif // __XHW_SYSCTL_H__
-
+ 
 //! Flash Accelerator Configuration Register Controls flash access timing.
 //  SYSCTL_BASE --> 0x400FC000
 #define FLASHCFG                (SYSCTL_BASE + (unsigned long)0x000)
@@ -272,7 +195,8 @@
 //! USB Interrupt Status
 #define USBINTST                (SYSCTL_BASE + (unsigned long)0x1C0)
 
-//! Selects between alternative requests on DMA channels 0 through 7 and 10 through 15
+//! Selects between alternative requests on DMA channels 0 through 7
+//! and 10 through 15
 #define DMAREQSEL               (SYSCTL_BASE + (unsigned long)0x1C4)
 
 //! Clock Output Configuration
@@ -287,11 +211,23 @@
 //! Values for the four programmable delays associated with SDRAM operation.
 #define EMCDLYCTL               (SYSCTL_BASE + (unsigned long)0x1DC)
 
-//! Controls the calibration counter for programmable delays and returns the result value.
-#define EMCCAL                  (SYSCTL_BASE + (unsigned long)0x1E0)
+//! Controls the calibration counter for programmable delays and returns
+//! the result value.
+#define EMCCAL                  (SYSCTL_BASE + (unsigned long)0x1E0)   
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-//FLASHCFG {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_FLASHCFG SysCtl Register FLASHCFG
+//! \brief Defines for the bit fields in the FLASHCFG register.
+//! @{
+//
+//***************************************************************************** 
 
 //! Flash access time MASK
 #define FLASHCFG_FLASHTIM_M     BIT_MASK(32, 15, 12)
@@ -308,20 +244,51 @@
 //! Flash accesses use 6 CPU clock. Safe setting for any allowed conditions.
 #define FLASHCFG_FLASHTIM_ANY   (BIT_32_14 | BIT_32_12)
 
-//FLASHCFG }}
+//*****************************************************************************
+//
+//! @}  FLASHCFG
+//
+//***************************************************************************** 
 
-//PLLCON {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PLLCON SysCtl Register PLLCON
+//! \brief Defines for the bit fields in the PLLCON register.
+//! @{
+//
+//***************************************************************************** 
+
+//! PLL0 Enable
 #define PLL0CON_PLLE           BIT_32_0
+
+//! PLL0 Connect
 #define PLL0CON_PLLC           BIT_32_1
 
+//! PLL1 Enable
 #define PLL1CON_PLLE           BIT_32_0
+
+//! PLL1 Connect
 #define PLL1CON_PLLC           BIT_32_1
 
+//! PLL Enable
 #define PLLCON_PLLE            BIT_32_0
-#define PLLCON_PLLC            BIT_32_1
-//PLLCON }}
 
-//PLLCFG {{
+//! PLL Connect
+#define PLLCON_PLLC            BIT_32_1
+
+//*****************************************************************************
+//
+//! @}  PLLCON 
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PLLCFG SysCtl Register PLLCFG
+//! \brief Defines for the bit fields in the PLLCFG register.
+//! @{
+//
+//***************************************************************************** 
 
 #if defined(LPC_175x) | defined(LPC_176x)
 
@@ -362,10 +329,19 @@
 
 #endif
 
-//PLLCFG }}
+//*****************************************************************************
+//
+//! @}  PLLCFG 
+//
+//*****************************************************************************
 
-//PLLSTAT {{
-
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PLLSTAT SysCtl Register PLLSTAT
+//! \brief Defines for the bit fields in the PLLSTAT register.
+//! @{
+//
+//***************************************************************************** 
 #if defined(LPC_175x) | defined(LPC_176x)
 
 #define PLL0STAT_MSEL_M         BIT_MASK(32, 14, 0)
@@ -389,18 +365,37 @@
 
 #endif
 
-//PLLSTAT }}
+//*****************************************************************************
+//
+//! @}  PLLSTAT
+//
+//***************************************************************************** 
 
-//PLLFEED {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PLLFEED SysCtl Register PLLFEED
+//! \brief Defines for the bit fields in the PLLFEED register.
+//! @{
+//
+//*****************************************************************************
 
 //! The PLL feed sequence must be written to this register in order for the
 //! related PLL's configuration and control register changes to take effect.
 #define PLLFEED_PLLFEED         BIT_MASK(32, 7, 0)
 
-//PLLFEED }}
+//*****************************************************************************
+//
+//! @}  PLLFEED
+//
+//***************************************************************************** 
 
-
-//PCON {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PCON SysCtl Register PCON
+//! \brief Defines for the bit fields in the PCON register.
+//! @{
+//
+//***************************************************************************** 
 
 //! This bit controls entry to the power-down mode.
 #define PCON_PM0                BIT_32_0
@@ -429,9 +424,19 @@
 //! Deep Power-down entry flag
 #define PCON_DPDFLAG            BIT_32_11
 
-//PCON }}
+//*****************************************************************************
+//
+//! @}  PCON
+//
+//*****************************************************************************  
 
-//PCONP {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PCONP SysCtl Register PCONP
+//! \brief Defines for the bit fields in the PCONP register.
+//! @{
+//
+//***************************************************************************** 
 
 //! LCD Controller power/clock control bit.
 #define PCONP_PCLCD             BIT_32_0
@@ -535,25 +540,52 @@
 //! USB interface power/clock control bit.
 #define PCONP_PCUSB             BIT_32_31
 
-//PCONP }}
+//*****************************************************************************
+//
+//! @}  PCONP
+//
+//*****************************************************************************  
 
-//EMCCLKSEL {{
-
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_EMCCLKSEL SysCtl Register EMCCLKSEL
+//! \brief Defines for the bit fields in the EMCCLKSEL register.
+//! @{
+//
+//***************************************************************************** 
 //! Selects the EMC clock rate relative to the CPU clock.
 #define EMCCLKSEL_EMCDIV        BIT_32_0
 
-//EMCCLKSEL }}
+//*****************************************************************************
+//
+//! @}  EMCCLKSEL 
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_CCLKCFG SysCtl Register CCLKCFG
+//! \brief Defines for the bit fields in the CCLKCFG register.
+//! @{
+//
+//*****************************************************************************
 #if defined(LPC_175x) | defined(LPC_176x)
-//CCLKCFG {{
-
 //! Selects the divide value for creating the CPU clock (CCLK) from the PLL0 output.
 #define CCLKCFG_CCLKSEL_M       BIT_MASK(32, 7, 0)
+#endif   
+//*****************************************************************************
+//
+//! @} CCLKCFG 
+//
+//*****************************************************************************
 
-//CCLKCFG }}
-#endif
-
-//CCLKSEL {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_CCLKSEL SysCtl Register CCLKSEL
+//! \brief Defines for the bit fields in the CCLKSEL register.
+//! @{
+//
+//*****************************************************************************
 #if defined(LPC_177x) | defined(LPC_178x)
 
 //! Selects the divide value for creating the CPU clock (CCLK) from the selected
@@ -561,13 +593,23 @@
 #define CCLKSEL_CCLKDIV         BIT_MASK(32, 4, 0)
 
 //! Selects the input clock for the CPU clock divider.
-#define CCLKSEL_CCLKSEL         BIT_32_8
-
+#define CCLKSEL_CCLKSEL         BIT_32_8                                       
 #endif
-//CCLKSEL }}
+
+//*****************************************************************************
+//
+//! @} CCLKSEL 
+//
+//*****************************************************************************
 
 
-//USBCLKSEL {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_USBCLKSEL SysCtl Register USBCLKSEL
+//! \brief Defines for the bit fields in the USBCLKSEL register.
+//! @{
+//
+//*****************************************************************************
 #if   defined(LPC_175x) | defined(LPC_176x)
 
 //! Selects the input clock for the USB clock divider.
@@ -606,9 +648,20 @@
 #define USBCLKSEL_USBSEL_A_PLLK BIT_32_9
 
 #endif
-//USBCLKSEL }}
 
-//CLKSRCSEL {{
+//*****************************************************************************
+//
+//! @} USBCLKSEL
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_CLKSRCSEL SysCtl Register CLKSRCSEL
+//! \brief Defines for the bit fields in the CLKSRCSEL register.
+//! @{
+//
+//*****************************************************************************
 
 //! Select the clock source for sysclk and PLL0
 #define CLKSRCSEL_CLKSRC_M      BIT_MASK(32, 1, 0)
@@ -622,9 +675,20 @@
 //! Select Internal RC oscillator as the PLL0 clock source.
 #define CLKSRCSEL_CLKSRC_RTC    BIT_32_1
 
-//CLKSRCSEL }}
 
-//CANSLEEPCLR {{
+//*****************************************************************************
+//
+//! @} CLKSRCSEL
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_CANSLEEPCLR SysCtl Register CANSLEEPCLR
+//! \brief Defines for the bit fields in the CANSLEEPCLR register.
+//! @{
+//
+//*****************************************************************************
 
 //! Sleep status and control for CAN channel 1.
 #define CANSLEEPCLR_CAN1SLEEP   BIT_32_1
@@ -632,9 +696,19 @@
 //! Sleep status and control for CAN channel 2.
 #define CANSLEEPCLR_CAN2SLEEP   BIT_32_2
 
-//CANSLEEPCLR }}
+//*****************************************************************************
+//
+//! @} CANSLEEPCLR
+//
+//*****************************************************************************
 
-//CANWAKEFLAGS {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_CANWAKEFLAGS SysCtl Register CANWAKEFLAGS
+//! \brief Defines for the bit fields in the CANWAKEFLAGS register.
+//! @{
+//
+//*****************************************************************************
 
 //! Wake-up status for CAN channel 1.
 #define CANWAKEFLAGS_CAN1WAKE   BIT_32_1
@@ -642,9 +716,20 @@
 //! Wake-up status for CAN channel 2.
 #define CANWAKEFLAGS_CAN2WAKE   BIT_32_2
 
-//CANWAKEFLAGS }}
 
-//EXTINT {{
+//*****************************************************************************
+//
+//! @} CANWAKEFLAGS
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_EXTINT SysCtl Register EXTINT
+//! \brief Defines for the bit fields in the EXTINT register.
+//! @{
+//
+//*****************************************************************************
 
 //! External interrupt flag for INT0
 #define EXTINT_EINT0            BIT_32_0
@@ -658,9 +743,19 @@
 //! External interrupt flag for INT3
 #define EXTINT_EINT3            BIT_32_3
 
-//EXTINT }}
+//*****************************************************************************
+//
+//! @} EXTINT
+//
+//*****************************************************************************
 
-//EXTMODE {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_EXTMODE SysCtl Register EXTMODE
+//! \brief Defines for the bit fields in the EXTMODE register.
+//! @{
+//
+//*****************************************************************************
 
 //! Level or edge sensitivity select for EXINT0.
 #define EXTMODE_EXTMODE0        BIT_32_0
@@ -682,9 +777,20 @@
 #define EXTMODE_EXTMODE3_LEVEL  BIT_32_ALL_0
 #define EXTMODE_EXTMODE3_EDGE   BIT_32_3
 
-//EXTMODE }}
 
-//EXTPOLAR {{
+//*****************************************************************************
+//
+//! @} EXTMODE
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_EXTPOLAR SysCtl Register EXTPOLAR
+//! \brief Defines for the bit fields in the EXTPOLAR register.
+//! @{
+//
+//*****************************************************************************
 
 //! External interrupt polarity for EINT0
 #define EXTPOLAR_EXTPOLAR0      BIT_32_0
@@ -714,9 +820,19 @@
 //! High-active or Rising-edge sensitive
 #define EXTPOLAR_EXTPOLAR3_H_R  BIT_32_3
 
-//EXTPOLAR }}
+//*****************************************************************************
+//
+//! @} EXTPOLAR
+//
+//*****************************************************************************
 
-//RSID {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_RSID SysCtl Register RSID
+//! \brief Defines for the bit fields in the RSID register.
+//! @{
+//
+//*****************************************************************************
 
 //! Power on reset
 #define RSID_POR                BIT_32_0
@@ -736,9 +852,20 @@
 //! Lockup reset
 #define RSID_LOCKUP             BIT_32_5
 
-//RSID }}
 
-//MATRIXARB {{
+//*****************************************************************************
+//
+//! @} RSID
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_MATRIXARB SysCtl Register MATRIXARB
+//! \brief Defines for the bit fields in the MATRIXARB register.
+//! @{
+//
+//*****************************************************************************
 
 //! I-code bus priority. Should be lower than PRI_DCODE for proper operation.
 #define MATRIXARB_PRI_ICODE     BIT_MASK(32, 1, 0)
@@ -764,9 +891,20 @@
 //! ROM latency select, should awalys be 0.
 #define MATRIXARB_ROM_LAT       BIT_32_16
 
-//MATRIXARB }}
 
-//SCS {{
+//*****************************************************************************
+//
+//! @} MATRIXARB
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_SCS SysCtl Register SCS
+//! \brief Defines for the bit fields in the SCS register.
+//! @{
+//
+//*****************************************************************************
 
 //! EMC Shift control.
 #define SCS_EMCSC               BIT_32_0
@@ -791,16 +929,38 @@
 #define SCS_OSCSTAT_RDY         BIT_32_6
 #define SCS_OSCSTAT_NOTRDY      BIT_32_ALL_0
 
-//SCS }}
 
-//PCLKSEL {{
+//*****************************************************************************
+//
+//! @} SCS
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PCLKSEL SysCtl Register PCLKSEL
+//! \brief Defines for the bit fields in the PCLKSEL register.
+//! @{
+//
+//*****************************************************************************
 
 //! Selects the divde value for the clock used for all APB peripherals.
 #define PCLKSEL_PCLKDIV_M       BIT_MASK(32, 4, 0)
 
-//PCLKSEL }}
 
-//PCLKSEL0 {{ For LPC 17_5x_6x
+//*****************************************************************************
+//
+//! @} PCLKSEL
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PCLKSEL0 SysCtl Register PCLKSEL0 
+//! \brief Defines for the bit fields in the PCLKSEL0 register.
+//! @{
+//
+//*****************************************************************************
 
 #define PCLKSEL_PPP_M          BIT_MASK(32, 1, 0)
 
@@ -860,10 +1020,19 @@
 #define PCLKSEL0_ACF_M         BIT_MASK(32, 31, 30)
 #define PCLKSEL0_ACF_S         30
 
-//PCLKSEL0 }}
+//*****************************************************************************
+//
+//! @} PCLKSEL0
+//
+//*****************************************************************************
 
-
-//PCLKSEL1 {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PCLKSEL1 SysCtl Register PCLKSEL1
+//! \brief Defines for the bit fields in the PCLKSEL1 register.
+//! @{
+//
+//*****************************************************************************
 
 //! Peripheral clock selection for the Quadrature Encoder Interface.
 #define PCLKSEL1_QEI_M         BIT_MASK(32, 1 , 0)
@@ -921,9 +1090,20 @@
 #define PCLKSEL1_MC_M          BIT_MASK(32, 31,30)
 #define PCLKSEL1_MC_S          30
 
-//PCLKSEL1 }}
 
-//PBOOST {{
+//*****************************************************************************
+//
+//! @} PCLKSEL1
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_PBOOST SysCtl Register PBOOST
+//! \brief Defines for the bit fields in the PBOOST register.
+//! @{
+//
+//*****************************************************************************
 
 //! Boost control bits
 #define PBOOST_BOOST_M          BIT_MASK(32, 1, 0)
@@ -934,9 +1114,20 @@
 //! Boost is on, operation up to 120 Mhz is supported
 #define PBOOST_BOOST_ON         (BIT_32_0 | BIT_32_1)
 
-//PBOOST }}
 
-//SPIFICLKSEL {{
+//*****************************************************************************
+//
+//! @} PBOOST
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_SPIFICLKSEL SysCtl Register SPIFICLKSEL
+//! \brief Defines for the bit fields in the SPIFICLKSEL register.
+//! @{
+//
+//*****************************************************************************
 
 //! Selects the divide value for creating the SPIFI clock from the selected clock source.
 #define SPIFICLKSEL_SPIFIDIV_M  BIT_MASK(32, 4, 0)
@@ -953,17 +1144,38 @@
 //! The output of the Alt PLL is used as the input to the SPIFI clock divider
 #define SPIFICLKSEL_SPIFISEL_A_PLL     BIT_32_9
 
-//SPIFICLKSEL }}
 
-//LCD_CFG {{
+//*****************************************************************************
+//
+//! @} SPIFICLKSEL
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_LCD_CFG SysCtl Register LCD_CFG
+//! \brief Defines for the bit fields in the LCD_CFG register.
+//! @{
+//
+//*****************************************************************************
 
 //! LCD panel clock prescaler selection. The value in the this register plus 1
 //! is used to divide the selected input clock to produce the panel clock.
 #define LCD_CFG_CLKDIV_M        BIT_MASK(32, 4, 0)
 
-//LCD_CFG }}
+//*****************************************************************************
+//
+//! @} LCD_CFG
+//
+//*****************************************************************************
 
-//USBINTST {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_USBINTST SysCtl Register USBINTST
+//! \brief Defines for the bit fields in the USBINTST register.
+//! @{
+//
+//*****************************************************************************
 //! Low priority interrupt line status.
 #define USBINTST_USB_INT_REQ_LP  BIT_32_0
 //! High priority interrupt line status.
@@ -983,10 +1195,20 @@
 //! Enable all USB interrupts.
 #define USBINTST_EN_USB_INTS     BIT_32_31
 
-//USBINTST }}
+//*****************************************************************************
+//
+//! @} USBINTST
+//
+//*****************************************************************************
 
 
-//DMAREQSEL {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_DMAREQSEL SysCtl Register DMAREQSEL
+//! \brief Defines for the bit fields in the DMAREQSEL register.
+//! @{
+//
+//*****************************************************************************
 //! Selects the DMA request for GPDMA input 0:
 #define DMAREQSEL_DMASEL00              BIT_32_0
 #define DMAREQSEL_DMASEL00_UNUSED       BIT_32_ALL_0
@@ -1057,9 +1279,19 @@
 #define DMAREQSEL_DMASEL15_UART2_RX     BIT_32_ALL_0
 #define DMAREQSEL_DMASEL15_TIMER3_M1    BIT_32_15
 
-//DMAREQSEL }}
+//*****************************************************************************
+//
+//! @} DMAREQSEL
+//
+//*****************************************************************************
 
-//CLKOUTCFG {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_CLKOUTCFG SysCtl Register CLKOUTCFG
+//! \brief Defines for the bit fields in the CLKOUTCFG register.
+//! @{
+//
+//*****************************************************************************
 
 //! Selects the clock source for the CLKOUT function.
 #define CLKOUTCFG_CLKOUTSEL_M        BIT_MASK(32, 3, 0)
@@ -1096,9 +1328,19 @@
 //! CLKOUT activity indication
 #define CLKOUTCFG_CLKOUT_ACT         BIT_32_9
 
-//CLKOUTCFG }}
+//*****************************************************************************
+//
+//! @} CLKOUTCFG
+//
+//*****************************************************************************
 
-//RSTCON0 {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_RSTCON0 SysCtl Register RSTCON0
+//! \brief Defines for the bit fields in the RSTCON0 register.
+//! @{
+//
+//*****************************************************************************
 //! LCD controller reset control bit
 #define RSTCON0_RSTLCD                 BIT_32_0
 
@@ -1195,10 +1437,21 @@
 //! USB interface reset control bit
 #define RSTCON0_RSTUSB                 BIT_32_31
 
-//RSTCON0 }}
+
+//*****************************************************************************
+//
+//! @} RSTCON0
+//
+//*****************************************************************************
 
 
-//RSTCON1 {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_RSTCON1 SysCtl Register RSTCON1
+//! \brief Defines for the bit fields in the RSTCON1 register.
+//! @{
+//
+//*****************************************************************************
 
 //! Reset control bit for the IOCON registers
 #define RSTCON1_RSTIOCON               BIT_32_0
@@ -1209,9 +1462,20 @@
 //! CAN acceptance filter reset control bit
 #define RSTCON1_RSTCANACC              BIT_32_2
 
-//RSTCON1 }}
 
-//EMCDLYCTL {{
+//*****************************************************************************
+//
+//! @} RSTCON1
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_EMCDLYCTL SysCtl Register EMCDLYCTL
+//! \brief Defines for the bit fields in the EMCDLYCTL register.
+//! @{
+//
+//*****************************************************************************
 
 //! Programmable delay value for EMC outputs in command delayed mode.
 #define EMCDLYCTL_CMDDLY_M      BIT_MASK(32, 4, 0)
@@ -1225,9 +1489,20 @@
 //! Programmable delay value for the CLKOUT1 output.
 #define EMCDLYCTL_CLKOUT1DLY_M  BIT_MASK(32, 28, 24)
 
-//EMCDLYCTL }}
 
-//EMCCAL {{
+//*****************************************************************************
+//
+//! @} EMCDLYCTL
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_SysCtl_Register_EMCCAL SysCtl Register EMCCAL
+//! \brief Defines for the bit fields in the EMCCAL register.
+//! @{
+//
+//*****************************************************************************
 
 //! Returns the count of the approximately 50 MHz ring oscillator that occur
 //! during 32 clocks of the IRC oscillator
@@ -1239,6 +1514,28 @@
 //! Measurement completion flag
 #define EMCCAL_DONE             BIT_32_15
 
-//EMCCAL }}
+//*****************************************************************************
+//
+//! @} EMCCAL
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+#endif // __XHW_SYSCTL_H__
 

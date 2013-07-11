@@ -41,7 +41,7 @@
 #define __xHW_MEMMAP_H__
 
 //! Detect MCU Type.
-#if defined(LPC_175x) || defined (LPC_176x) || \
+#if defined(LPC_175x) || defined (LPC_176x)
 #else
 #error Please select your LPC MCU first!             \
        This value can be one of the following value: \
