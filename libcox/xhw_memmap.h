@@ -87,11 +87,11 @@
 #define xETH_BASE               ETH_BASE                                     
 #define xDMA0_BASE              DMA_BASE                                     
 #define xUSB_BASE               USB_BASE                                     
-#define xGPIO_PORTA_BASE        GPIO_PORTA_BASE                              
-#define xGPIO_PORTB_BASE        GPIO_PORTB_BASE                              
-#define xGPIO_PORTC_BASE        GPIO_PORTC_BASE                              
-#define xGPIO_PORTD_BASE        GPIO_PORTD_BASE                              
-#define xGPIO_PORTE_BASE        GPIO_PORTE_BASE                              
+#define xGPIO_PORTA_BASE        GPIOA_BASE                              
+#define xGPIO_PORTB_BASE        GPIOB_BASE                              
+#define xGPIO_PORTC_BASE        GPIOC_BASE                              
+#define xGPIO_PORTD_BASE        GPIOD_BASE                              
+#define xGPIO_PORTE_BASE        GPIOE_BASE                              
 #define xWDT_BASE               WDT_BASE                                     
 #define xTIMER0_BASE            TIMER0_BASE                                  
 #define xTIMER1_BASE            TIMER1_BASE                                  
@@ -154,11 +154,11 @@
 #define DMA_BASE                ((unsigned long)0x50004000)
 #define USB_BASE                ((unsigned long)0x5000C000)
 
-#define GPIO_PORTA_BASE         ((unsigned long)0x2009C000)
-#define GPIO_PORTB_BASE         ((unsigned long)0x2009C020)
-#define GPIO_PORTC_BASE         ((unsigned long)0x2009C040)
-#define GPIO_PORTD_BASE         ((unsigned long)0x2009C060)
-#define GPIO_PORTE_BASE         ((unsigned long)0x2009C080)
+#define GPIOA_BASE              ((unsigned long)0x2009C000)
+#define GPIOB_BASE              ((unsigned long)0x2009C020)
+#define GPIOC_BASE              ((unsigned long)0x2009C040)
+#define GPIOD_BASE              ((unsigned long)0x2009C060)
+#define GPIOE_BASE              ((unsigned long)0x2009C080)
 
 //LPC17nx APB0 (n = 5/6)
 #define WDT_BASE                ((unsigned long)0x40000000)
