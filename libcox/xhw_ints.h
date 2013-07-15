@@ -210,6 +210,9 @@
 #define INT_EINT1                            35 // External Interrupt 1
 #define INT_EINT2                            36 // External Interrupt 2
 #define INT_EINT3                            37 // External Interrupt 3, Share with GPIO
+#define INT_GPIO                             37 // External Interrupt 3, Share with GPIO
+#define INT_GPIOA                            37 // External Interrupt 3, Share with GPIO
+#define INT_GPIOC                            37 // External Interrupt 3, Share with GPIO
 #define INT_ADC                              38 // ADC
 #define INT_BOD                              39 // Brown Out detect
 #define INT_USB                              40 // USB Controller
