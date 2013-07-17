@@ -9,21 +9,16 @@
 #include "xhw_gpio.h"
 #include "xgpio.h"
 
-void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins, unsigned long ulPinIO)
-{
-    unsigned long i = 0;
 
-    for(i = 0; i < 32; i++)
-    {
-        if(ulPins & (0x01 << i))
-        {
-            if(0 != ulPinIO)
-            {
-                GPIOPinModeCfg(ulPort, 0x01<<i, ulPinIO);
-            }
-        }
-    }
-}
+// GPIO Pin Interrupt
+// PA 0  --> 11   12
+// PA 15 --> 30   15
+// PC 0  --> 13   14
+
+static xtEventCallback g_psGPIOPinIntAssignTable[64] = 
+{
+    0,
+};
 
 static unsigned long PinIDToPos(unsigned long ulPin)
 { 
@@ -40,7 +35,155 @@ static unsigned long PinIDToPos(unsigned long ulPin)
     }
 
     return (-1);
+}  
+
+
+void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins, unsigned long ulPinIO)
+{
+    unsigned long i = 0;
+
+    for(i = 0; i < 32; i++)
+    {
+        if(ulPins & (0x01 << i))
+        {
+            if(0 != ulPinIO)
+            {
+                GPIOPinModeCfg(ulPort, 0x01<<i, ulPinIO);
+            }
+        }
+    }
 }
+
+unsigned long GPIOPinToPeripheralId(unsigned long ulPort, unsigned long ulPin)
+{
+
+    switch (ulPort)
+    {
+        case GPIOA_BASE:
+            {
+                return (SYSCTL_PERIPH_GPIOA);
+                break;
+            }
+        case GPIOB_BASE:
+            {
+                return (SYSCTL_PERIPH_GPIOB);
+                break;
+            }
+        case GPIOC_BASE:
+            {
+                return (SYSCTL_PERIPH_GPIOC);
+                break;
+            }
+        case GPIOD_BASE:
+            {
+                return (SYSCTL_PERIPH_GPIOD);
+                break;
+            }
+        case GPIOE_BASE:
+            {
+                return (SYSCTL_PERIPH_GPIOE);
+                break;
+            }
+    }
+
+    return (0);                      // Error
+}
+
+unsigned long  GPIOPinToPort(unsigned long ulPort, unsigned long ulPin)
+{
+
+    return (ulPort);
+}
+
+unsigned long  GPIOPinToPin(unsigned long ulPort, unsigned long ulPin)
+{
+
+    return (ulPin);
+}
+
+unsigned long xGPIODirModeGet(unsigned long ulPort, unsigned long ulPin)
+{
+    //! \todo Finish this function.
+    return (0);
+}
+
+void xGPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin, 
+                                   xtEventCallback xtPortCallback) 
+{
+    unsigned long PinNum = PinIDToPos(ulPin);
+    
+    if(GPIOA_BASE == ulPort)
+    {
+        g_psGPIOPinIntAssignTable[PinNum] = xtPortCallback;
+    }
+    else if(GPIOC_BASE == ulPort)
+    {
+        PinNum += 32;
+        g_psGPIOPinIntAssignTable[PinNum] = xtPortCallback;
+    }
+    else           // Error
+    {
+        while(1);
+    }
+
+}
+
+void xGPIOPinIntEnable(unsigned long ulPort, unsigned long ulPins, unsigned long ulIntType)
+{
+    unsigned long i = 0;
+
+    for(i = 0; i < 32; i++)
+    {
+        if(ulPins & (0x01 << i))
+        {
+            GPIOPinIntCfg(ulPort, (0x01 << i), ulIntType);
+            GPIOPinIntEnable(ulPort, (0x01 << i));
+        }
+    }
+}
+
+void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins)
+{
+    unsigned long i = 0;
+
+    for(i = 0; i < 32; i++)
+    {
+        if(ulPins & (0x01 << i))
+        {
+            GPIOPinIntDisable(ulPort, (0x01 << i));
+        }
+    }
+}
+
+void xGPIOPinIntClear(unsigned long ulPort, unsigned long ulPins)
+{
+    unsigned long i = 0;
+
+    for(i = 0; i < 32; i++)
+    {
+        if(ulPins & (0x01 << i))
+        {
+            GPIOPinIntFlagClear(ulPort, (0x01 << i));
+        }
+    } 
+}
+
+unsigned long xGPIOPinRead(unsigned long ulPort, unsigned long ulPins)
+{
+    xHWREG(ulPort + FIOMASK) = ~ulPins;
+    return xHWREG(ulPort + FIOPIN);
+}
+
+void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
+        unsigned long ulVal)
+{
+    xHWREG(ulPort + FIOMASK) = ~ulPins;
+    xHWREG(ulPort + FIOPIN)  =   ulVal;
+}
+
+////////////////////////////////////////////////////////////////////
+
+
 
 //! ulPort GPIOA_BASE/GPIOB_BASE/GPIOC_BASE/GPIOD_BASE/GPIOE_BASE
 //! ulPin
@@ -216,28 +359,35 @@ void GPIOPinModeCfg(unsigned long ulPort, unsigned long ulPin, unsigned long ulC
 
 
 // ulPin GPIO_PIN_n (n = 0/1/../31)
-void GPIOPinSet(unsigned long ulPort, unsigned long ulPin)
+void GPIOPinSet(unsigned long ulPort, unsigned long ulPins)
 {
-    xHWREG(ulPort + FIOMASK) = (unsigned long) 0x00;
-    xHWREG(ulPort + FIOSET)  = ulPin;
+    xHWREG(ulPort + FIOMASK) =~ulPins;
+    xHWREG(ulPort + FIOSET)  = ulPins;
 }
 
 // ulPin GPIO_PIN_n (n = 0/1/../31)
-void GPIOPinClr(unsigned long ulPort, unsigned long ulPin)
+void GPIOPinClr(unsigned long ulPort, unsigned long ulPins)
 {
-    xHWREG(ulPort + FIOMASK) = (unsigned long) 0x00;
-    xHWREG(ulPort + FIOCLR)  = ulPin;
+    xHWREG(ulPort + FIOMASK) =~ulPins;
+    xHWREG(ulPort + FIOCLR)  = ulPins;
 }
 
-void GPIOPinWrite(unsigned long ulPort, unsigned long ulPin, unsigned long ulVal)
+void GPIOPinWrite(unsigned long ulPort, unsigned long ulPins, unsigned long ulVal)
 {
-    xHWREG(ulPort + FIOMASK) &= ~ulPin;
-    xHWREG(ulPort + FIOPIN)   =  ulVal;
+    xHWREG(ulPort + FIOMASK) = ~ulPins;
+    if(0 != ulVal)
+    {
+        xHWREG(ulPort + FIOSET)   =  ulPins;
+    }
+    else
+    {
+        xHWREG(ulPort + FIOCLR)   =  ulPins;
+    }
 }
 
 unsigned long GPIOPinRead(unsigned long ulPort, unsigned long ulPin)
 {
-    xHWREG(ulPort + FIOMASK) &= ~ulPin;
+    xHWREG(ulPort + FIOMASK) = ~ulPin;
     return xHWREG(ulPort + FIOPIN);
 }
 

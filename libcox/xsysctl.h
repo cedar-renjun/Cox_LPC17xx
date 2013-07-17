@@ -1410,19 +1410,19 @@ extern "C"
 #define SYSCTL_PERIPH_CAN2             14
 
 //! GPIO A --> P0
-#define SYSCTL_PERIPH_GPIOA            15
+//#define SYSCTL_PERIPH_GPIOA            15
 
 //! GPIO B --> P1
-#define SYSCTL_PERIPH_GPIOB            15
+//#define SYSCTL_PERIPH_GPIOB            15
 
 //! GPIO C --> P2
-#define SYSCTL_PERIPH_GPIOC            15
+//#define SYSCTL_PERIPH_GPIOC            15
 
 //! GPIO D --> P3
-#define SYSCTL_PERIPH_GPIOD            15
+//#define SYSCTL_PERIPH_GPIOD            15
 
 //! GPIO E --> P4
-#define SYSCTL_PERIPH_GPIOE            15
+//#define SYSCTL_PERIPH_GPIOE            15
 
 //! Repetitive Interrupt Timer
 #define SYSCTL_PERIPH_RIT              16
@@ -1466,6 +1466,20 @@ extern "C"
 //! USB
 #define SYSCTL_PERIPH_USB              31
 
+//! GPIO A --> P0
+#define SYSCTL_PERIPH_GPIOA            32
+
+//! GPIO B --> P1
+#define SYSCTL_PERIPH_GPIOB            33
+
+//! GPIO C --> P2
+#define SYSCTL_PERIPH_GPIOC            34
+
+//! GPIO D --> P3
+#define SYSCTL_PERIPH_GPIOD            35
+
+//! GPIO E --> P4
+#define SYSCTL_PERIPH_GPIOE            36
 //*****************************************************************************
 //
 //! @}

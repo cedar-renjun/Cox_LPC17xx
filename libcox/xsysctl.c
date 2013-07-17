@@ -954,6 +954,10 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
 //*****************************************************************************
 void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 {
+    if(ulPeripheral >= 32)           // GPIOx (x=A/B/C/D/E)
+    {
+        ulPeripheral = 15;
+    }
     xHWREG(PCONP) |= ((unsigned long)0x01 << ulPeripheral);
 }
 
@@ -996,6 +1000,11 @@ void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 //*****************************************************************************
 void SysCtlPeripheralDisable(unsigned long ulPeripheral)
 {
+
+    if(ulPeripheral >= 32)           // GPIOx (x=A/B/C/D/E)
+    {
+        ulPeripheral = 15;
+    }
     xHWREG(PCONP) &= ~((unsigned long)0x01 << ulPeripheral);
 }
 

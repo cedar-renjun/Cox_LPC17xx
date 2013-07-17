@@ -295,12 +295,12 @@ extern "C"
 //
 //! Interrupt on falling edge
 //
-#define xGPIO_FALLING_EDGE      INT_TYPE_RISING         
+#define xGPIO_FALLING_EDGE      INT_TYPE_FALLING         
 
 //
 //! Interrupt on rising edge
 //
-#define xGPIO_RISING_EDGE       INT_TYPE_FALLING
+#define xGPIO_RISING_EDGE       INT_TYPE_RISING
 
 //
 //! Interrupt on low level
@@ -739,85 +739,85 @@ extern "C"
 //!
 //! \section xGPIO_Peripheral_Pin_Port CoX Port Details
 //! \verbatim
-//! +------------------------+----------------+------------------------+
-//! |General Peripheral Pin  |       CoX      |         STM32F1xx      |
-//! |------------------------|----------------|------------------------|
-//! |ADCn                    |    Mandatory   |   ADC0 ADC1 ... ADC15  |
-//! |------------------------|----------------|------------------------|
-//! |CANnRX                  |    Mandatory   |      CAN0RX CAN1RX     |
-//! |------------------------|----------------|------------------------|
-//! |CANnTX                  |    Mandatory   |      CAN0TX CAN1TX     |
-//! |------------------------|----------------|------------------------|
-//! |I2CnSCK                 |    Mandatory   | I2C0SCK I2C1SCK I2C2SCK|
-//! |------------------------|----------------|------------------------|
-//! |I2CnSDA                 |    Mandatory   | I2C0SDA I2C1SDA I2C2SDA|
-//! |------------------------|----------------|------------------------|
-//! |I2SnRXSCK               |    Mandatory   |        I2S0RXSCK       |
-//! |------------------------|----------------|------------------------|
-//! |I2SnRXMCLK              |    Mandatory   |       I2S0RXMCLK       |
-//! |------------------------|----------------|------------------------|
-//! |I2SnRXSD                |    Mandatory   |        I2S0RXSD        |
-//! |------------------------|----------------|------------------------|
-//! |I2SnRXWS                |    Mandatory   |        I2S0RXWS        |
-//! |------------------------|----------------|------------------------|
-//! |I2SnTXSCK               |    Mandatory   |        I2S0TXSCK       |
-//! |------------------------|----------------|------------------------|
-//! |I2SnTXMCLK              |    Mandatory   |       I2S0TXMCLK       |
-//! |------------------------|----------------|------------------------|
-//! |I2SnTXSD                |    Mandatory   |        I2S0TXSD        |
-//! |------------------------|----------------|------------------------|
-//! |I2SnTXWS                |    Mandatory   |        I2S0TXWS        |
-//! |------------------------|----------------|------------------------|
-//! |SPInCLK                 |    Mandatory   |     SPI0CLK SPI1CLK    |
-//! |                        |                |------------------------|
-//! |                        |                |     SPI2CLK SPI3CLK    |
-//! |------------------------|----------------|------------------------|
-//! |SPInMOSI                |    Mandatory   |    SPI0MOSI SPI1MOSI   |
-//! |                        |                |------------------------|
-//! |                        |                |    SPI2MOSI SPI3MOSI   |
-//! |------------------------|----------------|------------------------|
-//! |SPInMISO                |    Mandatory   |    SPI0MISO SPI1MISO   |
-//! |                        |                |------------------------|
-//! |                        |                |    SPI2MISO SPI3MISO   |
-//! |------------------------|----------------|------------------------|
-//! |SPInCS                  |    Mandatory   |      SPI0CS SPI1CS     |
-//! |                        |                |------------------------|
-//! |                        |                |      SPI2CS SPI3CS     |
-//! |------------------------|----------------|------------------------|
-//! |UARTnRX                 |    Mandatory   |     UART0RX UART1RX    |
-//! |                        |                |------------------------|
-//! |                        |                |     UART2RX            |
-//! |------------------------|----------------|------------------------|
-//! |UARTnTX                 |    Mandatory   |     UART0TX UART1TX    |
-//! |                        |                |------------------------|
-//! |                        |                |     UART2TX            |
-//! |------------------------|----------------|------------------------|
-//! |UARTnCTS                |    Mandatory   |    UART0CTS UART1CTS   |
-//! |                        |                |------------------------|
-//! |                        |                |    UART2CTS            |
-//! |------------------------|----------------|------------------------|
-//! |UARTnDCD                |    Mandatory   |    UART0DCD UART1DCD   |
-//! |                        |                |------------------------|
-//! |                        |                |    UART2DCD            |
-//! |------------------------|----------------|------------------------|
-//! |UARTnDSR                |    Mandatory   |    UART0DSR UART1DSR   |
-//! |                        |                |------------------------|
-//! |                        |                |    UART2DSR            |
-//! |------------------------|----------------|------------------------|
-//! |UARTnDTR                |    Mandatory   |    UART0DTR UART1DTR   |
-//! |                        |                |------------------------|
-//! |                        |                |    UART2DTR            |
-//! |------------------------|----------------|------------------------|
-//! |CMPnN                   |    Mandatory   |       CMP0N CMP1N      |
-//! |------------------------|----------------|------------------------|
-//! |CMPnP                   |    Mandatory   |       CMP0P CMP1P      |
-//! |------------------------|----------------|------------------------|
-//! |CMPnO                   |    Mandatory   |       CMP0O CMP1O      |
-//! |------------------------|----------------|------------------------|
-//! |PWMn                    |    Mandatory   |      PWM0 ... PWM7     |
-//! |------------------------|----------------|------------------------|
-//! |TIMCCPn                 |    Mandatory   |   TIMCCP0 ... TIMCCP7  |
-//! +------------------------+----------------+------------------------+
+//! +-------------------------+----------------+-------------------------+
+//! | General Peripheral Pin  |       CoX      |         STM32F1xx       |
+//! |-------------------------|----------------|-------------------------|
+//! | ADCn                    |    Mandatory   |   ADC0 ADC1 ... ADC15   |
+//! |-------------------------|----------------|-------------------------|
+//! | CANnRX                  |    Mandatory   |      CAN0RX CAN1RX      |
+//! |-------------------------|----------------|-------------------------|
+//! | CANnTX                  |    Mandatory   |      CAN0TX CAN1TX      |
+//! |-------------------------|----------------|-------------------------|
+//! | I2CnSCK                 |    Mandatory   | I2C0SCK I2C1SCK I2C2SCK |
+//! |-------------------------|----------------|-------------------------|
+//! | I2CnSDA                 |    Mandatory   | I2C0SDA I2C1SDA I2C2SDA |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnRXSCK               |    Mandatory   |        I2S0RXSCK        |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnRXMCLK              |    Mandatory   |       I2S0RXMCLK        |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnRXSD                |    Mandatory   |        I2S0RXSD         |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnRXWS                |    Mandatory   |        I2S0RXWS         |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnTXSCK               |    Mandatory   |        I2S0TXSCK        |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnTXMCLK              |    Mandatory   |       I2S0TXMCLK        |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnTXSD                |    Mandatory   |        I2S0TXSD         |
+//! |-------------------------|----------------|-------------------------|
+//! | I2SnTXWS                |    Mandatory   |        I2S0TXWS         |
+//! |-------------------------|----------------|-------------------------|
+//! | SPInCLK                 |    Mandatory   |     SPI0CLK SPI1CLK     |
+//! |                         |                |------------------------ |
+//! |                         |                |     SPI2CLK SPI3CLK     |
+//! |-------------------------|----------------|-------------------------|
+//! | SPInMOSI                |    Mandatory   |    SPI0MOSI SPI1MOSI    |
+//! |                         |                |------------------------ |
+//! |                         |                |    SPI2MOSI SPI3MOSI    |
+//! |-------------------------|----------------|-------------------------|
+//! | SPInMISO                |    Mandatory   |    SPI0MISO SPI1MISO    |
+//! |                         |                |------------------------ |
+//! |                         |                |    SPI2MISO SPI3MISO    |
+//! |-------------------------|----------------|-------------------------|
+//! | SPInCS                  |    Mandatory   |      SPI0CS SPI1CS      |
+//! |                         |                |------------------------ |
+//! |                         |                |      SPI2CS SPI3CS      |
+//! |-------------------------|----------------|-------------------------|
+//! | UARTnRX                 |    Mandatory   |     UART0RX UART1RX     |
+//! |                         |                |------------------------ |
+//! |                         |                |     UART2RX             |
+//! |-------------------------|----------------|-------------------------|
+//! | UARTnTX                 |    Mandatory   |     UART0TX UART1TX     |
+//! |                         |                |------------------------ |
+//! |                         |                |     UART2TX             |
+//! |-------------------------|----------------|-------------------------|
+//! | UARTnCTS                |    Mandatory   |    UART0CTS UART1CTS    |
+//! |                         |                |------------------------ |
+//! |                         |                |    UART2CTS             |
+//! |-------------------------|----------------|-------------------------|
+//! | UARTnDCD                |    Mandatory   |    UART0DCD UART1DCD    |
+//! |                         |                |------------------------ |
+//! |                         |                |    UART2DCD             |
+//! |-------------------------|----------------|-------------------------|
+//! | UARTnDSR                |    Mandatory   |    UART0DSR UART1DSR    |
+//! |                         |                |------------------------ |
+//! |                         |                |    UART2DSR             |
+//! |-------------------------|----------------|-------------------------|
+//! | UARTnDTR                |    Mandatory   |    UART0DTR UART1DTR    |
+//! |                         |                |------------------------ |
+//! |                         |                |    UART2DTR             |
+//! |-------------------------|----------------|-------------------------|
+//! | CMPnN                   |    Mandatory   |       CMP0N CMP1N       |
+//! |-------------------------|----------------|-------------------------|
+//! | CMPnP                   |    Mandatory   |       CMP0P CMP1P       |
+//! |-------------------------|----------------|-------------------------|
+//! | CMPnO                   |    Mandatory   |       CMP0O CMP1O       |
+//! |-------------------------|----------------|-------------------------|
+//! | PWMn                    |    Mandatory   |      PWM0 ... PWM7      |
+//! |-------------------------|----------------|-------------------------|
+//! | TIMCCPn                 |    Mandatory   |   TIMCCP0 ... TIMCCP7   |
+//! +-------------------------+----------------+-------------------------+
 //! \endverbatim
 //!
 //!  
@@ -1216,7 +1216,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //
 //*****************************************************************************
 #define xGPIOSPinToPeripheralId(eShortPin)                                    \
-        GPIOSPinToPeripheralId(eShortPin)
+        GPIOPinToPeripheralId(G##eShortPin)
 
 //*****************************************************************************
 //
@@ -1230,7 +1230,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //
 //*****************************************************************************
 #define xGPIOSPinToPort(eShortPin)                                            \
-        GPIOSPinToPort(eShortPin)
+        GPIOPinToPort(G##eShortPin)
 
 
 //*****************************************************************************
@@ -1259,7 +1259,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //
 //*****************************************************************************
 #define xGPIOSPinToPin(eShortPin)                                             \
-        GPIOSPinToPin(eShortPin)
+        GPIOPinToPin(G##eShortPin)
 
 //*****************************************************************************
 //
@@ -1295,7 +1295,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //
 //*****************************************************************************
 #define xGPIOSPinDirModeSet(eShortPin, ulPinIO)                               \
-        xGPIOSDirModeSet(eShortPin, ulPinIO)
+        xGPIODirModeSet(G##eShortPin, ulPinIO)
 
 //*****************************************************************************
 //
@@ -1320,7 +1320,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //! \return Returns one of the enumerated data types described for
 //! \ref xGPIODirModeSet().Details please refer to \ref xGPIO_Dir_Mode_CoX.
 //
-//*****************************************************************************        
+//*****************************************************************************
 extern unsigned long xGPIODirModeGet(unsigned long ulPort, 
                                      unsigned long ulPin);
 
@@ -1348,8 +1348,8 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! \return None.
 //
 //*****************************************************************************
-#define xGPIOPinIntCallbackInit(ulPort, ulPin, pfnCallback)                   \
-        GPIOPinIntCallbackInit(ulPort, ulPin, pfnCallback)
+extern void xGPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin, 
+                                   xtEventCallback xtPortCallback);
         
 //*****************************************************************************
 //
@@ -1387,8 +1387,8 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! \return None.
 //
 //*****************************************************************************
-#define xGPIOPinIntEnable(ulPort, ulPins, ulIntType)                          \
-        GPIOPinIntEnable(ulPort, ulPins, ulIntType) 
+extern void xGPIOPinIntEnable(unsigned long ulPort, unsigned long ulPins,
+        unsigned long ulIntType);
          
 //*****************************************************************************
 //
@@ -1422,7 +1422,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //
 //*****************************************************************************
 #define xGPIOSPinIntEnable(eShortPin, ulIntType)                              \
-        GPIOSPinIntEnable(eShortPin, ulIntType)
+        xGPIOPinIntEnable(G##eShortPin, ulIntType)
 
 //*****************************************************************************
 //
@@ -1444,8 +1444,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! \return None.
 //
 //*****************************************************************************       
-#define xGPIOPinIntDisable(ulPort, ulPins)                                    \
-        GPIOPinIntDisable(ulPort, ulPins)
+extern void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins);
 
 //*****************************************************************************
 //
@@ -1463,7 +1462,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //
 //*****************************************************************************       
 #define xGPIOSPinIntDisable(eShortPin)                                        \
-        GPIOSPinIntDisable(eShortPin)
+        xGPIOPinIntDisable(G##eShortPin)
 
 //*****************************************************************************
 //
@@ -1478,8 +1477,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! Bits 31:16 should be ignored.
 //
 //*****************************************************************************
-#define xGPIOPinIntStatus(ulPort)                                             \
-        GPIOPinIntStatus()  
+#define xGPIOPinIntStatus(ulPort)
 
 //*****************************************************************************
 //
@@ -1510,8 +1508,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! \return None.
 //
 //*****************************************************************************
-#define xGPIOPinIntClear(ulPort, ulPins)                                      \
-        GPIOPinIntClear(ulPort, ulPins)
+extern void xGPIOPinIntClear(unsigned long ulPort, unsigned long ulPins);
 
 //*****************************************************************************
 //
@@ -1538,7 +1535,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //
 //*****************************************************************************
 #define xGPIOSPinIntClear(eShortPin)                                          \
-        GPIOSPinIntClear(eShortPin)
+        xGPIOPinIntClear(G##eShortPin)
 
 //*****************************************************************************
 //
@@ -1565,8 +1562,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! is returned as a 0.  Bits 31:8 should be ignored.
 //
 //*****************************************************************************
-#define xGPIOPinRead(ulPort, ulPins)                                          \
-        GPIOPinRead(ulPort, ulPins)
+extern unsigned long xGPIOPinRead(unsigned long ulPort, unsigned long ulPins);
 
 //*****************************************************************************
 //
@@ -1601,7 +1597,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //
 //*****************************************************************************
 #define xGPIOSPinRead(eShortPin)                                              \
-        GPIOSPinRead(eShortPin)
+        GPIOPinRead(G##eShortPin)
 
 //*****************************************************************************
 //
@@ -1625,8 +1621,8 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! \return None.
 //
 //*****************************************************************************
-#define xGPIOPinWrite(ulPort, ulPins, ucVal)                                  \
-        GPIOPinWrite(ulPort, ulPins, ucVal)
+extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
+        unsigned long ucVal);
 
 //*****************************************************************************
 //
@@ -1643,7 +1639,7 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 #define xGPIOPortWrite(ulPort, ulVal)                                         \
         GPIOPortWrite(ulPort, ulVal)
 
-		
+        
 //*****************************************************************************
 //
 //! \brief Write a value to the specified pin.
@@ -1661,8 +1657,8 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //! \return None.
 //
 //*****************************************************************************
-#define xGPIOSPinWrite(eShortPin, ucVal)                                      \
-        GPIOSPinWrite(eShortPin, ucVal)
+#define xGPIOSPinWrite(eShortPin, ulVal)                                      \
+        GPIOPinWrite(G##eShortPin, ulVal)
 
 //*****************************************************************************
 //
@@ -1681,9 +1677,9 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //!
 //! \return None.
 //
-//*****************************************************************************        
-#define xGPIOPinConfigure(eShortPin, ulPinConfig)                                        \
-        GPIOSPinConfigure(eShortPin, ulPinConfig)
+//*****************************************************************************
+#define xGPIOPinConfigure(eShortPin, ulPinConfig)                             \
+        GPIOPinFunCfg(G##eShortPin, ulPinConfig)
 
 //*****************************************************************************
 //
@@ -1701,7 +1697,8 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 #define xGPIOSPinTypeGPIOInput(eShortPin)                                     \
         do                                                                    \
         {                                                                     \
-         xGPIOSDirModeSet(eShortPin, GPIO_DIR_MODE_IN);                       \
+            GPIOPinFunCfg(G##eShortPin, GPIO_##eShortPin##_##eShortPin);      \
+            GPIOPinModeCfg(G##eShortPin, PIN_MODE_INPUT);                     \
         }                                                                     \
         while(0)
 
@@ -1721,9 +1718,10 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 #define xGPIOSPinTypeGPIOOutput(eShortPin)                                    \
         do                                                                    \
         {                                                                     \
-         xGPIOSDirModeSet(eShortPin, GPIO_DIR_MODE_OUT);                      \
+            GPIOPinFunCfg(G##eShortPin, GPIO_##eShortPin##_##eShortPin);      \
+            GPIOPinModeCfg(G##eShortPin, PIN_MODE_OUTPUT);                    \
         }                                                                     \
-        while(0)
+        while(0)  
             
 //*****************************************************************************
 //
@@ -1741,7 +1739,8 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 #define xGPIOSPinTypeGPIOOutputOD(eShortPin)                                  \
         do                                                                    \
         {                                                                     \
-         xGPIOSDirModeSet(eShortPin, GPIO_DIR_MODE_OD);                       \
+            GPIOPinFunCfg(G##eShortPin, GPIO_##eShortPin##_eShortPin);        \
+            GPIOPinModeCfg(G##eShortPin, PIN_MODE_OD_EN);                     \
         }                                                                     \
         while(0)  
 
@@ -2383,7 +2382,6 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
         GPIOSPinConfigure(ePeripheralPin, eShortPin)
 
 
-
 //*****************************************************************************
 //
 //! @}
@@ -2391,53 +2389,124 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 //*****************************************************************************
 
 
+ #define GPIOSPinConfigure(ePeripheralPin, eShortPin)                          \
+        GPIOPinFunCfg(G##eShortPin, GPIO_##eShortPin##_##ePeripheralPin)
 
 
 
 
 
 
+//*****************************************************************************
+//
+//! \addtogroup STM32F1xx_GPIO_General_Pin_IDs STM32F1xx GPIO General Pin ID
+//! \brief The following values define the bit field for the ucPins argument 
+//! to several of the APIs.
+//! @{
+//
+//*****************************************************************************
 
-
-
-
-
-
-
-
-//! GPIO Pin
+//! GPIO Pin 0
 #define GPIO_PIN_0              BIT_32_0
+
+//! GPIO Pin 1
 #define GPIO_PIN_1              BIT_32_1
+
+//! GPIO Pin 2
 #define GPIO_PIN_2              BIT_32_2
+
+//! GPIO Pin 3
 #define GPIO_PIN_3              BIT_32_3
+
+//! GPIO Pin 4
 #define GPIO_PIN_4              BIT_32_4
+
+//! GPIO Pin 5
 #define GPIO_PIN_5              BIT_32_5
+
+//! GPIO Pin 6
 #define GPIO_PIN_6              BIT_32_6
+
+//! GPIO Pin 7
 #define GPIO_PIN_7              BIT_32_7
+
+//! GPIO Pin 8
 #define GPIO_PIN_8              BIT_32_8
+
+//! GPIO Pin 9
 #define GPIO_PIN_9              BIT_32_9
+
+//! GPIO Pin 10
 #define GPIO_PIN_10             BIT_32_10
+
+//! GPIO Pin 11
 #define GPIO_PIN_11             BIT_32_11
+
+//! GPIO Pin 12
 #define GPIO_PIN_12             BIT_32_12
+
+//! GPIO Pin 13
 #define GPIO_PIN_13             BIT_32_13
+
+//! GPIO Pin 14
 #define GPIO_PIN_14             BIT_32_14
+
+//! GPIO Pin 15
 #define GPIO_PIN_15             BIT_32_15
+
+//! GPIO Pin 16
 #define GPIO_PIN_16             BIT_32_16
+
+//! GPIO Pin 17
 #define GPIO_PIN_17             BIT_32_17
+
+//! GPIO Pin 18
 #define GPIO_PIN_18             BIT_32_18
+
+//! GPIO Pin 19
 #define GPIO_PIN_19             BIT_32_19
+
+//! GPIO Pin 20
 #define GPIO_PIN_20             BIT_32_20
+
+//! GPIO Pin 21
 #define GPIO_PIN_21             BIT_32_21
+
+//! GPIO Pin 22
 #define GPIO_PIN_22             BIT_32_22
+
+//! GPIO Pin 23
 #define GPIO_PIN_23             BIT_32_23
+
+//! GPIO Pin 24
 #define GPIO_PIN_24             BIT_32_24
+
+//! GPIO Pin 25
 #define GPIO_PIN_25             BIT_32_25
+
+//! GPIO Pin 26
 #define GPIO_PIN_26             BIT_32_26
+
+//! GPIO Pin 27
 #define GPIO_PIN_27             BIT_32_27
+
+//! GPIO Pin 28
 #define GPIO_PIN_28             BIT_32_28
+
+//! GPIO Pin 29
 #define GPIO_PIN_29             BIT_32_29
+
+//! GPIO Pin 30
 #define GPIO_PIN_30             BIT_32_30
+
+//! GPIO Pin 31
 #define GPIO_PIN_31             BIT_32_31
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
 #define GPIO_PA0_PA0            ((unsigned long)0x00 << 0 )
 #define GPIO_PA0_RD1            ((unsigned long)0x01 << 0 )
@@ -2684,18 +2753,30 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort,
 #define INT_TYPE_RISING         BIT_32_0
 #define INT_TYPE_FALLING        BIT_32_1
 
-extern void GPIOPinFunCfg(unsigned long ulPort, unsigned long ulPin, unsigned long ulCfg);
-extern void GPIOPinModeCfg(unsigned long ulPort, unsigned long ulPin, unsigned long ulCfg);
-extern void GPIOPinSet(unsigned long ulPort, unsigned long ulPin);
-extern void GPIOPinClr(unsigned long ulPort, unsigned long ulPin);
-extern void GPIOPinWrite(unsigned long ulPort, unsigned long ulPin, unsigned long ulVal);
+
+extern unsigned long GPIOPinToPeripheralId(unsigned long ulPort, unsigned long ulPin);
+extern unsigned long  GPIOPinToPort(unsigned long ulPort, unsigned long ulPin);
+extern unsigned long  GPIOPinToPin(unsigned long ulPort, unsigned long ulPin);
+
+extern void          GPIOPinFunCfg(unsigned long ulPort, unsigned long ulPin, unsigned long ulCfg);
+extern void          GPIOPinModeCfg(unsigned long ulPort, unsigned long ulPin, unsigned long ulCfg);
+extern void          GPIOPinSet(unsigned long ulPort, unsigned long ulPins);
+extern void          GPIOPinClr(unsigned long ulPort, unsigned long ulPins);
+extern void          GPIOPinWrite(unsigned long ulPort, unsigned long ulPins, unsigned long ulVal);
 extern unsigned long GPIOPinRead(unsigned long ulPort, unsigned long ulPin);
 extern unsigned long GPIOPortRead(unsigned long ulPort);
-extern void GPIOPortWrite(unsigned long ulPort, unsigned long ulVal);
-extern void GPIOPinIntCfg(unsigned long ulPort, unsigned long ulPin, unsigned long ulCfg);
+extern void          GPIOPortWrite(unsigned long ulPort, unsigned long ulVal);
+extern void          GPIOPinIntCfg(unsigned long ulPort, unsigned long ulPin, unsigned long ulCfg);
 extern unsigned long GPIOPinIntFlagGet(unsigned long ulPort, unsigned long ulPin);
-extern void GPIOPinIntFlagClear(unsigned long ulPort, unsigned long ulPin);
-extern void GPIOPinIntEnable(unsigned long ulPort, unsigned long ulPin);
-extern void GPIOPinIntDisable(unsigned long ulPort, unsigned long ulPin);
+extern void          GPIOPinIntFlagClear(unsigned long ulPort, unsigned long ulPin);
+extern void          GPIOPinIntEnable(unsigned long ulPort, unsigned long ulPin);
+extern void          GPIOPinIntDisable(unsigned long ulPort, unsigned long ulPin);
 
+
+#endif
+
+
+// For write n(>=1) pin with the same value, please use GPIOPinSet/GPIOPinClr
+// For Write pin value in parial, please use GPIOPinWrite
+// For control whole GPIO, please use GPIOPortWrite.
 
