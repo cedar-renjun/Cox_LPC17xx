@@ -837,6 +837,102 @@ void SysCtlPeripheralClockSourceSet(unsigned long ulPeri, unsigned long ulCfg)
 
 //*****************************************************************************
 //
+//! \brief Get Peripheral Clock.
+//!
+//! \param [in] ulPeri is the LPC17nx(n=5/6) peripherals, the parameter can be
+//!             logical OR of the following value:
+//!             - \ref PCLKSEL_WDT
+//!             - \ref PCLKSEL_TIMER0
+//!             - \ref PCLKSEL_TIMER1
+//!             - \ref PCLKSEL_UART0
+//!             - \ref PCLKSEL_UART1
+//!             - \ref PCLKSEL_PWM1
+//!             - \ref PCLKSEL_I2C0
+//!             - \ref PCLKSEL_SPI
+//!             - \ref PCLKSEL_SSP1
+//!             - \ref PCLKSEL_DAC
+//!             - \ref PCLKSEL_ADC
+//!             - \ref PCLKSEL_CAN1
+//!             - \ref PCLKSEL_CAN2
+//!             - \ref PCLKSEL_ACF
+//!             - \ref PCLKSEL_QEI
+//!             - \ref PCLKSEL_GPIOINT
+//!             - \ref PCLKSEL_PCB
+//!             - \ref PCLKSEL_I2C1
+//!             - \ref PCLKSEL_SSP0
+//!             - \ref PCLKSEL_TIMER2
+//!             - \ref PCLKSEL_TIMER3
+//!             - \ref PCLKSEL_UART2
+//!             - \ref PCLKSEL_UART3
+//!             - \ref PCLKSEL_I2C2
+//!             - \ref PCLKSEL_I2S
+//!             - \ref PCLKSEL_RIT
+//!             - \ref PCLKSEL_SYSCON
+//!             - \ref PCLKSEL_MC
+//!
+//! \return     None.
+//! \note       PCLK_CCLK_DIV_6 is only suit for CAN1, CAN2.
+//!
+//
+//*****************************************************************************
+unsigned long SysCtlPeripheralClockGet(unsigned long ulPeri)
+{
+    unsigned long ulTmpReg = 0;
+    unsigned long ulDiv    = 0;
+
+    if(ulPeri < 32)
+    {
+        ulTmpReg = xHWREG(PCLKSEL0);
+        if(ulPeri == 26 || ulPeri == 28) // CAN1 or CAN2
+        {
+            ulDiv = (ulTmpReg >> ulPeri) & 0x03;
+            if(3 == ulDiv)
+            {
+                return (g_ulSystemClk/6);
+            }
+        }
+    }
+    else
+    {
+        ulPeri -= 32;
+        ulTmpReg = xHWREG(PCLKSEL1);
+    }
+
+    ulDiv = (ulTmpReg >> ulPeri) & 0x03;
+
+    switch(ulDiv)
+    {
+        case 0:                  // Div 4
+            {
+                return (g_ulSystemClk/4);
+            }
+
+        case 1:                  // Div 1
+            {
+                return (g_ulSystemClk/1);
+            }
+
+        case 2:                  // Div 2
+            {
+                return (g_ulSystemClk/2);
+            }
+
+        case 3:                  // Div 8
+            {
+                return (g_ulSystemClk/8);
+            }
+        default:                // Error
+            {
+                while(1);
+            }
+    }
+} 
+
+
+
+
+//*****************************************************************************
+//
 //! \brief Reset MCU Periperal.
 //!
 //! \param [in] ulPeripheral is the LPC17nx(n=7/8) peripherals, the parameter

@@ -1657,6 +1657,7 @@ extern xtBoolean SysCtlResetFlagCheck(unsigned long ulFlag);
 extern void SysCtlResetFlagClear(unsigned long ulFlag);
 
 extern void SysCtlPeripheralClockSourceSet(unsigned long ulPeri, unsigned long ulCfg);
+extern unsigned long SysCtlPeripheralClockGet(unsigned long ulPeri);
 extern void SysCtlPeripheralReset(unsigned long ulPeripheral);
 extern void SysCtlPeripheralEnable(unsigned long ulPeripheral);
 extern void SysCtlPeripheralDisable(unsigned long ulPeripheral);

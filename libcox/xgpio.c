@@ -533,7 +533,3 @@ void GPIOPinIntFlagClear(unsigned long ulPort, unsigned long ulPin)
     }
 }
 
-
-
-
-
