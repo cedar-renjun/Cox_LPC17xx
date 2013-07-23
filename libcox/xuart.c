@@ -778,14 +778,12 @@ unsigned long UARTModemStatGet(unsigned long ulBase)
 //! \note This function is only suit for UART1.
 xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags)
 {
-    unsigned long ulTmpReg = 0;
 
     // Check input parameters.
     xASSERT(ulBase == UART1_BASE);
 
     // Check Status Bit.
-    ulTmpReg = xHWREG(ulBase + MSR);
-    if(ulTmpReg & ulFlags)                       // Set
+    if(xHWREG(ulBase + MSR) & ulFlags)                       // Set
     {
         return (xtrue);
     }

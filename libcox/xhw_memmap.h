@@ -99,7 +99,7 @@
 #define xUART1_BASE             UART1_BASE                                   
 #define xPWM1_BASE              PWM1_BASE                                    
 #define xI2C0_BASE              I2C0_BASE                                    
-#define xSPI0_BASE              SPI_BASE                                     
+#define xSPI0_BASE              SPI0_BASE                                     
 #define xRTC_BASE               RTC_BASE                                     
 #define xSSP1_BASE              SSP1_BASE                                    
 #define xADC0_BASE              ADC_BASE                                     
@@ -168,7 +168,7 @@
 #define UART1_BASE              ((unsigned long)0x40010000)
 #define PWM1_BASE               ((unsigned long)0x40018000)
 #define I2C0_BASE               ((unsigned long)0x4001C000)
-#define SPI_BASE                ((unsigned long)0x40020000)
+#define SPI0_BASE               ((unsigned long)0x40020000)
 #define RTC_BASE                ((unsigned long)0x40024000)
 #define GPIO_INT_BASE           ((unsigned long)0x40028000)
 #define PIN_CON_BASE            ((unsigned long)0x4002C000)
