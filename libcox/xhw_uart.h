@@ -30,9 +30,16 @@
 //! generation.
 #define LCR                     ((unsigned long)0x0000000C)
 
+//! Modem Control Register. Contains controls for flow control
+//! handshaking and loopback mode.
+#define MCR                     ((unsigned long)0x00000010)
+
 //! LSR Line Status Register. Contains flags for transmit and receive status,
 //! including line errors.
 #define LSR                     ((unsigned long)0x00000014)
+
+//! Modem Status Register. Contains handshake signal status flags
+#define MSR                     ((unsigned long)0x00000018)
 
 //! SCR Scratch Pad Register. 8-bit temporary storage for software.
 #define SCR                     ((unsigned long)0x0000001C)
@@ -50,6 +57,18 @@
 //! TER Transmit Enable Register. Turns off UART transmitter for use with
 //! software flow control.
 #define TER                     ((unsigned long)0x00000030)
+
+
+//! RS-485/EIA-485 Control. Contains controls to configure various
+//! aspects of RS-485/EIA-485 modes.
+#define RS485CTRL               ((unsigned long)0x0000004C)
+
+//! RS-485/EIA-485 address match. Contains the address match value
+//! for RS-485/EIA-485 mode.
+#define ADRMATCH                ((unsigned long)0x00000050)
+
+//! RS-485/EIA-485 direction control delay.
+#define RS485DLY                ((unsigned long)0x00000054)
 
 //! RBR {{
 //! RBR }}
@@ -81,6 +100,12 @@
 //! Enables the UARTn RX line status interrupts. The status of this interrupt
 //! can be read from UnLSR[4:1].
 #define IER_RX_LINE_STAT_INT_EN BIT_32_2
+
+//! Modem Status Interrupt Enable
+#define IER_MODEM_STAT_INT_EN   BIT_32_3
+
+//! CTS Interrupt Enable
+#define IER_CTS_INT_EN          BIT_32_7
 
 //! Enables the end of auto-baud interrupt.
 #define IER_ABEO_INT_EN         BIT_32_8
@@ -119,6 +144,9 @@
 
 //! THRE Interrupt 
 #define IIR_INT_ID_THRE         BIT_32_1
+
+//! Modem Interrupt
+#define IIR_INT_ID_MODEM        BIT_32_ALL_0
 
 //! Copies of UnFCR
 #define IIR_FIFO_EN_M           BIT_MASK(32, 7, 6)
@@ -192,6 +220,26 @@
 
 //! LCR }}
 
+//! MCR {{
+
+//! Source for modem output pin, DTR. This bit reads as 0 when modem loopback mode
+//! is active.
+#define MCR_DTR_CTL            BIT_32_0
+
+//! Source for modem output pin RTS. This bit reads as 0 when modem loopback mode is
+//! active.
+#define MCR_RTS_CTL            BIT_32_1
+
+//! Loopback Mode Select
+#define MCR_LOOPBACK_SEL       BIT_32_4
+
+//! Auto-RTS Flow control
+#define MCR_RTS_EN             BIT_32_6
+
+//! Auto-CTS Flow control
+#define MCR_CTS_EN             BIT_32_7
+
+//! MCR }}
 
 //! LSR {{
 
@@ -220,6 +268,35 @@
 #define LSR_RXFE               BIT_32_7
 
 //! LSR }}
+
+//! MSR {{
+
+//! Delta CTS
+#define MSR_DELTA_CTS         BIT_32_0
+
+//! Delta DSR
+#define MSR_DELTA_DSR         BIT_32_1
+
+//! Trailing Edge RI
+//! Set upon low to high transition of input RI. Cleared on an U1MSR read
+#define MSR_TRAIL_EDGE_RI     BIT_32_2
+
+//! Delta DCD
+#define MSR_DELTA_DCD         BIT_32_3
+
+//! Clear to Send State.
+#define MSR_CTS               BIT_32_4
+
+//! Data Set Ready State.
+#define MSR_DSR               BIT_32_5
+
+//! Ring Indicator State.
+#define MSR_RI                BIT_32_6
+
+//! Data Carrier Detect State.
+#define MSR_DCD               BIT_32_7
+
+//! MSR }}
 
 //! SCR {{
 
@@ -283,4 +360,40 @@
 #define TER_TX_EN               BIT_32_7
 
 //! TER }}
+
+//! RS485CTRL {{
+
+//! Normal Mulitdrop Mode.
+#define RS485CTRL_NMMEN        BIT_32_0
+
+//! Receive Disable.
+#define RS485CTRL_RXDIS        BIT_32_1
+
+//! Auto Address Detect
+#define RS485CTRL_AADEN        BIT_32_2
+
+//! Direct pin select
+#define RS485CTRL_SEL          BIT_32_3
+
+//! Direction control
+#define RS485CTRL_DCTRL        BIT_32_4
+
+//! Direction Control Invert
+#define RS485CTRL_OINV         BIT_32_5
+
+//! RS485CTRL }}
+
+//! RS485ADRMATCH {{
+
+//! Address match value.
+#define RS485ADRMATCH_ADRMATCH_M   BIT_MASK(32, 7, 0)
+
+//! RS485ADRMATCH }}
+
+//! RS485DLY {{
+
+//! Direction control delay value.
+#define RS485DLY_DLY_M          BIT_MASK(32, 7, 0)
+
+//! RS485DLY }}
 
