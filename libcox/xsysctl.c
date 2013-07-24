@@ -848,7 +848,7 @@ void SysCtlPeripheralClockSourceSet(unsigned long ulPeri, unsigned long ulCfg)
 //!             - \ref PCLKSEL_UART1
 //!             - \ref PCLKSEL_PWM1
 //!             - \ref PCLKSEL_I2C0
-//!             - \ref PCLKSEL_SPI
+//!             - \ref PCLKSEL_SPI0
 //!             - \ref PCLKSEL_SSP1
 //!             - \ref PCLKSEL_DAC
 //!             - \ref PCLKSEL_ADC
@@ -949,7 +949,11 @@ unsigned long SysCtlPeripheralClockGet(unsigned long ulPeri)
 //!             - \ref SYSCTL_PERIPH_ADC
 //!             - \ref SYSCTL_PERIPH_CAN1
 //!             - \ref SYSCTL_PERIPH_CAN2
-//!             - \ref SYSCTL_PERIPH_GPIO
+//!             - \ref SYSCTL_PERIPH_GPIOA
+//!             - \ref SYSCTL_PERIPH_GPIOB
+//!             - \ref SYSCTL_PERIPH_GPIOC
+//!             - \ref SYSCTL_PERIPH_GPIOD
+//!             - \ref SYSCTL_PERIPH_GPIOE
 //!             - \ref SYSCTL_PERIPH_RIT
 //!             - \ref SYSCTL_PERIPH_MCPWM
 //!             - \ref SYSCTL_PERIPH_QEI
@@ -1028,7 +1032,11 @@ void SysCtlPeripheralReset(unsigned long ulPeripheral)
 //!             - \ref SYSCTL_PERIPH_ADC
 //!             - \ref SYSCTL_PERIPH_CAN1
 //!             - \ref SYSCTL_PERIPH_CAN2
-//!             - \ref SYSCTL_PERIPH_GPIO
+//!             - \ref SYSCTL_PERIPH_GPIOA
+//!             - \ref SYSCTL_PERIPH_GPIOB
+//!             - \ref SYSCTL_PERIPH_GPIOC
+//!             - \ref SYSCTL_PERIPH_GPIOD
+//!             - \ref SYSCTL_PERIPH_GPIOE
 //!             - \ref SYSCTL_PERIPH_RIT
 //!             - \ref SYSCTL_PERIPH_MCPWM
 //!             - \ref SYSCTL_PERIPH_QEI
@@ -1075,7 +1083,11 @@ void SysCtlPeripheralEnable(unsigned long ulPeripheral)
 //!             - \ref SYSCTL_PERIPH_ADC
 //!             - \ref SYSCTL_PERIPH_CAN1
 //!             - \ref SYSCTL_PERIPH_CAN2
-//!             - \ref SYSCTL_PERIPH_GPIO
+//!             - \ref SYSCTL_PERIPH_GPIOA
+//!             - \ref SYSCTL_PERIPH_GPIOB
+//!             - \ref SYSCTL_PERIPH_GPIOC
+//!             - \ref SYSCTL_PERIPH_GPIOD
+//!             - \ref SYSCTL_PERIPH_GPIOE
 //!             - \ref SYSCTL_PERIPH_RIT
 //!             - \ref SYSCTL_PERIPH_MCPWM
 //!             - \ref SYSCTL_PERIPH_QEI

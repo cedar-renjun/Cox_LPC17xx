@@ -1,7 +1,11 @@
-
-
-
-
+#include "xhw_types.h"
+#include "xhw_ints.h"
+#include "xcore.h"
+#include "xhw_memmap.h"
+#include "xhw_nvic.h"
+#include "xhw_sysctl.h"
+#include "xdebug.h"
+#include "xsysctl.h"
 
 
 
@@ -130,7 +134,7 @@
 //! S0SPINT {{
 
 //! SPI interrupt flag.
-#define S0SPINT                 BIT_32_0
+#define S0SPINT_SPIF            BIT_32_0
 
 //! S0SPINT }}
 
