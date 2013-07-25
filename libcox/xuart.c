@@ -11,7 +11,6 @@
 #include "xhw_uart.h"
 #include "xuart.h"
 
-static volatile unsigned long g_DataStatus = 0;
 
 static xtBoolean UartSetDivisors(unsigned long ulBase, unsigned long ulBaudrate)
 {
@@ -147,7 +146,7 @@ static xtBoolean UartSetDivisors(unsigned long ulBase, unsigned long ulBaudrate)
             xHWREG(ulBase + DLM) = (best_divisor >> 8) & 0xFF;
             xHWREG(ulBase + DLL) = (best_divisor >> 0) & 0xFF;
 
-            // Configure FDR
+            // DLAB Must be zero.
             xHWREG(ulBase + LCR) &= ~LCR_DLAB;
             bestd &= (unsigned long)0x0F;
             bestm = (bestm << 4) & (unsigned long)0xF0;
@@ -165,10 +164,12 @@ unsigned char UARTByteRead(unsigned long ulBase)
 {
     unsigned long ulTmpReg = 0;
 
-    if(0 != g_DataStatus)              // DLAB has been set
-    {
-        xHWREG(ulBase + LCR) &= ~LCR_DLAB;
-    }
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+
+    // DLAB MUST be zero.
+    xHWREG(ulBase + LCR) &= ~LCR_DLAB;
 
     // Waiting UART receive one byte.
     do
@@ -187,10 +188,12 @@ void UARTByteWrite(unsigned long ulBase, unsigned char ucData)
 {
     unsigned long ulTmpReg = 0;
     
-    if(0 != g_DataStatus)                             // DLAB has been set
-    {
-        xHWREG(ulBase + LCR) &= ~LCR_DLAB;
-    }
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+
+    // DLAB MUST be zero.
+    xHWREG(ulBase + LCR) &= ~LCR_DLAB;
 
     // Waiting UART receive one byte.
     do
@@ -209,10 +212,14 @@ xtBoolean UARTByteReadNoBlocking(unsigned long ulBase, unsigned char * ucpData)
 {
     unsigned long ulTmpReg = 0;
 
-    if(0 != g_DataStatus)              // DLAB has been set
-    {
-        xHWREG(ulBase + LCR) &= ~LCR_DLAB;
-    }
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+
+    xASSERT(0 != ucpData);
+
+    // DLAB MUST be zero.
+    xHWREG(ulBase + LCR) &= ~LCR_DLAB;
 
     // Receive one byte ?
     ulTmpReg = xHWREG(ulBase + LSR);
@@ -232,11 +239,13 @@ xtBoolean UARTByteReadNoBlocking(unsigned long ulBase, unsigned char * ucpData)
 xtBoolean UARTByteWriteNoBlocking(unsigned long ulBase, unsigned char ucData)
 {
     unsigned long ulTmpReg = 0;
-        
-    if(0 != g_DataStatus)              //DLAB has been set
-    {
-        xHWREG(ulBase + LCR) &= ~LCR_DLAB;
-    }
+
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+
+    // DLAB MUST be zero.
+    xHWREG(ulBase + LCR) &= ~LCR_DLAB;
 
     // Transmitter FIFO is empty ?
     ulTmpReg = xHWREG(ulBase + LSR);
@@ -255,6 +264,10 @@ xtBoolean UARTByteWriteNoBlocking(unsigned long ulBase, unsigned char ucData)
 
 void UARTStrSend(unsigned long ulBase, unsigned char * pStr)
 {
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+
     while(NULL != *pStr)
     {
         UARTByteWrite(ulBase, *pStr++);
@@ -265,6 +278,10 @@ void UARTBufWrite(unsigned long ulBase, unsigned char * pBuf, unsigned long ulLe
 {
     unsigned long i = 0;
 
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+
     for(i = 0; i < ulLen; i++)
     {
         UARTByteWrite(ulBase, pBuf[i]);
@@ -274,6 +291,10 @@ void UARTBufWrite(unsigned long ulBase, unsigned char * pBuf, unsigned long ulLe
 void UARTBufRead(unsigned long ulBase, unsigned char * pBuf, unsigned long ulLen)
 {
     unsigned long i = 0;
+
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
 
     for(i = 0; i < ulLen; i++)
     {
@@ -288,15 +309,19 @@ void UARTIntEnable(unsigned long ulBase, unsigned long ulIntFlags)
             (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
 
     xASSERT( (ulIntFlags & ~(
-                            INT_RDA     |
-                            INT_THRE    |
-                            INT_RX_LINE |
-                            INT_MODEM   |
-                            INT_CTS     |
-                            INT_ABEO    |
+                            INT_RDA   |
+                            INT_THRE  |
+                            INT_RLS   |
+                            INT_MODEM |
+                            INT_CTS   |
+                            INT_ABEO  |
                             INT_ABTO
                     )
              ) == 0);
+
+
+    // DLAB MUST be zero.
+    xHWREG(ulBase + LCR) &= ~LCR_DLAB;
 
     // Set interrupt control bit.
     xHWREG(ulBase + IER) |= ulIntFlags;
@@ -311,13 +336,16 @@ void UARTIntDisable(unsigned long ulBase, unsigned long ulIntFlags)
     xASSERT( (ulIntFlags & ~(
                             INT_RDA     |
                             INT_THRE    |
-                            INT_RX_LINE |
+                            INT_RLS     |
                             INT_MODEM   |
                             INT_CTS     |
                             INT_ABEO    |
                             INT_ABTO
                     )
              ) == 0);
+
+    // DLAB MUST be zero.
+    //xHWREG(ulBase + LCR) &= ~LCR_DLAB;
 
     // Clear interrupt control bit.
     xHWREG(ulBase + IER) &= ~ulIntFlags;
@@ -336,30 +364,73 @@ unsigned long UARTIntGet(unsigned long ulBase)
 
 xtBoolean UARTIntCheck(unsigned long ulBase, unsigned long ulIntFlags)
 {
-    // Interrupt Idenetification register.
-    unsigned long ulTmpReg = xHWREG(ulBase + IIR) & IIR_INT_ID_M;
+    unsigned long ulTmpReg = 0;
 
     // Check input parameters.
     xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
             (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
 
     xASSERT( (ulIntFlags & ~(
-                            IIR_INT_ID_RLS   |
-                            IIR_INT_ID_RDA   |
-                            IIR_INT_ID_CTI   |
-                            IIR_INT_ID_THRE  |
-                            IIR_INT_ID_MODEM
-                    )
+                                 INT_FLAG_RLS  |
+                                 INT_FLAG_RDA  |
+                                 INT_FLAG_CTI  |
+                                 INT_FLAG_THRE |
+                                 INT_FLAG_MODEM|
+                                 INT_FLAG_ABEO |
+                                 INT_FLAG_ABTO 
+                            )
              ) == 0);
 
-    if(ulTmpReg == ulIntFlags)
+    switch(ulIntFlags)
     {
-        return (xtrue);
+        case INT_FLAG_ABEO:
+        case INT_FLAG_ABTO:
+        case INT_FLAG_ABEO | INT_FLAG_ABTO:
+            {
+                if(xHWREG(ulBase + IIR) & ulIntFlags)
+                {
+                    return (xtrue);
+                }
+                else
+                {
+                    return (xfalse);
+                }
+            }
+        case INT_FLAG_RLS   :
+        case INT_FLAG_RDA   :
+        case INT_FLAG_CTI   :
+        case INT_FLAG_THRE  :
+        case INT_FLAG_MODEM :
+            {
+                ulTmpReg = xHWREG(ulBase + IIR);
+
+                // Is there a pending interrupt?
+                if(ulTmpReg & IIR_INT_STAT)      // No
+                {
+                    return (xfalse);
+                }
+                else
+                {
+                    ulTmpReg = (ulTmpReg & BIT_MASK(32, 3, 1)) >> 1;
+                    if (ulTmpReg == ulIntFlags)
+                    {
+                        return (xtrue);
+                    }
+                    else
+                    {
+                        return (xfalse);
+                    }
+                }
+            }
+        default:                                 // Error
+            {
+                while (1);
+            }
     }
-    else
-    {
-        return (xfalse);
-    }
+
+
+
+
 }
 
 
@@ -480,7 +551,6 @@ void UARTIrDACfg(unsigned long ulBase, unsigned long ulCfg)
     ulTmpReg |= (ulCfg & 0xFFFF);
     xHWREG(ulBase + ICR) = ulTmpReg;
     
-    ulTmpReg = xHWREG(ulBase + ICR);
 }
 
 void UARTIrDAEnable(unsigned long ulBase)
@@ -551,15 +621,24 @@ void UARTModemCfg(unsigned long ulBase, unsigned long ulCfg)
 
 }
 
-
-
 void UARTRS485Cfg(unsigned long ulBase, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
 
     // Check input parameters.
-    xASSERT(ulBase == UART1_BASE);
-    xASSERT( (ulCfg & RS485_PARA_M) == 0 );
+    xASSERT(ulBase == UART1_BASE);    
+    xASSERT( (ulCfg & ~(
+                            RS485_NMM_DIS         | RS485_NMM_EN          |       
+                            RS485_RX_EN           | RS485_RX_DIS          |       
+                            RS485_AUTO_ADDR_EN    | RS485_AUTO_ADDR_DIS   |       
+                            RS485_AUTO_DIR_DIS    | 
+                            RS485_AUTO_DIR_RTS    | 
+                            RS485_AUTO_DIR_DTR    | 
+                            RS485_AUTO_DIR_INV_EN | RS485_AUTO_DIR_INV_DIS         
+                       )
+             ) == 0);
+
+
 
     // Configure RS485
     ulTmpReg = xHWREG(ulBase + RS485CTRL);
@@ -597,8 +676,6 @@ unsigned long UARTModemStatGet(unsigned long ulBase)
     return (xHWREG(ulBase + MSR));
 }
 
-
-
 //! \note This function is only suit for UART1.
 xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags)
 {
@@ -607,12 +684,37 @@ xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags)
     xASSERT(ulBase == UART1_BASE);
 
     // Check Status Bit.
-    if(xHWREG(ulBase + MSR) & ulFlags)                       // Set
+    if(xHWREG(ulBase + MSR) & ulFlags)           // Set
     {
         return (xtrue);
     }
     else                                         // Unset
     {
         return (xfalse);
+    }
+}
+
+
+void UARTIntFlagClear(unsigned long ulBase, unsigned long ulIntFlags)
+{
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+    xASSERT( (ulIntFlags & ~(INT_ABEO | INT_ABTO)) == 0);
+
+    switch(ulIntFlags)
+    {
+        case INT_ABEO:
+        case INT_ABTO:
+        case INT_ABEO | INT_ABTO:
+            {
+                xHWREG(ulBase + ACR) |= ulIntFlags;
+                break;
+            }
+
+        default:                         // Error
+            {
+                while(1);
+            }
     }
 }

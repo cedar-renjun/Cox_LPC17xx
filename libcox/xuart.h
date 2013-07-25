@@ -3,30 +3,6 @@
 #include "xhw_memmap.h"
 #include "xdebug.h"
 
-//! Enables the Receive Data Available interrupt.
-#define INT_RDA                        BIT_32_0
-
-//! Enables the THRE interrupt.
-#define INT_THRE                       BIT_32_1
-
-//! Enables Rx Line status interrupt.
-#define INT_RX_LINE                    BIT_32_2
-
-//! Enables the modem interrupt.
-#define INT_MODEM                      BIT_32_3
-
-//! Enable the CTS interrupt.
-#define INT_CTS                        BIT_32_7
-
-//! Enables the end of auto-baud interrupt.
-#define INT_ABEO                       BIT_32_8
-
-//! Enables the end of auto-baud time-out interrupt.
-#define INT_ABTO                       BIT_32_9
-
-
-
-
 //! Enable FIFO.
 #define FIFO_CFG_FIFO_EN               BIT_32_0
 
@@ -188,10 +164,6 @@
 //! \addtogroup RS485Cfg Parameters of RS485 Configure functions.
 //! @{
 
-//! \internal
-//! Parameters mask.
-#define RS485_PARA_M                   ((unsigned long)0xFFFFC0C0)
-
 //! RS-485/EIA-485 Normal Multidrop Mode (NMM) is disabled
 #define RS485_NMM_DIS                  BIT_32_16
 
@@ -256,6 +228,54 @@
 
 //! Data carrier detect state.
 #define MODEM_DCD                      BIT_32_7
+
+
+//! Receive data available interrupt.
+#define INT_RDA                        BIT_32_0                    
+
+//! Transfer hold register empty interrupt.
+#define INT_THRE                       BIT_32_1                    
+
+//! Receive line status interrupt.
+#define INT_RLS                        BIT_32_2                    
+
+//! UART modem interrupt.
+//! \note This parameter is only suit for UART1.
+#define INT_MODEM                      BIT_32_3                    
+
+//! Clear to send interrupt.
+#define INT_CTS                        BIT_32_7                    
+
+//! Auto-baud end interrupt.
+#define INT_ABEO                       BIT_32_8                    
+
+//! Auto-baud time-out interrupt.
+#define INT_ABTO                       BIT_32_9                    
+                                                           
+                                                           
+
+//! \note Those parameters is only suit for UARTIntCheck function.
+//! Receive Line Status
+#define INT_FLAG_RLS                   ((unsigned long)0x03)
+
+//! Receive Data Available
+#define INT_FLAG_RDA                   ((unsigned long)0x02)
+
+//! Character Time-Out Indicator
+#define INT_FLAG_CTI                   ((unsigned long)0x06)
+
+//! THRE Interrupt 
+#define INT_FLAG_THRE                  ((unsigned long)0x01)
+
+//! Modem Interrupt
+#define INT_FLAG_MODEM                 ((unsigned long)0x00)
+
+//! End of auto-baud interrupt.
+#define INT_FLAG_ABEO                  BIT_32_8
+
+//! Auto-baud time-out interrupt.
+#define INT_FLAG_ABTO                  BIT_32_9
+
 
 
 extern void UARTCfg(unsigned long ulBase, unsigned long ulBaud, unsigned long ulCfg);
