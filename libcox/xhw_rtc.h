@@ -1,94 +1,94 @@
 //! Interrupt Location Register
 #define RTC_ILR                 ((unsigned long)0x00000000)
 
-//! Clock Control Register 
+//! Clock Control Register
 #define RTC_CCR                 ((unsigned long)0x00000008)
 
-//! Counter Increment Interrupt Register 
+//! Counter Increment Interrupt Register
 #define RTC_CIIR                ((unsigned long)0x0000000C)
 
-//! Alarm Mask Register 
+//! Alarm Mask Register
 #define RTC_AMR                 ((unsigned long)0x00000010)
 
-//! RTC Auxiliary control register 
+//! RTC Auxiliary control register
 #define RTC_RTC_AUX             ((unsigned long)0x0000005C)
 
-//! RTC Auxiliary Enable register 
+//! RTC Auxiliary Enable register
 #define RTC_RTC_AUXEN           ((unsigned long)0x00000058)
 
-//! Consolidated Time Register 0 
+//! Consolidated Time Register 0
 #define RTC_CTIME0              ((unsigned long)0x00000014)
 
-//! Consolidated Time Register 1 
+//! Consolidated Time Register 1
 #define RTC_CTIME1              ((unsigned long)0x00000018)
 
-//! Consolidated Time Register 2 
+//! Consolidated Time Register 2
 #define RTC_CTIME2              ((unsigned long)0x0000001C)
 
-//! Seconds Counter 
+//! Seconds Counter
 #define RTC_SEC                 ((unsigned long)0x00000020)
 
-//! Minutes Register 
+//! Minutes Register
 #define RTC_MIN                 ((unsigned long)0x00000024)
 
-//! Hours Register 
+//! Hours Register
 #define RTC_HOUR                ((unsigned long)0x00000028)
 
-//! Day of Month Register 
+//! Day of Month Register
 #define RTC_DOM                 ((unsigned long)0x0000002C)
 
-//! Day of Week Register 
+//! Day of Week Register
 #define RTC_DOW                 ((unsigned long)0x00000030)
 
-//! Day of Year Register 
+//! Day of Year Register
 #define RTC_DOY                 ((unsigned long)0x00000034)
 
-//! Months Register 
+//! Months Register
 #define RTC_MONTH               ((unsigned long)0x00000038)
 
-//! Years Register 
+//! Years Register
 #define RTC_YEAR                ((unsigned long)0x0000003C)
 
-//! Calibration Value Register 
+//! Calibration Value Register
 #define RTC_CALIBRATION         ((unsigned long)0x00000040)
 
-//! General Purpose Register 0 
+//! General Purpose Register 0
 #define RTC_GPREG0              ((unsigned long)0x00000044)
 
-//! General Purpose Register 1 
+//! General Purpose Register 1
 #define RTC_GPREG1              ((unsigned long)0x00000048)
 
-//! General Purpose Register 2 
+//! General Purpose Register 2
 #define RTC_GPREG2              ((unsigned long)0x0000004C)
 
-//! General Purpose Register 3 
+//! General Purpose Register 3
 #define RTC_GPREG3              ((unsigned long)0x00000050)
 
-//! General Purpose Register 4 
+//! General Purpose Register 4
 #define RTC_GPREG4              ((unsigned long)0x00000054)
 
-//! Alarm value for Seconds 
+//! Alarm value for Seconds
 #define RTC_ALSEC               ((unsigned long)0x00000060)
 
-//! Alarm value for Minutes 
+//! Alarm value for Minutes
 #define RTC_ALMIN               ((unsigned long)0x00000064)
 
-//! Alarm value for Hours 
+//! Alarm value for Hours
 #define RTC_ALHOUR              ((unsigned long)0x00000068)
 
-//! Alarm value for Day of Month 
+//! Alarm value for Day of Month
 #define RTC_ALDOM               ((unsigned long)0x0000006C)
 
-//! Alarm value for Day of Week 
+//! Alarm value for Day of Week
 #define RTC_ALDOW               ((unsigned long)0x00000070)
 
-//! Alarm value for Day of Year 
+//! Alarm value for Day of Year
 #define RTC_ALDOY               ((unsigned long)0x00000074)
 
-//! Alarm value for Months 
-#define RTC_ALMON               ((unsigned long)0x00000078)
+//! Alarm value for Months
+#define RTC_ALMONTH             ((unsigned long)0x00000078)
 
-//! Alarm value for Year 
+//! Alarm value for Year
 #define RTC_ALYEAR              ((unsigned long)0x0000007C)
 
 
@@ -155,7 +155,7 @@
 //! Minute increment interrupt.
 #define AMR_MIN                 BIT_32_1
 
-//! Hour increment interrupt.   
+//! Hour increment interrupt.
 #define AMR_HOUR                BIT_32_2
 
 //! Day of month increment interrupt.
@@ -170,7 +170,7 @@
 //! Month increment interrupt.
 #define AMR_MON                 BIT_32_6
 
-//! Year increment interrupt.   
+//! Year increment interrupt.
 #define AMR_YEAR                BIT_32_7
 
 //! RTC_AMR }}
@@ -253,4 +253,13 @@
 #define CALI_DIR                BIT_32_17
 
 //! CALI }}
+
+
+
+
+//! Mask {{
+
+
+//! Mask }}
+
 
