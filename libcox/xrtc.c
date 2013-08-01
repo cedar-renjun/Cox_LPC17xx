@@ -9,6 +9,12 @@
 #include "xhw_rtc.h"
 #include "xrtc.h"
 
+//*****************************************************************************
+//
+// An array is I2C callback function point
+//
+//*****************************************************************************
+static xtEventCallback g_pfnRTCHandlerCallbacks = 0;
 
 #define SEC_MASK                BIT_MASK(32, 5, 0)
 #define MIN_MASK                BIT_MASK(32, 5, 0)
@@ -18,6 +24,30 @@
 #define DOY_MASK                BIT_MASK(32, 8, 0)
 #define MONTH_MASK              BIT_MASK(32, 3, 0)
 #define YEAR_MASK               BIT_MASK(32, 11, 0)
+
+//*****************************************************************************
+//
+//! \brief  RTC interrupt handler.
+//!
+//!         This function is the RTC interrupt handler, it simple execute the
+//!         callback function if there be one.
+//!
+//! \param  None.
+//! \return None.
+//!
+//
+//*****************************************************************************
+void RTCIntHandler(void)
+{
+    if(g_pfnRTCHandlerCallbacks != 0)
+    {
+        g_pfnRTCHandlerCallbacks(0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
 
 void RTCTimeSet(unsigned long ulType, unsigned long ulValue)
 {
@@ -61,6 +91,10 @@ void RTCTimeSet(unsigned long ulType, unsigned long ulValue)
             }
         case RTC_TIMETYPE_DAYOFMONTH:      // Day of month
             {
+                if(ulValue < 1)
+                {
+                    ulValue = 1;
+                }
                 if(ulValue > 31)
                 {
                     ulValue = 31;
@@ -205,7 +239,11 @@ void RTCAlarmSet(unsigned long ulType, unsigned long ulValue)
                 break;
             }
         case RTC_TIMETYPE_DAYOFMONTH:      // Day of month
-            {             
+            {       
+                if(ulValue < 1)
+                {
+                    ulValue = 1;
+                }
                 if(ulValue > 31)
                 {
                     ulValue = 31;
@@ -389,10 +427,10 @@ void RTCIntCfg(unsigned long ulCfg)
     // Configure Increment Interrupt.
     if(ulCfg & 0x0000FFFF)
     {
-        ulTmpReg = xHWREG(RTC_BASE + RTC_ILR);
+        ulTmpReg = xHWREG(RTC_BASE + RTC_CIIR);
         ulTmpReg &= ~((ulCfg >> 8) & 0xFF);
         ulTmpReg |=  ((ulCfg >> 0) & 0xFF);
-        xHWREG(RTC_BASE + RTC_ILR) = ulTmpReg;
+        xHWREG(RTC_BASE + RTC_CIIR) = ulTmpReg;
     }
 
     // Configure Alarm Interrupt.
@@ -404,3 +442,15 @@ void RTCIntCfg(unsigned long ulCfg)
         xHWREG(RTC_BASE + RTC_AMR) = ulTmpReg;
     }
 }
+
+unsigned long RTCIntCallbackInit(xtEventCallback pfnCallback)
+{
+    // Check the parameters.
+    xASSERT(pfnCallback != 0);
+
+    g_pfnRTCHandlerCallbacks = pfnCallback;
+
+    return (0);
+
+}
+

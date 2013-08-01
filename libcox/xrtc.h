@@ -8,10 +8,8 @@
 #define RTC_TIMETYPE_MONTH      BIT_32_6
 #define RTC_TIMETYPE_YEAR       BIT_32_7
 
-
 #define RTC_INT_INC             ILR_CIF
 #define RTC_INT_ALARM           ILR_CALF
-
 
 #define INT_SEC_EN              BIT_32_0
 #define INT_MIN_EN              BIT_32_1
@@ -49,18 +47,37 @@
 #define INT_ALARM_MON_DIS       BIT_32_22
 #define INT_ALARM_YEAR_DIS      BIT_32_23
 
+//! Passed
 extern void RTCTimeSet(unsigned long ulType, unsigned long ulValue);
+//! Passed
 extern unsigned long RTCTimeGet(unsigned long ulType);
+//! Passed
 extern void RTCAlarmSet(unsigned long ulType, unsigned long ulValue);
+//! Passed
 extern unsigned long RTCAlarmGet(unsigned long ulType);
+//! Passed
 extern void RTCGenRegWrite(unsigned long ulID, unsigned long ulValue);
+//! Passed
 extern unsigned long RTCGenRegRead(unsigned long ulID);
+
+//! Passed
 extern unsigned long RTCIntFlagGet(void);
+//! Passed
 extern xtBoolean RTCIntFlagCheck(unsigned long ulFlags);
+//! Passed
 extern void RTCIntFlagClear(unsigned long ulFlags);
+
+//! Passed
 extern void RTCEnable(void);
+//! Passed
 extern void RTCDisable(void);
+//! Passed
 extern void RTCCounterReset(void);
+//! Passed
 extern void RTCCaliEnable(void);
+//! Passed
 extern void RTCCaliDisable(void);
+//! Passed
 extern void RTCIntCfg(unsigned long ulCfg);
+
+extern unsigned long RTCIntCallbackInit(xtEventCallback pfnCallback);
