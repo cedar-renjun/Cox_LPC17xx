@@ -11,7 +11,7 @@
 
 //*****************************************************************************
 //
-// An array is I2C callback function point
+// An array is RTC callback function point
 //
 //*****************************************************************************
 static xtEventCallback g_pfnRTCHandlerCallbacks = 0;
