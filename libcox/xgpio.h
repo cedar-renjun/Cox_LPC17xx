@@ -947,7 +947,7 @@ extern "C"
 #define ENET_MDIO               ENET_MDIO   
 #define PB18                    PB18        
 #define USB_UP_LED              USB_UP_LED  
-#define PWM1_1                  PWM1_1      
+#define PWM1_CH1                PWM1_CH1    
 #define CAP1_0                  CAP1_0      
 #define PB19                    PB19        
 #define MCOA0                   MCOA0       
@@ -955,11 +955,11 @@ extern "C"
 #define CAP1_1                  CAP1_1      
 #define PB20                    PB20        
 #define MCI0                    MCI0        
-#define PWM1_2                  PWM1_2      
+#define PWM1_CH2                PWM1_CH2    
 #define SCK0                    SCK0        
 #define PB21                    PB21        
 #define MCABORT                 MCABORT     
-#define PWM1_3                  PWM1_3      
+#define PWM1_CH3                PWM1_CH3    
 #define SSEL0                   SSEL0       
 #define PB22                    PB22        
 #define MCOB0                   MCOB0       
@@ -967,18 +967,18 @@ extern "C"
 #define MAT1_0                  MAT1_0      
 #define PB23                    PB23        
 #define MCI1                    MCI1        
-#define PWM1_4                  PWM1_4      
+#define PWM1_CH4                PWM1_CH4    
 #define MISO0                   MISO0       
 #define PB24                    PB24        
 #define MCI2                    MCI2        
-#define PWM1_5                  PWM1_5      
+#define PWM1_CH5                PWM1_CH5    
 #define MOSI0                   MOSI0       
 #define PB25                    PB25        
 #define MCOA1                   MCOA1       
 #define MAT1_1                  MAT1_1      
 #define PB26                    PB26        
 #define MCOB1                   MCOB1       
-#define PWM1_6                  PWM1_6      
+#define PWM1_CH6                PWM1_CH6    
 #define CAP0_0                  CAP0_0      
 #define PB27                    PB27        
 #define CLKOUT                  CLKOUT      
@@ -986,11 +986,11 @@ extern "C"
 #define CAP0_1                  CAP0_1      
 #define PB28                    PB28        
 #define MCOA2                   MCOA2       
-#define PCAP1_0                 PCAP1_0     
+#define PWM_CAP_CH0             PWM_CAP_CH0 
 #define MAT0_0                  MAT0_0      
 #define PB29                    PB29        
 #define MCOB2                   MCOB2       
-#define PCAP1_1                 PCAP1_1     
+#define PWM_CAP_CH1             PWM_CAP_CH1 
 #define MAT0_1                  MAT0_1      
 #define PB30                    PB30        
 #define VBUS                    VBUS        
@@ -999,25 +999,18 @@ extern "C"
 #define SCK1                    SCK1        
 #define AD0_5                   AD0_5       
 #define PC0                     PC0         
-#define PWM1_1                  PWM1_1      
 #define TXD1                    TXD1        
 #define PC1                     PC1         
-#define PWM1_2                  PWM1_2      
 #define RXD1                    RXD1        
 #define PC2                     PC2         
-#define PWM1_3                  PWM1_3      
 #define CTS1                    CTS1        
 #define PC3                     PC3         
-#define PWM1_4                  PWM1_4      
 #define DCD1                    DCD1        
 #define PC4                     PC4         
-#define PWM1_5                  PWM1_5      
 #define DSR1                    DSR1        
 #define PC5                     PC5         
-#define PWM1_6                  PWM1_6      
 #define DTR1                    DTR1        
 #define PC6                     PC6         
-#define PCAP1_0                 PCAP1_0     
 #define RI1                     RI1         
 #define PC7                     PC7         
 #define RD2                     RD2         
@@ -1044,11 +1037,9 @@ extern "C"
 #define I2STX_SDA               I2STX_SDA   
 #define PD25                    PD25        
 #define MAT0_0                  MAT0_0      
-#define PWM1_2                  PWM1_2      
 #define PD26                    PD26        
 #define STCLK                   STCLK       
 #define MAT0_1                  MAT0_1      
-#define PWM1_3                  PWM1_3      
 #define PE28                    PE28        
 #define RX_MCLK                 RX_MCLK     
 #define MAT2_0                  MAT2_0      
@@ -2279,6 +2270,46 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 
 //*****************************************************************************
 //
+//! \brief Turn a pin to a GPIO PWM output pin.
+//!
+//! \param ePeripheralPin is the GPIO Peripheral name such as I2C0SDA. 
+//! Details please refer to \ref xGPIO_Pin_Config.
+//! \param eShortPin is the GPIO short pin name such as PA0. 
+//! Details please refer to \ref xGPIO_Short_Pin. 
+//!
+//! This function configures a pin for use as an GPIO DAC function and  
+//! turns the pin into a GPIO DAC output  pin.
+//!
+//! \verbatim
+//! +--------------------+------------------------+------------------------+
+//! |    manufacturer    |ePeripheralPin          |eShortPin               |
+//! |--------------------|------------------------|------------------------|
+//! |    CoX             |This parameter is a     |This parameter is a     |
+//! |                    |mandatory.The mandatory |mandatory. the mandatory|
+//! |                    |is the format of        |is the format of        |
+//! |                    |Variable naming.So it   |Variable naming.So it   |
+//! |                    |should be: DACOUTn,     |should be: PXn          |
+//! |                    |                        |X  indicate the GPIO    |
+//! |                    |n x indicate the pin    |PORT,Such as            |
+//! |                    |number such as          |A B C D E ...           |
+//! |                    |0 1 2 3 ....            |n indicate the pin      |
+//! |                    |                        |number such as          |
+//! |                    |                        |0 1 2 3 ....            |
+//! |--------------------|------------------------|------------------------|
+//! |      STM32F1xx     |    DACOUT1             |    PA4                 |
+//! |                    |    DACOUT2             |    PA5                 |
+//! |--------------------|------------------------|------------------------|
+//! \endverbatim
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xSPinTypeDAC(ePeripheralPin, eShortPin)                               \
+        GPIOSPinConfigure(ePeripheralPin, eShortPin)
+
+
+//*****************************************************************************
+//
 //! \brief Turn a pin to a GPIO FSMC input or output pin.
 //!
 //! \param ePeripheralPin is the GPIO Peripheral name such as I2C0SDA. 
@@ -2375,7 +2406,7 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!
 //! \return None.
 //
-//*****************************************************************************            
+//*****************************************************************************
 #define xSPinTypeFSMC(ePeripheralPin, eShortPin)                              \
         GPIOSPinConfigure(ePeripheralPin, eShortPin)
 
@@ -2628,7 +2659,7 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PB17_ENET_MDIO     ((unsigned long)0x01 << 2 )
 #define GPIO_PB18_PB18          ((unsigned long)0x00 << 4 )
 #define GPIO_PB18_USB_UP_LED    ((unsigned long)0x01 << 4 )
-#define GPIO_PB18_PWM1_1        ((unsigned long)0x02 << 4 )
+#define GPIO_PB18_PWM1_CH1      ((unsigned long)0x02 << 4 )
 #define GPIO_PB18_CAP1_0        ((unsigned long)0x03 << 4 )
 #define GPIO_PB19_PB19          ((unsigned long)0x00 << 6 )
 #define GPIO_PB19_MCOA0         ((unsigned long)0x01 << 6 )
@@ -2636,11 +2667,11 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PB19_CAP1_1        ((unsigned long)0x03 << 6 )
 #define GPIO_PB20_PB20          ((unsigned long)0x00 << 8 )
 #define GPIO_PB20_MCI0          ((unsigned long)0x01 << 8 )
-#define GPIO_PB20_PWM1_2        ((unsigned long)0x02 << 8 )
+#define GPIO_PB20_PWM1_CH2      ((unsigned long)0x02 << 8 )
 #define GPIO_PB20_SCK0          ((unsigned long)0x03 << 8 )
 #define GPIO_PB21_PB21          ((unsigned long)0x00 << 10)
 #define GPIO_PB21_MCABORT       ((unsigned long)0x01 << 10)
-#define GPIO_PB21_PWM1_3        ((unsigned long)0x02 << 10)
+#define GPIO_PB21_PWM1_CH3      ((unsigned long)0x02 << 10)
 #define GPIO_PB21_SSEL0         ((unsigned long)0x03 << 10)
 #define GPIO_PB22_PB22          ((unsigned long)0x00 << 12)
 #define GPIO_PB22_MCOB0         ((unsigned long)0x01 << 12)
@@ -2648,18 +2679,18 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PB22_MAT1_0        ((unsigned long)0x03 << 12)
 #define GPIO_PB23_PB23          ((unsigned long)0x00 << 14)
 #define GPIO_PB23_MCI1          ((unsigned long)0x01 << 14)
-#define GPIO_PB23_PWM1_4        ((unsigned long)0x02 << 14)
+#define GPIO_PB23_PWM1_CH4      ((unsigned long)0x02 << 14)
 #define GPIO_PB23_MISO0         ((unsigned long)0x03 << 14)
 #define GPIO_PB24_PB24          ((unsigned long)0x00 << 16)
 #define GPIO_PB24_MCI2          ((unsigned long)0x01 << 16)
-#define GPIO_PB24_PWM1_5        ((unsigned long)0x02 << 16)
+#define GPIO_PB24_PWM1_CH5      ((unsigned long)0x02 << 16)
 #define GPIO_PB24_MOSI0         ((unsigned long)0x03 << 16)
 #define GPIO_PB25_PB25          ((unsigned long)0x00 << 18)
 #define GPIO_PB25_MCOA1         ((unsigned long)0x01 << 18)
 #define GPIO_PB25_MAT1_1        ((unsigned long)0x03 << 18)
 #define GPIO_PB26_PB26          ((unsigned long)0x00 << 20)
 #define GPIO_PB26_MCOB1         ((unsigned long)0x01 << 20)
-#define GPIO_PB26_PWM1_6        ((unsigned long)0x02 << 20)
+#define GPIO_PB26_PWM1_CH6      ((unsigned long)0x02 << 20)
 #define GPIO_PB26_CAP0_0        ((unsigned long)0x03 << 20)
 #define GPIO_PB27_PB27          ((unsigned long)0x00 << 22)
 #define GPIO_PB27_CLKOUT        ((unsigned long)0x01 << 22)
@@ -2667,11 +2698,11 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PB27_CAP0_1        ((unsigned long)0x03 << 22)
 #define GPIO_PB28_PB28          ((unsigned long)0x00 << 24)
 #define GPIO_PB28_MCOA2         ((unsigned long)0x01 << 24)
-#define GPIO_PB28_PCAP1_0       ((unsigned long)0x02 << 24)
+#define GPIO_PB28_PWM_CAP_CH0   ((unsigned long)0x02 << 24)
 #define GPIO_PB28_MAT0_0        ((unsigned long)0x03 << 24)
 #define GPIO_PB29_PB29          ((unsigned long)0x00 << 26)
 #define GPIO_PB29_MCOB2         ((unsigned long)0x01 << 26)
-#define GPIO_PB29_PCAP1_1       ((unsigned long)0x02 << 26)
+#define GPIO_PB29_PWM_CAP_CH1   ((unsigned long)0x02 << 26)
 #define GPIO_PB29_MAT0_1        ((unsigned long)0x03 << 26)
 #define GPIO_PB30_PB30          ((unsigned long)0x00 << 28)
 #define GPIO_PB30_VBUS          ((unsigned long)0x02 << 28)
@@ -2680,25 +2711,25 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PB31_SCK1          ((unsigned long)0x02 << 30)
 #define GPIO_PB31_AD0_5         ((unsigned long)0x03 << 30)
 #define GPIO_PC0_PC0            ((unsigned long)0x00 << 0 )
-#define GPIO_PC0_PWM1_1         ((unsigned long)0x01 << 0 )
+#define GPIO_PC0_PWM1_CH1       ((unsigned long)0x01 << 0 )
 #define GPIO_PC0_UART1TX        ((unsigned long)0x02 << 0 )
 #define GPIO_PC1_PC1            ((unsigned long)0x00 << 2 )
-#define GPIO_PC1_PWM1_2         ((unsigned long)0x01 << 2 )
+#define GPIO_PC1_PWM1_CH2       ((unsigned long)0x01 << 2 )
 #define GPIO_PC1_UART1RX        ((unsigned long)0x02 << 2 )
 #define GPIO_PC2_PC2            ((unsigned long)0x00 << 4 )
-#define GPIO_PC2_PWM1_3         ((unsigned long)0x01 << 4 )
+#define GPIO_PC2_PWM1_CH3       ((unsigned long)0x01 << 4 )
 #define GPIO_PC2_UART1CTS       ((unsigned long)0x02 << 4 )
 #define GPIO_PC3_PC3            ((unsigned long)0x00 << 6 )
-#define GPIO_PC3_PWM1_4         ((unsigned long)0x01 << 6 )
+#define GPIO_PC3_PWM1_CH4       ((unsigned long)0x01 << 6 )
 #define GPIO_PC3_UART1DCD       ((unsigned long)0x02 << 6 )
 #define GPIO_PC4_PC4            ((unsigned long)0x00 << 8 )
-#define GPIO_PC4_PWM1_5         ((unsigned long)0x01 << 8 )
+#define GPIO_PC4_PWM1_CH5       ((unsigned long)0x01 << 8 )
 #define GPIO_PC4_UART1DSR       ((unsigned long)0x02 << 8 )
 #define GPIO_PC5_PC5            ((unsigned long)0x00 << 10)
-#define GPIO_PC5_PWM1_6         ((unsigned long)0x01 << 10)
+#define GPIO_PC5_PWM1_CH6       ((unsigned long)0x01 << 10)
 #define GPIO_PC5_UART1DTR       ((unsigned long)0x02 << 10)
 #define GPIO_PC6_PC6            ((unsigned long)0x00 << 12)
-#define GPIO_PC6_PCAP1_0        ((unsigned long)0x01 << 12)
+#define GPIO_PC6_PWM_CAP_CH0    ((unsigned long)0x01 << 12)
 #define GPIO_PC6_UART1RI        ((unsigned long)0x02 << 12)
 #define GPIO_PC7_PC7            ((unsigned long)0x00 << 14)
 #define GPIO_PC7_RD2            ((unsigned long)0x01 << 14)
@@ -2725,11 +2756,11 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PC13_I2STX_SDA     ((unsigned long)0x03 << 26)
 #define GPIO_PD25_PD25          ((unsigned long)0x00 << 18)
 #define GPIO_PD25_MAT0_0        ((unsigned long)0x02 << 18)
-#define GPIO_PD25_PWM1_2        ((unsigned long)0x03 << 18)
+#define GPIO_PD25_PWM1_CH2      ((unsigned long)0x03 << 18)
 #define GPIO_PD26_PD26          ((unsigned long)0x00 << 20)
 #define GPIO_PD26_STCLK         ((unsigned long)0x01 << 20)
 #define GPIO_PD26_MAT0_1        ((unsigned long)0x02 << 20)
-#define GPIO_PD26_PWM1_3        ((unsigned long)0x03 << 20)
+#define GPIO_PD26_PWM1_CH3      ((unsigned long)0x03 << 20)
 #define GPIO_PE28_PE28          ((unsigned long)0x00 << 24)
 #define GPIO_PE28_RX_MCLK       ((unsigned long)0x01 << 24)
 #define GPIO_PE28_MAT2_0        ((unsigned long)0x02 << 24)

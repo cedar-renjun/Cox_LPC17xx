@@ -79,34 +79,34 @@
 //! and/or generate an interrupt when it matches the TC.In addition, a match
 //! between this value and the TC clears PWM4 in either edge mode, and sets
 //! PWM5 if it¡¯s in double-edge mode.
-#define PWM_MR4 0x40018040
+#define PWM_MR4 0x00000040
 
 //! Match Register 5.
 //! MR5 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.In addition, a match
 //! between this value and the TC clears PWM5 in either edge mode, and sets
 //! PWM6 if it¡¯s in double-edge mode.
-#define PWM_MR5 0x40018044
+#define PWM_MR5 0x00000044
 
 //! Match Register 6.
 //! MR6 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.In addition, a match
 //! between this value and the TC clears PWM6 in either edge mode.
-#define PWM_MR6 0x40018048
+#define PWM_MR6 0x00000048
 
 //! PWM Control Register.
 //! Enables PWM outputs and selects PWM channel types as either single edge or
 //! double edge controlled.
-#define PWM_PCR 0x4001804C
+#define PWM_PCR 0x0000004C
 
 //! Load Enable Register.
 //! Enables use of new PWM match values.
-#define PWM_LER 0x40018050
+#define PWM_LER 0x00000050
 
 //! Count Control Register.
 //! The CTCR selects between Timer and Counter mode, and in Counter mode selects
 //! the signal and edge(s) for counting.
-#define PWM_CTCR 0x40018070
+#define PWM_CTCR 0x00000070
 
 
 //! PWM_IR {{
