@@ -828,11 +828,11 @@ extern "C"
 #define PA0                     PA0         
 #define RD1                     RD1         
 #define RXD3                    RXD3        
-#define SDA1                    SDA1        
+#define I2C1SDA                 I2C1SDA         
 #define PA1                     PA1         
 #define TD1                     TD1         
 #define RXD3                    RXD3        
-#define SCL1                    SCL1        
+#define I2C1SCL                 I2C1SCL         
 #define PA2                     PA2         
 #define TXD0                    TXD0        
 #define AD0_7                   AD0_7       
@@ -865,11 +865,11 @@ extern "C"
 #define MAT2_3                  MAT2_3      
 #define PA10                    PA10        
 #define TXD2                    TXD2        
-#define SDA2                    SDA2        
+#define I2C2SDA                 I2C2SDA         
 #define MAT3_0                  MAT3_0      
 #define PA11                    PA11        
 #define RXD2                    RXD2        
-#define SCL2                    SCL2        
+#define I2C2SCL                 I2C2SCL         
 #define MAT3_1                  MAT3_1      
 #define PA15                    PA15        
 #define TXD1                    TXD1        
@@ -889,10 +889,8 @@ extern "C"
 #define MOSI                    MOSI        
 #define PA19                    PA19        
 #define DSR1                    DSR1        
-#define SDA1                    SDA1        
 #define PA20                    PA20        
 #define DTR1                    DTR1        
-#define SCL1                    SCL1        
 #define PA21                    PA21        
 #define RI1                     RI1         
 #define RD1                     RD1         
@@ -916,10 +914,10 @@ extern "C"
 #define AOUT                    AOUT        
 #define RXD3                    RXD3        
 #define PA27                    PA27        
-#define SDA0                    SDA0        
+#define I2C0SDA                 I2C0SDA        
 #define USB_SDA                 USB_SDA     
 #define PA28                    PA28        
-#define SCL0                    SCL0        
+#define I2C0SCL                 I2C0SCL         
 #define USB_SCL                 USB_SCL     
 #define PA29                    PA29        
 #define USB_D_P                 USB_D_P     
@@ -2540,11 +2538,11 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PA0_PA0            ((unsigned long)0x00 << 0 )
 #define GPIO_PA0_RD1            ((unsigned long)0x01 << 0 )
 #define GPIO_PA0_UART3TX        ((unsigned long)0x02 << 0 )
-#define GPIO_PA0_SDA1           ((unsigned long)0x03 << 0 )
+#define GPIO_PA0_I2C1SDA        ((unsigned long)0x03 << 0 )
 #define GPIO_PA1_PA1            ((unsigned long)0x00 << 2 )
 #define GPIO_PA1_TD1            ((unsigned long)0x01 << 2 )
 #define GPIO_PA1_UART3RX        ((unsigned long)0x02 << 2 )
-#define GPIO_PA1_SCL1           ((unsigned long)0x03 << 2 )
+#define GPIO_PA1_I2C1SCL        ((unsigned long)0x03 << 2 )
 #define GPIO_PA2_PA2            ((unsigned long)0x00 << 4 )
 #define GPIO_PA2_UART0TX        ((unsigned long)0x01 << 4 )
 #define GPIO_PA2_AD0_7          ((unsigned long)0x02 << 4 )
@@ -2577,11 +2575,11 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PA9_MAT2_3         ((unsigned long)0x03 << 18)
 #define GPIO_PA10_PA10          ((unsigned long)0x00 << 20)
 #define GPIO_PA10_UART2TX       ((unsigned long)0x01 << 20)
-#define GPIO_PA10_SDA2          ((unsigned long)0x02 << 20)
+#define GPIO_PA10_I2C2SDA       ((unsigned long)0x02 << 20)
 #define GPIO_PA10_MAT3_0        ((unsigned long)0x03 << 20)
 #define GPIO_PA11_PA11          ((unsigned long)0x00 << 22)
 #define GPIO_PA11_UART2RX       ((unsigned long)0x01 << 22)
-#define GPIO_PA11_SCL2          ((unsigned long)0x02 << 22)
+#define GPIO_PA11_I2C2SCL       ((unsigned long)0x02 << 22)
 #define GPIO_PA11_MAT3_1        ((unsigned long)0x03 << 22)
 #define GPIO_PA15_PA15          ((unsigned long)0x00 << 30)
 #define GPIO_PA15_UART1TX       ((unsigned long)0x01 << 30)
@@ -2601,10 +2599,10 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PA18_MOSI          ((unsigned long)0x03 << 4 )
 #define GPIO_PA19_PA19          ((unsigned long)0x00 << 6 )
 #define GPIO_PA19_UART1DSR      ((unsigned long)0x01 << 6 )
-#define GPIO_PA19_SDA1          ((unsigned long)0x03 << 6 )
+#define GPIO_PA19_I2C1SDA       ((unsigned long)0x03 << 6 )
 #define GPIO_PA20_PA20          ((unsigned long)0x00 << 8 )
 #define GPIO_PA20_UART1DTR      ((unsigned long)0x01 << 8 )
-#define GPIO_PA20_SCL1          ((unsigned long)0x03 << 8 )
+#define GPIO_PA20_I2C1SCL       ((unsigned long)0x03 << 8 )
 #define GPIO_PA21_PA21          ((unsigned long)0x00 << 10)
 #define GPIO_PA21_UART1RI       ((unsigned long)0x01 << 10)
 #define GPIO_PA21_RD1           ((unsigned long)0x03 << 10)
@@ -2628,10 +2626,10 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PA26_AOUT          ((unsigned long)0x02 << 20)
 #define GPIO_PA26_UART3RX       ((unsigned long)0x03 << 20)
 #define GPIO_PA27_PA27          ((unsigned long)0x00 << 22)
-#define GPIO_PA27_SDA0          ((unsigned long)0x01 << 22)
+#define GPIO_PA27_I2C0SDA       ((unsigned long)0x01 << 22)
 #define GPIO_PA27_USB_SDA       ((unsigned long)0x02 << 22)
 #define GPIO_PA28_PA28          ((unsigned long)0x00 << 28)
-#define GPIO_PA28_SCL0          ((unsigned long)0x01 << 28)
+#define GPIO_PA28_I2C0SCL       ((unsigned long)0x01 << 28)
 #define GPIO_PA28_USB_SCL       ((unsigned long)0x02 << 28)
 #define GPIO_PA29_PA29          ((unsigned long)0x00 << 26)
 #define GPIO_PA29_USB_D_P       ((unsigned long)0x01 << 26)
