@@ -92,7 +92,7 @@
 #define CONSET_STA                 BIT_32_5
 
 //! I2C interface enable.
-#define CONSET_I2CEN               BIT_32_5
+#define CONSET_I2CEN               BIT_32_6
 
 //! CONSET }}
 
