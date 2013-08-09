@@ -109,7 +109,7 @@
 #define CONCLR_STAC                 BIT_32_5
 
 //! I2C interface disable bit.
-#define CONCLR_I2CENC               BIT_32_5
+#define CONCLR_I2CENC               BIT_32_6
 
 //! CONCLR }}
 

@@ -2781,7 +2781,7 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define INT_TYPE_FALLING        BIT_32_1
 
 
-extern unsigned long GPIOPinToPeripheralId(unsigned long ulPort, unsigned long ulPin);
+extern unsigned long  GPIOPinToPeripheralId(unsigned long ulPort, unsigned long ulPin);
 extern unsigned long  GPIOPinToPort(unsigned long ulPort, unsigned long ulPin);
 extern unsigned long  GPIOPinToPin(unsigned long ulPort, unsigned long ulPin);
 
