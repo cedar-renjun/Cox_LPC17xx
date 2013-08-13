@@ -84,7 +84,7 @@ static const tPeripheralTable g_pPeripherals[] =
     { xSPI0_BASE         , xSYSCTL_PERIPH_SPI     , 0 },
     { xRTC_BASE          , xSYSCTL_PERIPH_RTC     , 0 },
     { xSSP1_BASE         , xSYSCTL_PERIPH_SSP1    , 0 },
-    { xADC0_BASE         , xSYSCTL_PERIPH_ADC0     , 0 },
+    { xADC0_BASE         , xSYSCTL_PERIPH_ADC0    , 0 },
     { xCAN1_BASE         , xSYSCTL_PERIPH_CAN1    , 0 },
     { xCAN2_BASE         , xSYSCTL_PERIPH_CAN2    , 0 },
     { xGPIO_PORTA_BASE   , xSYSCTL_PERIPH_GPIOA   , 0 },
