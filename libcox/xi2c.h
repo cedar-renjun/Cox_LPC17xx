@@ -1307,7 +1307,7 @@ extern void I2CMasterWriteS1(unsigned long ulBase, unsigned long ucSlaveAddr, un
 extern void I2CMasterWriteS2(unsigned long ulBase, unsigned long ucData, xtBoolean bEndTransmition);
 extern void I2CMasterWriteBufS1(unsigned long ulBase, unsigned long ucSlaveAddr, unsigned char *pucDataBuf, unsigned long ulLen, xtBoolean bEndTransmition);
 extern void I2CMasterWriteBufS2(unsigned long ulBase, unsigned char *pucDataBuf, unsigned long ulLen, xtBoolean bEndTransmition);
-externunsigned long I2CMasterReadRequestS1(unsigned long ulBase, unsigned long ucSlaveAddr, xtBoolean bEndTransmition);
+extern unsigned long I2CMasterReadRequestS1(unsigned long ulBase, unsigned long ucSlaveAddr, xtBoolean bEndTransmition);
 extern unsigned long I2CMasterReadRequestS2(unsigned long ulBase, xtBoolean bEndTransmition);
 extern unsigned long I2CMasterReadLastRequestS2(unsigned long ulBase);
 extern unsigned long I2CMasterReadS1(unsigned long ulBase, unsigned long ucSlaveAddr, unsigned char *pucData, xtBoolean bEndTransmition);

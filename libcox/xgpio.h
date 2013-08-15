@@ -47,7 +47,7 @@
 // have a C binding.
 //
 //*****************************************************************************
-#ifdef __cplusplus
+#ifdef __cplusplu
 extern "C"
 {
 #endif
@@ -313,12 +313,12 @@ extern "C"
 #define xGPIO_HIGH_LEVEL        0 
 
 //
-//! Interrupt on both edges
+//! Interrupt on both edge
 //
 #define xGPIO_BOTH_EDGES        (INT_TYPE_RISING | INT_TYPE_FALLING)
 
 //
-//! Interrupt on both levels
+//! Interrupt on both level
 //
 #define xGPIO_BOTH_LEVEL        0
 //*****************************************************************************
@@ -737,7 +737,7 @@ extern "C"
 //! The macros of General Peripheral Pin Name always like:
 //! <b> ModuleName + n + PinName </b>, such as CAN0RX, SPI1CLK.
 //!
-//! \section xGPIO_Peripheral_Pin_Port CoX Port Details
+//! \section xGPIO_Peripheral_Pin_Port CoX Port Detail
 //! \verbatim
 //! +-------------------------+----------------+-------------------------+
 //! | General Peripheral Pin  |       CoX      |         STM32F1xx       |
@@ -835,10 +835,10 @@ extern "C"
 #define I2C1SCL                 I2C1SCL         
 #define PA2                     PA2         
 #define TXD0                    TXD0        
-#define AD0_7                   AD0_7       
+#define AD_CH_7                 AD_CH_7
 #define PA3                     PA3         
 #define RXD0                    RXD0        
-#define AD0_6                   AD0_6       
+#define AD_CH_6                 AD_CH_6
 #define PA4                     PA4         
 #define I2SRX_CLK               I2SRX_CLK   
 #define RD2                     RD2         
@@ -898,19 +898,19 @@ extern "C"
 #define RTS1                    RTS1        
 #define TD1                     TD1         
 #define PA23                    PA23        
-#define AD0_0                   AD0_0       
+#define AD_CH_0                 AD_CH_0
 #define I2SRX_CLK               I2SRX_CLK   
 #define CAP3_0                  CAP3_0      
 #define PA24                    PA24        
-#define AD0_1                   AD0_1       
+#define AD_CH_1                 AD_CH_1
 #define I2SRX_WS                I2SRX_WS    
 #define CAP3_1                  CAP3_1      
 #define PA25                    PA25        
-#define AD0_2                   AD0_2       
+#define AD_CH_2                 AD_CH_2
 #define I2SRX_SDA               I2SRX_SDA   
 #define TXD3                    TXD3        
 #define PA26                    PA26        
-#define AD0_3                   AD0_3       
+#define AD_CH_3                 AD_CH_3
 #define AOUT                    AOUT        
 #define RXD3                    RXD3        
 #define PA27                    PA27        
@@ -992,10 +992,10 @@ extern "C"
 #define MAT0_1                  MAT0_1      
 #define PB30                    PB30        
 #define VBUS                    VBUS        
-#define AD0_4                   AD0_4       
+#define AD_CH_4                 AD_CH_4
 #define PB31                    PB31        
 #define SCK1                    SCK1        
-#define AD0_5                   AD0_5       
+#define AD_CH_5                 AD_CH_5
 #define PC0                     PC0         
 #define TXD1                    TXD1        
 #define PC1                     PC1         
@@ -1060,7 +1060,7 @@ extern "C"
 //! \addtogroup xGPIO_Exported_APIs xGPIO API
 //! \brief xGPIO API Reference.
 //!
-//! \section xGPIO_Exported_APIs_Port CoX Port Details
+//! \section xGPIO_Exported_APIs_Port CoX Port Detail
 //!
 //! \verbatim
 //! +--------------------------+----------------+------------------------+
@@ -1172,13 +1172,13 @@ extern "C"
 //! 
 //! Details please refer to \ref xGPIO_Dir_Mode_CoX.
 //!
-//! Where \b xGPIO_DIR_MODE_IN specifies that the pin will be programmed as
+//! Where \b xGPIO_DIR_MODE_IN specifies that the pin will be programmed a
 //! a software controlled input, \b xGPIO_DIR_MODE_OUT specifies that the pin
 //! will be programmed as a software controlled output, and
 //! \b xGPIO_DIR_MODE_HW specifies that the pin will be placed under
 //! hardware control.
 //!
-//! The pin(s) are specified using a bit-packed byte, where each bit that is
+//! The pin(s) are specified using a bit-packed byte, where each bit that i
 //! set identifies the pin to be accessed, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //! 
@@ -1268,7 +1268,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //!
 //! Details please refer to \ref xGPIO_Dir_Mode_CoX.
 //!
-//! where \b xGPIO_DIR_MODE_IN specifies that the pin will be programmed as
+//! where \b xGPIO_DIR_MODE_IN specifies that the pin will be programmed a
 //! a software controlled input, \b xGPIO_DIR_MODE_OUT specifies that the pin
 //! will be programmed as a software controlled output, and
 //! \b xGPIO_DIR_MODE_HW specifies that the pin will be placed under
@@ -1300,7 +1300,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //! output under software control, or it can be under hardware control.  The
 //! type of control and direction are returned as an enumerated data type.
 //!
-//! The pin are specified using a bit-packed byte, where each bit that is
+//! The pin are specified using a bit-packed byte, where each bit that i
 //! set identifies the pin to be accessed, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //! 
@@ -1363,7 +1363,7 @@ extern void xGPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin,
 //! (edge or level) and the particular triggering event (falling, rising,
 //! or both edges for edge detect, low or high for level detect).
 //!
-//! The pin(s) are specified using a bit-packed byte, where each bit that is
+//! The pin(s) are specified using a bit-packed byte, where each bit that i
 //! set identifies the pin to be accessed, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //! 
@@ -1424,7 +1424,7 @@ extern void xGPIOPinIntEnable(unsigned long ulPort, unsigned long ulPins,
 //!
 //! Mask the interrupt for the specified pin(s).
 //!
-//! The pin(s) are specified using a bit-packed byte, where each bit that is
+//! The pin(s) are specified using a bit-packed byte, where each bit that i
 //! set identifies the pin to be accessed, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //!
@@ -1460,7 +1460,7 @@ extern void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins);
 //! \param ulPort is the base address of the GPIO port.
 //! Details please refer to \ref xLowLayer_Peripheral_Memmap.
 //! 
-//! \return Returns a bit-packed byte, where each bit that is set identifies
+//! \return Returns a bit-packed byte, where each bit that is set identifie
 //! an active masked or raw interrupt, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //! Bits 31:16 should be ignored.
@@ -1479,7 +1479,7 @@ extern void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins);
 //!
 //! Clear the interrupt for the specified pin(s).
 //!
-//! The pin(s) are specified using a bit-packed byte, where each bit that is
+//! The pin(s) are specified using a bit-packed byte, where each bit that i
 //! set identifies the pin to be accessed, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //!
@@ -1489,9 +1489,9 @@ extern void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins);
 //! take several clock cycles before the interrupt source is actually cleared.
 //! Therefore, it is recommended that the interrupt source be cleared early in
 //! the interrupt handler (as opposed to the very last action) to avoid
-//! returning from the interrupt handler before the interrupt source is
+//! returning from the interrupt handler before the interrupt source i
 //! actually cleared.  Failure to do so may result in the interrupt handler
-//! being immediately reentered (because the interrupt controller still sees
+//! being immediately reentered (because the interrupt controller still see
 //! the interrupt source asserted).
 //!
 //! \return None.
@@ -1515,9 +1515,9 @@ extern void xGPIOPinIntClear(unsigned long ulPort, unsigned long ulPins);
 //! take several clock cycles before the interrupt source is actually cleared.
 //! Therefore, it is recommended that the interrupt source be cleared early in
 //! the interrupt handler (as opposed to the very last action) to avoid
-//! returning from the interrupt handler before the interrupt source is
+//! returning from the interrupt handler before the interrupt source i
 //! actually cleared.  Failure to do so may result in the interrupt handler
-//! being immediately reentered (because the interrupt controller still sees
+//! being immediately reentered (because the interrupt controller still see
 //! the interrupt source asserted).
 //!
 //! \return None.
@@ -1539,15 +1539,15 @@ extern void xGPIOPinIntClear(unsigned long ulPort, unsigned long ulPins);
 //! Values are returned for both input and output pin(s), and the value
 //! for pin(s) that are not specified by \e ucPins are set to 0.
 //!
-//! The pin(s) are specified using a bit-packed byte, where each bit that is
+//! The pin(s) are specified using a bit-packed byte, where each bit that i
 //! set identifies the pin to be accessed, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //!
 //! Details please refer to \ref xGPIO_General_Pin_IDs_CoX.
 //!
 //! \return Returns a bit-packed byte providing the state of the specified
-//! pin, where bit 0 of the byte represents GPIO port pin 0, bit 1 represents
-//! GPIO port pin 1, and so on.  Any bit that is not specified by \e ucPins
+//! pin, where bit 0 of the byte represents GPIO port pin 0, bit 1 represent
+//! GPIO port pin 1, and so on.  Any bit that is not specified by \e ucPin
 //! is returned as a 0.  Bits 31:8 should be ignored.
 //
 //*****************************************************************************
@@ -1601,7 +1601,7 @@ extern unsigned long xGPIOPinRead(unsigned long ulPort, unsigned long ulPins);
 //! Write the corresponding bit values to the output pin(s) specified by
 //! \e ucPins.  Writing to a pin configured as an input pin has no effect.
 //!
-//! The pin(s) are specified using a bit-packed byte, where each bit that is
+//! The pin(s) are specified using a bit-packed byte, where each bit that i
 //! set identifies the pin to be accessed, and where bit 0 of the byte
 //! represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and so on.
 //!
@@ -2545,10 +2545,10 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PA1_I2C1SCL        ((unsigned long)0x03 << 2 )
 #define GPIO_PA2_PA2            ((unsigned long)0x00 << 4 )
 #define GPIO_PA2_UART0TX        ((unsigned long)0x01 << 4 )
-#define GPIO_PA2_AD0_7          ((unsigned long)0x02 << 4 )
+#define GPIO_PA2_AD_CH_7        ((unsigned long)0x02 << 4 )
 #define GPIO_PA3_PA3            ((unsigned long)0x00 << 6 )
 #define GPIO_PA3_UART0RX        ((unsigned long)0x01 << 6 )
-#define GPIO_PA3_AD0_6          ((unsigned long)0x02 << 6 )
+#define GPIO_PA3_AD_CH_6        ((unsigned long)0x02 << 6 )
 #define GPIO_PA4_PA4            ((unsigned long)0x00 << 8 )
 #define GPIO_PA4_I2SRX_CLK      ((unsigned long)0x01 << 8 )
 #define GPIO_PA4_RD2            ((unsigned long)0x02 << 8 )
@@ -2610,19 +2610,19 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PA22_UART1RTS      ((unsigned long)0x01 << 12)
 #define GPIO_PA22_TD1           ((unsigned long)0x03 << 12)
 #define GPIO_PA23_PA23          ((unsigned long)0x00 << 14)
-#define GPIO_PA23_AD0_0         ((unsigned long)0x01 << 14)
+#define GPIO_PA23_AD_CH_0       ((unsigned long)0x01 << 14)
 #define GPIO_PA23_I2SRX_CLK     ((unsigned long)0x02 << 14)
 #define GPIO_PA23_CAP3_0        ((unsigned long)0x03 << 14)
 #define GPIO_PA24_PA24          ((unsigned long)0x00 << 16)
-#define GPIO_PA24_AD0_1         ((unsigned long)0x01 << 16)
+#define GPIO_PA24_AD_CH_1       ((unsigned long)0x01 << 16)
 #define GPIO_PA24_I2SRX_WS      ((unsigned long)0x02 << 16)
 #define GPIO_PA24_CAP3_1        ((unsigned long)0x03 << 16)
 #define GPIO_PA25_PA25          ((unsigned long)0x00 << 18)
-#define GPIO_PA25_AD0_2         ((unsigned long)0x01 << 18)
+#define GPIO_PA25_AD_CH_2       ((unsigned long)0x01 << 18)
 #define GPIO_PA25_I2SRX_SDA     ((unsigned long)0x02 << 18)
 #define GPIO_PA25_UART3TX       ((unsigned long)0x03 << 18)
 #define GPIO_PA26_PA26          ((unsigned long)0x00 << 20)
-#define GPIO_PA26_AD0_3         ((unsigned long)0x01 << 20)
+#define GPIO_PA26_AD_CH_3       ((unsigned long)0x01 << 20)
 #define GPIO_PA26_AOUT          ((unsigned long)0x02 << 20)
 #define GPIO_PA26_UART3RX       ((unsigned long)0x03 << 20)
 #define GPIO_PA27_PA27          ((unsigned long)0x00 << 22)
@@ -2704,10 +2704,10 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define GPIO_PB29_MAT0_1        ((unsigned long)0x03 << 26)
 #define GPIO_PB30_PB30          ((unsigned long)0x00 << 28)
 #define GPIO_PB30_VBUS          ((unsigned long)0x02 << 28)
-#define GPIO_PB30_AD0_4         ((unsigned long)0x03 << 28)
+#define GPIO_PB30_AD_CH_4       ((unsigned long)0x03 << 28)
 #define GPIO_PB31_PB31          ((unsigned long)0x00 << 30)
 #define GPIO_PB31_SCK1          ((unsigned long)0x02 << 30)
-#define GPIO_PB31_AD0_5         ((unsigned long)0x03 << 30)
+#define GPIO_PB31_AD_CH_5       ((unsigned long)0x03 << 30)
 #define GPIO_PC0_PC0            ((unsigned long)0x00 << 0 )
 #define GPIO_PC0_PWM1_CH1       ((unsigned long)0x01 << 0 )
 #define GPIO_PC0_UART1TX        ((unsigned long)0x02 << 0 )

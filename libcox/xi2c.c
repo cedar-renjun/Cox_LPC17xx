@@ -547,7 +547,7 @@ void I2CMasterWriteBufS1(unsigned long ulBase, unsigned long ucSlaveAddr,
 
     // Enable Autuo Ackknowledge 
     xHWREG(ulBase + I2C_CONSET) = CONSET_AA;
-    xHWREG(ulBase + I2C_CONCLR) = CONCLR_SIC;
+    xHWREG(ulBase + I2C_CONCLR) = CONCLR_STAC | CONCLR_SIC;
 
     // Address+W Transfer OK ?
     while(xHWREG(ulBase + I2C_STAT) != I2C_STAT_M_TX_SLAW_ACK);
@@ -629,8 +629,9 @@ unsigned long I2CMasterReadRequestS1(unsigned long ulBase,
     unsigned long ulTmp    = 0;
 
     // Send start signal
-    xHWREG(ulBase + I2C_CONCLR) = CONCLR_AAC;
     xHWREG(ulBase + I2C_CONSET) = CONSET_STA;
+    xHWREG(ulBase + I2C_CONCLR) = CONCLR_SIC;
+    
     while(1)
     {
         ulTmpReg = xHWREG(ulBase + I2C_STAT);
@@ -644,7 +645,7 @@ unsigned long I2CMasterReadRequestS1(unsigned long ulBase,
     // Send slave address + W
     ucSlaveAddr |= BIT_32_0;
     xHWREG(ulBase + I2C_DAT) = ucSlaveAddr;
-    xHWREG(ulBase + I2C_CONCLR) = CONCLR_SIC;
+    xHWREG(ulBase + I2C_CONCLR) = CONCLR_SIC | CONCLR_STAC;
     while(xHWREG(ulBase + I2C_STAT) != I2C_STAT_M_RX_SLAR_ACK);
 
     // Need to Send Stop signal ?
@@ -759,7 +760,7 @@ unsigned long  I2CMasterReadBufS1(unsigned long ulBase,
     // Send slave address + W
     ucSlaveAddr |= BIT_32_0;
     xHWREG(ulBase + I2C_DAT) = ucSlaveAddr;
-    xHWREG(ulBase + I2C_CONCLR) = CONCLR_SIC;
+    xHWREG(ulBase + I2C_CONCLR) = CONCLR_SIC | CONCLR_STAC;
     while(xHWREG(ulBase + I2C_STAT) != I2C_STAT_M_RX_SLAR_ACK);
 
     for(i = 0; i < ulLen; i++)

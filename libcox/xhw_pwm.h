@@ -274,22 +274,22 @@
 #define PCR_SEL6                BIT_32_6
 
 //! PWM1 output Enable
-#define PCR_SEL1                BIT_32_9
+#define PCR_ENA1                BIT_32_9
 
 //! PWM2 output Enable
-#define PCR_SEL2                BIT_32_10
+#define PCR_ENA2                BIT_32_10
 
 //! PWM3 output Enable
-#define PCR_SEL3                BIT_32_11
+#define PCR_ENA3                BIT_32_11
 
 //! PWM4 output Enable
-#define PCR_SEL4                BIT_32_12
+#define PCR_ENA4                BIT_32_12
 
 //! PWM5 output Enable
-#define PCR_SEL5                BIT_32_13
+#define PCR_ENA5                BIT_32_13
 
 //! PWM6 output Enable
-#define PCR_SEL6                BIT_32_14
+#define PCR_ENA6                BIT_32_14
 
 //! PWM_PCR }}
 

@@ -1,5 +1,17 @@
+#include "xhw_types.h"
+#include "xhw_ints.h"
+#include "xcore.h"
+#include "xhw_memmap.h"
+#include "xhw_nvic.h"
+#include "xhw_sysctl.h"
+#include "xdebug.h"
+#include "xsysctl.h"
+#include "xhw_gpio.h"
+#include "xgpio.h"
+#include "xhw_pwm.h"
+#include "xpwm.h"
 
-
+/*
 #define PWM_CH_0                BIT_32_0           
 #define PWM_CH_1                BIT_32_1           
 #define PWM_CH_2                BIT_32_2           
@@ -19,6 +31,7 @@
 #define PWM_INT_CH_6                BIT_32_10           
 #define PWM_INT_CAP_0               BIT_32_4           
 #define PWM_INT_CAP_1               BIT_32_5           
+*/
 
 #define PWM_INT_FLAG_MASK                                                            \
                                 (PWM_INT_CH_0 | PWM_INT_CH_1  | PWM_INT_CH_2 |       \
@@ -85,6 +98,7 @@ void PWMCounterReset(unsigned long ulBase)
     xHWREG(PWM1_BASE + PWM_TCR) &= ~TCR_CNT_RST;
 }
 
+/*
 PWM_CH_0
 PWM_CH_1
 PWM_CH_2
@@ -99,6 +113,7 @@ PWM_CH_6
 #define PWM_MATCH_RESET_DIS     BIT_32_9         
 #define PWM_MATCH_STOP_EN       BIT_32_2         
 #define PWM_MATCH_STOP_DIS      BIT_32_10        
+*/
 
 // \todo Is there ADN or OR 
 
@@ -114,9 +129,6 @@ void PWMMatchCfg(unsigned long ulBase, unsigned long ulCh, unsigned long ulCfg)
                        PWM_CH_4 | PWM_CH_5 |
                        PWM_CH_6)
             );
-    xASSERT((ulCfg == PWM_MATCH_INT) ||
-            (ulCfg == PWM_MATCH_RESET) || 
-            (ulCfg == PWM_MATCH_STOP) );
 
     for(i = 0; i < 8; i++)
     {
@@ -184,17 +196,19 @@ void PWMMatchUpdate(unsigned long ulBase, unsigned long ulCh, unsigned long ulVa
 
 void PWMOutPutEnable(unsigned long ulBase, unsigned long ulChs)
 {
-    xHWREG(PWM1_BASE + PWM_PCR) |= (ulCh<<8);
+    xHWREG(PWM1_BASE + PWM_PCR) |= (ulChs<<8);
 }
 
 void PWMOutPutDisable(unsigned long ulBase, unsigned long ulChs)
 {
-    xHWREG(PWM1_BASE + PWM_PCR) &= ~(ulCh<<8);
+    xHWREG(PWM1_BASE + PWM_PCR) &= ~(ulChs<<8);
 }
 
+/*
 //ulCfg
 #define PWM_EDGE_DOUBLE         BIT_32_0
 #define PWM_EDGE_SINGLE         BIT_32_1
+*/
 
 void PWMEdgeCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfg)
 {
@@ -202,13 +216,13 @@ void PWMEdgeCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfg)
     {
         case PWM_EDGE_DOUBLE:
             {
-                xHWREG(PWM1_BASE + PWM_PCR) |= ulCh;
+                xHWREG(PWM1_BASE + PWM_PCR) |= ulChs;
                 break;
             }
 
         case PWM_EDGE_SINGLE:
             {
-                xHWREG(PWM1_BASE + PWM_PCR) &= ~ulCh;
+                xHWREG(PWM1_BASE + PWM_PCR) &= ~ulChs;
                 break;
             }
         default:                         // Error
@@ -218,6 +232,7 @@ void PWMEdgeCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfg)
     }
 }
 
+/*
 #define CH0_FALLING_SAMPLE_EN      BIT_32_0
 #define CH0_FALLING_SAMPLE_DIS     BIT_32_8
 #define CH0_RISING_SAMPLE_EN       BIT_32_1
@@ -230,6 +245,7 @@ void PWMEdgeCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfg)
 #define CH1_RISING_SAMPLE_DIS      BIT_32_12
 #define CH1_EDGE_EVENT_INT_EN      BIT_32_5
 #define CH1_EDGE_EVENT_INT_DIS     BIT_32_13
+*/
 
 void PWMCapCfg(unsigned long ulBase, unsigned long ulCfg)
 {

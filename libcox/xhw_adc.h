@@ -55,25 +55,48 @@
 //! AD_CR {{
 
 //! Selects which of the AD0.7:0 pins is (are) to be sampled and converted.
-#define AD_CR_SEL_M                    BIT_MASK(32, 7, 0)
-#define AD_CR_SEL_S                    0
+#define CR_SEL_M                    BIT_MASK(32, 7, 0)
+#define CR_SEL_S                    0
 
 //! APB Clock divider.
-#define AD_CR_CLKDIV_M                 BIT_MASK(32, 15, 8)
-#define AD_CR_CLKDIV_S                 8
+#define CR_CLKDIV_M                 BIT_MASK(32, 15, 8)
+#define CR_CLKDIV_S                 8
 
 //! ADC Burst mode.
-#define AD_CR_BURST                    BIT_32_16
+#define CR_BURST                    BIT_32_16
 
 //! ADC Power-down mode.
-#define AD_CR_PDN                      BIT_32_21
-
-//! Start ADC conversion.
-#define AD_CR_START_M                  BIT_MASK(32, 26, 24)
-#define AD_CR_START_S                  24
+#define CR_PDN                      BIT_32_21
 
 //! Start conversion edge.
-#define AD_CR_EDGE                     BIT_32_27
+#define CR_EDGE                     BIT_32_27
+
+
+//! Start conversion bits mask
+#define CR_START_M                 (BIT_32_26 | BIT_32_25 | BIT_32_24)
+
+//! Start conversion now
+#define CR_START_NOW               (BIT_32_24                        )
+
+//! Start conversion when the edge selected by bit 27 occurs on P2.10/EINT0
+#define CR_START_EINT0             (BIT_32_25                        )
+
+//! Start conversion when the edge selected by bit 27 occurs on P1.27/CAP0.1
+#define CR_START_CAP01             (BIT_32_25 | BIT_32_24            )
+
+//! Start conversion when the edge selected by bit 27 occurs on MAT0.1
+#define CR_START_MAT01             (BIT_32_26                        )
+
+//! Start conversion when the edge selected by bit 27 occurs on MAT0.3
+#define CR_START_MAT03             (BIT_32_26 | BIT_32_24            )
+
+//! Start conversion when the edge selected by bit 27 occurs on MAT1.0
+#define CR_START_MAT10             (BIT_32_26 | BIT_32_24            )
+
+//! Start conversion when the edge selected by bit 27 occurs on MAT1.1
+#define CR_START_MAT11             (BIT_32_26 | BIT_32_25 | BIT_32_24)
+      
+
 
 //! AD_CR }}
 
@@ -81,131 +104,118 @@
 //! AD_GDR {{
 
 //! 
-#define AD_GDR_RESULT_M                BIT_MASK(32, 15, 4)
-#define AD_GDR_RESULT_S                4
+#define GDR_RESULT_M                BIT_MASK(32, 15, 4)
+#define GDR_RESULT_S                4
 
 //! 
-#define AD_GDR_CHN_M                   BIT_MASK(32, 26, 24)
-#define AD_GDR_CHN_S                   24
+#define GDR_CHN_M                   BIT_MASK(32, 26, 24)
+#define GDR_CHN_S                   24
 
 //! 
-#define AD_GDR_OVERRUN                 BIT_32_30
+#define GDR_OVERRUN                 BIT_32_30
 
 //! 
-#define AD_GDR_DONE                    BIT_32_31
+#define GDR_DONE                    BIT_32_31
 
 //! AD_GDR }}
 
 //! AD_INTEN {{
 
 //! Enable ADC channel 0.
-#define AD_INTEN_EN0                   BIT_32_0
+#define INTEN_EN0                   BIT_32_0
 
 //! Enable ADC channel 1.
-#define AD_INTEN_EN1                   BIT_32_1
+#define INTEN_EN1                   BIT_32_1
 
 //! Enable ADC channel 2.
-#define AD_INTEN_EN2                   BIT_32_2
+#define INTEN_EN2                   BIT_32_2
 
 //! Enable ADC channel 3.
-#define AD_INTEN_EN3                   BIT_32_3
+#define INTEN_EN3                   BIT_32_3
 
 //! Enable ADC channel 4.
-#define AD_INTEN_EN4                   BIT_32_4
+#define INTEN_EN4                   BIT_32_4
 
 //! Enable ADC channel 5.
-#define AD_INTEN_EN5                   BIT_32_5
+#define INTEN_EN5                   BIT_32_5
 
 //! Enable ADC channel 6.
-#define AD_INTEN_EN6                   BIT_32_6
+#define INTEN_EN6                   BIT_32_6
 
 //! Enable ADC channel 7.
-#define AD_INTEN_EN7                   BIT_32_7
+#define INTEN_EN7                   BIT_32_7
 
 //! Enable global interrupt.
-#define AD_INTEN_GEN                   BIT_32_8
+#define INTEN_GEN                   BIT_32_8
 
 //! AD_INTEN }}
 
 //! AD_DR {{
 
 //!
-#define AD_DR_RESULT_M                 BIT_MASK(32, 15, 4)
-#define AD_DR_RESULT_S                 4
+#define DR_RESULT_M                 BIT_MASK(32, 15, 4)
+#define DR_RESULT_S                 4
 
 //!
-#define AD_DR_OVERRUN                  BIT_32_30
+#define DR_OVERRUN                  BIT_32_30
 
 //!
-#define AD_DR_DONE                     BIT_32_31
+#define DR_DONE                     BIT_32_31
 
 //! AD_DR }}
 
 //! AD_STAT {{
 
 //!
-#define AD_STAT_DONE_0                 BIT_32_0
+#define STAT_DONE_0                 BIT_32_0
 
 //!
-#define AD_STAT_DONE_1                 BIT_32_1
+#define STAT_DONE_1                 BIT_32_1
 
 //!
-#define AD_STAT_DONE_2                 BIT_32_2
+#define STAT_DONE_2                 BIT_32_2
 
 //!
-#define AD_STAT_DONE_3                 BIT_32_3
+#define STAT_DONE_3                 BIT_32_3
 
 //!
-#define AD_STAT_DONE_4                 BIT_32_4
+#define STAT_DONE_4                 BIT_32_4
 
 //!
-#define AD_STAT_DONE_5                 BIT_32_5
+#define STAT_DONE_5                 BIT_32_5
 
 //!
-#define AD_STAT_DONE_6                 BIT_32_6
+#define STAT_DONE_6                 BIT_32_6
 
 //!
-#define AD_STAT_DONE_7                 BIT_32_7
+#define STAT_DONE_7                 BIT_32_7
 
 //! 
-#define AD_STAT_OVERRUN_0              BIT_32_8 
+#define STAT_OVERRUN_0              BIT_32_8 
 
 //! 
-#define AD_STAT_OVERRUN_1              BIT_32_9 
+#define STAT_OVERRUN_1              BIT_32_9 
 
 //! 
-#define AD_STAT_OVERRUN_2              BIT_32_10
+#define STAT_OVERRUN_2              BIT_32_10
 
 //!
-#define AD_STAT_OVERRUN_3              BIT_32_11
+#define STAT_OVERRUN_3              BIT_32_11
 
 //! 
-#define AD_STAT_OVERRUN_4              BIT_32_12
+#define STAT_OVERRUN_4              BIT_32_12
 
 //!
-#define AD_STAT_OVERRUN_5              BIT_32_13
+#define STAT_OVERRUN_5              BIT_32_13
 
 //! 
-#define AD_STAT_OVERRUN_6              BIT_32_14
+#define STAT_OVERRUN_6              BIT_32_14
 
 //!
-#define AD_STAT_OVERRUN_7              BIT_32_15
+#define STAT_OVERRUN_7              BIT_32_15
 
 //! 
-#define AD_STAT_ADINT                  BIT_32_16
+#define STAT_ADINT                  BIT_32_16
 
 //! AD_STAT }}
-
-//! AD_TRIM {{
-
-//! Offset trim bits for ADC operation.
-#define AD_TRIM_COFFS_M                BIT_MASK(32, 7, 4)
-#define AD_TRIM_COFFS_S                4
-
-//! written-to by boot code.Can not be overwritten by the user.
-//! These bits are locked after boot code write.
-#define AD_TRIM_TRIM_M                 BIT_MASK(32, 11, 8)
-#define AD_TRIM_TRIM_S                 8
-
-//! AD_TRIM }}
 
