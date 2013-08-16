@@ -115,6 +115,16 @@
 
 //! MCR {{
 
+//! Interrupt on MRx.
+#define MCR_MRxI                BIT_32_0
+
+//! Reset on MRx.
+#define MCR_MRxR                BIT_32_1
+
+//! Stop on MRx.
+#define MCR_MRxS                BIT_32_2
+
+
 //! Interrupt on MR0.
 #define MCR_MR0I                BIT_32_0
 
