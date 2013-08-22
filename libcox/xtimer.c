@@ -11,6 +11,99 @@
 #include "xhw_timer.h"
 #include "xtimer.h"
 
+
+
+static xtEventCallback g_pfnTimerHandlerCallbacks[4] = {0};
+
+
+void TIMER0IntHandler(void) 
+{
+    if( g_pfnTimerHandlerCallbacks[0] != 0)
+    {
+        g_pfnTimerHandlerCallbacks[0](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+void TIMER1IntHandler(void) 
+{
+    if( g_pfnTimerHandlerCallbacks[1] != 0)
+    {
+        g_pfnTimerHandlerCallbacks[1](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+void TIMER2IntHandler(void) 
+{
+    if( g_pfnTimerHandlerCallbacks[2] != 0)
+    {
+        g_pfnTimerHandlerCallbacks[2](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+void TIMER3IntHandler(void) 
+{
+    if( g_pfnTimerHandlerCallbacks[3] != 0)
+    {
+        g_pfnTimerHandlerCallbacks[3](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+void TimerIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback)
+{
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+
+    switch(ulBase)
+    {
+        case TIMER0_BASE:
+            {
+                g_pfnTimerHandlerCallbacks[0] = pfnCallback;
+                break;
+            }
+
+        case TIMER1_BASE:
+            {
+                g_pfnTimerHandlerCallbacks[1] = pfnCallback;
+                break;
+            }
+
+        case TIMER2_BASE:
+            {
+                g_pfnTimerHandlerCallbacks[2] = pfnCallback;
+                break;
+            }
+
+        case TIMER3_BASE:
+            {
+                g_pfnTimerHandlerCallbacks[3] = pfnCallback;
+                break;
+            }
+
+        default:
+            {
+                while(1);
+            }
+    }
+}
+
+
 /*
 
 #define TIMER_MAT_CH_0          BIT_32_0 
@@ -31,7 +124,7 @@
 
 */
 
-unsigned long TimerStatusGet(unsigned long ulBase)
+unsigned long TimerIntStatusGet(unsigned long ulBase)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
@@ -41,7 +134,7 @@ unsigned long TimerStatusGet(unsigned long ulBase)
     return (xHWREG(ulBase + TIMER_IR));
 }
 
-xtBoolean TimerStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
+xtBoolean TimerIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
@@ -59,7 +152,7 @@ xtBoolean TimerStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
 
 }
 
-void TimerStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
+void TimerIntStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
@@ -68,8 +161,6 @@ void TimerStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
     // Clear special interrupt flag by write 1 to correct bit.
     xHWREG(ulBase + TIMER_IR) |= ulIntFlags;
 }
-
-
 
 void TimerStart(unsigned long ulBase)
 {
@@ -153,6 +244,89 @@ unsigned long TimerLoadGet(unsigned long ulBase)
     // Read back the prescale value
     return (xHWREG(ulBase + TIMER_PR));
 }
+
+
+void TimerMatchValueSet(unsigned long ulBase, unsigned long ulChs, unsigned long ulValue)
+{
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+
+    switch(ulChs)
+    {
+        case TIMER_MAT_CH_0:
+            {
+                xHWREG(ulBase + TIMER_MR0) = ulValue;
+                break;
+            }
+
+        case TIMER_MAT_CH_1:
+            {
+                xHWREG(ulBase + TIMER_MR1) = ulValue;
+                break;
+            }
+
+        case TIMER_MAT_CH_2:
+            {
+                xHWREG(ulBase + TIMER_MR2) = ulValue;
+                break;
+            }
+
+        case TIMER_MAT_CH_3:
+            {
+                xHWREG(ulBase + TIMER_MR3) = ulValue;
+                break;
+            }
+
+        default:
+            {
+                while(1);
+            }
+    }
+
+}
+
+unsigned long  TimerMatchValueGet(unsigned long ulBase, unsigned long ulChs)
+{
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+
+    switch(ulChs)
+    {
+        case TIMER_MAT_CH_0:
+            {
+                return xHWREG(ulBase + TIMER_MR0);
+                break;
+            }
+
+        case TIMER_MAT_CH_1:
+            {
+                return xHWREG(ulBase + TIMER_MR1);
+                break;
+            }
+
+        case TIMER_MAT_CH_2:
+            {
+                return xHWREG(ulBase + TIMER_MR2);
+                break;
+            }
+
+        case TIMER_MAT_CH_3:
+            {
+                return xHWREG(ulBase + TIMER_MR3);
+                break;
+            }
+
+        default:
+            {
+                while(1);
+            }
+    }
+
+}
+
+
 
 unsigned long TimerValueGet(unsigned long ulBase)
 {
@@ -239,10 +413,89 @@ void TimerMatchCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCf
 #define TIMER_CAP_CH_0          BIT_32_4 
 #define TIMER_CAP_CH_1          BIT_32_5 
 */
+
+/*
+#define TIMER_CFG_CAP_RISING    BIT_32_0
+#define TIMER_CFG_CAP_FALLING   BIT_32_1
+#define TIMER_CFG_CAP_INT       BIT_32_2
+*/
+
 void TimerCaptureCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfgs)
 {
+    unsigned long ulTmpReg = 0;
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
 
+    xASSERT( (ulChs & ~( TIMER_CAP_CH_0 | TIMER_CAP_CH_1 )) == 0 );
+
+    xASSERT( (ulCfgs & ~( TIMER_CFG_CAP_RISING | TIMER_CFG_CAP_FALLING | TIMER_CFG_CAP_INT )) == 0 );
+
+    // Configure Capture Channel 0
+    if(ulChs & TIMER_CAP_CH_0)
+    {
+        ulTmpReg = xHWREG(ulBase + TIMER_CCR);
+        ulTmpReg &= ~(CCR_CAP0RE | CCR_CAP0FE | CCR_CAP0I);
+        ulTmpReg |= ulCfgs;
+        xHWREG(ulBase + TIMER_CCR) = ulTmpReg;
+    }
+
+    // Configure Capture Channel 1
+    if(ulChs & TIMER_CAP_CH_1)
+    {
+        ulTmpReg = xHWREG(ulBase + TIMER_CCR);
+        ulTmpReg &= ~(CCR_CAP1RE | CCR_CAP1FE | CCR_CAP1I);
+        ulTmpReg |= (ulCfgs << 3);
+        xHWREG(ulBase + TIMER_CCR) = ulTmpReg;
+    }
 }
 
+unsigned long TimerCapValueGet(unsigned long ulBase, unsigned long ulChs)
+{
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
 
+    xASSERT( (ulChs & ~( TIMER_CAP_CH_0 | TIMER_CAP_CH_1 )) == 0 );
+
+    switch(ulChs)
+    {
+        case TIMER_CAP_CH_0:
+            {
+                return xHWREG(ulBase + TIMER_CR0);
+            }
+
+        case TIMER_CAP_CH_1:
+            {
+                return xHWREG(ulBase + TIMER_CR1);
+            }
+        default:
+            {
+                while(1);
+            }
+    }
+}
+
+/*
+#define TIMER_CFG_CNT_CAP0_RISING      (BIT_32_0)
+#define TIMER_CFG_CNT_CAP0_FALLING     (BIT_32_1)
+#define TIMER_CFG_CNT_CAP0_BOTH        (BIT_32_1 | BIT_32_0)
+
+#define TIMER_CFG_CNT_CAP1_RISING      (BIT_32_2 | BIT_32_0)
+#define TIMER_CFG_CNT_CAP1_FALLING     (BIT_32_2 | BIT_32_1)
+#define TIMER_CFG_CNT_CAP1_BOTH        (BIT_32_2 | BIT_32_1 | BIT_32_0)
+*/
+
+void TimerCounterCfg(unsigned long ulBase, unsigned long ulCfg)
+{
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT( (ulCfg & ~BIT_MASK(32, 2, 0)) == 0 );
+
+    // Configure Timer Counter/Timer Register.
+    xHWREG(ulBase + TIMER_CTCR) = ulCfg;
+    xHWREG(ulBase + TIMER_CCR)  = 0x00;
+
+}
 
