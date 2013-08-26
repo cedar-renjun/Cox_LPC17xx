@@ -12,13 +12,25 @@
 #include "xtimer.h"
 
 
-
+//*****************************************************************************
+//
+// Callback Function Array.
+//
+//****************************************************************************
 static xtEventCallback g_pfnTimerHandlerCallbacks[4] = {0};
 
-
+//*****************************************************************************
+//
+//! \brief  Timer 0 Interrupt handler.
+//!         This function is startup code handler entry.
+//!
+//! \param  None.
+//! \return None.
+//
+//*****************************************************************************
 void TIMER0IntHandler(void) 
 {
-    if( g_pfnTimerHandlerCallbacks[0] != 0)
+    if( g_pfnTimerHandlerCallbacks[0] != 0 )           // Valid function.
     {
         g_pfnTimerHandlerCallbacks[0](0, 0, 0, 0);
     }
@@ -28,9 +40,18 @@ void TIMER0IntHandler(void)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Timer 1 Interrupt handler.
+//!         This function is startup code handler entry.
+//!
+//! \param  None.
+//! \return None.
+//
+//*****************************************************************************
 void TIMER1IntHandler(void) 
 {
-    if( g_pfnTimerHandlerCallbacks[1] != 0)
+    if( g_pfnTimerHandlerCallbacks[1] != 0 )      // Valid function.
     {
         g_pfnTimerHandlerCallbacks[1](0, 0, 0, 0);
     }
@@ -40,9 +61,18 @@ void TIMER1IntHandler(void)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Timer 2 Interrupt handler.
+//!         This function is startup code handler entry.
+//!
+//! \param  None.
+//! \return None.
+//
+//*****************************************************************************
 void TIMER2IntHandler(void) 
 {
-    if( g_pfnTimerHandlerCallbacks[2] != 0)
+    if( g_pfnTimerHandlerCallbacks[2] != 0 )           // Valid function.
     {
         g_pfnTimerHandlerCallbacks[2](0, 0, 0, 0);
     }
@@ -52,9 +82,18 @@ void TIMER2IntHandler(void)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Timer 3 Interrupt handler.
+//!         This function is startup code handler entry.
+//!
+//! \param  None.
+//! \return None.
+//
+//*****************************************************************************
 void TIMER3IntHandler(void) 
 {
-    if( g_pfnTimerHandlerCallbacks[3] != 0)
+    if( g_pfnTimerHandlerCallbacks[3] != 0 )           // Valid function.
     {
         g_pfnTimerHandlerCallbacks[3](0, 0, 0, 0);
     }
@@ -64,6 +103,16 @@ void TIMER3IntHandler(void)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Init interrupts callback for the timer.
+//!
+//! \param [in] ulBase is the base address of the Timer port.
+//! \param [in] xtPortCallback is user callback for the timer.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void TimerIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback)
 {
     // Check the parameters.
@@ -72,25 +121,25 @@ void TimerIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback)
 
     switch(ulBase)
     {
-        case TIMER0_BASE:
+        case TIMER0_BASE:                            // Register timer 0 user ISR
             {
-                g_pfnTimerHandlerCallbacks[0] = pfnCallback;
+                g_pfnTimerHandlerCallbacks[0] = pfnCallback;   
                 break;
             }
 
-        case TIMER1_BASE:
+        case TIMER1_BASE:                            // Register timer 1 user ISR
             {
                 g_pfnTimerHandlerCallbacks[1] = pfnCallback;
                 break;
             }
 
-        case TIMER2_BASE:
+        case TIMER2_BASE:                            // Register timer 2 user ISR
             {
                 g_pfnTimerHandlerCallbacks[2] = pfnCallback;
                 break;
             }
 
-        case TIMER3_BASE:
+        case TIMER3_BASE:                            // Register timer 3 user ISR
             {
                 g_pfnTimerHandlerCallbacks[3] = pfnCallback;
                 break;
@@ -103,27 +152,127 @@ void TimerIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Configurate The Timer's mode and tick frequency. 
+//!         This function is to configurate The Timer's mode and tick frequency.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref xTIMER0_BASE, \ref xTIMER1_BASE,
+//!              \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!
+//! \param  [in] ulChannel is the channel of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref xTIMER_CHANNEL0
+//!              \ref xTIMER_CHANNEL1
+//!
+//! \param  [in] ulConfig is the mode Configuratation of the Timer port.
+//!              This parameter is the OR value of two values:
+//!              - Timer's mode
+//!                \ref xTIMER_MODE_ONESHOT
+//!                \ref xTIMER_MODE_PERIODIC
+//!                \ref xTIMER_MODE_TOGGLE and
+//!                \ref xTIMER_MODE_CONTINUOUS
+//!                \ref xTIMER_MODE_CAPTURE
+//!              - Timer's direction
+//!                \ref xTIMER_COUNT_UP
+//!                \ref xTIMER_COUNT_DOWN
+//!
+//! \param  [in] ulTickFreq is the tick frequency of the Timer port.
+//!
+//! \return None.
+//!
+//! \note   For LPC17xx, Channel 0 is general timer, Channel 1 is input capture
+//
+//*****************************************************************************
+void TimerInitConfig(unsigned long ulBase, unsigned long ulChannel,
+        unsigned long ulConfig, unsigned long ulTickFreq)
+{
+    unsigned long ulFre = 0;
 
-/*
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT((ulChannel == xTIMER_CHANNEL0) || (ulChannel == xTIMER_CHANNEL1));
+    xASSERT( (ulConfig == xTIMER_MODE_ONESHOT)    || (ulConfig == xTIMER_MODE_PERIODIC)
+             (ulConfig == xTIMER_MODE_CONTINUOUS) || (ulConfig == xTIMER_MODE_CAPTURE) );
 
-#define TIMER_MAT_CH_0          BIT_32_0 
-#define TIMER_MAT_CH_1          BIT_32_1 
-#define TIMER_MAT_CH_2          BIT_32_2 
-#define TIMER_MAT_CH_3          BIT_32_3 
+    // Get Timer System Clock Frequency.
+    switch(ulBase)
+    {
+        case TIMER0_BASE:
+            {
+                ulFre = SysCtlPeripheralClockGet(PCLKSEL_TIMER0);
+                break;
+            }
 
-#define TIMER_CAP_CH_0          BIT_32_4 
-#define TIMER_CAP_CH_1          BIT_32_5 
+        case TIMER1_BASE:
+            {
+                ulFre = SysCtlPeripheralClockGet(PCLKSEL_TIMER1);
+                break;
+            }
 
-#define TIMER_INT_MAT_CH_0      BIT_32_0 
-#define TIMER_INT_MAT_CH_1      BIT_32_1 
-#define TIMER_INT_MAT_CH_2      BIT_32_2 
-#define TIMER_INT_MAT_CH_3      BIT_32_3 
+        case TIMER2_BASE:
+            {
+                ulFre = SysCtlPeripheralClockGet(PCLKSEL_TIMER2);
+                break;
+            }
 
-#define TIMER_INT_CAP_CH_0      BIT_32_4 
-#define TIMER_INT_CAP_CH_1      BIT_32_5 
+        case TIMER3_BASE:
+            {
+                ulFre = SysCtlPeripheralClockGet(PCLKSEL_TIMER3);
+                break;
+            }
+        default:
+            {
+                while(1);                          // Error
+            }
+    }
 
-*/
+    // Configure Timer Clock
+    if(ulTickFreq >= ulFre)
+    {
+        ulFre = 0;
+    }
+    else
+    {
+        ulFre = ulFre/ulTickFreq - 1;
+    }
+    TimerPrescaleSet(ulBase, ulFre);
 
+
+    if(ulChannel == xTIMER_CHANNEL0)               // Timer Mode
+    {
+        // Nothing todo
+    }
+    else if(ulChannel == xTIMER_CHANNEL1)          // Capture Mode 
+    {
+        // Nothing todo
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  Get Timer Interrupt status.
+//!         This function is used to get timer interrupts status.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \return The status of timer module interrupt status.
+//!         This value is the OR of the following value:
+//!              \ref TIMER_INT_MAT_CH_0
+//!              \ref TIMER_INT_MAT_CH_1
+//!              \ref TIMER_INT_MAT_CH_2
+//!              \ref TIMER_INT_MAT_CH_3
+//!              \ref TIMER_INT_CAP_CH_0
+//!              \ref TIMER_INT_CAP_CH_1
+//!
+//
+//*****************************************************************************
 unsigned long TimerIntStatusGet(unsigned long ulBase)
 {
     // Check the parameters.
@@ -134,6 +283,31 @@ unsigned long TimerIntStatusGet(unsigned long ulBase)
     return (xHWREG(ulBase + TIMER_IR));
 }
 
+//*****************************************************************************
+//
+//! \brief  Check Timer Interrupt Flag.
+//!         This function is used to check whether special flag is set or not.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulIntFlags is the interrupt flag you want to check
+//!         This value is the OR of the following value:
+//!              \ref TIMER_INT_MAT_CH_0
+//!              \ref TIMER_INT_MAT_CH_1
+//!              \ref TIMER_INT_MAT_CH_2
+//!              \ref TIMER_INT_MAT_CH_3
+//!              \ref TIMER_INT_CAP_CH_0
+//!              \ref TIMER_INT_CAP_CH_1
+//!
+//! \return The status of special interrupt flag.
+//!         - xtrue The check flag has been set. 
+//!         - xflase The check flag has not been set. 
+//!
+//
+//*****************************************************************************
 xtBoolean TimerIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
 {
     // Check the parameters.
@@ -152,6 +326,29 @@ xtBoolean TimerIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
 
 }
 
+//*****************************************************************************
+//
+//! \brief  Clear Timer Interrupt Flag.
+//!         This function is used to clear special timer interrupt flag.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulIntFlags is the interrupt flag you want to clear.
+//!         This value is the OR of the following value:
+//!              \ref TIMER_INT_MAT_CH_0
+//!              \ref TIMER_INT_MAT_CH_1
+//!              \ref TIMER_INT_MAT_CH_2
+//!              \ref TIMER_INT_MAT_CH_3
+//!              \ref TIMER_INT_CAP_CH_0
+//!              \ref TIMER_INT_CAP_CH_1
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerIntStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
 {
     // Check the parameters.
@@ -162,6 +359,20 @@ void TimerIntStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
     xHWREG(ulBase + TIMER_IR) |= ulIntFlags;
 }
 
+//*****************************************************************************
+//
+//! \brief  Start Timer
+//!         This function is used to start timer module.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerStart(unsigned long ulBase)
 {
     // Check the parameters.
@@ -172,6 +383,20 @@ void TimerStart(unsigned long ulBase)
     xHWREG(ulBase + TIMER_TCR) |= TCR_CNT_EN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Stop Timer
+//!         This function is used to stop timer module.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerStop(unsigned long ulBase)
 {
     // Check the parameters.
@@ -182,6 +407,20 @@ void TimerStop(unsigned long ulBase)
     xHWREG(ulBase + TIMER_TCR) &= ~TCR_CNT_EN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Reset Timer Counter.
+//!         This function is used to reset timer counter.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerReset(unsigned long ulBase)
 {
     // Check the parameters.
@@ -194,7 +433,6 @@ void TimerReset(unsigned long ulBase)
 }
 
 /*
-MODE_TIMER
 MODE_COUNTER_CH0_RISING
 MODE_COUNTER_CH0_FALLING
 MODE_COUNTER_CH0_BOTHEDGE
@@ -203,8 +441,24 @@ MODE_COUNTER_CH1_FALLING
 MODE_COUNTER_CH1_BOTHEDGE
 */
 
-//TimerCfg
 
+//*****************************************************************************
+//
+//! \brief  Set timer prescale value.
+//!         This function is used to configure timer clock prescale value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulValue is the timer clock precsacle.
+//!              0 <= ulValue <= (32-bit long maximum value)
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerPrescaleSet(unsigned long ulBase, unsigned long ulValue)
 {
     // Check the parameters.
@@ -215,6 +469,21 @@ void TimerPrescaleSet(unsigned long ulBase, unsigned long ulValue)
     xHWREG(ulBase + TIMER_PR) = ulValue;
 }
 
+//*****************************************************************************
+//
+//! \brief  Get timer prescale value.
+//!         This function is used to get timer clock prescale value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \return      The timer clock precsacle.
+//!              0 <= ulValue <= (32-bit long maximum value)
+//!
+//
+//*****************************************************************************
 unsigned long TimerPrescaleGet(unsigned long ulBase)
 {
     // Check the parameters.
@@ -225,60 +494,118 @@ unsigned long TimerPrescaleGet(unsigned long ulBase)
     return (xHWREG(ulBase + TIMER_PR));
 }
 
+//*****************************************************************************
+//
+//! \brief  Set timer counter value.
+//!         This function is used to set timer clock counter value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulValue is the timer counter value.
+//!              0 <= ulValue <= (32-bit long maximum value)
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerLoadSet(unsigned long ulBase, unsigned long ulValue)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
             (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
 
-    // Write the prescale value
-    xHWREG(ulBase + TIMER_PR) = ulValue;
+    // Write the Timer Counter value
+    xHWREG(ulBase + TIMER_TC) = ulValue;
 }
 
+//*****************************************************************************
+//
+//! \brief  Get timer counter value.
+//!         This function is used to get timer clock counter value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \return [in] The timer counter value.
+//!              0 <= ulValue <= (32-bit long maximum value)
+//!
+//!
+//
+//*****************************************************************************
 unsigned long TimerLoadGet(unsigned long ulBase)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
             (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
 
-    // Read back the prescale value
-    return (xHWREG(ulBase + TIMER_PR));
+    // Read the Timer Counter value
+    return (xHWREG(ulBase + TIMER_TC));
 }
 
-
+//*****************************************************************************
+//
+//! \brief  Set timer channel match value.
+//!         This function is used to set timer channel match value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulChs is the timer channel.
+//!              This value can be one of the following value:
+//!              \ref TIMER_MAT_CH_0
+//!              \ref TIMER_MAT_CH_1
+//!              \ref TIMER_MAT_CH_2
+//!              \ref TIMER_MAT_CH_3
+//!
+//! \param  [in] ulValue is the timer match value.
+//!              0 <= ulValue <= (32-bit long maximum value)
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerMatchValueSet(unsigned long ulBase, unsigned long ulChs, unsigned long ulValue)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
             (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT((ulBase == TIMER_MAT_CH_0) || (ulBase == TIMER_MAT_CH_1) ||
+            (ulBase == TIMER_MAT_CH_2) || (ulBase == TIMER_MAT_CH_3) );
 
     switch(ulChs)
     {
-        case TIMER_MAT_CH_0:
+        case TIMER_MAT_CH_0:                          // Match Channel 0
             {
                 xHWREG(ulBase + TIMER_MR0) = ulValue;
                 break;
             }
 
-        case TIMER_MAT_CH_1:
+        case TIMER_MAT_CH_1:                          // Match Channel 0
             {
                 xHWREG(ulBase + TIMER_MR1) = ulValue;
                 break;
             }
 
-        case TIMER_MAT_CH_2:
+        case TIMER_MAT_CH_2:                          // Match Channel 0
             {
                 xHWREG(ulBase + TIMER_MR2) = ulValue;
                 break;
             }
 
-        case TIMER_MAT_CH_3:
+        case TIMER_MAT_CH_3:                          // Match Channel 0
             {
                 xHWREG(ulBase + TIMER_MR3) = ulValue;
                 break;
             }
 
-        default:
+        default:                                      // Error
             {
                 while(1);
             }
@@ -286,39 +613,62 @@ void TimerMatchValueSet(unsigned long ulBase, unsigned long ulChs, unsigned long
 
 }
 
+//*****************************************************************************
+//
+//! \brief  Get timer channel match value.
+//!         This function is used to get timer channel match value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulChs is the timer channel.
+//!              This value can be one of the following value:
+//!              \ref TIMER_MAT_CH_0
+//!              \ref TIMER_MAT_CH_1
+//!              \ref TIMER_MAT_CH_2
+//!              \ref TIMER_MAT_CH_3
+//!
+//! \return The timer match value.
+//!
+//
+//***************************************************************************** 
 unsigned long  TimerMatchValueGet(unsigned long ulBase, unsigned long ulChs)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
             (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT((ulBase == TIMER_MAT_CH_0) || (ulBase == TIMER_MAT_CH_1) ||
+            (ulBase == TIMER_MAT_CH_2) || (ulBase == TIMER_MAT_CH_3) );
 
     switch(ulChs)
     {
-        case TIMER_MAT_CH_0:
+        case TIMER_MAT_CH_0:                          // Match Channel 0
             {
                 return xHWREG(ulBase + TIMER_MR0);
                 break;
             }
 
-        case TIMER_MAT_CH_1:
+        case TIMER_MAT_CH_1:                          // Match Channel 2
             {
                 return xHWREG(ulBase + TIMER_MR1);
                 break;
             }
 
-        case TIMER_MAT_CH_2:
+        case TIMER_MAT_CH_2:                          // Match Channel 2
             {
                 return xHWREG(ulBase + TIMER_MR2);
                 break;
             }
 
-        case TIMER_MAT_CH_3:
+        case TIMER_MAT_CH_3:                          // Match Channel 3
             {
                 return xHWREG(ulBase + TIMER_MR3);
                 break;
             }
 
-        default:
+        default:                                      // Error
             {
                 while(1);
             }
@@ -326,37 +676,62 @@ unsigned long  TimerMatchValueGet(unsigned long ulBase, unsigned long ulChs)
 
 }
 
-
-
+//*****************************************************************************
+//
+//! \brief  Get timer current counter value.
+//!         This function is used to get timer current counter value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \return The timer current counter value.
+//!         0 <= ulValue <= (32-bit long maximum value).
+//!
+//
+//***************************************************************************** 
 unsigned long TimerValueGet(unsigned long ulBase)
 {
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
             (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
 
-    // Write the prescale value
+    // Get current counter value.
     return (xHWREG(ulBase + TIMER_TC));
 }
 
-
-/*
-#define TIMER_MAT_MASK          BIT_MASK(32, 2, 0)
-//! An interrupt is generated when MR matches the value in the TC. 
-#define TIMER_MAT_INT           BIT_32_0
-
-//! The TC will be reset if MR matches it.
-#define TIMER_MAT_RESET         BIT_32_1
-
-//! The TC and PC will be stopped and TCR will be set to 0 if MR matches the TC.
-#define TIMER_MAT_STOP          BIT_32_2
-
-#define TIMER_MAT_PIN_MASK      BIT_MASK(32, 14, 12)
-#define TIMER_MAT_PIN_NONE      BIT_32_14
-#define TIMER_MAT_PIN_LOW       BIT_32_12
-#define TIMER_MAT_PIN_HIGH      BIT_32_13
-#define TIMER_MAT_PIN_TOGGLE    (BIT_32_13 | BIT_32_12)
-*/
-
+//*****************************************************************************
+//
+//! \brief  Configure timer match function.
+//!         This function is used to configure timer match function.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulChs is the timer channel.
+//!              This value can be one of the following value:
+//!              \ref TIMER_MAT_CH_0
+//!              \ref TIMER_MAT_CH_1
+//!              \ref TIMER_MAT_CH_2
+//!              \ref TIMER_MAT_CH_3
+//!
+//! \param  [in] ulCfgs is the parameters for timer match mode.
+//!              This value can be one of the following value:
+//!              \ref TIMER_MAT_INT        Triggle interrupt when match event occurs.
+//!              \ref TIMER_MAT_RESET      Reset counter when match event occurs.   
+//!              \ref TIMER_MAT_STOP       Stop counter when match event occurs.   
+//!              \ref TIMER_MAT_PIN_NONE   No action when match event occurs.   
+//!              \ref TIMER_MAT_PIN_LOW    Set pin low when match event occurs.  
+//!              \ref TIMER_MAT_PIN_HIGH   Set pin High when match event occurs.   
+//!              \ref TIMER_MAT_PIN_TOGGLE Toggle pin value when match event occurs.   
+//!
+//! \return None.
+//!
+//
+//***************************************************************************** 
 void TimerMatchCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfgs)
 {
     unsigned long i        = 0;
@@ -408,27 +783,41 @@ void TimerMatchCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCf
     }
 }
 
-
-/*
-#define TIMER_CAP_CH_0          BIT_32_4 
-#define TIMER_CAP_CH_1          BIT_32_5 
-*/
-
-/*
-#define TIMER_CFG_CAP_RISING    BIT_32_0
-#define TIMER_CFG_CAP_FALLING   BIT_32_1
-#define TIMER_CFG_CAP_INT       BIT_32_2
-*/
-
+//*****************************************************************************
+//
+//! \brief  Configure timer capture function.
+//!         This function is used to configure timer capture function.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulChs is the timer channel.
+//!              This value can be one of the following value:
+//!              \ref TIMER_CAP_CH_0
+//!              \ref TIMER_CAP_CH_1
+//!
+//! \param  [in] ulCfgs is the parameters for timer match mode.
+//!              This value can be one of the following value:
+//!              \ref TIMER_CFG_CAP_RISING  Capture rising edge signal.
+//!              \ref TIMER_CFG_CAP_FALLING Capture falling edge signal.
+//!              \ref TIMER_CFG_CAP_INT     Triggle interrupt when capture event occurs.
+//!
+//! \return None.
+//! \note   \ref TIMER_CFG_CAP_INT can be used with \ref TIMER_CFG_CAP_RISING
+//!         and \ref TIMER_CFG_CAP_FALLING, i.e:
+//!         TimerCaptureCfg(TIMER0_BASE, TIMER_CAP_CH_0, TIMER_CFG_CAP_RISING | TIMER_CFG_CAP_INT);
+//!
+//
+//***************************************************************************** 
 void TimerCaptureCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfgs)
 {
     unsigned long ulTmpReg = 0;
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
             (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
-
     xASSERT( (ulChs & ~( TIMER_CAP_CH_0 | TIMER_CAP_CH_1 )) == 0 );
-
     xASSERT( (ulCfgs & ~( TIMER_CFG_CAP_RISING | TIMER_CFG_CAP_FALLING | TIMER_CFG_CAP_INT )) == 0 );
 
     // Configure Capture Channel 0
@@ -450,6 +839,25 @@ void TimerCaptureCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ul
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Get timer capture value.
+//!         This function is used to get capture time value.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulChs is the timer channel.
+//!              This value can be one of the following value:
+//!              \ref TIMER_CAP_CH_0
+//!              \ref TIMER_CAP_CH_1
+//!
+//! \return The capture value.
+//!
+//
+//***************************************************************************** 
 unsigned long TimerCapValueGet(unsigned long ulBase, unsigned long ulChs)
 {
     // Check the parameters.
@@ -476,16 +884,36 @@ unsigned long TimerCapValueGet(unsigned long ulBase, unsigned long ulChs)
     }
 }
 
-/*
-#define TIMER_CFG_CNT_CAP0_RISING      (BIT_32_0)
-#define TIMER_CFG_CNT_CAP0_FALLING     (BIT_32_1)
-#define TIMER_CFG_CNT_CAP0_BOTH        (BIT_32_1 | BIT_32_0)
+       
 
-#define TIMER_CFG_CNT_CAP1_RISING      (BIT_32_2 | BIT_32_0)
-#define TIMER_CFG_CNT_CAP1_FALLING     (BIT_32_2 | BIT_32_1)
-#define TIMER_CFG_CNT_CAP1_BOTH        (BIT_32_2 | BIT_32_1 | BIT_32_0)
-*/
-
+//*****************************************************************************
+//
+//! \brief  Configure timer capture function.
+//!         This function is used to configure timer capture function.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              This value can be one of the following value:
+//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
+//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!
+//! \param  [in] ulChs is the timer channel.
+//!              This value can be one of the following value:
+//!              \ref TIMER_CAP_CH_0
+//!              \ref TIMER_CAP_CH_1
+//!
+//! \param  [in] ulCfg is the parameters for configure timer counter mode.
+//!              This value can be one of the following value:
+//!              \ref TIMER_CFG_CNT_CAP0_RISING     Capture 0 rising edge increase counter.
+//!              \ref TIMER_CFG_CNT_CAP0_FALLING    Capture 0 falling edge increase counter.
+//!              \ref TIMER_CFG_CNT_CAP0_BOTH       Capture 0 both edge increase counter.
+//!              \ref TIMER_CFG_CNT_CAP1_RISING     Capture 1 rising edge increase counter.
+//!              \ref TIMER_CFG_CNT_CAP1_FALLING    Capture 1 falling edge increase counter.
+//!              \ref TIMER_CFG_CNT_CAP1_BOTH       Capture 1 both edge increase counter.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
 void TimerCounterCfg(unsigned long ulBase, unsigned long ulCfg)
 {
     // Check the parameters.
@@ -496,6 +924,131 @@ void TimerCounterCfg(unsigned long ulBase, unsigned long ulCfg)
     // Configure Timer Counter/Timer Register.
     xHWREG(ulBase + TIMER_CTCR) = ulCfg;
     xHWREG(ulBase + TIMER_CCR)  = 0x00;
+}
 
+//*****************************************************************************
+//
+//! \brief Enable The Timer counter interrupt. 
+//!        This function is to enable The Timer counter interrupt.
+//!
+//! \param [in] ulBase is the base address of the Timer port.
+//!             Can be one of the following value:
+//!             \ref xTIMER0_BASE, \ref xTIMER1_BASE,
+//!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!
+//! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
+//! \param [in] ulIntFlags is the interrupt type of the Timer port.
+//!             \ref xTIMER_INT_MATCH       Match interrupt event.
+//!             \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
+//!
+//! \return None.
+//
+//***************************************************************************** 
+void xTimerIntEnable(unsigned long ulBase, unsigned long ulChannel, unsigned long ulIntFlags)
+{
+    unsigned long ulTmpReg = 0;
+
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT((ulChannel == xTIMER_CHANNEL0) || (ulChannel == xTIMER_CHANNEL1));
+    (void) ulIntFlags;
+
+    if(ulChannel == xTIMER_CHANNEL0)               // Timer Mode
+    {
+        ulTmpReg = xHWREG(ulBase + TIMER_MCR);
+        ulTmpReg |= MCR_MR0I;
+        xHWREG(ulBase + TIMER_MCR) = ulTmpReg;
+    }
+    else if(ulChannel == xTIMER_CHANNEL1)          // Capture Mode 
+    {
+        ulTmpReg = xHWREG(ulBase + TIMER_CCR);
+        ulTmpReg |= CCR_CAP0I;
+        xHWREG(ulBase + TIMER_CCR) = ulTmpReg;
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief Enable The Timer counter interrupt. 
+//!        This function is to enable The Timer counter interrupt.
+//!
+//! \param [in] ulBase is the base address of the Timer port.
+//!             Can be one of the following value:
+//!             \ref xTIMER0_BASE, \ref xTIMER1_BASE,
+//!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!
+//! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
+//! \param [in] ulIntFlags is the interrupt type of the Timer port.
+//!             \ref xTIMER_INT_MATCH       Match interrupt event.
+//!             \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
+//!
+//! \return None.
+//
+//***************************************************************************** 
+void xTimerIntDisable(unsigned long ulBase, unsigned long ulChannel, unsigned long ulIntFlags)
+{
+    unsigned long ulTmpReg = 0;
+
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT((ulChannel == xTIMER_CHANNEL0) || (ulChannel == xTIMER_CHANNEL1));
+    (void) ulIntFlags;
+
+    if(ulChannel == xTIMER_CHANNEL0)               // Timer Mode
+    {
+        ulTmpReg = xHWREG(ulBase + TIMER_MCR);
+        ulTmpReg &= ~MCR_MR0I;
+        xHWREG(ulBase + TIMER_MCR) = ulTmpReg;
+    }
+    else if(ulChannel == xTIMER_CHANNEL1)          // Capture Mode 
+    {
+        ulTmpReg = xHWREG(ulBase + TIMER_CCR);
+        ulTmpReg &= ~CCR_CAP0I;
+        xHWREG(ulBase + TIMER_CCR) = ulTmpReg;
+    }
+}
+
+xtBoolean xTimerStatusGet(unsigned long ulBase, unsigned long ulChannel,
+        unsigned long ulIntFlags)
+{
+    unsigned long ulTmpReg = 0;
+
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT((ulChannel == xTIMER_CHANNEL0) || (ulChannel == xTIMER_CHANNEL1));
+    (void) ulIntFlags;
+
+    if(ulChannel == xTIMER_CHANNEL0)               // Timer Mode
+    {
+        return TimerIntStatusCheck(ulBase, TIMER_INT_MAT_CH_0);
+    }
+    else if(ulChannel == xTIMER_CHANNEL1)          // Capture Mode 
+    {
+        return TimerIntStatusCheck(ulBase, TIMER_INT_CAP_CH_0);
+    }
+}
+
+void xTimerCaptureEdgeSelect(unsigned long ulBase, unsigned long ulChannel,
+                                    unsigned long ulEdge)
+{
+    // Check the parameters.
+    xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
+            (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
+    xASSERT(ulChannel == xTIMER_CHANNEL1);
+    (void) ulChannel;
+
+    // Configure Capture Edge
+    TimerCaptureCfg(ulBase, TIMER_CAP_CH_0, ulEdge);
 }
 
