@@ -16,6 +16,8 @@
 //*****************************************************************************
 static xtEventCallback g_pfnRTCHandlerCallbacks = 0;
 
+// RTC Mask code
+// Note: Only for internal use!
 #define SEC_MASK                BIT_MASK(32, 5, 0)
 #define MIN_MASK                BIT_MASK(32, 5, 0)
 #define HOUR_MASK               BIT_MASK(32, 4, 0)
@@ -49,6 +51,57 @@ void RTCIntHandler(void)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Init interrupts callback for the RTC.
+//!
+//! \param [in] xtPortCallback is user callback for the WDT.
+//!
+//! \return None.
+//
+//*****************************************************************************
+unsigned long RTCIntCallbackInit(xtEventCallback pfnCallback)
+{
+    // Check the parameters.
+    xASSERT(pfnCallback != 0);
+
+    g_pfnRTCHandlerCallbacks = pfnCallback;
+
+    return (0);
+
+}   
+
+//*****************************************************************************
+//
+//! \brief Set RTC Time value.
+//!        This function can be used to configure time value,
+//!        for exampe, second/minute/hour/day and so on.
+//!
+//! \param [in] ulType is the type of time.
+//!             This value can be one of the following value:
+//!             \ref RTC_TIMETYPE_SECOND     
+//!             \ref RTC_TIMETYPE_MINUTE     
+//!             \ref RTC_TIMETYPE_HOUR       
+//!             \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             \ref RTC_TIMETYPE_MONTH      
+//!             \ref RTC_TIMETYPE_YEAR       
+//!
+//! \param [in] ulValue is the value of time, for different type of time, you
+//!             must satisfied those condition.
+//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!                                                                  
+//! \return None.                                                    
+//
+//***************************************************************************** 
 void RTCTimeSet(unsigned long ulType, unsigned long ulValue)
 {
     switch(ulType)
@@ -146,6 +199,36 @@ void RTCTimeSet(unsigned long ulType, unsigned long ulValue)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Get RTC Time
+//!        This function can be used to get rtc time value,
+//!        for exampe, second/minute/hour/day and so on.
+//!
+//! \param [in] ulType is the type of time.
+//!             This value can be one of the following value:
+//!             \ref RTC_TIMETYPE_SECOND     
+//!             \ref RTC_TIMETYPE_MINUTE     
+//!             \ref RTC_TIMETYPE_HOUR       
+//!             \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             \ref RTC_TIMETYPE_MONTH      
+//!             \ref RTC_TIMETYPE_YEAR       
+//!
+//! \return The value of time, for different type of time, value
+//!             satisfied different range condition.
+//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!                                                                  
+//
+//***************************************************************************** 
 unsigned long RTCTimeGet(unsigned long ulType)
 {
     switch(ulType)
@@ -196,7 +279,6 @@ unsigned long RTCTimeGet(unsigned long ulType)
             }
     }
 }
-
 
 void RTCAlarmSet(unsigned long ulType, unsigned long ulValue)
 {
@@ -354,7 +436,15 @@ RTC_GPREG2
 RTC_GPREG3
 RTC_GPREG4
 */
-
+//*****************************************************************************
+//
+//! \brief  Enable RTC function and start counter.
+//!
+//! \param  None.
+//!
+//! \return None.
+//
+//***************************************************************************** 
 void RTCGenRegWrite(unsigned long ulID, unsigned long ulValue)
 {
     xHWREG(RTC_BASE + ulID) = ulValue;
@@ -390,33 +480,124 @@ void RTCIntFlagClear(unsigned long ulFlags)
     xHWREG(RTC_BASE + RTC_ILR) |= ulFlags;
 }
 
-
+//*****************************************************************************
+//
+//! \brief  Enable RTC function and start counter.
+//!
+//! \param  None.
+//!
+//! \return None.
+//
+//***************************************************************************** 
 void RTCEnable(void)
 {
     xHWREG(RTC_BASE + RTC_CCR) |= CCR_CLKEN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Disable RTC function and start counter.
+//!
+//! \param  None.
+//!
+//! \return None.
+//
+//***************************************************************************** 
 void RTCDisable(void)
 {
     xHWREG(RTC_BASE + RTC_CCR) &= ~CCR_CLKEN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Reset RTC counter and time value.
+//! 
+//! \param  None.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void RTCCounterReset(void)
 {
     xHWREG(RTC_BASE + RTC_CCR) |= CCR_CTCRST;
     xHWREG(RTC_BASE + RTC_CCR) &= ~CCR_CTCRST;
 }
 
+//*****************************************************************************
+//
+//! \brief  Enable RTC calibration function.
+//!
+//! \param  None.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void RTCCaliEnable(void)
 {
     xHWREG(RTC_BASE + RTC_CCR) |= CCR_CCALEN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Disable RTC calibration function.
+//!
+//! \param  None.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void RTCCaliDisable(void)
 {
     xHWREG(RTC_BASE + RTC_CCR) &= ~CCR_CCALEN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Configure RTC interrupt mode.
+//!         This function can be used to enable/disable rtc time/alarm interrupt.
+//!
+//! \param  [in] ulCfg is interrupt configure parameters.
+//!              This value can be the logical OR of the following value:
+//!
+//!              \ref INT_SEC_EN         Enable second       interrupt     
+//!              \ref INT_MIN_EN         Enable minute       interrupt     
+//!              \ref INT_HOUR_EN        Enable hour         interrupt     
+//!              \ref INT_DOM_EN         Enable day of month interrupt     
+//!              \ref INT_DOW_EN         Enable day of week  interrupt     
+//!              \ref INT_DOY_EN         Enable day of year  interrupt     
+//!              \ref INT_MON_EN         Enable month        interrupt     
+//!              \ref INT_YEAR_EN        Enable year         interrupt     
+//! 
+//!              \ref INT_SEC_DIS        Disable second       interrupt     
+//!              \ref INT_MIN_DIS        Disable minute       interrupt     
+//!              \ref INT_HOUR_DIS       Disable hour         interrupt     
+//!              \ref INT_DOM_DIS        Disable day of month interrupt     
+//!              \ref INT_DOW_DIS        Disable day of week  interrupt     
+//!              \ref INT_DOY_DIS        Disable day of year  interrupt     
+//!              \ref INT_MON_DIS        Disable month        interrupt     
+//!              \ref INT_YEAR_DIS       Disable year         interrupt     
+//! 
+//!              \ref INT_ALARM_SEC_EN   Enable second       alarm interrupt     
+//!              \ref INT_ALARM_MIN_EN   Enable minute       alarm interrupt     
+//!              \ref INT_ALARM_HOUR_EN  Enable hour         alarm interrupt     
+//!              \ref INT_ALARM_DOM_EN   Enable day of month alarm interrupt     
+//!              \ref INT_ALARM_DOW_EN   Enable day of week  alarm interrupt     
+//!              \ref INT_ALARM_DOY_EN   Enable day of year  alarm interrupt     
+//!              \ref INT_ALARM_MON_EN   Enable month        alarm interrupt     
+//!              \ref INT_ALARM_YEAR_EN  Enable year         alarm interrupt     
+//! 
+//!              \ref INT_ALARM_SEC_DIS  Disable second       alarm interrupt     
+//!              \ref INT_ALARM_MIN_DIS  Disable minute       alarm interrupt     
+//!              \ref INT_ALARM_HOUR_DIS Disable hour         alarm interrupt     
+//!              \ref INT_ALARM_DOM_DIS  Disable day of month alarm interrupt     
+//!              \ref INT_ALARM_DOW_DIS  Disable day of week  alarm interrupt     
+//!              \ref INT_ALARM_DOY_DIS  Disable day of year  alarm interrupt     
+//!              \ref INT_ALARM_MON_DIS  Disable month        alarm interrupt     
+//!              \ref INT_ALARM_YEAR_DIS Disable year         alarm interrupt     
+//!
+//! \return None.
+//
+//*****************************************************************************
 void RTCIntCfg(unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -443,14 +624,154 @@ void RTCIntCfg(unsigned long ulCfg)
     }
 }
 
-unsigned long RTCIntCallbackInit(xtEventCallback pfnCallback)
+//*****************************************************************************
+//
+//! \brief  Enable the time tick or alarm interrupt of RTC. 
+//!         This function is to enable the time tick or alarm interrupt of RTC.
+//!
+//! \param  [in] ulIntType is the bit mask of the interrupt sources to be enabled.
+//!              This value can be the logical OR of the following value:
+//!              \ref xRTC_INT_SECOND      Tick interrupt
+//!              \ref xRTC_INT_ALARM       Alarm interrupt
+//!
+//! \return None.
+//
+//***************************************************************************** 
+void xRTCIntEnable(unsigned long ulIntType)
 {
-    // Check the parameters.
-    xASSERT(pfnCallback != 0);
+    // Check parameters valid.
+    xASSERT(( ulIntType == xRTC_INT_SECOND ) ||
+            ( ulIntType == xRTC_INT_ALARM  ) ||
+            ( ulIntType == (xRTC_INT_SECOND | xRTC_INT_ALARM) ));
+    
+    // Enable RTC second interrupt.
+    if(ulIntType & xRTC_INT_SECOND)
+    {
+        RTCIntCfg((INT_SEC_EN  | INT_MIN_DIS | INT_HOUR_DIS | INT_DOM_DIS  |
+                   INT_DOW_DIS | INT_DOY_DIS | INT_MON_DIS  | INT_YEAR_DIS ));
+    }
 
-    g_pfnRTCHandlerCallbacks = pfnCallback;
+    // Enable RTC alarm interrupt.
+    if(ulIntType & xRTC_INT_ALARM)
+    {
+        RTCIntCfg((INT_ALARM_SEC_EN  | INT_ALARM_MIN_EN  |
+                   INT_ALARM_HOUR_EN | INT_ALARM_DOM_EN  |
+                   INT_ALARM_DOW_EN  | INT_ALARM_DOY_EN  |
+                   INT_ALARM_MON_EN  | INT_ALARM_YEAR_EN ));
+    }
+}
 
-    return (0);
+//*****************************************************************************
+//
+//! \brief  Disable the time tick or alarm interrupt of RTC. 
+//!         This function is to disable the time tick or alarm interrupt of RTC.
+//!
+//! \param  [in] ulIntType is the bit mask of the interrupt sources to be enabled.
+//!              This value can be the logical OR of the following value:
+//!              \ref xRTC_INT_SECOND      Tick interrupt
+//!              \ref xRTC_INT_ALARM       Alarm interrupt
+//!
+//! \return None.
+//
+//***************************************************************************** 
+void xRTCIntDisable(unsigned long ulIntType)
+{
+    // Check parameters valid.
+    xASSERT(( ulIntType == xRTC_INT_SECOND ) ||
+            ( ulIntType == xRTC_INT_ALARM  ) ||
+            ( ulIntType == (xRTC_INT_SECOND | xRTC_INT_ALARM) ));
+    
+    // Disable RTC second interrupt.
+    if(ulIntType & xRTC_INT_SECOND)
+    {
+        RTCIntCfg((INT_SEC_DIS | INT_MIN_DIS | INT_HOUR_DIS | INT_DOM_DIS  |
+                   INT_DOW_DIS | INT_DOY_DIS | INT_MON_DIS  | INT_YEAR_DIS ));
+    }
 
+    // Disable RTC alarm interrupt.
+    if(ulIntType & xRTC_INT_ALARM)
+    {
+        RTCIntCfg((INT_ALARM_SEC_DIS  | INT_ALARM_MIN_DIS  |
+                   INT_ALARM_HOUR_DIS | INT_ALARM_DOM_DIS  |
+                   INT_ALARM_DOW_DIS  | INT_ALARM_DOY_DIS  |
+                   INT_ALARM_MON_DIS  | INT_ALARM_YEAR_DIS ));
+    }  
+}
+
+//*****************************************************************************
+//
+//! \brief  Read current date/time or alarm date/time from RTC setting. 
+//!         This function is to Read current date/time or alarm date/time from RTC
+//!         setting.
+//!
+//! \param  [out] xtTime specifies the point of time and data.
+//! \param  [in]  ulTimeAlarm specifies which will be read current time or alarm time.
+//!               This parameter is the one of any of the following:
+//!               \ref xRTC_TIME_CURRENT  Get Current time.
+//!               \ref xRTC_TIME_ALARM    Get System Alarm.
+//!
+//! \return None.
+//
+//***************************************************************************** 
+void xRTCTimeRead(xtTime * pxtTime, unsigned long ulTimeAlarm)
+{
+    // Check parameters valid.
+    xASSERT(pxtTime != 0);
+    xASSERT((ulTimeAlarm == xRTC_TIME_CURRENT) || (ulTimeAlarm == xRTC_TIME_ALARM));
+
+    switch(ulTimeAlarm)
+    {
+        case xRTC_TIME_CURRENT:
+            {
+                break;
+            }
+
+        case  xRTC_TIME_ALARM:
+            {
+                break;
+            }   
+        default:                                      // Error
+            {
+                while(1);
+            }
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  Write current date/time or alarm date/time to RTC Module.
+//!         This function is to configure current date/time or alarm date/time.
+//!
+//! \param  [out] xtTime specifies the point of time and data.
+//! \param  [in]  ulTimeAlarm specifies which will be read current time or alarm time.
+//!               This parameter is the one of any of the following:
+//!               \ref xRTC_TIME_CURRENT  Get Current time.
+//!               \ref xRTC_TIME_ALARM    Get System Alarm.
+//!
+//! \return None.
+//
+//***************************************************************************** 
+void xRTCTimeWrite(xtTime * pxtTime, unsigned long ulTimeAlarm)
+{
+    // Check parameters valid.
+    xASSERT(pxtTime != 0);
+    xASSERT((ulTimeAlarm == xRTC_TIME_CURRENT) || (ulTimeAlarm == xRTC_TIME_ALARM));
+
+    switch(ulTimeAlarm)
+    {
+        case xRTC_TIME_CURRENT:
+            {
+                break;
+            }
+
+        case  xRTC_TIME_ALARM:
+            {
+                break;
+            }   
+        default:                                      // Error
+            {
+                while(1);
+            }
+    }
 }
 

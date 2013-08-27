@@ -510,6 +510,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return None.
 //
@@ -528,6 +531,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return None.
 //
@@ -546,6 +552,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return None.
 //
@@ -564,6 +573,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return None.
 //
@@ -582,6 +594,10 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulCapMode is the capture mode of the Timer port.
 //!             Which can be the values: \b xTIMER_CAP_MODE_CAP, \b TIMER_CAP_MODE_RST.
 //!
@@ -601,6 +617,10 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulValue is the Prescale Value will be set.
 //!
 //! \return None.
@@ -620,6 +640,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return the Prescale Value will be get.
 //
@@ -638,6 +661,10 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulValue is the Proload Value will be set.
 //!
 //! \return None.
@@ -656,6 +683,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return the counter Value will be get.
 //
@@ -675,6 +705,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return current up timer or up event counter value will be set.
 //
@@ -693,6 +726,10 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulValue is Timer counter Compare Match Value.
 //!
 //! \return None.
@@ -712,6 +749,9 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \return the Prescale Value will be set.
 //
@@ -748,6 +788,10 @@ extern "C"
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulIntFlags is the interrupt type of the Timer port.
 //!
 //! \return None.
@@ -766,6 +810,10 @@ extern void xTimerIntEnable(unsigned long ulBase, unsigned long ulChannel, unsig
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulIntFlags is the interrupt type of the Timer port.
 //!
 //! \return None.
@@ -785,6 +833,10 @@ extern void xTimerIntDisable(unsigned long ulBase, unsigned long ulChannel,
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulIntFlags is the interrupt type of the Timer port.
 //!
 //! \return the Status of The Timer counter interrupt.
@@ -801,6 +853,11 @@ extern xtBoolean xTimerStatusGet(unsigned long ulBase, unsigned long ulChannel, 
 //!             Can be one of the following value:
 //!             \ref xTIMER0_BASE, \ref xTIMER1_BASE,
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!
+//!//! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \param [in] ulPhase is the counter detect phase of the Timer port.
 //! 
@@ -820,6 +877,10 @@ extern xtBoolean xTimerStatusGet(unsigned long ulBase, unsigned long ulChannel, 
 //!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
 //! \param [in] ulEdge is the capture detect edge of the Timer port.
 //!
 //! \return None.

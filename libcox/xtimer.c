@@ -974,8 +974,8 @@ void xTimerIntEnable(unsigned long ulBase, unsigned long ulChannel, unsigned lon
 
 //*****************************************************************************
 //
-//! \brief Enable The Timer counter interrupt. 
-//!        This function is to enable The Timer counter interrupt.
+//! \brief Disable The Timer counter interrupt. 
+//!        This function is to disable The Timer counter interrupt.
 //!
 //! \param [in] ulBase is the base address of the Timer port.
 //!             Can be one of the following value:
@@ -1018,6 +1018,28 @@ void xTimerIntDisable(unsigned long ulBase, unsigned long ulChannel, unsigned lo
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Get The Timer counter interrupt Status. 
+//!        This function is to get timer interrupt status.
+//!
+//! \param [in] ulBase is the base address of the Timer port.
+//!             Can be one of the following value:
+//!             \ref xTIMER0_BASE, \ref xTIMER1_BASE,
+//!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!
+//! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             \ref xTIMER_CHANNEL0 is general timer channel.
+//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!
+//! \param [in] ulIntFlags is the interrupt type of the Timer port.
+//!             \ref xTIMER_INT_MATCH       Match interrupt event.
+//!             \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
+//!
+//! \return the Status of The Timer counter interrupt.
+//
+//*****************************************************************************
 xtBoolean xTimerStatusGet(unsigned long ulBase, unsigned long ulChannel,
         unsigned long ulIntFlags)
 {
