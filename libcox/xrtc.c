@@ -280,6 +280,37 @@ unsigned long RTCTimeGet(unsigned long ulType)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Set RTC alarm value.
+//!        This function can be used to configure rtc alarm value,
+//!        for exampe, second/minute/hour/day and so on.
+//!
+//! \param [in] ulType is the type of time.
+//!             This value can be one of the following value:
+//!             \ref RTC_TIMETYPE_SECOND     
+//!             \ref RTC_TIMETYPE_MINUTE     
+//!             \ref RTC_TIMETYPE_HOUR       
+//!             \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             \ref RTC_TIMETYPE_MONTH      
+//!             \ref RTC_TIMETYPE_YEAR       
+//!
+//! \param [in] ulValue is the value of time, for different type of time, you
+//!             must satisfied those condition.
+//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!                                                                  
+//! \return None.                                                    
+//
+//***************************************************************************** 
 void RTCAlarmSet(unsigned long ulType, unsigned long ulValue)
 {
      switch(ulType)
@@ -378,6 +409,36 @@ void RTCAlarmSet(unsigned long ulType, unsigned long ulValue)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Get RTC alarm value.
+//!        This function can be used to get rtc alarm time value,
+//!        for exampe, second/minute/hour/day and so on.
+//!
+//! \param [in] ulType is the type of time.
+//!             This value can be one of the following value:
+//!             \ref RTC_TIMETYPE_SECOND     
+//!             \ref RTC_TIMETYPE_MINUTE     
+//!             \ref RTC_TIMETYPE_HOUR       
+//!             \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             \ref RTC_TIMETYPE_MONTH      
+//!             \ref RTC_TIMETYPE_YEAR       
+//!
+//! \return The value of time, for different type of time, value
+//!             satisfied different range condition.
+//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!                                                                  
+//
+//***************************************************************************** 
 unsigned long RTCAlarmGet(unsigned long ulType)
 {
      switch(ulType)
@@ -429,18 +490,20 @@ unsigned long RTCAlarmGet(unsigned long ulType)
     }
 }
 
-/*
-RTC_GPREG0
-RTC_GPREG1
-RTC_GPREG2
-RTC_GPREG3
-RTC_GPREG4
-*/
 //*****************************************************************************
 //
-//! \brief  Enable RTC function and start counter.
+//! \brief  Write value to RTC general registers.
 //!
-//! \param  None.
+//! \param  [in] ulID is the order of rtc general register.
+//!              ulID can be one of the following value:
+//!              \ref RTC_REG_0
+//!              \ref RTC_REG_1
+//!              \ref RTC_REG_2
+//!              \ref RTC_REG_3
+//!              \ref RTC_REG_4
+//!
+//! \param  [in] ulValue is the data going to store into general register.
+//!              0 <= ulValue <= 0xFFFFFFFF
 //!
 //! \return None.
 //
@@ -450,16 +513,62 @@ void RTCGenRegWrite(unsigned long ulID, unsigned long ulValue)
     xHWREG(RTC_BASE + ulID) = ulValue;
 }
 
+//*****************************************************************************
+//
+//! \brief  Read value from RTC general registers.
+//!
+//! \param  [in] ulID is the order of rtc general register.
+//!              ulID can be one of the following value:
+//!              \ref RTC_REG_0
+//!              \ref RTC_REG_1
+//!              \ref RTC_REG_2
+//!              \ref RTC_REG_3
+//!              \ref RTC_REG_4
+//!
+//! \return The value stored in general register.
+//!              0 <= ulValue <= 0xFFFFFFFF
+//!
+//
+//***************************************************************************** 
 unsigned long RTCGenRegRead(unsigned long ulID)
 {
     return xHWREG(RTC_BASE + ulID);
 }
 
+//*****************************************************************************
+//
+//! \brief  Get RTC Interrupt status.
+//!         This function is used to get RTC interrupt status.
+//!
+//! \param  None.
+//!
+//! \return The status of RTC interrupt, which contains of the OR of following value:
+//!         \ref RTC_INT_INC
+//!         \ref RTC_INT_ALARM
+//!
+//
+//*****************************************************************************
 unsigned long RTCIntFlagGet(void)
 {
     return xHWREG(RTC_BASE + RTC_ILR);
 }
 
+//*****************************************************************************
+//
+//! \brief  Check RTC status flag.
+//!         This function is used to check whether special flag is set or not.
+//!
+//! \param  [in] ulFlags is the flag you want to check
+//!         This value is the OR of the following value:
+//!              \ref RTC_INT_INC
+//!              \ref RTC_INT_ALARM
+//!
+//! \return The status of special flag.
+//!         - xtrue The check flag has been set. 
+//!         - xflase The check flag has not been set. 
+//!
+//
+//*****************************************************************************
 xtBoolean RTCIntFlagCheck(unsigned long ulFlags)
 {
     xASSERT( !(ulFlags & ~( RTC_INT_INC | RTC_INT_ALARM )));
@@ -474,6 +583,20 @@ xtBoolean RTCIntFlagCheck(unsigned long ulFlags)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Clear RTC interrupt status flag.
+//!         This function can be used to clear special RTC interrupt status flag.
+//!
+//! \param  [in] ulFlags is RTC interrupt status flag.
+//!              This parameter can be OR of the following value:
+//!              \ref RTC_INT_INC
+//!              \ref RTC_INT_ALARM
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************       
 void RTCIntFlagClear(unsigned long ulFlags)
 {
     xASSERT( !(ulFlags & ~( RTC_INT_INC | RTC_INT_ALARM )));

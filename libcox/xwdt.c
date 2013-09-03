@@ -47,9 +47,9 @@ void WDTIntHandler(void)
 
 //*****************************************************************************
 //
-//! \brief Init interrupts callback for the WDT.
+//! \brief  Register user interrupts callback function  for the WDT.
 //!
-//! \param [in] xtPortCallback is user callback for the WDT.
+//! \param  [in] xtPortCallback is user callback for the WDT.
 //!
 //! \return None.
 //
@@ -205,7 +205,7 @@ void WDTEnable(void)
 //!
 //! \param  None.
 //!
-//! \return The status of WDT, which contains of the following value:
+//! \return The status of WDT, which contains of the OR of following value:
 //!         \ref WDT_FLAG_TIMEOUT
 //!         \ref WDT_FLAG_INT
 //!

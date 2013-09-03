@@ -1,7 +1,837 @@
-#include "xhw_types.h"
-#include "xhw_ints.h"
-#include "xhw_memmap.h"
-#include "xdebug.h"
+//*****************************************************************************
+//
+//! \file xuart.h
+//! \brief Prototypes for the UART Driver.
+//! \version V2.2.1.0
+//! \date 11/14/2011
+//! \author CooCox
+//! \copy
+//!
+//! Copyright (c)  2011, CooCox 
+//! All rights reserved.
+//! 
+//! Redistribution and use in source and binary forms, with or without 
+//! modification, are permitted provided that the following conditions 
+//! are met: 
+//!     * Redistributions of source code must retain the above copyright 
+//! notice, this list of conditions and the following disclaimer. 
+//!     * Redistributions in binary form must reproduce the above copyright
+//! notice, this list of conditions and the following disclaimer in the
+//! documentation and/or other materials provided with the distribution. 
+//!     * Neither the name of the <ORGANIZATION> nor the names of its 
+//! contributors may be used to endorse or promote products derived 
+//! from this software without specific prior written permission. 
+//! 
+//! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! THE POSSIBILITY OF SUCH DAMAGE.
+//
+//*****************************************************************************
+
+#ifndef __xUART_H__
+#define __xUART_H__
+
+//*****************************************************************************
+//
+// If building with a C++ compiler, make all of the definitions in this header
+// have a C binding.
+//
+//*****************************************************************************
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+//*****************************************************************************
+//
+//! \addtogroup CoX_Peripheral_Lib
+//! @{
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup UART
+//! @{
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup xUART
+//! @{
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup xUART_Ints xUART Interrupt
+//! \brief      Values that show xUART Interrupt
+//! 
+//! \section    xUART_Ints_Section 1. Where to use this group
+//!             Values that can be passed to UARTIntEnable, UARTIntDisable,
+//!             and UARTIntClear as the ulIntFlags parameter, and returned
+//!             from UARTIntStatus. 
+//! 
+//! \section    xUART_Ints_CoX 2. CoX Port Details 
+//! \verbatim
+//! +---------------------------+----------------+------------------------+
+//! |   xUART Interrupts        |       CoX      |          LPC17xx       |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_ERROR         |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_RT            |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_TX            |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_RX            |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_DSR           |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_DCD           |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_CTS           |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_RI            |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_INT_LMSB          |  Non-Mandatory |            N           |
+//! +---------------------------+----------------+------------------------+
+//! \endverbatim
+//! @{
+//
+//*****************************************************************************
+
+//
+//! All Error Interrupt Mask
+//
+#define xUART_INT_ERROR     
+
+//
+//! Receive Timeout Interrupt Mask
+//
+#define xUART_INT_RT        
+
+//
+//! Transmit Interrupt Mask
+//
+#define xUART_INT_TX        
+
+//
+//! Receive Interrupt Mask
+//
+#define xUART_INT_RX       
+
+//
+//! DSR Modem Interrupt Mask
+//
+#define xUART_INT_DSR     
+
+//
+//! DCD Modem Interrupt Mask
+//
+#define xUART_INT_DCD     
+
+//
+//! CTS Modem Interrupt Mask
+//
+#define xUART_INT_CTS     
+
+//
+//! RI Modem Interrupt Mask
+//
+#define xUART_INT_RI       
+
+//
+//! LIN Mode Sync Break Interrupt Mask
+//
+#define xUART_INT_LMSB    
+
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************   
+
+//*****************************************************************************
+//
+//! \addtogroup xUART_Event_Flag xUART Event Flags
+//! \brief      Values that show xUART Event Flags
+//! 
+//! \section    xUART_Event_Flag_Section 1. Where to use this group
+//!             Uart Event/Error Flag, Used by IntHandle's Event Callback
+//!             Function as ulMsgParam parmeter. User Callback function can
+//!             user this to detect what event happened.
+//! 
+//! \section    xUART_Event_Flag_CoX 2. CoX Port Details 
+//! \verbatim
+//! +---------------------------+----------------+------------------------+
+//! |   xUART Events            |       CoX      |          LPC17xx       |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_TX          |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_RX          |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_OE          |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_FE          |    Mandatory   |            Y           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_RT          |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_PE          |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_DSR         |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_DCD         |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_CTS         |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_RI          |  Non-Mandatory |            N           |
+//! |---------------------------|----------------|------------------------|
+//! |   xUART_EVENT_LMSB        |  Non-Mandatory |            N           |
+//! +---------------------------+----------------+------------------------+
+//! \endverbatim
+//! @{
+//
+//*****************************************************************************
+
+//
+//! Transmit Event Mask
+//
+#define xUART_EVENT_TX     
+
+//
+//! Receive Event Mask
+//
+#define xUART_EVENT_RX  
+
+//
+//! Overrun Error Event Mask
+//
+#define xUART_EVENT_OE    
+
+//
+//! Parity Error Event Mask
+//
+#define xUART_EVENT_PE   
+
+//
+//! Framing Error Event Mask
+//
+#define xUART_EVENT_FE   
+
+//
+//! Receive Timeout Event Mask
+//
+#define xUART_EVENT_RT   
+
+//
+//! DSR Modem Event Mask
+//
+#define xUART_EVENT_DSR 
+
+//
+//! DCD Modem Event Mask
+//
+#define xUART_EVENT_DCD  
+
+//
+//! CTS Modem Event Mask
+//
+#define xUART_EVENT_CTS   
+
+//
+//! RI Modem Event Mask
+//
+#define xUART_EVENT_RI  
+
+//
+//! LIN Mode Sync Break Event Mask
+//
+#define xUART_EVENT_LMSB  
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup xUART_Error xUART Error
+//! \brief      Values that show xUART Error
+//! 
+//! \section    xUART_Event_Flag_Section 1. Where to use this group
+//!             Values returned from xUARTRxErrorGet().
+//!
+//! \section    xUART_Event_Flag_CoX 2. CoX Port Details 
+//! \verbatim
+//! +------------------------+----------------+------------------------+
+//! |xUART Error             |       CoX      |         LPC17xx        |
+//! |------------------------|----------------|------------------------|
+//! |xUART_RXERROR_OVERRUN   |    Mandatory   |            Y           |
+//! |------------------------|----------------|------------------------|
+//! |xUART_RXERROR_BREAK     |    Mandatory   |            Y           |
+//! |------------------------|----------------|------------------------|
+//! |xUART_RXERROR_PARITY    |    Mandatory   |            Y           |
+//! |------------------------|----------------|------------------------|
+//! |xUART_RXERROR_FRAMING   |    Mandatory   |            Y           |
+//! +------------------------+----------------+------------------------+
+//! \endverbatim
+//! @{
+//
+//*****************************************************************************
+
+#define xUART_RXERROR_OVERRUN
+#define xUART_RXERROR_BREAK  
+#define xUART_RXERROR_PARITY 
+#define xUART_RXERROR_FRAMING
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup xUART_Frame_Configs xUART Frame Configuration
+//! \brief      Values that show xUART Frame Configuration
+//! 
+//! \section    xUART_Frame_Configs_Section 1. Where to use this group
+//!             Uart Data Frame Configs. Such as Word Length, Parity, Stop bit.
+//!             Values that can be passed to xUARTConfig as the ulConfig parameter
+//!             and returned by UARTConfigGetExpClk in the pulConfig parameter.
+//!             Additionally, the UART_CONFIG_PAR_* subset can be passed to
+//!             UARTParityModeSet as the ulParity parameter, and are returned by
+//!             UARTParityModeGet. 
+//!
+//! \section    xUART_Frame_Configs_CoX 2. CoX Port Details 
+//! \verbatim
+//! +--------------------------+----------------+------------------------+
+//! |  xUART Frame Config      |       CoX      |          LPC17xx       |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_WLEN_MASK  |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_WLEN_n     |    Mandatory   |   xUART_CONFIG_WLEN_9  |
+//! |                          |                |------------------------|
+//! |                          |                |   xUART_CONFIG_WLEN_8  |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_PAR_MASK   |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_PAR_NONE   |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_PAR_EVEN   |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_PAR_ODD    |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_PAR_ONE    |  Non-Mandatory |            N           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_PAR_ZERO   |  Non-Mandatory |            N           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_STOP_MASK  |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_STOP_1     |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_STOP_2     |    Mandatory   |            Y           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_STOP_0_5   |  Non-Mandatory |            N           |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_CONFIG_STOP_1_5   |  Non-Mandatory |            N           |
+//! +--------------------------+----------------+------------------------+
+//! \endverbatim
+//! @{
+//
+//*****************************************************************************
+//
+// Mask for extracting word length
+//
+#define xUART_CONFIG_WLEN_MASK
+
+//
+//! 9 bit data
+//
+#define xUART_CONFIG_WLEN_9   
+
+//
+//! 8 bit data
+//
+#define xUART_CONFIG_WLEN_8   
+
+//
+//! Mask for extracting stop bits
+//
+#define xUART_CONFIG_STOP_MASK 
+
+//
+//! One stop bit
+//
+#define xUART_CONFIG_STOP_1   
+
+//
+//! Two stop bits
+//
+#define xUART_CONFIG_STOP_2 
+
+#define xUART_CONFIG_STOP_0_5
+#define xUART_CONFIG_STOP_1_5
+
+//
+//! Mask for extracting parity
+//
+#define xUART_CONFIG_PAR_MASK 
+
+//
+//! No parity
+//
+#define xUART_CONFIG_PAR_NONE 
+
+//
+//! Even parity
+//
+#define xUART_CONFIG_PAR_EVEN  
+
+//
+//! Odd parity
+//
+#define xUART_CONFIG_PAR_ODD  
+
+//
+//! Parity bit is one / marked
+//
+#define xUART_CONFIG_PAR_ONE  
+
+//
+//! Parity bit is zero / space
+//
+#define xUART_CONFIG_PAR_ZERO  
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
+//*****************************************************************************
+//
+//! \addtogroup xUART_Enable_Blocks xUART Enable Blocks
+//! \brief      Values that show xUART Enable Blocks
+//! 
+//! \section    xUART_Enable_Blocks_Section 1. Where to use this group
+//!             Uart logic blocks  that can be passed to UARTEnable() or
+//!             UARTDisable() as the ulBlock parameter.
+//! 
+//! \section    xUART_Enable_Blocks_CoX 2. CoX Port Details 
+//! \verbatim
+//! +------------------------+----------------+------------------------+
+//! |    xUART Enable Block  |       CoX      |         LPC17xx        |
+//! |------------------------|----------------|------------------------|
+//! |    xUART_BLOCK_UART    |    Mandatory   |            Y           |
+//! |------------------------|----------------|------------------------|
+//! |    xUART_BLOCK_RX      |    Mandatory   |            Y           |
+//! |------------------------|----------------|------------------------|
+//! |    xUART_BLOCK_TX      |    Mandatory   |            Y           |
+//! +------------------------+----------------+------------------------+
+//! \endverbatim
+//! @{
+//
+//*****************************************************************************
+
+//
+//! Uart logic block
+//
+#define xUART_BLOCK_UART        0x00002000
+
+//
+//! Uart transmit logic block
+//
+#define xUART_BLOCK_TX          0x00000008
+
+//
+//! uart receive logic block
+//
+#define xUART_BLOCK_RX          0x00000004
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup xUART_FIFO_Rx_Tiggle_Level xUART FIFO Rx Tiggle Level
+//! \brief      Values that show xUART FIFO Rx Tiggle Level
+//! 
+//! \section    xUART_FIFO_Rx_Tiggle_Level_Section 1. Where to use this group
+//!             Values that can be passed to UARTFIFORxLevelSet as the
+//!             ulRxLevel parameter.
+//!
+//! \section    xUART_FIFO_Rx_Tiggle_Level_CoX 2. CoX Port Details 
+//! \verbatim
+//! +--------------------------+----------------+------------------------+
+//! |  FIFO Rx Tiggle Level    |       CoX      |         LPC17xx        |
+//! |--------------------------|----------------|------------------------|
+//! |  xUART_FIFO_RX_n         |  Non-Mandatory |            N           |
+//! |                          |                |------------------------|
+//! |                          |                |            N           |
+//! |                          |                |------------------------|
+//! |                          |                |            N           |
+//! |                          |                |------------------------|
+//! |                          |                |            N           |
+//! |                          |                |------------------------|
+//! |                          |                |            N           |
+//! |                          |                |------------------------|
+//! |                          |                |            N           |
+//! |                          |                |------------------------|
+//! |                          |                |            N           |
+//! +--------------------------+----------------+------------------------+
+//! \endverbatim
+//! @{
+//
+//*****************************************************************************
+
+//
+//! (1 character)
+//
+#define xUART_FIFO_RX_1         0  
+
+//
+//! (4 character)
+//
+#define xUART_FIFO_RX_4         0  
+
+//
+//! (8 character)
+//
+#define xUART_FIFO_RX_8         0  
+
+//
+//! (14 character)
+//
+#define xUART_FIFO_RX_14        0  
+
+//
+//! (30 character)
+//
+#define xUART_FIFO_RX_30        0 
+
+//
+//! (46 character)
+//
+#define xUART_FIFO_RX_46        0 
+
+//
+//! (62 character)
+//
+#define xUART_FIFO_RX_62        0 
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
+//*****************************************************************************
+//
+//! \addtogroup xUART_Exported_APIs xUART API
+//! \brief      UART API Reference.
+//! \section    xUART_Exported_APIs_Port CoX Port Details
+//! \verbatim
+//! +----------------------------+--------------+-----------+
+//! |  xUART API                 |     CoX      |  LPC17xx  |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTConfigSet            |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTEnable               |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTDisable              |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTCharGetNonBlocking   |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTCharGet              |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTCharPutNonBlocking   |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTCharPut              |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTIntEnable            |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTIntCallbackInit      |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTIntDisable           |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTRxErrorGet           |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! |  xUARTRxErrorClear         |  Mandatory   |     Y     |
+//! |----------------------------|--------------|-----------|
+//! \endverbatim
+//! @{
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \brief  Sets the configuration of a UART.
+//!         This function configures the UART for operation in the specified
+//!         data format. The baud rate is provided in the \e ulBaud parameter
+//!         and the data format in the \e ulConfig parameter.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//!
+//! \param  [in] ulBaud is the desired baud rate.
+//!
+//! \param  [in] ulConfig is the data format for the port (number of data bits,
+//!              number of stop bits, and parity).
+//!              The \e ulConfig parameter is the logical OR of three values:
+//!              the number of data bits, the number of stop bits, and the parity.
+//!              \ref UART_CONFIG_WLEN_9
+//!              \ref xUART_CONFIG_WLEN_8.
+//!              \ref xUART_CONFIG_STOP_1
+//!              \ref xUART_CONFIG_STOP_2
+//!              \ref xUART_CONFIG_PAR_NONE
+//!              \ref xUART_CONFIG_PAR_EVEN,
+//!              \ref xUART_CONFIG_PAR_ODD
+//!              \ref xUART_CONFIG_PAR_ONE
+//!              \ref xUART_CONFIG_PAR_ZERO
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xUARTConfigSet(ulBase, ulBaud, ulConfig)
+
+
+//*****************************************************************************
+//
+//! \brief  Enables transmitting or receiving.
+//!         Sets the UARTEN, or TXE or RXE bits.
+//!
+//! \param  ulBase is the base address of the UART port.
+//! \param  ulBlock is the block to enable. it is the logical OR of these values:
+//!         \ref xUART_BLOCK_TX
+//!         \ref xUART_BLOCK_RX
+//!
+//! \return None.
+//! \note   Do nothing in UART,In IrDA and LIN mode will set the Tx or Rx enable
+//
+//*****************************************************************************      
+#define xUARTEnable(ulBase, ulBlock)
+
+//*****************************************************************************
+//
+//! \brief  Disables transmitting or receiving.
+//!         Waits for the end ofransmission of the current character, then Clears
+//!         the UARTEN or TXE or RXE bits.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//! \param  [in] ulBlock is the block to disable. it is the logical OR of 
+//!              these values:
+//!              \ref xUART_BLOCK_UART
+//!              \ref xUART_BLOCK_TX
+//!              \ref xUART_BLOCK_RX 
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xUARTDisable(ulBase, ulBlock) 
+
+//*****************************************************************************
+//
+//! \brief  Receives a character from the specified port.
+//!         Gets a character from the receive FIFO for the specified port.
+//!
+//!         This function replaces the original UARTCharNonBlockingGet() API and
+//!         performs the same actions.  A macro is provided in <tt>uart.h</tt>
+//!         to map the original API to this API.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//!
+//! \return Returns the character read from the specified port, cast as a
+//!         \e long. A \b -1 is returned if there are no characters present in the
+//!         receive FIFO. The UARTCharsAvail() function should be called before
+//!         attempting to call this function.
+//
+//*****************************************************************************
+#define xUARTCharGetNonBlocking(ulBase)
+
+//*****************************************************************************
+//
+//! \brief  Waits for a character from the specified port.
+//!         Gets a character from the receive FIFO for the specified port.
+//!         If there are no characters available, this function waits until a
+//!         character is received before returning.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//!
+//! \return Returns the character read from the specified port, cast as a
+//!         \e long.
+//
+//*****************************************************************************
+#define xUARTCharGet(ulBase)
+
+//*****************************************************************************
+//
+//! \brief  Sends a character to the specified port.
+//!         Writes the character \e ucData to the transmit FIFO for the specified
+//!         port. This function does not block, so if there is no space available,
+//!         then a \b false is returned, and the application must retry the
+//!         function later.
+//!
+//!         This function replaces the original UARTCharNonBlockingPut() API
+//!         and performs the same actions.  A macro is provided in <tt>uart.h</tt>
+//!         to map the original API to this API.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//! \param  [in] ucData is the character to be transmitted.
+//!
+//! \return Returns \b true if the character was successfully placed in the
+//!         transmit FIFO or \b false if there was no space available in the
+//!         transmit FIFO.
+//
+//*****************************************************************************
+#define xUARTCharPutNonBlocking(ulBase, ucData)
+
+//*****************************************************************************
+//
+//! \brief  Waits to send a character from the specified port.
+//!         Sends the character \e ucData to the transmit FIFO for the specified
+//!         port. If there is no space available in the transmit FIFO, this
+//!         function waits until there is space available before returning.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//! \param  [in] ucData is the character to be transmitted.
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xUARTCharPut(ulBase, ucData)
+
+//*****************************************************************************
+//
+//! \brief  Enables individual UART interrupt sources.
+//!         Enables the indicated UART interrupt sources.  Only the sources that
+//!         are enabled can be reflected to the processor interrupt; disabled
+//!         sources have no effect on the processor.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//! \param  [in] ulIntFlags is the bit mask of the interrupt sources to be enabled.
+//!              this parameter is the logical OR of any of the following:
+//!              \ref xUART_INT_ERROR  All Error interrupt
+//!              \ref xUART_INT_RT     Receive Timeout interrupt
+//!              \ref xUART_INT_TX     Transmit interrupt
+//!              \ref xUART_INT_RX     Receive interrupt
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xUARTIntEnable(ulBase, ulIntFlags)
+
+//*****************************************************************************
+//
+//! \brief  Init interrupts callback for the specified UART Port.
+//!
+//! \param  [in] ulPort is the base address of the UART port.
+//! \param  [in] xtI2CCallback is callback for the specified UART Port.
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xUARTIntCallbackInit(ulBase, xtUARTCallback)
+        
+//*****************************************************************************
+//
+//! \brief  Disables individual UART interrupt sources.
+//!         Disables the indicated UART interrupt sources.  Only the sources that
+//!         are enabled can be reflected to the processor interrupt; disabled
+//!         sources have no effect on the processor.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//! \param  [in] ulIntFlags is the bit mask of the interrupt sources to be disabled.
+//!              this parameter is the logical OR of any of the following:
+//!              \ref xUART_INT_ERROR  All Error interrupt
+//!              \ref xUART_INT_RT     Receive Timeout interrupt
+//!              \ref xUART_INT_TX     Transmit interrupt
+//!              \ref xUART_INT_RX     Receive interrupt
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xUARTIntDisable(ulBase, ulIntFlags)
+
+//*****************************************************************************
+//
+//! \brief  Gets current receiver errors.
+//!         This function returns the current state of each of the 4 receiver
+//!         error sources.  The returned errors are equivalent to the four error
+//!         bits returned via the previous call to \ref UARTCharGet() or
+//!         \ref UARTCharGetNonBlocking() with the exception that the overrun
+//!         error is set immediately the overrun occurs rather than when a
+//!         character is next read.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//!
+//! \return Returns a logical OR combination of the receiver error flags,
+//!         \ref xUART_RXERROR_FRAMING
+//!         \ref xUART_RXERROR_PARITY
+//!         \ref xUART_RXERROR_BREAK
+//!         \ref xUART_RXERROR_OVERRUN 
+//
+//*****************************************************************************
+#define xUARTRxErrorGet(ulBase)
+
+//*****************************************************************************
+//
+//! \brief  Clears all reported receiver errors.
+//!         This function is used to clear all receiver error conditions reported
+//!         via \ref UARTRxErrorGet(). If using the overrun, framing error, parity
+//!         error or break interrupts, this function must be called after clearing
+//!         the interrupt to ensure that later errors of the same type trigger
+//!         another interrupt.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//!
+//! \return None.
+//
+//*****************************************************************************
+#define xUARTRxErrorClear(ulBase)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
+//*****************************************************************************
+//
+//! \addtogroup  LPC17xx_UART
+//! @{
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup  LPC17xx _UART_IrDA_Mode  LPC17xx  UART IrDA mode Configuration
+//! Values that can be passed to UARTIrDAConfig as the ulMode parameter
+//! @{
+//
+//*****************************************************************************
 
 //! Enable FIFO.
 #define FIFO_CFG_FIFO_EN               BIT_32_0
@@ -34,7 +864,6 @@
 #define FIFO_CFG_RX_TRI_LVL_3          (BIT_32_7  | BIT_32_6)
 
 
-
 //! The UART receiver FIFO is not empty.
 #define RX_FIFO_NOT_EMPTY              BIT_32_0
 
@@ -62,8 +891,6 @@
 
 //! Error in Rx FIFO
 #define RX_FIFO_ERR                    BIT_32_7
-
-
 
 
 //! Invert input serial.
@@ -140,7 +967,6 @@
 #define UART_CFG_BREAK_DIS             BIT_32_22
 
 
-
 //! Enable Modem loopback mode.
 #define LOOPBACK_MODE_EN               BIT_32_4
 
@@ -158,7 +984,6 @@
 
 //! Disable Auto-CTS Flow control.
 #define AUTO_CTS_DIS                   BIT_32_23
-
 
 
 //! \addtogroup RS485Cfg Parameters of RS485 Configure functions.
@@ -276,7 +1101,19 @@
 //! Auto-baud time-out interrupt.
 #define INT_FLAG_ABTO                  BIT_32_9
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! \addtogroup  LPC17xx _UART_Exported_APIs  LPC17xx  UART API
+//! \brief  LPC17xx  UART API Reference.
+//! @{
+//
+//*****************************************************************************
 
 extern void UARTCfg(unsigned long ulBase, unsigned long ulBaud, unsigned long ulCfg);
 
@@ -314,3 +1151,39 @@ extern void UARTRS485AddrSet(unsigned long ulBase, unsigned long ulVal);
 extern void UARTRS485DlyTimeSet(unsigned long ulBase, unsigned long ulVal);
 extern unsigned long UARTModemStatGet(unsigned long ulBase);
 extern xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags);
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
+//*****************************************************************************
+//
+// Mark the end of the C bindings section for C++ compilers.
+//
+//*****************************************************************************
+#ifdef __cplusplus
+}
+#endif
+
+#endif // __xUART_H__
+

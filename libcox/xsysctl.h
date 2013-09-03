@@ -75,65 +75,66 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xSysCtl_Peripheral_ID xSysCtl Peripheral ID
-//! \brief Values that show xSysCtl Peripheral ID
+//! \brief      Values that show xSysCtl Peripheral ID
 //!
-//! \section xSysCtl_Peripheral_ID 1. Where to use this group
-//! Values that can be passed to the
-//! xSysCtlPeripheralEnable(),
-//! xSysCtlPeripheralDisable(), and xSysCtlPeripheralReset() APIs as the
-//! ulPeripheral parameter.
+//! \section    xSysCtl_Peripheral_ID 1. Where to use this group
+//!             Values that can be passed to the
+//!             \ref xSysCtlPeripheralEnable()
+//!             \ref xSysCtlPeripheralDisable()
+//!             \ref xSysCtlPeripheralReset()
+//!             APIs as the ulPeripheral parameter.
 //!
-//! \section xSysCtl_Peripheral_ID_CoX 2.CoX Port Details
+//! \section    xSysCtl_Peripheral_ID_CoX 2.CoX Port Details
 //! \verbatim
-//! +--------------------------+----------------+--------------------------+
-//! |SysCtl Peripheral ID      |       CoX      |       LPC17xx            |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_ACMPn      |  Non-Mandatory |           N              |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_ADCn       |    Mandatory   |   xSYSCTL_PERIPH_ADC0    |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_DMA        |  Non-Mandatory |    xSYSCTL_PERIPH_DMA    |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_GPIOn      |    Mandatory   |   xSYSCTL_PERIPH_GPIOA   |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_GPIOB   |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_GPIOC   |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_GPIOD   |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_GPIOE   |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_I2Cn       |  Non-Mandatory |   xSYSCTL_PERIPH_I2C0    |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_I2C1    |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_I2C2    |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_PWMn       |  Non-Mandatory |   xSYSCTL_PERIPH_PWM1    |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_RTC        |    Mandatory   |   xSYSCTL_PERIPH_RTC     |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_SPIn       |    Mandatory   |   xSYSCTL_PERIPH_SPI     |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_TIMERn     |    Mandatory   |   xSYSCTL_PERIPH_TIMER0  |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_TIMER1  |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_TIMER2  |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_TIMER3  |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_UARTn      |    Mandatory   |   xSYSCTL_PERIPH_UART0   |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_UART1   |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_UART2   |
-//! |                          |                |--------------------------|
-//! |                          |                |   xSYSCTL_PERIPH_UART3   |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PERIPH_WDOG       |    Mandatory   |           N              |
-//! +--------------------------+----------------+--------------------------+
+//! +---------------------------+----------------+--------------------------+
+//! | SysCtl Peripheral ID      |       CoX      |       LPC17xx            |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_ACMPn      |  Non-Mandatory |           N              |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_ADCn       |    Mandatory   |   xSYSCTL_PERIPH_ADC0    |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_DMA        |  Non-Mandatory |    xSYSCTL_PERIPH_DMA    |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_GPIOn      |    Mandatory   |   xSYSCTL_PERIPH_GPIOA   |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_GPIOB   |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_GPIOC   |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_GPIOD   |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_GPIOE   |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_I2Cn       |  Non-Mandatory |   xSYSCTL_PERIPH_I2C0    |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_I2C1    |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_I2C2    |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_PWMn       |  Non-Mandatory |   xSYSCTL_PERIPH_PWM1    |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_RTC        |    Mandatory   |   xSYSCTL_PERIPH_RTC     |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_SPIn       |    Mandatory   |   xSYSCTL_PERIPH_SPI     |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_TIMERn     |    Mandatory   |   xSYSCTL_PERIPH_TIMER0  |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_TIMER1  |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_TIMER2  |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_TIMER3  |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_UARTn      |    Mandatory   |   xSYSCTL_PERIPH_UART0   |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_UART1   |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_UART2   |
+//! |                           |                |--------------------------|
+//! |                           |                |   xSYSCTL_PERIPH_UART3   |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PERIPH_WDOG       |    Mandatory   |           N              |
+//! +---------------------------+----------------+--------------------------+
 //! \endverbatim
 //! @{
 //
@@ -244,47 +245,47 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xSysCtl_Clock_Set_Config xSysCtl Clock Set Configuration
-//! \brief Values that show xSysCtl Clock Set Configuration
+//! \brief      Values that show xSysCtl Clock Set Configuration
 //!
-//! \section xSysCtl_Clock_Set_Config 1. Where to use this group
-//! Values that can be passed to the xSysCtlClockSet() API as the
-//! \b ulConfig parameter.
+//! \section    xSysCtl_Clock_Set_Config 1. Where to use this group
+//!             Values that can be passed to the xSysCtlClockSet() API as the
+//!             ulConfig parameter.
 //!
-//! \section xSysCtl_Clock_Set_Config 2. ulConfig parameter description
-//! The ulConfig parameter is the logical OR of several different values,
-//! many of which are grouped into sets where only one can be chosen.
-//! ulConfig contains the external and internal crystal, main oscillators
-//! and PLL disabled options.
+//! \section    xSysCtl_Clock_Set_Config 2. ulConfig parameter description
+//!             The ulConfig parameter is the logical OR of several different
+//!             values, many of which are grouped into sets where only one can
+//!             be chosen. ulConfig contains the external and internal crystal,
+//!             main oscillators and PLL disabled options.
 //!
-//! \section xSysCtl_Clock_Set_Config_CoX 3.CoX Port Details
+//! \section    xSysCtl_Clock_Set_Config_CoX 3.CoX Port Details
 //! \verbatim
-//! +--------------------------+----------------+--------------------------+
-//! |SysCtl Clock Set Configs  |       CoX      |         LPC17xx          |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_OSC_MAIN          |    Mandatory   |             Y            |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_OSC_INT           |    Mandatory   |             Y            |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_XTAL_nMHZ         |  Non-Mandatory |     xSYSCTL_XTAL_1MHZ    |
-//! |                          |                |--------------------------|
-//! |                          |                |            ...           |
-//! |                          |                |--------------------------|
-//! |                          |                |     xSYSCTL_XTAL_8MHZ    |
-//! |                          |                |--------------------------|
-//! |                          |                |            ...           |
-//! |                          |                |--------------------------|
-//! |                          |                |    xSYSCTL_XTAL_12MHZ    |
-//! |                          |                |--------------------------|
-//! |                          |                |            ...           |
-//! |                          |                |--------------------------|
-//! |                          |                |    xSYSCTL_XTAL_25MHZ    |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_INT_OSC_DIS       |  Non-Mandatory |             Y            |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_MAIN_OSC_DIS      |  Non-Mandatory |             Y            |
-//! |--------------------------|----------------|--------------------------|
-//! |xSYSCTL_PLL_PWRDN         |  Non-Mandatory |             Y            |
-//! +--------------------------+----------------+--------------------------+
+//! +---------------------------+----------------+--------------------------+
+//! | SysCtl Clock Set Configs  |       CoX      |         LPC17xx          |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_OSC_MAIN          |    Mandatory   |             Y            |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_OSC_INT           |    Mandatory   |             Y            |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_XTAL_nMHZ         |  Non-Mandatory |     xSYSCTL_XTAL_1MHZ    |
+//! |                           |                |--------------------------|
+//! |                           |                |            ...           |
+//! |                           |                |--------------------------|
+//! |                           |                |     xSYSCTL_XTAL_8MHZ    |
+//! |                           |                |--------------------------|
+//! |                           |                |            ...           |
+//! |                           |                |--------------------------|
+//! |                           |                |    xSYSCTL_XTAL_12MHZ    |
+//! |                           |                |--------------------------|
+//! |                           |                |            ...           |
+//! |                           |                |--------------------------|
+//! |                           |                |    xSYSCTL_XTAL_25MHZ    |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_INT_OSC_DIS       |  Non-Mandatory |             Y            |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_MAIN_OSC_DIS      |  Non-Mandatory |             Y            |
+//! |---------------------------|----------------|--------------------------|
+//! | xSYSCTL_PLL_PWRDN         |  Non-Mandatory |             Y            |
+//! +---------------------------+----------------+--------------------------+
 //! \endverbatim
 //! @{
 //
@@ -349,17 +350,17 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xSysCtl_Peripheral_Src_Clk SysCtl Peripheral Source Clock
-//! \brief Values that show SysCtl Peripheral Source Clock
-//! The following are values that can be passed to the
-//! xSysCtlPeripheralClockSourceSet()  API as the
-//! ulPeripheralsrc parameter.
+//! \brief      Values that show SysCtl Peripheral Source Clock
+//!             The following are values that can be passed to the
+//!             \ref xSysCtlPeripheralClockSourceSet()  API as the ulPeripheralsrc
+//!             parameter.
 //!
-//! \section xSysCtl_Peripheral_Src_Clk_Def SysCtl Peripheral Short Name define
-//! The macros of General Peripheral Source Clock always like:
-//! <b> ModuleName + n + SourceClock</b>, such as xSYSCTL_WDT_EXTSL,
-//! xSYSCTL_ADC0_MAIN.
+//! \section    xSysCtl_Peripheral_Src_Clk_Def SysCtl Peripheral Short Name define
+//!             The macros of General Peripheral Source Clock always like:
+//!             <b> ModuleName + n + SourceClock</b>
+//!             such as \ref xSYSCTL_WDT_EXTSL, \ref xSYSCTL_ADC0_MAIN.
 //!
-//! \section xSysCtl_Peripheral_Src_Clk_CoX CoX Port Details
+//! \section    xSysCtl_Peripheral_Src_Clk_CoX CoX Port Details
 //! \verbatim
 //! +------------------------------+-----------------+--------------------------+
 //! | Peripheral Source Clock Set  |       CoX       |         LPC17xx          |
@@ -526,67 +527,66 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xSysCtl_Peripheral_Short SysCtl Peripheral Short Name
-//! \brief Values that show SysCtl Peripheral Source Clock
-//! The following are values that can be passed to the
-//! xSysCtlPeripheralClockSourceSet2()  API as the
-//! ulPeripheral parameter.
+//! \brief      Values that show SysCtl Peripheral Source Clock
+//!             The following are values that can be passed to the
+//!             xSysCtlPeripheralClockSourceSet2()  API as the ulPeripheral parameter.
 //!
-//! \section xSysCtl_Peripheral_Short_Def SysCtl Peripheral Short Name define
-//! The macros of General Peripheral Short Name always like:
-//! <b> ModuleName + n </b>, such as CAN0, ADC0.
+//! \section    xSysCtl_Peripheral_Short_Def SysCtl Peripheral Short Name define
+//!             The macros of General Peripheral Short Name always like:
+//!             <b> ModuleName + n </b>, such as CAN0, ADC0.
 //!
-//! \section xSysCtl_Peripheral_Short_CoX CoX Port Details
+//! \section    xSysCtl_Peripheral_Short_CoX CoX Port Details
 //! \verbatim
-//! +-------------------------- +----------------+--------------------------+
-//! |Peripheral Short name      |       CoX      |         LPC17xx          |
+//! +---------------------------+----------------+--------------------------+
+//! | Peripheral Short name     |       CoX      |         LPC17xx          |
 //! |---------------------------|----------------|--------------------------|
-//! |ADCn                       |  Non-Mandatory |            N             |
+//! | ADCn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |PWMn                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |CANn                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |UARTn                      |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |I2Sn                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |WDTn                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |TIMERn                     |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |I2Cn                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |SPIn                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |SPIn                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |ACMPn                      |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |RTC                        |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//! |GPIO                       |  Non-Mandatory |            N             |
-//! |-------------------------- |----------------|--------------------------|
-//!
-//! +-------------------------- +----------------+--------------------------+
-//! |Peripheral Clock source    |       CoX      |         LPC17xx          |
+//! | PWMn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |INT                        |    Mandatory   |             N            |
+//! | CANn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |HCLK                       |    Mandatory   |             N            |
+//! | UARTn                     |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |HCLK_n                     |  Non-Mandatory |             N            |
+//! | I2Sn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |EXTSL                      |    Mandatory   |             N            |
+//! | WDTn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |INTSL                      |    Mandatory   |             N            |
+//! | TIMERn                    |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |MAIN                       |    Mandatory   |             N            |
+//! | I2Cn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |PLL                        |    Mandatory   |             N            |
+//! | SPIn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |PLL_n                      |  Non-Mandatory |             N            |
+//! | SPIn                      |  Non-Mandatory |            N             |
 //! |---------------------------|----------------|--------------------------|
-//! |EXTTRG                     |  Non-Mandatory |             N            |
+//! | ACMPn                     |  Non-Mandatory |            N             |
+//! |---------------------------|----------------|--------------------------|
+//! | RTC                       |  Non-Mandatory |            N             |
+//! |---------------------------|----------------|--------------------------|
+//! | GPIO                      |  Non-Mandatory |            N             |
+//! +---------------------------+----------------+--------------------------+
+//!   
+//! +---------------------------+----------------+--------------------------+
+//! | Peripheral Clock source   |       CoX      |         LPC17xx          |
+//! |---------------------------|----------------|--------------------------|
+//! | INT                       |    Mandatory   |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | HCLK                      |    Mandatory   |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | HCLK_n                    |  Non-Mandatory |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | EXTSL                     |    Mandatory   |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | INTSL                     |    Mandatory   |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | MAIN                      |    Mandatory   |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | PLL                       |    Mandatory   |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | PLL_n                     |  Non-Mandatory |             N            |
+//! |---------------------------|----------------|--------------------------|
+//! | EXTTRG                    |  Non-Mandatory |             N            |
 //! |---------------------------|----------------|--------------------------|
 //! \endverbatim
 //! @{
@@ -653,9 +653,9 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xSysCtl_Exported_APIs xSysCtl API
-//! \brief xSysCtl API Reference
+//! \brief      xSysCtl API Reference
 //!
-//! \section xSysCtl_Exported_APIs_Port CoX Port Details
+//! \section    xSysCtl_Exported_APIs_Port CoX Port Details
 //! \verbatim
 //! +----------------------------------+----------------+-----------+
 //! | xSysCtl API                      |       CoX      |  LPC17xx  |
@@ -697,17 +697,21 @@ extern "C"
 //*****************************************************************************
 //
 //! \brief Performs a software reset of a peripheral.
+//!        This function performs a software reset of the specified peripheral.
+//!        An individual peripheral reset signal is asserted for a brief period
+//!        and then deasserted, returning the internal state of the peripheral
+//!        to its reset condition.
 //!
-//! \param ulPeripheralID is the peripheral to reset.
-//! Details please refer to \ref xSysCtl_Peripheral_ID.
-//!
-//! This function performs a software reset of the specified peripheral.  An
-//! individual peripheral reset signal is asserted for a brief period and then
-//! deasserted, returning the internal state of the peripheral to its reset
-//! condition.
-//!
-//! The \e ulPeripheralID parameter must be only one of the following values:
-//! Details please refer to \ref xSysCtl_Peripheral_ID_CoX.
+//! \param [in] ulPeripheralID is the peripheral to reset.
+//!             This value can be one of the following value:
+//!             \ref xSYSCTL_PERIPH_GPIOA     
+//!             \ref xSYSCTL_PERIPH_I2C0     
+//!             \ref xSYSCTL_PERIPH_RTC    
+//!                  ...
+//!             \ref xSYSCTL_PERIPH_SPI0   
+//!             \ref xSYSCTL_PERIPH_TIMER0
+//!             \ref xSYSCTL_PERIPH_UART0
+//!             More information, please refer to \ref xSysCtl_Peripheral_ID.
 //!
 //! \return None.
 //
@@ -717,25 +721,29 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Enables a peripheral.
+//! \brief  Enables a peripheral.
+//!         Peripherals are enabled with this function.  At power-up, all
+//!         peripherals are disabled; they must be enabled in order to operate
+//!         or respond to register reads/writes.
 //!
-//! \param ulPeripheralID is the peripheral to enable.
-//! Details please refer to \ref xSysCtl_Peripheral_ID.
-//!
-//! Peripherals are enabled with this function.  At power-up, all peripherals
-//! are disabled; they must be enabled in order to operate or respond to
-//! register reads/writes.
-//!
-//! The \e ulPeripheralID parameter must be only one of the following values:
-//! Details please refer to \ref xSysCtl_Peripheral_ID_CoX.
-//!
-//! \note It takes five clock cycles after the write to enable a peripheral
-//! before the the peripheral is actually enabled.  During this time, attempts
-//! to access the peripheral will result in a bus fault.  Care should be taken
-//! to ensure that the peripheral is not accessed during this brief time
-//! period.
+//! \param  [in] ulPeripheralID is the peripheral to enable.
+//!              This value can be one of the following value:
+//!              \ref xSYSCTL_PERIPH_GPIOA     
+//!              \ref xSYSCTL_PERIPH_I2C0     
+//!              \ref xSYSCTL_PERIPH_RTC    
+//!                   ...
+//!              \ref xSYSCTL_PERIPH_SPI0   
+//!              \ref xSYSCTL_PERIPH_TIMER0
+//!              \ref xSYSCTL_PERIPH_UART0
+//!              More information, please refer to \ref xSysCtl_Peripheral_ID.
 //!
 //! \return None.
+//!
+//! \note   It takes five clock cycles after the write to enable a peripheral
+//!         before the the peripheral is actually enabled.  During this time,
+//!         attempts to access the peripheral will result in a bus fault.
+//!         Care should be taken to ensure that the peripheral is not accessed
+//!         during this brief time period.
 //
 //*****************************************************************************
 #define xSysCtlPeripheralEnable(ulPeripheralID)                               \
@@ -744,15 +752,19 @@ extern "C"
 //*****************************************************************************
 //
 //! \brief Disable a peripheral.
+//!        Peripherals are disabled with this function.  Once disabled, they
+//!        will not operate or respond to register reads/writes.
 //!
-//! \param ulPeripheralID is the peripheral to disable.
-//! Details please Refer to \ref xSysCtl_Peripheral_ID.
-//!
-//! Peripherals are disabled with this function.  Once disabled, they will not
-//! operate or respond to register reads/writes.
-//!
-//! The \e ulPeripheralID parameter must be only one of the following values:
-//! Details please Refer to \ref xSysCtl_Peripheral_ID_CoX.
+//! \param [in] ulPeripheralID is the peripheral to disable.
+//!             This value can be one of the following value:
+//!             \ref xSYSCTL_PERIPH_GPIOA     
+//!             \ref xSYSCTL_PERIPH_I2C0     
+//!             \ref xSYSCTL_PERIPH_RTC    
+//!                  ...
+//!             \ref xSYSCTL_PERIPH_SPI0   
+//!             \ref xSYSCTL_PERIPH_TIMER0
+//!             \ref xSYSCTL_PERIPH_UART0
+//!             More information, please refer to \ref xSysCtl_Peripheral_ID.
 //!
 //! \return None.
 //
@@ -763,18 +775,47 @@ extern "C"
 //*****************************************************************************
 //
 //! \brief Enable a peripheral.
+//!        Peripherals are enabled with this function.  At power-up, all
+//!        peripherals are disabled; they must be enabled in order to operate
+//!        or respond to register reads/writes.
 //!
-//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be
-//! enabled.Details please Refer to \ref xLowLayer_Peripheral_Memmap.
-//!
-//! Peripherals are enabled with this function.  At power-up, all peripherals
-//! are disabled; they must be enabled in order to operate or respond to
-//! register reads/writes.
-//!
-//! The \e ulPeripheral parameter must be only one of the following values:
-//! Details please Refer to \ref xLowLayer_Peripheral_Memmap.
-//!
-//! \note None.
+//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be enabled.
+//!        The \e ulPeripheral parameter must be only one of the following values:
+//!        \ref xETH_BASE               
+//!        \ref xDMA0_BASE              
+//!        \ref xUSB_BASE               
+//!        \ref xGPIO_PORTA_BASE        
+//!        \ref xGPIO_PORTB_BASE        
+//!        \ref xGPIO_PORTC_BASE        
+//!        \ref xGPIO_PORTD_BASE        
+//!        \ref xGPIO_PORTE_BASE        
+//!        \ref xWDT_BASE               
+//!        \ref xTIMER0_BASE            
+//!        \ref xTIMER1_BASE            
+//!        \ref xUART0_BASE             
+//!        \ref xUART1_BASE             
+//!        \ref xPWM0_BASE              
+//!        \ref xI2C0_BASE              
+//!        \ref xSPI0_BASE              
+//!        \ref xRTC_BASE               
+//!        \ref xSSP1_BASE              
+//!        \ref xADC0_BASE              
+//!        \ref xCAN1_BASE              
+//!        \ref xCAN2_BASE              
+//!        \ref xI2C1_BASE              
+//!        \ref xSSP0_BASE              
+//!        \ref xDAC0_BASE              
+//!        \ref xTIMER2_BASE            
+//!        \ref xTIMER3_BASE            
+//!        \ref xUART2_BASE             
+//!        \ref xUART3_BASE             
+//!        \ref xI2C2_BASE              
+//!        \ref xI2S_BASE               
+//!        \ref xRIT_BASE               
+//!        \ref xMCPWM_BASE             
+//!        \ref xQEI_BASE               
+//!             ...
+//!        More information, please Refer to \ref xLowLayer_Peripheral_Memmap.
 //!
 //! \return None.
 //
@@ -785,18 +826,48 @@ extern "C"
 //*****************************************************************************
 //
 //! \brief Disable a peripheral.
+//!        Peripherals are disabled with this function. At power-up, all
+//!        peripherals are disabled; they must be enabled in order to operate
+//!        or respond to register reads/writes.
 //!
-//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be
-//! enabled.Details please Refer to \ref xLowLayer_Peripheral_Memmap.
-//!
-//! Peripherals are disabled with this function.  At power-up, all peripherals
-//! are disabled; they must be enabled in order to operate or respond to
-//! register reads/writes.
-//!
-//! The \e ulPeripheral parameter must be only one of the following values:
-//! Details please Refer to \ref xLowLayer_Peripheral_Memmap.
-//!
-//! \note None.
+//! \param  [in] ulPeripheralBase a Peripheral base indicate which peripheral
+//!              to be enabled. The \e ulPeripheral parameter must be only one
+//!              of the following values:
+//!              \ref xETH_BASE               
+//!              \ref xDMA0_BASE              
+//!              \ref xUSB_BASE               
+//!              \ref xGPIO_PORTA_BASE        
+//!              \ref xGPIO_PORTB_BASE        
+//!              \ref xGPIO_PORTC_BASE        
+//!              \ref xGPIO_PORTD_BASE        
+//!              \ref xGPIO_PORTE_BASE        
+//!              \ref xWDT_BASE               
+//!              \ref xTIMER0_BASE            
+//!              \ref xTIMER1_BASE            
+//!              \ref xUART0_BASE             
+//!              \ref xUART1_BASE             
+//!              \ref xPWM0_BASE              
+//!              \ref xI2C0_BASE              
+//!              \ref xSPI0_BASE              
+//!              \ref xRTC_BASE               
+//!              \ref xSSP1_BASE              
+//!              \ref xADC0_BASE              
+//!              \ref xCAN1_BASE              
+//!              \ref xCAN2_BASE              
+//!              \ref xI2C1_BASE              
+//!              \ref xSSP0_BASE              
+//!              \ref xDAC0_BASE              
+//!              \ref xTIMER2_BASE            
+//!              \ref xTIMER3_BASE            
+//!              \ref xUART2_BASE             
+//!              \ref xUART3_BASE             
+//!              \ref xI2C2_BASE              
+//!              \ref xI2S_BASE               
+//!              \ref xRIT_BASE               
+//!              \ref xMCPWM_BASE             
+//!              \ref xQEI_BASE               
+//!                   ...
+//!              More information, please Refer to \ref xLowLayer_Peripheral_Memmap.
 //!
 //! \return None.
 //
@@ -806,19 +877,13 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Reset a peripheral.
+//! \brief  Reset a peripheral.
+//!         Peripherals are Reset with this function. At power-up, all peripherals
+//!         are disabled; they must be enabled in order to operate or respond to
+//!         register reads/writes.
 //!
-//! \param ulPeripheralBase a Peripheral base indicate which peripheral to be
-//! Reset.Details please Refer to \ref xLowLayer_Peripheral_Memmap.
-//!
-//! Peripherals are Reset with this function.  At power-up, all peripherals
-//! are disabled; they must be enabled in order to operate or respond to
-//! register reads/writes.
-//!
-//! The \e ulPeripheral parameter must be only one of the following values:
-//! Details please Refer to \ref xLowLayer_Peripheral_Memmap.
-//!
-//! \note None.
+//! \param  [in] ulPeripheralBase a Peripheral base indicate which peripheral to
+//!              be Reset. Details please Refer to \ref xLowLayer_Peripheral_Memmap.
 //!
 //! \return None.
 //
@@ -828,16 +893,16 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Get the peripheral interrupt number through peripheral base.
+//! \brief  Get the peripheral interrupt number through peripheral base.
 //!
-//! \param ulPeripheral The peripheral's base
-//!
-//! \note It's especially useful to enable the short pin's corresponding
-//! peripheral interrupt: Use the short pin to Get the GPIO base through
-//! \ref xGPIOSPinToPort function, and then use this function to enable the GPIO
-//! interrupt.
+//! \param  [in] ulPeripheral The peripheral's base
 //!
 //! \return None.
+//!
+//! \note   It's especially useful to enable the short pin's corresponding
+//!         peripheral interrupt: Use the short pin to Get the GPIO base through
+//!         \ref xGPIOSPinToPort function, and then use this function to enable
+//!         the GPIO interrupt.
 //
 //*****************************************************************************
 #define xSysCtlPeripheraIntNumGet(ulPeripheralBase)                           \
@@ -845,36 +910,42 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Set the clocking of the device.
+//! \brief  Set the clocking of the device.
+//!         This function configures the clocking of the device.  The input
+//!         crystal frequency, oscillator to be used, use of the PLL, and the
+//!         system clock divider are all configured with this function.
 //!
-//! \param ulConfig is the required configuration of the device clocking.
+//! \param  [in] ulSysClk is target system clock frequency.
+//! \param  [in] ulConfig is the required configuration of the device clocking.
 //!
-//! This function configures the clocking of the device.  The input crystal
-//! frequency, oscillator to be used, use of the PLL, and the system clock
-//! divider are all configured with this function.
+//!              The \e ulConfig parameter is the logical OR of several different
+//!              values, many of which are grouped into sets where only one can
+//!              be chosen.
 //!
-//! The \e ulConfig parameter is the logical OR of several different values,
-//! many of which are grouped into sets where only one can be chosen.
+//!              The external crystal frequency is chosen with one of the
+//!              following values:
+//!                  \ref xSYSCTL_XTAL_4MHZ
+//!                  \ref xSYSCTL_XTAL_5MHZ
+//!                  \ref xSYSCTL_XTAL_6MHZ
+//!                       ...
+//!                  \ref xSYSCTL_XTAL_50MHZ
 //!
-//! The external crystal frequency is chosen with one of the following values:
-//! \ref xSYSCTL_XTAL_4MHZ, \ref xSYSCTL_XTAL_5MHZ, \ref xSYSCTL_XTAL_6MHZ,
-//! \ref xSYSCTL_XTAL_24MHZ.
+//!              The oscillator source is chosen with one of the following values:
+//!                  \ref xSYSCTL_OSC_MAIN
+//!                  \ref xSYSCTL_OSC_INT
+//!                  \ref xSYSCTL_OSC_INTSL 
+//!                  \ref xSYSCTL_OSC_EXTSL 
 //!
-//! The oscillator source is chosen with one of the following values:
-//! \ref xSYSCTL_OSC_MAIN, \ref xSYSCTL_OSC_INT, \ref xSYSCTL_OSC_INTSL,
-//! \ref xSYSCTL_OSC_EXTSL.
-//!
-//! The internal and main oscillators and PLL are disabled with the
-//! \ref xSYSCTL_INT_OSC_DIS and \ref xSYSCTL_MAIN_OSC_DIS flags,
-//! \ref xSYSCTL_PLL_PWRDN respectively.
-//! The external oscillator must be enabled in order to use an external clock
-//! source.  Note that attempts to disable the oscillator used to clock the
-//! device will be prevented by the hardware.
-//! <br />
-//! Details please Refer to \ref XSysCtl_Clock_Set_Config_CoX.
-//!
+//!              The internal and main oscillators and PLL are disabled with the
+//!                  \ref xSYSCTL_INT_OSC_DIS
+//!                  \ref xSYSCTL_MAIN_OSC_DIS
+//!                  \ref xSYSCTL_PLL_PWRDN
 //!
 //! \return None.
+//!
+//! \note   The external oscillator must be enabled in order to use an external
+//!         clock source. Note that attempts to disable the oscillator used to
+//!         clock the device will be prevented by the hardware.
 //
 //*****************************************************************************
 #define xSysCtlClockSet(ulSysClk, ulConfig)                                   \
@@ -882,19 +953,21 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Get the processor clock rate.
+//! \brief  Get the processor clock rate.
+//!         This function determines the clock rate of the processor clock.
+//!         This is also the clock rate of all the peripheral modules (with the
+//!         exception of PWM, which has its own clock divider).
 //!
-//! This function determines the clock rate of the processor clock.  This is
-//! also the clock rate of all the peripheral modules (with the exception of
-//! PWM, which has its own clock divider).
-//!
-//! \note This will not return accurate results if SysCtlClockSet() has not
-//! been called to configure the clocking of the device, or if the device is
-//! directly clocked from a crystal (or a clock source) that is not one of the
-//! supported crystal frequencies.  In the later case, this function should be
-//! modified to directly return the correct system clock rate.
+//! \param  None.
 //!
 //! \return The processor clock rate.
+//!
+//! \note   This will not return accurate results if SysCtlClockSet() has not
+//!         been called to configure the clocking of the device, or if the
+//!         device is directly clocked from a crystal (or a clock source) that
+//!         is not one of the supported crystal frequencies. In the later case,
+//!         this function should be modified to directly return the correct
+//!         system clock rate.
 //
 //*****************************************************************************
 #define xSysCtlClockGet()                                                     \
@@ -902,15 +975,14 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Provide a small delay.
+//! \brief  Provide a small delay.
+//!         This function provides a means of generating a constant length delay.
+//!         It is written in assembly to keep the delay consistent across tool
+//!         chains, avoiding the need to tune the delay based on the tool chain
+//!         in use. The loop takes 3 cycles/loop.
 //!
-//! \param ulCount is the number of delay loop iterations to perform.
+//! \param  ulCount is the number of delay loop iterations to perform.
 //!
-//! This function provides a means of generating a constant length delay.  It
-//! is written in assembly to keep the delay consistent across tool chains,
-//! avoiding the need to tune the delay based on the tool chain in use.
-//!
-//! The loop takes 3 cycles/loop.
 //!
 //! \return None.
 //
@@ -920,13 +992,12 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Reset the device.
-//!
-//! This function will perform a software reset of the entire device.  The
-//! processor and all peripherals will be reset and all device registers will
-//! return to their default values (with the exception of the reset cause
-//! register, which will maintain its current value but have the software reset
-//! bit set as well).
+//! \brief  Reset the device.
+//!         This function will perform a software reset of the entire device.
+//!         The processor and all peripherals will be reset and all device
+//!         registers will return to their default values (with the exception
+//!         of the reset cause register, which will maintain its current value
+//!         but have the software reset bit set as well).
 //!
 //! \return This function does not return.
 //
@@ -936,14 +1007,13 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Put the processor into sleep mode.
-//!
-//! This function places the processor into sleep mode; it will not return
-//! until the processor returns to run mode.  The peripherals that are enabled
-//! via SysCtlPeripheralSleepEnable() continue to operate and can wake up the
-//! processor (if automatic clock gating is enabled with
-//! SysCtlPeripheralClockGating(), otherwise all peripherals continue to
-//! operate).
+//! \brief  Put the processor into sleep mode.
+//!         This function places the processor into sleep mode; it will not return
+//!         until the processor returns to run mode.  The peripherals that are
+//!         enabled via SysCtlPeripheralSleepEnable() continue to operate and
+//!         can wake up the processor (if automatic clock gating is enabled with
+//!         SysCtlPeripheralClockGating(), otherwise all peripherals continue to
+//!         operate).
 //!
 //! \return None.
 //
@@ -953,19 +1023,16 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Set a peripheral clock source and peripheral divide.
+//! \brief  Set a peripheral clock source and peripheral divide.
 //!
-//! \param ulPeripheralSrc is the peripheral clock source to set.
-//! \param ulDivide is the peripheral clock divide to set.
-//!
-//! Peripherals clock source are seted with this function.  At power-up, all
-//! Peripherals clock source are Peripherals clock source; they must be set in
-//! order to operate or respond to register reads/writes.
-//!
-//! The \e ulPeripheralSrc parameter must be only one of the following values:
-//! \ref xSysCtl_Peripheral_Src_Clk.
+//! \param  [in] ulPeripheralSrc is the peripheral clock source to set.
+//! \param  [in] ulDivide is the peripheral clock divide to set.
 //!
 //! \return None.
+//!
+//! \note   Peripherals clock source are seted with this function.  At power-up,
+//!         all Peripherals clock source are Peripherals clock source; they must
+//!         be set in order to operate or respond to register reads/writes.
 //
 //*****************************************************************************
 #define xSysCtlPeripheralClockSourceSet(ulPeripheralSrc, ulDivide)            \
@@ -973,53 +1040,42 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Set a peripheral clock source and peripheral divide.
+//! \brief  Set a peripheral clock source and peripheral divide.
 //!
-//! \param ePeripheral is the peripheral which's clock source will be set.
-//! \param eSrc is the clock source will be set.
-//! \param ulDivide is the peripheral clock divide to set.
+//! \param  [in] ePeripheral is the peripheral which's clock source will be set.
+//! \param  [in] ulPeripheralSrc is the clock source will be set.
+//! \param  [in] ulDivide is the peripheral clock divide to set.
 //!
-//! Peripherals clock source are seted with this function.  At power-up, all
-//! Peripherals clock source are Peripherals clock source; they must be set in
-//! order to operate or respond to register reads/writes.
+//!         The \e ulPeripheralSrc parameter must be only one of the following values:
+//!         \ref xSysCtl_Peripheral_Src_Clk_CoX.
 //!
-//! The \e ulPeripheralSrc parameter must be only one of the following values:
-//! \ref xSysCtl_Peripheral_Src_Clk_CoX.
 //! \verbatim
-//! +--------------------+------------------------+---------------------------+
-//! |    manufacturer    |ePeripheral             |eSrc                       |
-//! |--------------------|------------------------|---------------------------|
-//! |    CoX Common &    |This parameter is a     |This parameter is a        |
-//! |      Mandatory     |mandatory.Mandatory     |mandatory. So it           |
-//! |                    |is the format of        |should be: INT             |
-//! |                    |Variable naming.So it   |HCLK  HCLK_n EXTSL         |
-//! |                    |should be: ADCn,        |INTSL  MAIN  PLL           |
-//! |                    |TIMERn or UARTn         |PLL_n  EXTTRG              |
-//! |                    |n indicate the pin      |n indicate the pin         |
-//! |                    |number such as          |number such as             |
-//! |                    |0 1 2 3 ....            |0 1 2 3 ....               |
-//! |--------------------|------------------------|---------------------------|
-//! |       LPC17xx      |    ADC0                |MAIN PLL INT               |
-//! |                    |    PWMB                |INT HCLK EXTSL MAIN        |
-//! |                    |    PWMA                |INT HCLK EXTSL MAIN        |
-//! |                    |    FRQDIV              |INT HCLK EXTSL MAIN        |
-//! |                    |    I2S0                |INT HCLK PLL MAIN          |
-//! |                    |    TIMER0              |INT EXTTRG HCLK EXTSL MAIN |
-//! |                    |    TIMER1              |INT EXTTRG HCLK EXTSL MAIN |
-//! |                    |    TIMER2              |INT EXTTRG HCLK EXTSL MAIN |
-//! |                    |    TIMER3              |INT EXTTRG HCLK EXTSL MAIN |
-//! |                    |    UART0               |INT PLL MAIN               |
-//! |                    |    UART1               |INT PLL MAIN               |
-//! |                    |    UART2               |INT PLL MAIN               |
-//! |                    |    CAN0                |INT PLL MAIN               |
-//! |                    |    WDT0                |INTSL HCLK_2048 EXTSL      |
-//! |--------------------|------------------------|---------------------------|
+//! +--------------------+-------------------------+-----------------------------+
+//! |    manufacturer    | ePeripheral             | eSrc                        |
+//! |--------------------|-------------------------|-----------------------------|
+//! |    CoX Common &    | This parameter is a     | This parameter is a         |
+//! |      Mandatory     | mandatory.Mandatory     | mandatory. So it            |
+//! |                    | is the format of        | should be: INT              |
+//! |                    | Variable naming.So it   | HCLK  HCLK_n EXTSL          |
+//! |                    | should be: ADCn,        | INTSL  MAIN  PLL            |
+//! |                    | TIMERn or UARTn         | PLL_n  EXTTRG               |
+//! |                    | n indicate the pin      | n indicate the pin          |
+//! |                    | number such as          | number such as              |
+//! |                    | 0 1 2 3 ....            | 0 1 2 3 ....                |
+//! |--------------------|-------------------------|-----------------------------|
+//! |       LPC17xx      |     ADC0                | MAIN PLL INT                |
+//! |                    |     PWMB                | INT HCLK EXTSL MAIN         |
+//! |--------------------|-------------------------|-----------------------------|
 //! \endverbatim
 //!
 //! \return None.
+//!
+//! \note   Peripherals clock source are seted with this function.  At power-up,
+//!         all Peripherals clock source are Peripherals clock source; they must
+//!         be set in order to operate or respond to register reads/writes.
 //
 //*****************************************************************************
-#define xSysCtlPeripheralClockSourceSet2(ePeripheral, eSrc, ulDivide)
+#define xSysCtlPeripheralClockSourceSet2(ePeripheral, ulPeripheralSrc, ulDivide)
 
 
 //*****************************************************************************

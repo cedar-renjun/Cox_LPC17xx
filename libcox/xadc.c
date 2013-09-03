@@ -11,8 +11,19 @@
 #include "xhw_adc.h"
 #include "xadc.h"  
 
-
-// ulRate <= 200KHz
+//*****************************************************************************
+//
+//! \brief  Init ADC module
+//!         This function can be used to configure ADC peripherals clock frequecy.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be \ref xADC0_BASE.
+//!
+//! \param  [in] ulRate is the ADC convert frequecy, it must be lower than 200KHz.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void ADCInit(unsigned long ulBase, unsigned long ulRate)
 {
 
@@ -20,8 +31,9 @@ void ADCInit(unsigned long ulBase, unsigned long ulRate)
     unsigned long ulClk   = 0;
 
     // Note: ADC Module Maximum frequecy is 13MHz
-    /*ulClk = SysCtlPeripheralClockGet(SYSCTL_PERIPH_ADC);*/
-    /*ulClk /= 13000000;*/
+    // ulRate <= 200KHz
+    // ulClk = SysCtlPeripheralClockGet(SYSCTL_PERIPH_ADC);
+    // ulClk /= 13000000;
 
     //xHWREG(ulBase + AD_CR) = (ulClk<<CR_CLKDIV_S) | BIT_32_0;
     xHWREG(ulBase + AD_CR) = 0;
@@ -42,32 +54,38 @@ void ADCInit(unsigned long ulBase, unsigned long ulRate)
     xHWREG(ulBase + AD_CR) = (temp<<CR_CLKDIV_S) | BIT_32_0;
 }
 
-/*
-//! Start burst mode
-#define ADC_START_MODE_BURST        CR_BURST
-
-//! Start conversion now
-#define ADC_START_MODE_NOW          CR_START_NOW
-
-//! Start conversion when the edge selected by bit 27 occurs on P2.10/EINT0
-#define ADC_START_MODE_EINT0        CR_START_EINT0             
-
-//! Start conversion when the edge selected by bit 27 occurs on P1.27/CAP0.1
-#define ADC_START_MODE_CAP01        CR_START_CAP01             
-
-//! Start conversion when the edge selected by bit 27 occurs on MAT0.1
-#define ADC_START_MODE_MAT01        CR_START_MAT01             
-
-//! Start conversion when the edge selected by bit 27 occurs on MAT0.3
-#define ADC_START_MODE_MAT03        CR_START_MAT03             
-
-//! Start conversion when the edge selected by bit 27 occurs on MAT1.0
-#define ADC_START_MODE_MAT10        CR_START_MAT10             
-
-//! Start conversion when the edge selected by bit 27 occurs on MAT1.1
-#define ADC_START_MODE_MAT11        CR_START_MAT11             
-*/
-
+//*****************************************************************************
+//
+//! \brief  Start special ADC channel.
+//!         This function configure ADC convert mode, triggle mode.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be \ref xADC0_BASE.
+//!
+//! \param  [in] ulChs is ADC channel.
+//!              This value can be OR of the following value:
+//!              \ref ADC_CH_0
+//!              \ref ADC_CH_1
+//!              \ref ADC_CH_2
+//!              \ref ADC_CH_3
+//!              \ref ADC_CH_4
+//!              \ref ADC_CH_5
+//!              \ref ADC_CH_6
+//!
+//! \param  [in] ulMode is adc convert mode, consist of burst and external
+//!              triggle mode. this value can be one of the following value:
+//!              \ref ADC_START_MODE_BURST
+//!              \ref ADC_START_MODE_NOW  
+//!              \ref ADC_START_MODE_EINT0
+//!              \ref ADC_START_MODE_CAP01
+//!              \ref ADC_START_MODE_MAT01
+//!              \ref ADC_START_MODE_MAT03
+//!              \ref ADC_START_MODE_MAT10
+//!              \ref ADC_START_MODE_MAT11
+//!
+//! \return None.
+//
+//*****************************************************************************
 void ADCStart(unsigned long ulBase, unsigned long ulChs, unsigned long ulMode)
 {
     unsigned long ulTmpReg = 0;
@@ -106,6 +124,16 @@ void ADCStart(unsigned long ulBase, unsigned long ulChs, unsigned long ulMode)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Stop ADC convert procedure.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be \ref xADC0_BASE.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void ADCStop(unsigned long ulBase)
 {
     unsigned long ulTmpReg = 0;
@@ -119,20 +147,27 @@ void ADCStop(unsigned long ulBase)
     xHWREG(ulBase + AD_CR) = ulTmpReg;
 }
 
-
-/*
-#define ADC_CH_M                BIT_MASK(32, 6, 0)
-
-#define ADC_CH_0                BIT_32_0
-#define ADC_CH_1                BIT_32_1
-#define ADC_CH_2                BIT_32_2
-#define ADC_CH_3                BIT_32_3
-#define ADC_CH_4                BIT_32_4
-#define ADC_CH_5                BIT_32_5
-#define ADC_CH_6                BIT_32_6
-*/
-
-
+//*****************************************************************************
+//
+//! \brief  Enable speical ADC interrupt.
+//!         This function can be used to enable ADC convert done interrupt.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be \ref xADC0_BASE.
+//!
+//! \param  [in] ulChs is ADC channel.
+//!              This value can be OR of the following value:
+//!              \ref ADC_CH_0
+//!              \ref ADC_CH_1
+//!              \ref ADC_CH_2
+//!              \ref ADC_CH_3
+//!              \ref ADC_CH_4
+//!              \ref ADC_CH_5
+//!              \ref ADC_CH_6
+//!
+//! \return None.
+//
+//*****************************************************************************
 void ADCIntEnable(unsigned long ulBase, unsigned long ulChs)
 {
     unsigned long ulTmpReg = 0;
@@ -148,6 +183,27 @@ void ADCIntEnable(unsigned long ulBase, unsigned long ulChs)
     xHWREG(ulBase + AD_INTEN) = ulTmpReg;
 }
 
+//*****************************************************************************
+//
+//! \brief  Disable speical ADC interrupt.
+//!         This function can be used to disable ADC convert done interrupt.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be \ref xADC0_BASE.
+//!
+//! \param  [in] ulChs is ADC channel.
+//!              This value can be OR of the following value:
+//!              \ref ADC_CH_0
+//!              \ref ADC_CH_1
+//!              \ref ADC_CH_2
+//!              \ref ADC_CH_3
+//!              \ref ADC_CH_4
+//!              \ref ADC_CH_5
+//!              \ref ADC_CH_6
+//!
+//! \return None.
+//
+//*****************************************************************************
 void ADCIntDisable(unsigned long ulBase, unsigned long ulChs)
 {
     unsigned long ulTmpReg = 0;
@@ -164,36 +220,53 @@ void ADCIntDisable(unsigned long ulBase, unsigned long ulChs)
 } 
 
 
-unsigned long ADCStatusGet(unsigned long ulBase, unsigned long ulChs)
-{
-    ulChs |= (ulChs << 8);
-
-    return (xHWREG(ulBase + AD_INTEN) &  ulChs);
-}
-
-/*
-#define ADC_DONE                BIT_32_0
-#define ADC_OVERRUN             BIT_32_1
-*/
-
+//*****************************************************************************
+//
+//! \brief  Check ADC status flag.
+//!         This function can be use to check ADC special channel DONE and
+//!         OVERRUN flag.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be \ref xADC0_BASE.
+//!
+//! \param  [in] ulChs is ADC channel.
+//!              This value can be OR of the following value:
+//!              \ref ADC_CH_0
+//!              \ref ADC_CH_1
+//!              \ref ADC_CH_2
+//!              \ref ADC_CH_3
+//!              \ref ADC_CH_4
+//!              \ref ADC_CH_5
+//!              \ref ADC_CH_6
+//!
+//! \param  [in] ulFlags is used to check done or overrun status bit.
+//!              This flag is OR of the following value:
+//!              \ref ADC_DONE
+//!              \ref ADC_OVERRUN
+//!
+//! \return The ADC channel status flag.
+//!              \ref xtrue when flag has been set.
+//!              \ref xflase when flag has not been set.
+//
+//*****************************************************************************
 xtBoolean ADCStatusCheck(unsigned long ulBase, unsigned long ulChs, unsigned long ulFlags)
 {
 
     switch(ulFlags)
     {
-        case ADC_DONE:
+        case ADC_DONE:                 // Check ADC convert done flag. 
             {
                 ulChs = ulChs;
                 break;
             }
 
-        case ADC_OVERRUN:
+        case ADC_OVERRUN:              // Check ADC overrun flag. 
             {
                 ulChs <<= 8;
                 break;                
             }
 
-        case ADC_DONE | ADC_OVERRUN:
+        case ADC_DONE | ADC_OVERRUN:   // Check ADC convert done and overrun flag. 
             {
                 ulChs |= (ulChs << 8);
                 break;
@@ -214,6 +287,28 @@ xtBoolean ADCStatusCheck(unsigned long ulBase, unsigned long ulChs, unsigned lon
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Read ADC channel converted data.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be \ref xADC0_BASE.
+//!
+//! \param  [in] ulChs is ADC channel.
+//!              This value can be OR of the following value:
+//!              \ref ADC_CH_0
+//!              \ref ADC_CH_1
+//!              \ref ADC_CH_2
+//!              \ref ADC_CH_3
+//!              \ref ADC_CH_4
+//!              \ref ADC_CH_5
+//!              \ref ADC_CH_6
+//!
+//! \return The ADC channel data.
+//!
+//! \note   The ADC convert data is 12-bit length.
+//
+//*****************************************************************************
 unsigned long ADCDataRead(unsigned long ulBase, unsigned long ulCh)
 {
     unsigned long ulTmpReg = 0;
@@ -264,13 +359,12 @@ unsigned long ADCDataRead(unsigned long ulBase, unsigned long ulCh)
 
         default:
             {
-                while(1);
+                while(1);              // Error.
             }
     }
 
+    // Return ADC channel value.
     ulTmpReg = (ulTmpReg & BIT_MASK(32, 15, 4)) >> 4;
     return (ulTmpReg);
-
 }
-
 

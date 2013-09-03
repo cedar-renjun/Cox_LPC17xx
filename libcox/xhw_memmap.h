@@ -97,7 +97,7 @@
 #define xTIMER1_BASE            TIMER1_BASE                                  
 #define xUART0_BASE             UART0_BASE                                   
 #define xUART1_BASE             UART1_BASE                                   
-#define xPWM1_BASE              PWM1_BASE                                    
+#define xPWM0_BASE              PWM1_BASE                                    
 #define xI2C0_BASE              I2C0_BASE                                    
 #define xSPI0_BASE              SPI0_BASE                                     
 #define xRTC_BASE               RTC_BASE                                     

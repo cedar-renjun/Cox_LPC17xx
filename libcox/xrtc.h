@@ -496,55 +496,201 @@ extern void xRTCIntDisable(unsigned long ulIntType);
 //
 //*****************************************************************************
 
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_TIME_TYPE   The type of the RTC time.
+//! @{
+//
+//*****************************************************************************
+
+//! Second
 #define RTC_TIMETYPE_SECOND     BIT_32_0
+
+//! Minute
 #define RTC_TIMETYPE_MINUTE     BIT_32_1
+
+//! Hour
 #define RTC_TIMETYPE_HOUR       BIT_32_2
+
+//! Day of week
 #define RTC_TIMETYPE_DAYOFWEEK  BIT_32_3
+
+//! Day of month
 #define RTC_TIMETYPE_DAYOFMONTH BIT_32_4
+
+//! Day of year
 #define RTC_TIMETYPE_DAYOFYEAR  BIT_32_5
+
+//! Month
 #define RTC_TIMETYPE_MONTH      BIT_32_6
+
+//! Year
 #define RTC_TIMETYPE_YEAR       BIT_32_7
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_INT_TYPE RTC interrupt type.
+//! @{
+//
+//*****************************************************************************
+
+//! RTC increment interrupt.
 #define RTC_INT_INC             ILR_CIF
+
+//! RTC alarm interrupt.
 #define RTC_INT_ALARM           ILR_CALF
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_INT_CFG  RTC interrupt configure mode. 
+//! @{
+//
+//*****************************************************************************
+
+//! Enable second increment interrupt.
 #define INT_SEC_EN              BIT_32_0
+
+//! Enable minute increment interrupt.
 #define INT_MIN_EN              BIT_32_1
+
+//! Enable hour increment interrupt.
 #define INT_HOUR_EN             BIT_32_2
+
+//! Enable day of month increment interrupt.
 #define INT_DOM_EN              BIT_32_3
+
+//! Enable day of week increment interrupt.
 #define INT_DOW_EN              BIT_32_4
+
+//! Enable day of year increment interrupt.
 #define INT_DOY_EN              BIT_32_5
+
+//! Enable month increment interrupt.
 #define INT_MON_EN              BIT_32_6
+
+//! Enable year increment interrupt.
 #define INT_YEAR_EN             BIT_32_7
 
+
+//! Disable second increment interrupt.
 #define INT_SEC_DIS             BIT_32_8
+
+//! Disable minute increment interrupt.
 #define INT_MIN_DIS             BIT_32_9
+
+//! Disable hour increment interrupt.
 #define INT_HOUR_DIS            BIT_32_10
+
+//! Disable day of month increment interrupt.
 #define INT_DOM_DIS             BIT_32_11
+
+//! Disable day of week increment interrupt.
 #define INT_DOW_DIS             BIT_32_12
+
+//! Disable day of year increment interrupt.
 #define INT_DOY_DIS             BIT_32_13
+
+//! Disable month increment interrupt.
 #define INT_MON_DIS             BIT_32_14
+
+//! Disable year increment interrupt.
 #define INT_YEAR_DIS            BIT_32_15
 
+
+//! Enable second alarm match interrupt.
 #define INT_ALARM_SEC_EN        BIT_32_24
+
+//! Enable minute alarm match interrupt.
 #define INT_ALARM_MIN_EN        BIT_32_25
+
+//! Enable hour alarm match interrupt.
 #define INT_ALARM_HOUR_EN       BIT_32_26
+
+//! Enable day of month alarm match interrupt.
 #define INT_ALARM_DOM_EN        BIT_32_27
+
+//! Enable day of week alarm match interrupt.
 #define INT_ALARM_DOW_EN        BIT_32_28
+
+//! Enable day of year alarm match interrupt.
 #define INT_ALARM_DOY_EN        BIT_32_29
+
+//! Enable month alarm match interrupt.
 #define INT_ALARM_MON_EN        BIT_32_30
+
+//! Enable year alarm match interrupt.
 #define INT_ALARM_YEAR_EN       BIT_32_31
 
+
+//! Disable second alarm match interrupt.
 #define INT_ALARM_SEC_DIS       BIT_32_16
+
+//! Disable minute alarm match interrupt.
 #define INT_ALARM_MIN_DIS       BIT_32_17
+
+//! Disable hour alarm match interrupt.
 #define INT_ALARM_HOUR_DIS      BIT_32_18
+
+//! Disable day of month alarm match interrupt.
 #define INT_ALARM_DOM_DIS       BIT_32_19
+
+//! Disable day of week alarm match interrupt.
 #define INT_ALARM_DOW_DIS       BIT_32_20
+
+//! Disable day of year alarm match interrupt.
 #define INT_ALARM_DOY_DIS       BIT_32_21
+
+//! Disable month alarm match interrupt.
 #define INT_ALARM_MON_DIS       BIT_32_22
+
+//! Disable year alarm match interrupt.
 #define INT_ALARM_YEAR_DIS      BIT_32_23
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_GEN_REG  RTC general register ID
+//! @{
+//
+//*****************************************************************************
+
+//! RTC general register 0
+#define RTC_REG_0               RTC_GPREG0
+
+//! RTC general register 1
+#define RTC_REG_1               RTC_GPREG1
+
+//! RTC general register 2
+#define RTC_REG_2               RTC_GPREG2
+
+//! RTC general register 3
+#define RTC_REG_3               RTC_GPREG3
+
+//! RTC general register 4
+#define RTC_REG_4               RTC_GPREG4
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
 
 //*****************************************************************************
@@ -571,8 +717,6 @@ extern void RTCCaliEnable(void);
 extern void RTCCaliDisable(void);
 extern void RTCIntCfg(unsigned long ulCfg);
 extern unsigned long RTCIntCallbackInit(xtEventCallback pfnCallback);
-
-
 
 //*****************************************************************************
 //

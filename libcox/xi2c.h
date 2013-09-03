@@ -3,7 +3,7 @@
 //! \file xi2c.h
 //! \brief Prototypes for the I2C Driver.
 //! \version V2.2.1.0
-//! \date 02/06/2011
+//! \todo Need to update time information.
 //! \author CooCox
 //! \copy
 //!
@@ -13,7 +13,6 @@
 //! Redistribution and use in source and binary forms, with or without
 //! modification, are permitted provided that the following conditions
 //! are met:
-//!
 //!     * Redistributions of source code must retain the above copyright
 //! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
@@ -65,18 +64,6 @@
 //
 //*****************************************************************************
 
-
-
-
-
-
-
-
-
-
-
-
-
 //*****************************************************************************
 //
 //! \addtogroup xI2C
@@ -89,11 +76,11 @@
 //! \addtogroup xI2C_INT_Master xI2C Master Interrupt
 //!
 //! \verbatim
-//! +------------------------+----------------+------------------------+
-//! |xI2C Master Interrupts  |       CoX      |        STM32F1xx       |
-//! |------------------------|----------------|------------------------|
-//! |xI2C_MASTER_INT_DATA    |    Mandatory   |            Y           |
-//! +------------------------+----------------+------------------------+
+//! +--------------------------+----------------+------------------------+
+//! |  xI2C Master Interrupts  |       CoX      |         LPC17xx        |
+//! |--------------------------|----------------|------------------------|
+//! |  xI2C_MASTER_INT_DATA    |    Mandatory   |            Y           |
+//! +--------------------------+----------------+------------------------+
 //! \endverbatim
 //! @{
 //
@@ -115,12 +102,12 @@
 //! \addtogroup xI2C_Event_Master xI2C Master Event
 //!
 //! \verbatim
-//! +------------------------+----------------+------------------------+
-//! |xI2C Master Event       |       CoX      |        STM32F1xx       |
-//! |------------------------|----------------|------------------------|
-//! |xI2C_MASTER_EVENT_TX    |    Mandatory   |            Y           |
-//! |xI2C_MASTER_EVENT_RX    |    Mandatory   |            Y           |
-//! +------------------------+----------------+------------------------+
+//! +--------------------------+----------------+------------------------+
+//! |  xI2C Master Event       |       CoX      |         LPC17xx        |
+//! |--------------------------|----------------|------------------------|
+//! |  xI2C_MASTER_EVENT_TX    |    Mandatory   |            Y           |
+//! |  xI2C_MASTER_EVENT_RX    |    Mandatory   |            Y           |
+//! +--------------------------+----------------+------------------------+
 //! \endverbatim
 //! @{
 //
@@ -148,13 +135,13 @@
 //!
 //!
 //! \verbatim
-//! +------------------------+----------------+------------------------+
-//! |xI2C Slave Interrupts   |       CoX      |        STM32F1xx       |
-//! |------------------------|----------------|------------------------|
-//! |xI2C_SLAVE_INT_START    |    Optional    |            N           |
-//! |xI2C_SLAVE_INT_STOP     |    Optional    |            N           |
-//! |xI2C_SLAVE_INT_DATA     |    Mandatory   |            Y           |
-//! +------------------------+----------------+------------------------+
+//! +--------------------------+----------------+------------------------+
+//! |  xI2C Slave Interrupts   |       CoX      |         LPC17xx        |
+//! |--------------------------|----------------|------------------------|
+//! |  xI2C_SLAVE_INT_START    |    Optional    |            N           |
+//! |  xI2C_SLAVE_INT_STOP     |    Optional    |            N           |
+//! |  xI2C_SLAVE_INT_DATA     |    Mandatory   |            Y           |
+//! +--------------------------+----------------+------------------------+
 //! \endverbatim
 //! @{
 //
@@ -187,14 +174,14 @@
 //! \addtogroup xI2C_Event_Slave xI2C Slave Event
 //!
 //! \verbatim
-//! +------------------------+----------------+------------------------+
-//! |xI2C Slave Event        |       CoX      |        STM32F1xx       |
-//! |------------------------|----------------|------------------------|
-//! |xI2C_SLAVE_EVENT_START  |    Optional    |            N           |
-//! |xI2C_SLAVE_EVENT_STOP   |    Optional    |            N           |
-//! |xI2C_SLAVE_EVENT_TREQ   |    Mandatory   |            Y           |
-//! |xI2C_SLAVE_EVENT_RREQ   |    Mandatory   |            Y           |
-//! +------------------------+----------------+------------------------+
+//! +--------------------------+----------------+------------------------+
+//! |  xI2C Slave Event        |       CoX      |         LPC17xx        |
+//! |--------------------------|----------------|------------------------|
+//! |  xI2C_SLAVE_EVENT_START  |    Optional    |            N           |
+//! |  xI2C_SLAVE_EVENT_STOP   |    Optional    |            N           |
+//! |  xI2C_SLAVE_EVENT_TREQ   |    Mandatory   |            Y           |
+//! |  xI2C_SLAVE_EVENT_RREQ   |    Mandatory   |            Y           |
+//! +--------------------------+----------------+------------------------+
 //! \endverbatim
 //! @{
 //
@@ -231,14 +218,14 @@
 //! \addtogroup xI2C_Master_Error xI2C Master Error
 //!
 //! \verbatim
-//! +------------------------+----------------+------------------------+
-//! |xI2C Master Error       |       CoX      |        STM32F1xx       |
-//! |------------------------|----------------|------------------------|
-//! |xI2C_MASTER_ERR_NONE    |    Mandatory   |            Y           |
-//! |xI2C_MASTER_ERR_ADDR_ACK|    Mandatory   |            Y           |
-//! |xI2C_MASTER_ERR_DATA_ACK|    Mandatory   |            Y           |
-//! |xI2C_MASTER_ERR_ARB_LOST|    Mandatory   |            Y           |
-//! +------------------------+----------------+------------------------+
+//! +---------------------------+----------------+------------------------+
+//! |  xI2C Master Error        |       CoX      |         LPC17xx        |
+//! |---------------------------|----------------|------------------------|
+//! |  xI2C_MASTER_ERR_NONE     |    Mandatory   |            Y           |
+//! |  xI2C_MASTER_ERR_ADDR_ACK |    Mandatory   |            Y           |
+//! |  xI2C_MASTER_ERR_DATA_ACK |    Mandatory   |            Y           |
+//! |  xI2C_MASTER_ERR_ARB_LOST |    Mandatory   |            Y           |
+//! +---------------------------+----------------+------------------------+
 //! \endverbatim
 //! @{
 //
@@ -284,13 +271,13 @@
 //! \n
 //! \section xI2C_Transfer_Type_CoX 2.CoX Mandatory and CoX Non-mandatory
 //! \verbatim
-//! +------------------------+----------------+---------------------------+
-//! |xI2C General Call       |       CoX      |         STM32F1xx         |
-//! |------------------------|----------------|---------------------------|
-//! |xI2C_GENERAL_CALL_DIS   |    Mandatory   |             Y             |
-//! |------------------------|----------------|---------------------------|
-//! |xI2C_GENERAL_CALL_EN    |  Non-Mandatory |             Y             |
-//! |------------------------|----------------|---------------------------|
+//! +-------------------------+---------------+---------------------------+
+//! |  xI2C General Call      |      CoX      |          LPC17xx          |
+//! |-------------------------|---------------|---------------------------|
+//! |  xI2C_GENERAL_CALL_DIS  |   Mandatory   |             Y             |
+//! |-------------------------|---------------|---------------------------|
+//! |  xI2C_GENERAL_CALL_EN   | Non-Mandatory |             Y             |
+//! |-------------------------|---------------|---------------------------|
 //! \endverbatim
 //! @{
 //
@@ -312,7 +299,7 @@
 //! \section xI2C_Exported_APIs_Port CoX Port Details
 //! \verbatim
 //! +-------------------------------+----------------+------------------------+
-//! |  xI2C API                     |       CoX      |       STM32F1xx        |
+//! |  xI2C API                     |       CoX      |        LPC17xx         |
 //! |-------------------------------|----------------|------------------------|
 //! |  xI2CMasterInit               |    Mandatory   |            Y           |
 //! |-------------------------------|----------------|------------------------|
@@ -385,24 +372,19 @@
 
 //*****************************************************************************
 //
-//! \brief Initialize the I2C controller.
+//! \brief  Initialize the I2C controller.
+//!         This function initializes operation of the I2C Master block.
+//!         Upon successful initialization of the I2C block, this function will
+//!         have set the bus speed for the master, and will have enabled the I2C
+//!         Master block.
 //!
-//! \param ulBase is the I2C module base address.
-//! \param ulI2CClk is the I2C clock bit rate.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function initializes operation of the I2C Master block.  Upon
-//! successful initialization of the I2C block, this function will have set the
-//! bus speed for the master, and will have enabled the I2C Master block.
-//!
-//! The parameter \e ulBase can be:
-//! - \ref xI2C0_BASE
-//! - \ref xI2C1_BASE
-//!
-//! The parameter \e ulI2CClk can only be:
-//! - \b 100000 - I2C works under standard-mode (Sm), with a bit rate up to
-//!               100 kbit/s
-//! - \b 400000 - I2C works under fast-mode (Fm), with a bit rate up to
-//!               400 kbit/s
+//! \param  [in] ulI2CClk is the I2C clock bit rate.
+//!              0 < ulI2CClk <= 400000
 //!
 //! \return None.
 //
@@ -411,11 +393,13 @@
 
 //*****************************************************************************
 //
-//! \brief Enables the I2C Master block.
+//! \brief  Enables the I2C Master block.
+//!         This function will enable operation of the I2C Master block.
 //!
-//! \param ulBase is the base address of the I2C module.
-//!
-//! This will enable operation of the I2C Master block.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -424,11 +408,13 @@
 
 //*****************************************************************************
 //
-//! \brief Disables the I2C master block.
+//! \brief  Disables the I2C master block.
+//!         This function will disable operation of the I2C Master block.
 //!
-//! \param ulBase is the base address of the I2C module.
-//!
-//! This will disable operation of the I2C master block.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -438,10 +424,12 @@
 //*****************************************************************************
 //
 //! \brief Enables the I2C Slave block.
+//!        This will enable operation of the I2C Slave block.
 //!
-//! \param ulBase is the base address of the I2C module.
-//!
-//! This will enable operation of the I2C Slave block.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -451,10 +439,12 @@
 //*****************************************************************************
 //
 //! \brief Disables the I2C slave block.
+//!        This will disable operation of the I2C slave block.
 //!
-//! \param ulBase is the base address of the I2C module.
-//!
-//! This will disable operation of the I2C slave block.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -463,98 +453,108 @@
 
 //*****************************************************************************
 //
-//! \brief Indicates whether or not the I2C bus is busy.
+//! \brief  Indicates whether or not the I2C bus is busy.
+//!         This function returns an indication of whether or not the I2C bus
+//!         is busy. This function can be used in a multi-master environment to
+//!         determine if another master is currently using the bus.
 //!
-//! \param ulBase is the base address of the I2C module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function returns an indication of whether or not the I2C bus is busy.
-//! This function can be used in a multi-master environment to determine if
-//! another master is currently using the bus.
-//!
-//! \return Returns \b xtrue if the I2C bus is busy; otherwise, returns
-//! \b xfalse.
+//! \return The I2C bus status:
+//!         - xtrue    if I2C bus is busy.
+//!         - xfalse   if I2C bus is free.
 //
 //*****************************************************************************
 #define xI2CMasterBusBusy(ulBase)             I2CBusBusyStatus(ulBase)
 
 //*****************************************************************************
 //
-//! \brief Indicates whether or not the I2C Master is busy.
+//! \brief  Indicates whether or not the I2C Master is busy.
+//!         This function returns an indication of whether or not the I2C Master
+//!         is busy transmitting or receiving data.
 //!
-//! \param ulBase is the base address of the I2C Master module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function returns an indication of whether or not the I2C Master is
-//! busy transmitting or receiving data.
-//!
-//! \return Returns \b xtrue if the I2C Master is busy; otherwise, returns
-//! \b xfalse.
+//! \return The I2C bus status:
+//!         - xtrue    if I2C bus is busy.
+//!         - xfalse   if I2C bus is free.
 //
 //*****************************************************************************
 #define xI2CMasterBusy(ulBase)               I2CBusBusyStatus(ulBase)
 
 //*****************************************************************************
 //
-//! \brief Init interrupts callback for the specified I2C Port.
+//! \brief  Register user interrupt callback ISR for the I2C module.
 //!
-//! \param ulPort is the base address of the I2C port.
-//! \param xtI2CCallback is callback for the specified I2C Port.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! Init interrupts callback for the specified I2C Port.
+//! \param  [in] xtI2CCallback is user callback for the specified I2C Port.
 //!
 //! \return None.
 //
 //*****************************************************************************
 #define xI2CIntCallbackInit(ulBase, xtI2CCallback)                            \
-        I2CIntCallbackInit(ulBase, xtI2CCallback)
+         I2CIntCallbackInit(ulBase, xtI2CCallback)
 
 //*****************************************************************************
+//
 //! \brief Slave Send a byte to I2C bus.
+//!        This function is to send a byte on specified I2C BUS.
 //!
-//! \param ulBase specifies the I2C module base address.
-//! \param ucData specifies the data which will send to I2C BUS.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function is to send a byte on specified I2C BUS.
-//!
-//! The \e ulBase can be one of the following values:
-//! \b xI2C1_BASE, \b xI2C2_BASE.
-//!
-//! \note This is only for slave
+//! \param  [in] ucData specifies the data which will send to I2C BUS.
 //!
 //! \return None.
+//!
+//! \note   This is only for slave
 //
 //*****************************************************************************
 #define xI2CSlaveDataPut(ulBase, ucData)                                      \
-        I2CDataWrite(ulBase, ucData)
+         I2CDataWrite(ulBase, ucData)
 
 
 //*****************************************************************************
 //! \brief Slave receive a byte to I2C bus.
+//!        This function is to receive a byte on specified I2C BUS.
 //!
-//! \param ulBase specifies the I2C module base address.
-//!
-//! This function is to receive a byte on specified I2C BUS.
-//!
-//! The \e ulBase can be one of the following values:
-//! \b xI2C1_BASE, \b xI2C2_BASE.
-//!
-//! \note This is only for slave
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
 //! \return None.
+//!
+//! \note   This is only for slave
 //
 //*****************************************************************************
 #define xI2CSlaveDataGet(ulBase)                                              \
-        I2CDataRead(ulBase)
+         I2CDataRead(ulBase)
 
 //*****************************************************************************
 //
-//! Enables the I2C Master interrupt.
+//! \brief  Enables the I2C Master interrupt.
+//!         Enables the I2C Master interrupt source.
 //!
-//! \param ulBase is the base address of the I2C module.
-//! \param ulIntType is the interrupt type of the I2C module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! The \e ulIntType is the interrupt type of the I2C module.
-//!
-//! Enables the I2C Master interrupt source.
+//! \param  [in] ulIntType is the interrupt type of the I2C module.
+//!         TODO
 //!
 //! \return None.
 //
@@ -564,606 +564,655 @@
 
 //*****************************************************************************
 //
-//! Disables the I2C Master interrupt.
+//! \brief  Disables the I2C Master interrupt.
+//!         Disables the I2C Master interrupt source.
 //!
-//! \param ulBase is the base address of the I2C module.
-//! \param ulIntType is the interrupt type of the I2C module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! The \e ulIntType is the interrupt type of the I2C module.
-//!
-//! Disables the I2C Master interrupt source.
+//! \param  [in] ulIntType is the interrupt type of the I2C module.
+//!         TODO
 //!
 //! \return None.
 //
 //*****************************************************************************
 #define xI2CMasterIntDisable(ulBase, ulIntType)                               \
-        I2CIntDisable(ulBase)
+         I2CIntDisable(ulBase)
 
 //*****************************************************************************
 //
-//! \brief Set the clock rate of the specified I2C port.
+//! \brief  Initialize I2C slave function.
+//!         This function is to 7-bit slave addresses and enable General Call
+//!         function of specified I2C port.
 //!
-//! \param ulBase specifies the I2C module base address.
-//! \param ucSlaveAddr specifies the slave address.
-//! \param ulGeneralCall specifies enable General Call function or not.
-//! Details please refer to \ref xI2C_General_Call.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function is to Set 4 7-bit slave addresses and enable General Call
-//! function of specified I2C port.
-//!
-//! The \e ulBase must be:\b I2C0_BASE.
-//!
-//! The \e ucSlaveAddr is the I2C slave address,There are 4 slave address.
-//! The ucSlaveAddr can be a 7-bit value.
-//!
-//! The \e ulGeneralCall is to enable the General Call function or not.
-//! The ulGeneralCall can be one of the following values:
-//! \b I2C_GENERAL_CALL_EN,\b I2C_GENERAL_CALL_DIS.
-//! Details please refer to \ref xI2C_General_Call_CoX.
-//!
-//! \note this is only for slave
+//! \param  [in] ucSlaveAddr specifies the slave address.
+//!              The ucSlaveAddr can be a 7-bit value.
+//! \param  [in] ulGeneralCall specifies enable General Call function or not.
+//!              The ulGeneralCall can be one of the following values:
+//!                  \ref xI2C_GENERAL_CALL_EN
+//!                  \ref xI2C_GENERAL_CALL_DIS.
 //!
 //! \return None.
+//!
+//! \note   This function is only suit for I2C slave mode.
 //
 //*****************************************************************************
 #define xI2CSlaveInit(ulBase, ucSlaveAddr, ulGeneralCall)                      \
-        I2CSlaveInit(ulBase, ucSlaveAddr, ulGeneralCall)
+         I2CSlaveInit(ulBase, ucSlaveAddr, ulGeneralCall)
 
 //*****************************************************************************
 //
-//! Enables the I2C Slave interrupt.
+//! \brief  Enables the I2C Slave interrupt.
 //!
-//! \param ulBase is the base address of the I2C module.
-//! \param ulIntType is the interrupt type of the I2C module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! The \e ulIntType is the interrupt type of the I2C module.
-//!
-//! Enables the I2C Slave interrupt source.
+//! \param  [in] ulIntType is the interrupt type of the I2C module.
+//!              This value can be one of the following value:
+//!              \ref xI2C_SLAVE_INT_STOP
+//!              \ref xI2C_SLAVE_INT_DATA
 //!
 //! \return None.
 //
 //*****************************************************************************
 #define xI2CSlaveIntEnable(ulBase, ulIntType)                                 \
-        I2CIntEnable(ulBase)
+         I2CIntEnable(ulBase)
 
 //*****************************************************************************
 //
-//! Disables the I2C Slave interrupt.
+//! \brief  Disables the I2C Slave interrupt.
 //!
-//! \param ulBase is the base address of the I2C module.
-//! \param ulIntType is the interrupt type of the I2C module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! The \e ulIntType is the interrupt type of the I2C module.
-//!
-//! Disables the I2C slave interrupt source.
+//! \param  [in] ulIntType is the interrupt type of the I2C module.
+//!              This value can be one of the following value:
+//!              \ref xI2C_SLAVE_INT_STOP
+//!              \ref xI2C_SLAVE_INT_DATA
 //!
 //! \return None.
 //
 //*****************************************************************************
 #define xI2CSlaveIntDisable(ulBase, ulIntType)                               \
-        I2CIntDisable(ulBase)
+         I2CIntDisable(ulBase)
 
 //*****************************************************************************
 //
-//! Gets the error status of the I2C Master module.
+//! \brief  Gets the error status of the I2C Master module.
+//!         This function is used to obtain the error status of the Master module
+//!         send and receive operations.
 //!
-//! \param ulBase is the base address of the I2C Master module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function is used to obtain the error status of the Master module send
-//! and receive operations.
-//!
-//! \return Returns the error status, as one of \b I2C_MASTER_ERR_NONE,
-//! \b I2C_MASTER_ERR_ADDR_ACK, \b I2C_MASTER_ERR_DATA_ACK, or
-//! \b I2C_MASTER_ERR_ARB_LOST.
+//! \return Returns the error status, can be one of the following value:
+//!         \ref I2C_MASTER_ERR_NONE
+//!         \ref I2C_MASTER_ERR_ADDR_ACK
+//!         \ref I2C_MASTER_ERR_DATA_ACK
+//!         \ref I2C_MASTER_ERR_ARB_LOST
 //
 //*****************************************************************************
 #define xI2CMasterError(ulBase)
 
 //*****************************************************************************
 //
-//! Transmits a byte from the I2C Master.
+//! \brief  Transfer an byte on the I2C bus.
+//!         This function will put an byte into I2C bus.
 //!
-//! \param ulBase is the base address of the I2C module.
-//! \param ucData data to be transmitted from the I2C Master
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function will place the supplied data into I2C Master Data Register.
+//! \param  [in] ucData data to be transmitted from the I2C Master
 //!
 //! \return None.
 //
 //*****************************************************************************
 #define xI2CMasterDataPut(ulBase, ucData)                                     \
-        I2CDataWrite(ulBase, ucData)
+         I2CDataWrite(ulBase, ucData)
 
 //*****************************************************************************
 //
-//! Receives a byte that has been sent to the I2C Master.
+//! \brief  Receive an byte on the I2C bus.
+//!         This function will get an byte into I2C bus.
 //!
-//! \param ulBase is the base address of the I2C module.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function reads a byte of data from the I2C Master Data Register.
+//! \return The data received from I2C bus.
 //!
-//! \return Returns the byte(unsigned char) received from by the I2C Master.
 //
 //*****************************************************************************
 #define xI2CMasterDataGet(ulBase)                                             \
-        I2CDataRead(ulBase)
+         I2CDataRead(ulBase)
 
 //*****************************************************************************
 //
-//! \brief Transmite the STOP condition, master goes to idle state.
+//! \brief  Transmite the STOP condition, master goes to idle state.
+//!         This function free the I2C bus. When the master no longer need send
+//!         or receive any more data, or need to terminate this transmition after
+//!         getting some errors, call this function.
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//!
-//! This function free the I2C bus. When the master no longer need send or
-//! receive any more data, or need to terminate this transmition after getting
-//! some errors, call this function.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
 //! \return None.
 //
 //*****************************************************************************
 #define xI2CMasterStop(ulBase)                                                \
-        I2CStopSend(ulBase)
+         I2CStopSend(ulBase)
 
 //*****************************************************************************
 //
-//! \brief Send a master transmit request when the bus is idle.(Write Step1)
+//! \brief  Send a master transmit request when the bus is idle.(Write Step1)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucSlaveAddr is the 7-bit slave address.
-//! \param ucData is the byte to transmit.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         This function init a new write transmition. When the master have
+//!         not obtained control of the bus, This function send request to
+//!         transmit the START condition, the slave address and the data, Then
+//!         it returns immediately, no waiting any bus transmition to complete.
 //!
-//! This function init a new write transmition. When the master have not obtained
-//! control of the bus, This function send request to transmit the START
-//! condition, the slave address and the data, Then it returns immediately, no
-//! waiting any bus transmition to complete.
+//!         Users can call xI2CMasterBusy() to check if all the bus transmition
+//!         complete, the call xI2CMasterError() to check if any error occurs.
 //!
-//! Users can call xI2CMasterBusy() to check if all the bus  transmition
-//! complete, the call xI2CMasterError() to check if any error occurs.
+//!         After the master obtained control of the bus, and haven't release it,
+//!         users can call xI2CMasterWriteRequestS2() to continue transmit data
+//!         to slave.  Users can also call xI2CMasterStop() to terminate this
+//!         transmition and release the I2C bus.
 //!
-//! After the master obtained control of the bus, and haven't release it, users
-//! can call xI2CMasterWriteRequestS2() to continue transmit data to slave.
-//! Users can also call xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! For this function returns immediately, it is always using in the interrupt
-//! handler.
+//! \param  [in] ucSlaveAddr is the 7-bit slave address.
+//! \param  [in] ucData is the byte to transmit.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
+//!              and terminate this transmition.
 //!
 //! \return None.
+//!
+//! \nore   For this function returns immediately, it is always using in the
+//!         interrupt handler.
 //
 //*****************************************************************************
 #define xI2CMasterWriteRequestS1(ulBase, ucSlaveAddr, ucData, bEndTransmition) \
-        I2CMasterWriteRequestS1(ulBase, ucSlaveAddr, ucData, bEndTransmition)
+         I2CMasterWriteRequestS1(ulBase, ucSlaveAddr, ucData, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Send a master data transmit request when the master have obtained
-//! control of the bus.(Write Step2)
+//! \brief  Send a master data transmit request when the master have obtained
+//!         control of the bus.(Write Step2)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucData is the byte to transmit.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         After the master obtained control of the bus(have called
+//!         xI2CMasterWriteRequestS1() without any error), and haven't release it,
+//!         users can call this function to continue transmit data to slave.
 //!
-//! After the master obtained control of the bus(have called
-//! xI2CMasterWriteRequestS1() without any error), and haven't release it, users
-//! can call this function to continue transmit data to slave.
+//!         This function just send request to transmit the data, and it returns
+//!         immediately, no waiting any bus transmition to complete.
 //!
-//! This function just send request to transmit the data, and it returns
-//! immediately, no waiting any bus transmition to complete.
+//!         Users can call xI2CMasterBusy() to check if all the bus transmition
+//!         complete, the call xI2CMasterError() to check if any error occurs.
+//!         Users call also can xI2CMasterStop() to terminate this transmition
+//!         and release the I2C bus.
 //!
-//! Users can call xI2CMasterBusy() to check if all the bus transmition
-//! complete, the call xI2CMasterError() to check if any error occurs. Users call
-//! also can xI2CMasterStop() to terminate this transmition and release the
-//! I2C bus.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! For this function returns immediately, it is always using in the interrupt
-//! handler.
+//! \param  [in] ucData is the byte to transmit.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
+//!              and terminate this transmition.
 //!
 //! \return None.
+//! \note   For this function returns immediately, it is always using in the interrupt
+//!         handler.
 //
 //*****************************************************************************
 #define xI2CMasterWriteRequestS2(ulBase, ucData, bEndTransmition)             \
-        I2CMasterWriteRequestS2(ulBase, ucData, bEndTransmition)
+         I2CMasterWriteRequestS2(ulBase, ucData, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Write a data to the slave when the bus is idle, and waiting for all
-//! bus transmiton complete.(Write Step1)
+//! \brief  Write a data to the slave when the bus is idle, and waiting for all
+//!         bus transmiton complete.(Write Step1)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucSlaveAddr is the 7-bit slave address.
-//! \param ucData is the byte to transmit.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         This function init a new write transmition. When the master have not
+//!         obtained control of the bus, This function transmit the START condition,
+//!         the slave address and the data, then waiting for all bus transmition
+//!         complete.
 //!
-//! This function init a new write transmition. When the master have not obtained
-//! control of the bus, This function transmit the START condition, the slave
-//! address and the data, then waiting for all bus transmition complete.
+//!         After the master obtained control of the bus, and haven't release it,
+//!         users can call xI2CMasterWriteS2() to continue transmit data to slave.
+//!         Users call also can xI2CMasterStop() to terminate this transmition and
+//!         release the I2C bus.
 //!
-//! Users can then check the return value to see if any error occurs:
-//! - \ref xI2C_MASTER_ERR_NONE     - \b 0, no error
-//! - \ref xI2C_MASTER_ERR_ADDR_ACK - The transmitted address was not acknowledged
-//! - \ref xI2C_MASTER_ERR_DATA_ACK - The transmitted data was not acknowledged
-//! - \ref xI2C_MASTER_ERR_ARB_LOST - The I2C controller lost arbitration.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! After the master obtained control of the bus, and haven't release it, users
-//! can call xI2CMasterWriteS2() to continue transmit data to slave.
-//! Users call also can xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
-//!
-//! This function is always used in thread mode.
+//! \param  [in] ucSlaveAddr is the 7-bit slave address.
+//! \param  [in] ucData is the byte to transmit.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
+//!              and terminate this transmition.
 //!
 //! \return Returns the master error status.
+//!
+//! \note   This function is always used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterWriteS1(ulBase, ucSlaveAddr, ucData, bEndTransmition)       \
-        I2CMasterWriteS1(ulBase, ucSlaveAddr, ucData, bEndTransmition)
+         I2CMasterWriteS1(ulBase, ucSlaveAddr, ucData, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Write a data to the slave, when the master have obtained control of
-//! the bus, and waiting for all bus transmiton complete.(Write Step2)
+//! \brief  Write a data to the slave, when the master have obtained control of
+//!         the bus, and waiting for all bus transmiton complete.(Write Step2)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucData is the byte to transmit.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         After the master obtained control of the bus(have called
+//!         xI2CMasterWriteS1() without any error), and haven't release it,
+//!         users can call this function to continue transmit data to slave.
 //!
-//! After the master obtained control of the bus(have called
-//! xI2CMasterWriteS1() without any error), and haven't release it, users
-//! can call this function to continue transmit data to slave.
+//!         This function transmit the data to the slave, and waiting for all bus
+//!         transmition complete.
 //!
-//! This function transmit the data to the slave, and waiting for all bus
-//! transmition complete.
+//!         Then users can call this function to continue transmit data to slave.
+//!         Users call also call xI2CMasterStop() to terminate this transmition
+//!         and release the I2C bus.
 //!
-//! Users can then check the return value to see if any error occurs:
-//! - \ref xI2C_MASTER_ERR_NONE     - \b 0, no error
-//! - \ref xI2C_MASTER_ERR_ADDR_ACK - The transmitted address was not acknowledged
-//! - \ref xI2C_MASTER_ERR_DATA_ACK - The transmitted data was not acknowledged
-//! - \ref xI2C_MASTER_ERR_ARB_LOST - The I2C controller lost arbitration.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! Then users can call this function to continue transmit data to slave.
-//! Users call also call xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
+//! \param  [in] ucData is the byte to transmit.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
+//!              and terminate this transmition.
 //!
-//! This function is always used in thread mode.
+//!
 //!
 //! \return Returns the master error status.
+//! \note   This function is always used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterWriteS2(ulBase, ucData, bEndTransmition)                    \
-        I2CMasterWriteS2(ulBase, ucData, bEndTransmition)
+         I2CMasterWriteS2(ulBase, ucData, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Write a data buffer to the slave when the bus is idle, and waiting
-//! for all bus transmiton complete.(Write Buffer Step1)
+//! \brief  Write a data buffer to the slave when the bus is idle, and waiting
+//!         for all bus transmiton complete.(Write Buffer Step1)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucSlaveAddr is the 7-bit slave address.
-//! \param pucDataBuf is the data buffer to transmit.
-//! \param ulLen is the data buffer byte size.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         This function init a new data buffer write transmition. When the
+//!         master have not obtained control of the bus, This function transmit
+//!         the START condition, the slave address and the data, then waiting for
+//!         the data transmition complete, and continue next data transmition,
+//!         until all complete. If there is any error occurs, the remain data
+//!         will be canceled.
 //!
-//! This function init a new data buffer write transmition. When the master have
-//! not obtained control of the bus, This function transmit the START condition,
-//! the slave address and the data, then waiting for the data transmition
-//! complete, and continue next data transmition, until all complete. If there
-//! is any error occurs, the remain data will be canceled.
+//!         Users can then check the return value to see how many datas have
+//!         been successfully transmited. if the number != ulLen, user can call
+//!         xI2CMasterError() to see what error occurs.
 //!
-//! Users can then check the return value to see how many datas have been
-//! successfully transmited. if the number != ulLen, user can call
-//! xI2CMasterError() to see what error occurs.
+//!         After the master obtained control of the bus, and haven't release it,
+//!         users can call xI2CMasterWriteS2()/xI2CMasterWriteBufS2() to continue
+//!         transmit data to slave. Users call also call xI2CMasterStop() to
+//!         terminate this transmition and release the I2C bus.
 //!
-//! After the master obtained control of the bus, and haven't release it, users
-//! can call xI2CMasterWriteS2() / xI2CMasterWriteBufS2() to continue transmit data
-//! to slave. Users call also call xI2CMasterStop() to terminate this transmition
-//! and release the I2C bus.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function is always used in thread mode.
+//! \param  [in] ucSlaveAddr is the 7-bit slave address.
+//! \param  [in] pucDataBuf is the data buffer to transmit.
+//! \param  [in] ulLen is the data buffer byte size.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
+//!              and terminate this transmition.
 //!
 //! \return Returns the data number that have been successully tranmited.
+//!
+//! \note   This function is always used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterWriteBufS1(ulBase, ucSlaveAddr, pucDataBuf, ulLen, bEndTransmition) \
-        I2CMasterWriteBufS1(ulBase, ucSlaveAddr, pucDataBuf, ulLen, bEndTransmition)
+         I2CMasterWriteBufS1(ulBase, ucSlaveAddr, pucDataBuf, ulLen, bEndTransmition)
 
 
 //*****************************************************************************
 //
-//! \brief Write a data buffer to the slave, when the master have obtained
-//! control of the bus, and waiting for all bus transmiton complete.(Write
-//! Buffer Step2)
+//! \brief  Write a data buffer to the slave, when the master have obtained
+//!         control of the bus, and waiting for all bus transmiton complete.
+//!         (Write Buffer Step2)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param pucDataBuf is the data buffer to transmit.
-//! \param ulLen is the data buffer byte size.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         After the master obtained control of the bus(have called xI2CMasterWriteS1()
+//!         or xI2CMasterWriteBufS1() without any error), and haven't release it,
+//!         users can call this function to continue transmit data to slave.
 //!
-//! After the master obtained control of the bus(have called
-//! xI2CMasterWriteS1() or xI2CMasterWriteBufS1() without any error), and haven't
-//! release it, users can call this function to continue transmit data to slave.
+//!         This function transmit the data one by one to the slave, waiting for
+//!         every data transmition complete, and continue next data transmition,
+//!         until all complete. If there is any error occurs, the remain data will
+//!         be canceled.
 //!
-//! This function transmit the data one by one to the slave, waiting for every
-//! data transmition complete, and continue next data transmition, until all
-//! complete. If there is any error occurs, the remain data will be canceled.
+//!         Users can then check the return value to see how many datas have been
+//!         successfully transmited. if the number != ulLen, user can call
+//!         xI2CMasterError() to see what error occurs.
 //!
-//! Users can then check the return value to see how many datas have been
-//! successfully transmited. if the number != ulLen, user can call
-//! xI2CMasterError() to see what error occurs.
+//!         Then users can call xI2CMasterWriteS2() or this function to continue
+//!         transmit data to slave. Users call also call xI2CMasterStop() to terminate
+//!         this transmition and release the I2C bus.!
 //!
-//! Then users can call xI2CMasterWriteS2() or this function to continue
-//! transmit data to slave. Users call also call xI2CMasterStop() to terminate
-//! this transmition and release the I2C bus.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function is always used in thread mode.
+//! \param  [in] pucDataBuf is the data buffer to transmit.
+//! \param  [in] ulLen is the data buffer byte size.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
+//!              and terminate this transmition.
 //!
 //! \return Returns the data number that have been successully tranmited.
+//!
+//! \note   This function is always used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterWriteBufS2(ulBase, pucDataBuf, ulLen, bEndTransmition)      \
-        I2CMasterWriteBufS2(ulBase, pucDataBuf, ulLen, bEndTransmition)
+         I2CMasterWriteBufS2(ulBase, pucDataBuf, ulLen, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Send a master receive request when the bus is idle.(Read Step1)
+//! \brief  Send a master receive request when the bus is idle.(Read Step1)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucSlaveAddr is the 7-bit slave address.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         This function init a new receive transmition. When the master have
+//!         not obtained control of the bus, This function send request to
+//!         transmit the START condition, the slave address and the data request,
+//!         Then it returns immediately, no waiting any bus transmition to complete.
 //!
-//! This function init a new receive transmition. When the master have not obtained
-//! control of the bus, This function send request to transmit the START
-//! condition, the slave address and the data request, Then it returns
-//! immediately, no waiting any bus transmition to complete.
+//!         If bEndTransmition is xtrue, the receive operation will followed by
+//!         an negative ACK and STOP condition.
 //!
-//! If bEndTransmition is xtrue, the receive operation will followed by an
-//! negative ACK and STOP condition.
+//!         Users can call xI2CMasterBusy() to check if all the bus transmition
+//!         complete, then call xI2CMasterError() to check if any error occurs.
+//!         Then user can get the data by calling xI2CMasterDataGet() if there
+//!         is no error occurs.
 //!
-//! Users can call xI2CMasterBusy() to check if all the bus transmition
-//! complete, then call xI2CMasterError() to check if any error occurs. Then user
-//! can get the data by calling xI2CMasterDataGet() if there is no error occurs.
+//!         After the master obtained control of the bus, and haven't release it,
+//!         users can call xI2CMasterReadRequestS2() to continue receive data from
+//!         slave.  Users call also can xI2CMasterStop() to terminate this transmition
+//!         and release the I2C bus.
 //!
-//! After the master obtained control of the bus, and haven't release it, users
-//! can call xI2CMasterReadRequestS2() to continue receive data from slave.
-//! Users call also can xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! For this function returns immediately, it is always using in the interrupt
-//! hander.
+//! \param  [in] ucSlaveAddr is the 7-bit slave address.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP
+//!              condition and terminate this transmition.
 //!
 //! \return None.
+//!
+//! \note   For this function returns immediately, it is always using in the
+//!         interrupt hander.
 //
 //*****************************************************************************
 #define xI2CMasterReadRequestS1(ulBase, ucSlaveAddr, bEndTransmition)         \
-        I2CMasterReadRequestS1(ulBase, ucSlaveAddr, bEndTransmition)
+         I2CMasterReadRequestS1(ulBase, ucSlaveAddr, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Send a master data receive request when the master have obtained
-//! control of the bus.(Write Step2)
+//! \brief  Send a master data receive request when the master have obtained
+//!         control of the bus.(Write Step2)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         After the master obtained control of the bus(have called
+//!         xI2CMasterReadRequestS1() without any error), and haven't release it,
+//!         users can call this function to continue receive data from slave.
 //!
-//! After the master obtained control of the bus(have called
-//! xI2CMasterReadRequestS1() without any error), and haven't release it, users
-//! can call this function to continue receive data from slave.
+//!         If bEndTransmition is xtrue, the receive operation will followed
+//!         by an negative ACK and STOP condition.
+//!         
+//!         Users can call xI2CMasterBusy() to check if all the bus
+//!         transmition complete, then call xI2CMasterError() to check if any
+//!         error occurs. Then user can get the data by calling xI2CMasterDataGet()
+//!         if there is no error occurs.
+//!         
+//!         Then users can call this function to continue receive data
+//!         from slave. Users call also can xI2CMasterStop() to terminate
+//!         this transmition and release the I2C bus.
 //!
-//! If bEndTransmition is xtrue, the receive operation will followed by an
-//! negative ACK and STOP condition.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! Users can call xI2CMasterBusy() to check if all the bus transmition
-//! complete, then call xI2CMasterError() to check if any error occurs. Then user
-//! can get the data by calling xI2CMasterDataGet() if there is no error occurs.
-//!
-//! Then users can call this function to continue receive data from slave.
-//! Users call also can xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
-//!
-//! For this function returns immediately, it is always using in the interrupt
-//! hander.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP condition and
+//!              terminate this transmition.
 //!
 //! \return None.
+//!
+//! \note   For this function returns immediately, it is always using in the
+//!         interrupt hander.
 //
 //*****************************************************************************
 #define xI2CMasterReadRequestS2(ulBase, bEndTransmition)                      \
-        I2CMasterReadRequestS2(ulBase, bEndTransmition)
+         I2CMasterReadRequestS2(ulBase, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Send a master data receive request with an NACK when the master have
-//! obtained control of the bus(Write Step2).
+//! \brief  Send a master data receive request with an NACK when the master have
+//!         obtained control of the bus(Write Step2).
 //!
-//! \param ulBase is the base address of the I2C Master module.
+//!         This function is used to request the last data to receive, and
+//!         signal the end of the transfer to the slave transmitter. Then
+//!         the master can repeat START condition, switch to transmit or
+//!         other slaves without lost control of the bus.
+//!         
+//!         Users can call xI2CMasterBusy() to check if all the bus
+//!         transmition complete, then call xI2CMasterError() to check
+//!         if any error occurs. Then user can get the data by calling
+//!         xI2CMasterDataGet() if there is no error occurs.
+//!         
+//!         Users call also can xI2CMasterStop() to terminate this
+//!         transmition and release the I2C bus.
 //!
-//! This function is used to request the last data to receive, and signal the
-//! end of the transfer to the slave transmitter. Then the master can repeat
-//! START condition, switch to transmit or other slaves without lost control
-//! of the bus.
-//!
-//! Users can call xI2CMasterBusy() to check if all the bus transmition
-//! complete, then call xI2CMasterError() to check if any error occurs. Then user
-//! can get the data by calling xI2CMasterDataGet() if there is no error occurs.
-//!
-//! Users call also can xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
-//!
-//! For this function returns immediately, it is always using in the interrupt
-//! handler.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
 //! \return None.
+//!
+//! \note   For this function returns immediately, it is always using in
+//!         the interrupt handler.
 //
 //*****************************************************************************
 #define xI2CMasterReadLastRequestS2(ulBase)                                   \
-        I2CMasterReadLastRequestS2(ulBase)
+         I2CMasterReadLastRequestS2(ulBase)
 
 
 //*****************************************************************************
 //
-//! \brief Read a data from a slave when the bus is idle, and waiting for all
-//! bus transmiton complete.(Read Step1)
+//! \brief  Read a data from a slave when the bus is idle, and waiting for all
+//!         bus transmiton complete.(Read Step1)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucSlaveAddr is the 7-bit slave address.
-//! \param pucData is the buffer where to save the data.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         This function init a new receive transmition. When the master have
+//!         not obtained control of the bus, This function send request to
+//!         transmit the START condition, the slave address and the data
+//!         request, then waiting for all bus transmition complete.
+//!         
+//!         If bEndTransmition is xtrue, the receive operation will followed
+//!         by an negative ACK and STOP condition.
+//!         
+//!         After the master obtained control of the bus, and haven't release
+//!         it, users can call xI2CMasterReadS2() to continue receive data
+//!         from slave.  Users call also can xI2CMasterStop() to terminate
+//!         this transmition and release the I2C bus.
 //!
-//! This function init a new receive transmition. When the master have not obtained
-//! control of the bus, This function send request to transmit the START
-//! condition, the slave address and the data request, then waiting for all bus
-//! transmition complete.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! If bEndTransmition is xtrue, the receive operation will followed by an
-//! negative ACK and STOP condition.
-//!
-//! Users can then check the return value to see if any error occurs:
-//! - \ref xI2C_MASTER_ERR_NONE     - \b 0, no error
-//! - \ref xI2C_MASTER_ERR_ADDR_ACK - The transmitted address was not acknowledged
-//! - \ref xI2C_MASTER_ERR_DATA_ACK - The transmitted data was not acknowledged
-//! - \ref xI2C_MASTER_ERR_ARB_LOST - The I2C controller lost arbitration.
-//!
-//! After the master obtained control of the bus, and haven't release it, users
-//! can call xI2CMasterReadS2() to continue receive data from slave.
-//! Users call also can xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
-//!
-//! This function is usually used in thread mode.
+//! \param  [in] ucSlaveAddr is the 7-bit slave address.
+//! \param  [in] pucData is the buffer where to save the data.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP
+//!              condition and terminate this transmition.
 //!
 //! \return Returns the master error status.
+//!
+//! \note   This function is usually used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterReadS1(ulBase, ucSlaveAddr, pucData, bEndTransmition)       \
-        I2CMasterReadS1(ulBase, ucSlaveAddr, pucData, bEndTransmition)
+         I2CMasterReadS1(ulBase, ucSlaveAddr, pucData, bEndTransmition)
 
 //*****************************************************************************
 //
-//! \brief Read a data from a slave when the master have obtained control of
-//! the bus, and waiting for all bus transmiton complete.(Read Step2)
+//! \brief  Read a data from a slave when the master have obtained control of
+//!         the bus, and waiting for all bus transmiton complete.(Read Step2)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param pucData is the buffer where to save the data.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         After the master obtained control of the bus(have called
+//!         xI2CMasterReadS1() without any error), and haven't release
+//!         it, users can call this function to continue receive data
+//!         from the slave.
+//!         
+//!         If bEndTransmition is xtrue, the receive operation will
+//!         followed by an negative ACK and STOP condition.
+//!         
+//!         Then useres can call this function to continue receive
+//!         data from slave.  Users call also can xI2CMasterStop()
+//!         to terminate this transmition and release the I2C bus.
 //!
-//! After the master obtained control of the bus(have called
-//! xI2CMasterReadS1() without any error), and haven't release it, users can
-//! call this function to continue receive data from the slave.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! If bEndTransmition is xtrue, the receive operation will followed by an
-//! negative ACK and STOP condition.
+//! \param  [in] pucData is the buffer where to save the data.
+//! \param  [in] bEndTransmition is flag to control if transmit the STOP
+//!              condition and terminate this transmition.
 //!
-//! It will be waiting for all bus transmition complete before return.
-//! Users can then check the return value to see if any error occurs:
-//! - \ref xI2C_MASTER_ERR_NONE     - \b 0, no error
-//! - \ref xI2C_MASTER_ERR_ADDR_ACK - The transmitted address was not acknowledged
-//! - \ref xI2C_MASTER_ERR_DATA_ACK - The transmitted data was not acknowledged
-//! - \ref xI2C_MASTER_ERR_ARB_LOST - The I2C controller lost arbitration.
-//!
-//! Then useres can call this function to continue receive data from slave.
-//! Users call also can xI2CMasterStop() to terminate this transmition and
-//! release the I2C bus.
-//!
-//! This function is usually used in thread mode.
 //!
 //! \return Returns the master error status.
+//! \note   This function is usually used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterReadS2(ulBase, pucData, bEndTransmition)                    \
-        I2CMasterReadS2(ulBase, pucData, bEndTransmition)
+         I2CMasterReadS2(ulBase, pucData, bEndTransmition)
 
 //*****************************************************************************
 //
 //! \brief Read some data from a slave when the bus is idle, and waiting for all
-//! bus transmiton complete.(Read Buffer Step1)
+//!        bus transmiton complete.(Read Buffer Step1)
+//! 
+//!        This function init a new data buffer receive transmition. When the
+//!        master have not obtained control of the bus, This function send request
+//!        to transmit the START condition, the slave address and the data request,
+//!        then waiting for the data transmition complete, and continue next data
+//!        transmition, until all complete. If there is any error occurs, the remain
+//!        data will be canceled.
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucSlaveAddr is the 7-bit slave address.
-//! \param pucDataBuf is the buffer where to save the data.
-//! \param ulLen is the data number to receive.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!        If bEndTransmition is xtrue, the receive operation will followed by an
+//!        negative ACK and STOP condition.
 //!
-//! This function init a new data buffer receive transmition. When the master
-//! have not obtained control of the bus, This function send request to transmit
-//! the START condition, the slave address and the data request, then waiting for
-//! the data transmition complete, and continue next data transmition, until all
-//! complete. If there is any error occurs, the remain data will be canceled.
+//!        Users can then check the return value to see how many datas have been
+//!        successfully received. if the number != ulLen, user can call
+//!        xI2CMasterError() to see what error occurs.
 //!
-//! If bEndTransmition is xtrue, the receive operation will followed by an
-//! negative ACK and STOP condition.
+//!        After the master obtained control of the bus, and haven't release it,
+//!        users can call xI2CMasterReadS2() or xI2CMasterReadBufS2() to continue
+//!        receive data .  from slave .Users call also can xI2CMasterStop() to
+//!        terminate this transmition and release the I2C bus.
 //!
-//! Users can then check the return value to see how many datas have been
-//! successfully received. if the number != ulLen, user can call
-//! xI2CMasterError() to see what error occurs.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! After the master obtained control of the bus, and haven't release it, users
-//! can call xI2CMasterReadS2() or xI2CMasterReadBufS2() to continue receive data .
-//! from slave .Users call also can xI2CMasterStop() to terminate this transmition
-//! and release the I2C bus.
+//! \param  [out] ucSlaveAddr is the 7-bit slave address.
 //!
-//! This function is usually used in thread mode.
+//! \param  [in]  pucDataBuf is the buffer where to save the data.
+//!
+//! \param  [in]  ulLen is the data number to receive.
+//!
+//! \param  [in]  bEndTransmition is flag to control if transmit the STOP condition
+//!               and terminate this transmition. this value can be one fo the following
+//!               value: \ref xtrue, \ref xflase.
 //!
 //! \return Returns the data number that have been successully received.
+//!
+//! \note   This function is usually used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterReadBufS1(ulBase, ucSlaveAddr, pucDataBuf, ulLen, bEndTransmition) \
-        I2CMasterReadBufS1(ulBase, ucSlaveAddr, pucDataBuf, ulLen, bEndTransmition)
+         I2CMasterReadBufS1(ulBase, ucSlaveAddr, pucDataBuf, ulLen, bEndTransmition)
 
 
 //*****************************************************************************
 //
-//! \brief Read some data from a slave when the master have obtained control of
-//! the bus, and waiting for all bus transmiton complete.(Write Buffer Step2)
+//! \brief  Read some data from a slave when the master have obtained control of
+//!         the bus,and waiting for all bus transmiton complete.(Write Buffer Step2)
 //!
-//! \param ulBase is the base address of the I2C Master module.
-//! \param ucSlaveAddr is the 7-bit slave address.
-//! \param pucDataBuf is the buffer where to save the data.
-//! \param ulLen is the data number to receive.
-//! \param bEndTransmition is flag to control if transmit the STOP condition and
-//! terminate this transmition.
+//!         After the master obtained control of the bus(have called
+//!         xI2CMasterReadS1() or xI2CMasterReadBufS1() without any error), and haven't
+//!         release it, users can call this function to continue receive data from slave.
 //!
-//! After the master obtained control of the bus(have called
-//! xI2CMasterReadS1() or xI2CMasterReadBufS1() without any error), and haven't
-//! release it, users can call this function to continue receive data from slave.
+//!         This function receive data one by one from the slave, waiting for every
+//!         data transmition complete, and continue next data transmition, until all
+//!         complete. If there is any error occurs, the remain data will be canceled.
 //!
-//! This function receive data one by one from the slave, waiting for every
-//! data transmition complete, and continue next data transmition, until all
-//! complete. If there is any error occurs, the remain data will be canceled.
+//!         If bEndTransmition is xtrue, the receive operation will followed by an
+//!         negative ACK and STOP condition.
 //!
-//! If bEndTransmition is xtrue, the receive operation will followed by an
-//! negative ACK and STOP condition.
+//!         Users can then check the return value to see how many datas have been
+//!         successfully received. if the number != ulLen, user can call
+//!         xI2CMasterError() to see what error occurs.
 //!
-//! Users can then check the return value to see how many datas have been
-//! successfully received. if the number != ulLen, user can call
-//! xI2CMasterError() to see what error occurs.
+//!         After the master obtained control of the bus, and haven't release it, users
+//!         can call xI2CMasterReadS2() or xI2CMasterReadBufS2() to continue receive data
+//!         from slave. Users call also can xI2CMasterStop() to terminate this transmition
+//!         and release the I2C bus.
 //!
-//! After the master obtained control of the bus, and haven't release it, users
-//! can call xI2CMasterReadS2() or xI2CMasterReadBufS2() to continue receive data
-//! from slave. Users call also can xI2CMasterStop() to terminate this transmition
-//! and release the I2C bus.
+//! \param  [in] ulBase is the I2C module base address.
+//!              \ref xI2C0_BASE
+//!              \ref xI2C1_BASE
+//!              \ref xI2C2_BASE
 //!
-//! This function is usually used in thread mode.
+//! \param  [out] pucDataBuf is the buffer where to save the data.
+//!
+//! \param  [in]  ulLen is the data number to receive.
+//!
+//! \param  [in]  bEndTransmition is flag to control if transmit the STOP condition
+//!               and terminate this transmition. this value can be one fo the following
+//!               value: \ref xtrue, \ref xflase.
 //!
 //! \return Returns the data number that have been successully received.
+//!
+//! \note   This function is usually used in thread mode.
 //
 //*****************************************************************************
 #define xI2CMasterReadBufS2(ulBase, pucDataBuf, ulLen, bEndTransmition)       \
-        I2CMasterReadBufS2(ulBase, pucDataBuf, ulLen, bEndTransmition)
-
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
+         I2CMasterReadBufS2(ulBase, pucDataBuf, ulLen, bEndTransmition)
 
 //*****************************************************************************
 //
@@ -1171,10 +1220,12 @@
 //
 //*****************************************************************************
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-
-
-            
 #define I2C_GENERAL_CALL_EN     BIT_32_0
 #define I2C_GENERAL_CALL_DIS    BIT_32_1
             
@@ -1284,7 +1335,6 @@
 
 //! Last data byte in I2DAT has been transmitted (AA = 0); ACK has been received
 #define I2C_STAT_S_TX_LAST_DAT_ACK            ((unsigned long) 0xC8)
-
 
 extern unsigned long I2CIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback);
 extern void I2CMasterInit(unsigned long ulBase, unsigned long TargetClk);
