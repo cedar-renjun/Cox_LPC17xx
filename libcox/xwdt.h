@@ -5,7 +5,7 @@
 //! \version V2.2.1.0
 //! \date 6/14/2012
 //! \author CooCox
-//! \copy
+//! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
 //! All rights reserved.

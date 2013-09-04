@@ -5,33 +5,33 @@
 //! \version V2.2.1.0
 //! \date 6/1/2012
 //! \author CooCox
-//! \copy
+//! \copyright
 //!
-//! Copyright (c)  2011, CooCox 
+//! Copyright (c)  2011, CooCox
 //! All rights reserved.
-//! 
-//! Redistribution and use in source and binary forms, with or without 
-//! modification, are permitted provided that the following conditions 
-//! are met: 
-//!     * Redistributions of source code must retain the above copyright 
-//! notice, this list of conditions and the following disclaimer. 
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!     * Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
 //! notice, this list of conditions and the following disclaimer in the
-//! documentation and/or other materials provided with the distribution. 
-//!     * Neither the name of the <ORGANIZATION> nor the names of its 
-//! contributors may be used to endorse or promote products derived 
-//! from this software without specific prior written permission. 
-//! 
+//! documentation and/or other materials provided with the distribution.
+//!     * Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
 //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
 //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 //! THE POSSIBILITY OF SUCH DAMAGE.
 //
 //*****************************************************************************
@@ -102,22 +102,16 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xADC_Ints xADC Interrupt Source
-//!
 //!             They can be passed to xADCIntEnable(), xADCIntDisable() as the
 //!             ulIntFlags parameter to enable/disable the corresponding interrupt.
 //!
 //! \section    xADC_Ints_Sec_Port CoX Port Details
 //!
-//! \verbatim
-//!     +-------------------------+----------------+------------------+
 //!     | xADC Interrupt Source   |       CoX      |     LPC17xx      |
 //!     |-------------------------|----------------|------------------|
 //!     | xADC_INT_END_CONVERSION |    Mandatory   |         Y        |
-//!     |-------------------------|----------------|------------------|
 //!     | xADC_INT_COMP           |  Non-Mandatory |         N        |
-//!     |-------------------------|----------------|------------------|
-//! \endverbatim
-//!    
+//!
 //! @{
 //
 //*****************************************************************************
@@ -140,17 +134,12 @@ extern "C"
 //!
 //!             Users use the event ID in the interrupt callback function
 //!             (\ref xtEventCallback) as \b ulEvent parameter to determine
-//!             which interrupt event occurs. 
+//!             which interrupt event occurs.
 //!
-//! \verbatim
-//!     +---------------------------+---------------+---------------------+
 //!     | xADC Event                |      CoX      |     LPC17xx         |
 //!     |---------------------------|---------------|---------------------|
 //!     | xADC_EVENT_END_CONVERSION |   Mandatory   |         Y           |
-//!     |---------------------------|---------------|---------------------|
 //!     | xADC_EVENT_COMPx          | Non-Mandatory |         N           |
-//!     |---------------------------|---------------|---------------------|
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -159,7 +148,7 @@ extern "C"
 //! The adc conversion end event
 //
 #define xADC_EVENT_END_CONVERSION      BIT_32_0
-                               
+
 
 //*****************************************************************************
 //
@@ -177,15 +166,10 @@ extern "C"
 //!             to configure the ADC.
 //!
 //! \section    xADC_Mode_Sec_Port CoX Port Details
-//! \verbatim
-//! +-----------------------------+---------------+-------------------+
 //! | xADC Mode                   |      CoX      |      LPC17xx      |
 //! |-----------------------------|---------------|-------------------|
 //! | xADC_MODE_SCAN_SINGLE_CYCLE |   Mandatory   |         Y         |
-//! |-----------------------------|---------------|-------------------|
 //! | xADC_MODE_SCAN_CONTINUOUS   | Non-Mandatory |         Y         |
-//! |-----------------------------|---------------|-------------------|
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -199,7 +183,7 @@ extern "C"
 //! Continuous scan mode.
 //
 #define xADC_MODE_SCAN_CONTINUOUS      BIT_32_1
-                               
+
 //*****************************************************************************
 //
 //! @}
@@ -215,15 +199,10 @@ extern "C"
 //!             Can be passed to xADCConfigure() as the ulTrigger parameter to
 //!             configure the ADC.
 //!
-//! \verbatim
-//! +-----------------------------+----------------+---------------------------+
 //! | xADC Trigger Source         |       CoX      |        LPC17xx            |
 //! |-----------------------------|----------------|---------------------------|
 //! | xADC_TRIGGER_PROCESSOR      |    Mandatory   |            Y              |
-//! |-----------------------------|----------------|---------------------------|
 //! | xADC_TRIGGER_EXT_$ShortPin$ |  Non-Mandatory |  xADC_TRIGGER_EXT_n       |
-//! |-----------------------------|----------------|---------------------------|
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -280,21 +259,13 @@ extern "C"
 //!
 //! \section    xADC_EXT_Trigger_Mode_Sec_Port CoX Port Details
 //!
-//! \verbatim
-//! +-------------------------------+----------------+------------------+
 //! | xADC Ext Trigger Mode         |       CoX      |     LPC17xx      |
 //! |-------------------------------|----------------|------------------|
 //! | xADC_TRIGGER_EXT_LOW_LEVEL    |  Non-Mandatory |         N        |
-//! |-------------------------------|----------------|------------------|
 //! | xADC_TRIGGER_EXT_HIGH_LEVEL   |  Non-Mandatory |         N        |
-//! |-------------------------------|----------------|------------------|
 //! | xADC_TRIGGER_EXT_RISING_EDGE  |  Non-Mandatory |         Y        |
-//! |-------------------------------|----------------|------------------|
 //! | xADC_TRIGGER_EXT_FALLING_EDGE |  Non-Mandatory |         Y        |
-//! |-------------------------------|----------------|------------------|
 //! | xADC_TRIGGER_EXT_BOTH_EDGE    |  Non-Mandatory |         N        |
-//! |-------------------------------|----------------|------------------|
-//! \endverbatim 
 //! @{
 //
 //*****************************************************************************
@@ -303,7 +274,7 @@ extern "C"
 //! EXT Tigger is rising edge.
 //
 #define xADC_TRIGGER_EXT_RISING_EDGE   BIT_32_0
-                            
+
 //
 //! EXT Tigger is falling edge.
 //
@@ -320,48 +291,30 @@ extern "C"
 //! \addtogroup xADC_Step_Config xADC Step Config
 //! \brief      ADC step config values, such as single-end / difference,
 //!             channel source.
-//!
 //!             They are can be passed to the xADCStepConfigure() as the ulConfig
 //!             parameter.
-//! 
+//!
 //! \section    xADC_Step_Config_Sec_Divide xADC Step Config Divide
 //!             The Step Config value is an logic OR type of the following config:
 //!
 //!             - Channel source select
-//!               like \b xADC_CTL_$CHx$, such as \ref xADC_CTL_CH0.  
-//!               Or \ref xADC_CTL_TS to select the temperature sensor.
-//!
-//!             - Comparator select to monitor the convertion value
-//!               like \b xADC_CTL_$CMPx$, such as \ref xADC_CTL_CMP0.
-//!
-//!             - single-end/difference input mode
-//!               \b xADC_CTL_D shows difference input mode, and 0 shows single-end mode.
+//!               like \ref xADC_CTL_CHx, such as \ref xADC_CTL_CH0.
 //!
 //!             - \ref xADC_CTL_END shows this is the end step.
-//! .
+//!
 //! \section xADC_Step_Config_Sec_Port CoX Port Details.
-//! \verbatim
-//! +-------------------+-----------------+-----------------------+
-//! |  xADC Step Config |       CoX       |        LPC17xx        |
-//! |-------------------|-----------------|-----------------------|
-//! |  xADC_CTL_CH$x$   |  Non-Mandatory  |     xADC_CTL_CH0      |
-//! |                   |                 |     xADC_CTL_CH1      |
-//! |                   |                 |     xADC_CTL_CH2      |
-//! |                   |                 |     xADC_CTL_CH3      |
-//! |                   |                 |     xADC_CTL_CH4      |
-//! |                   |                 |     xADC_CTL_CH5      |
-//! |                   |                 |     xADC_CTL_CH6      |
-//! |                   |                 |     xADC_CTL_CH7      |
-//! |-------------------|-----------------|-----------------------|
-//! |  xADC_CTL_TS      |  Non-Mandatory  |           N           |
-//! |-------------------|-----------------|-----------------------|
-//! |  xADC_CTL_CMP$x$  |  Non-Mandatory  |           N           |
-//! |-------------------|-----------------|-----------------------|
-//! |  xADC_CTL_D       |  Non-Mandatory  |           N           |
-//! |-------------------|-----------------|-----------------------|
-//! |  xADC_CTL_END     |  Non-Mandatory  |           N           |
-//! |-------------------|-----------------|-----------------------|
-//! \endverbatim
+//!
+//! |      xADC Step Config |       CoX       |        LPC17xx        |
+//! |-----------------------|-----------------|-----------------------|
+//! | \ref xADC_CTL_CHx     |  Non-Mandatory  |     xADC_CTL_CH0      |
+//! |                       |                 |     xADC_CTL_CH1      |
+//! |                       |                 |     xADC_CTL_CH2      |
+//! |                       |                 |     xADC_CTL_CH3      |
+//! |                       |                 |     xADC_CTL_CH4      |
+//! |                       |                 |     xADC_CTL_CH5      |
+//! |                       |                 |     xADC_CTL_CH6      |
+//! |                       |                 |     xADC_CTL_CH7      |
+//! | \ref xADC_CTL_END     |  Non-Mandatory  |           N           |
 //! @{
 //
 //*****************************************************************************
@@ -374,7 +327,7 @@ extern "C"
 //
 //! Input channel 1
 //
-#define xADC_CTL_CH1                   ADC_CH_0        
+#define xADC_CTL_CH1                   ADC_CH_0
 
 //
 //! Input channel 2
@@ -418,33 +371,19 @@ extern "C"
 //! \brief      xADC API Reference
 //!
 //! \section xADC_Exported_APIs_Port CoX Port Details
-//! \verbatim
-//! +--------------------------+----------------+------------------+
-//! |  xADC API                |       CoX      |     LPC17xx      |
-//! |--------------------------|----------------|------------------|
-//! |  xADCConfigure           |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCStepConfigure       |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCIntCallbackInit     |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCIntEnable           |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCIntDisable          |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCEnable              |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCDisable             |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCProcessorTrigger    |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCDataGet             |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCOverflow            |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! |  xADCOverflowClear       |    Mandatory   |         Y        |
-//! |--------------------------|----------------|------------------|
-//! \endverbatim
+//! |       xADC API                |       CoX      |     LPC17xx      |
+//! |-------------------------------|----------------|------------------|
+//! |  \ref xADCConfigure           |    Mandatory   |         Y        |
+//! |  \ref xADCStepConfigure       |    Mandatory   |         Y        |
+//! |  \ref xADCIntCallbackInit     |    Mandatory   |         Y        |
+//! |  \ref xADCIntEnable           |    Mandatory   |         Y        |
+//! |  \ref xADCIntDisable          |    Mandatory   |         Y        |
+//! |  \ref xADCEnable              |    Mandatory   |         Y        |
+//! |  \ref xADCDisable             |    Mandatory   |         Y        |
+//! |  \ref xADCProcessorTrigger    |    Mandatory   |         Y        |
+//! |  \ref xADCDataGet             |    Mandatory   |         Y        |
+//! |  \ref xADCOverflow            |    Mandatory   |         Y        |
+//! |  \ref xADCOverflowClear       |    Mandatory   |         Y        |
 //! @{
 //
 //*****************************************************************************
@@ -452,27 +391,27 @@ extern "C"
 //*****************************************************************************
 //
 //! \brief  Configure ADC Module.
-//!         
+//!
 //!         This function configures ADC convert mode(single/continue scan mode)
 //!         and triggle mode(soft/hardware triggler).
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
 //!              This value must be
-//!              \ref xADC0_BASE.
+//!              - \ref xADC0_BASE.
 //!
 //! \param  [in] ulMode is ADC scan mode, can be one of the following value:
-//!              \ref xADC_MODE_SCAN_SINGLE_CYCLE
-//!              \ref xADC_MODE_SCAN_CONTINUOUS
+//!              - \ref xADC_MODE_SCAN_SINGLE_CYCLE
+//!              - \ref xADC_MODE_SCAN_CONTINUOUS
 //!
 //! \param  [in] ulTrigger is ADC triggle source select. For LPC17xx, it can be
 //!              one of the following value:
-//!              \ref xADC_TRIGGER_PROCESSOR         
-//!              \ref xADC_TRIGGER_EXT_EINT0        
-//!              \ref xADC_TRIGGER_EXT_CAP01       
-//!              \ref xADC_TRIGGER_EXT_MAT01      
-//!              \ref xADC_TRIGGER_EXT_MAT03     
-//!              \ref xADC_TRIGGER_EXT_MAT10    
-//!              \ref xADC_TRIGGER_EXT_MAT11   
+//!              - \ref xADC_TRIGGER_PROCESSOR
+//!              - \ref xADC_TRIGGER_EXT_EINT0
+//!              - \ref xADC_TRIGGER_EXT_CAP01
+//!              - \ref xADC_TRIGGER_EXT_MAT01
+//!              - \ref xADC_TRIGGER_EXT_MAT03
+//!              - \ref xADC_TRIGGER_EXT_MAT10
+//!              - \ref xADC_TRIGGER_EXT_MAT11
 //!
 //! \return None.
 //!
@@ -486,10 +425,11 @@ extern "C"
 //
 //! \brief  Configure ADC convert array.
 //!
-//!         This function is used to fill 
+//!         This function is used to fill
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \param  [in] ulStep is the ID of ADC converter channel array, which can be
 //!              used in continue convert mode.
@@ -497,29 +437,33 @@ extern "C"
 //!
 //! \param  [in] ulConfig is ADC channerl source, which can be one of the
 //!              following value:
-//!              \ref xADC_CTL_CH0
-//!              \ref xADC_CTL_CH1
-//!              \ref xADC_CTL_CH2
-//!              \ref xADC_CTL_CH3
-//!              \ref xADC_CTL_CH4
-//!              \ref xADC_CTL_CH5
-//!              \ref xADC_CTL_CH6
-//!              \ref xADC_CTL_CH7
+//!              - \ref xADC_CTL_CH0
+//!              - \ref xADC_CTL_CH1
+//!              - \ref xADC_CTL_CH2
+//!              - \ref xADC_CTL_CH3
+//!              - \ref xADC_CTL_CH4
+//!              - \ref xADC_CTL_CH5
+//!              - \ref xADC_CTL_CH6
+//!              - \ref xADC_CTL_CH7
 //!
 //! \return None.
 //!
 //! \note   For LPC17xx, The relationship between ADC Convert array is fixed.
-//!             Array[0] --> xADC_CTL_CH0
-//!             Array[1] --> xADC_CTL_CH1
-//!             ...
-//!             Array[7] --> xADC_CTL_CH7
+//! \note
+//!             Array ID  |  ADC Channel
+//!             ----------|--------------
+//!             Array[0]  |  xADC_CTL_CH0
+//!             Array[1]  |  xADC_CTL_CH1
+//!             ...       |  ...
+//!             Array[7]  |  xADC_CTL_CH7
+//! \note
 //!         so, you can use this function to configure ADC continue scan mode
 //!         or single sample mode.
 //!         for example:
-//!         ---------------------------------------------------------------
-//!         | Correct --> xADCStepConfigure(xADC0_BASE, 0, xADC_CTL_CH0); |
-//!         | Wrong   --> xADCStepConfigure(xADC0_BASE, 1, xADC_CTL_CH0); |
-//!         ---------------------------------------------------------------
+//!         Status   |  Configure Function
+//!         ---------|-----------------------------------------------
+//!         Correct  |  xADCStepConfigure(xADC0_BASE, 0, xADC_CTL_CH0)
+//!         Wrong    |  xADCStepConfigure(xADC0_BASE, 1, xADC_CTL_CH0)
 //
 //*****************************************************************************
 #define xADCStepConfigure(ulBase, ulStep, ulConfig)                           \
@@ -530,13 +474,14 @@ extern "C"
 //! \brief  Register user interrupt callback function for the ADC timer.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \param  [in] xtPortCallback is callback for the Analog digital converter.
 //!
 //! \return None.
 //
-//*****************************************************************************     
+//*****************************************************************************
 #define xADCIntCallbackInit(ulBase, xtPortCallback)                           \
          ADCIntCallbackInit(ulBase, xtPortCallback)
 
@@ -548,10 +493,12 @@ extern "C"
 //!         sources have no effect on the processor.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \param  [in] ulIntFlags is the bit mask of the interrupt sources to be enabled.
-//!              This \ref xADC_INT_END_CONVERSION
+//!              This vale must be
+//!              - \ref xADC_INT_END_CONVERSION
 //!
 //! \return None.
 //
@@ -565,7 +512,8 @@ extern "C"
 //!         This function disables the requested ADC interrupts.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \param  ulIntFlags is the interrupt flags.
 //!
@@ -581,8 +529,8 @@ extern "C"
 //!         Allows the specified sample sequence to be captured when its trigger
 //!         is detected. A sample sequence must be configured before it is enabled.
 //!
-//! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//! \param  [in] ulBase is the base address of the ADC module. This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \return None.
 //
@@ -595,8 +543,8 @@ extern void xADCEnable(unsigned long ulBase);
 //!         Prevents the sample sequence from being captured when its trigger is
 //!         detected. The sample sequence should be disabled before it is configured.
 //!
-//! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//! \param  [in] ulBase is the base address of the ADC module. This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \return None.
 //
@@ -608,22 +556,17 @@ extern void xADCEnable(unsigned long ulBase);
 //
 //! \brief  Cause a processor trigger for a sample sequence.
 //!         This function triggers a processor-initiated sample sequence if the
-//!         sample sequence trigger is configured to \b xADC_TRIGGER_PROCESSOR. 
+//!         sample sequence trigger is configured to \b xADC_TRIGGER_PROCESSOR.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \return None.
 //
 //*****************************************************************************
 #define xADCProcessorTrigger(ulBase)                                          \
         xADCEnable(ulBase)
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
 
 //*****************************************************************************
 //
@@ -637,8 +580,8 @@ extern void xADCEnable(unsigned long ulBase);
 //!         which may not be the entire sample sequence if it is in the
 //!         process of being executed.
 //!
-//! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//! \param  [in] ulBase is the base address of the ADC module.  This value must be
+//!              - \ref xADC0_BASE.
 //!
 //! \param  [in] pulBuffer is the address where the data is stored.
 //!
@@ -657,33 +600,67 @@ extern unsigned long xADCDataGet(unsigned long ulBase, unsigned long * pulBuffer
 
 //*****************************************************************************
 //
-//! \addtogroup  LPC17xx _ADC
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup  LPC17xx_ADC
 //! @{
 //
 //*****************************************************************************
 
-
 //*****************************************************************************
 //
-//! \addtogroup  LPC17xx _ADC_Dual_Type  LPC17xx  Dual ADC Mode
-//! \brief Values that show the Dual ADC Mode.
+//! \addtogroup  LPC17xx_ADC_Channel  LPC17xx ADC channel ID
+//! \brief       ADC channel ID can be used as ulChs parameters in APIs.
 //! @{
 //
 //*****************************************************************************
 
-
-//! \todo wait to comment this macros
-//! Note by cedar
-
+//! ADC channel mask code.
 #define ADC_CH_M                       BIT_MASK(32, 6, 0)
 
+//! ADC channel 0
 #define ADC_CH_0                       BIT_32_0
+
+//! ADC channel 1
 #define ADC_CH_1                       BIT_32_1
+
+//! ADC channel 2
 #define ADC_CH_2                       BIT_32_2
+
+//! ADC channel 3
 #define ADC_CH_3                       BIT_32_3
+
+//! ADC channel 4
 #define ADC_CH_4                       BIT_32_4
+
+//! ADC channel 5
 #define ADC_CH_5                       BIT_32_5
+
+//! ADC channel 6
 #define ADC_CH_6                       BIT_32_6
+
+//! ADC channel 7
+#define ADC_CH_7                       BIT_32_7
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
+//*****************************************************************************
+//
+//! \addtogroup  LPC17xx_ADC_Convert_Mode LPC17xx ADC Convert Mode.
+//! \brief       Configure ADC convert mode, can be used as ulMode parameter
+//!              in ADCStart function.
+//! @{
+//
+//*****************************************************************************
 
 //! Start burst mode
 #define ADC_START_MODE_BURST           CR_BURST
@@ -692,29 +669,22 @@ extern unsigned long xADCDataGet(unsigned long ulBase, unsigned long * pulBuffer
 #define ADC_START_MODE_NOW             CR_START_NOW
 
 //! Start conversion when the edge selected by bit 27 occurs on P2.10/EINT0
-#define ADC_START_MODE_EINT0           CR_START_EINT0             
+#define ADC_START_MODE_EINT0           CR_START_EINT0
 
 //! Start conversion when the edge selected by bit 27 occurs on P1.27/CAP0.1
-#define ADC_START_MODE_CAP01           CR_START_CAP01             
+#define ADC_START_MODE_CAP01           CR_START_CAP01
 
 //! Start conversion when the edge selected by bit 27 occurs on MAT0.1
-#define ADC_START_MODE_MAT01           CR_START_MAT01             
+#define ADC_START_MODE_MAT01           CR_START_MAT01
 
 //! Start conversion when the edge selected by bit 27 occurs on MAT0.3
-#define ADC_START_MODE_MAT03           CR_START_MAT03             
+#define ADC_START_MODE_MAT03           CR_START_MAT03
 
 //! Start conversion when the edge selected by bit 27 occurs on MAT1.0
-#define ADC_START_MODE_MAT10           CR_START_MAT10             
+#define ADC_START_MODE_MAT10           CR_START_MAT10
 
 //! Start conversion when the edge selected by bit 27 occurs on MAT1.1
-#define ADC_START_MODE_MAT11           CR_START_MAT11             
-
-//! ADC channel convert done
-#define ADC_DONE                       BIT_32_0
-
-//! ADC channel convert overrun
-#define ADC_OVERRUN                    BIT_32_1
-
+#define ADC_START_MODE_MAT11           CR_START_MAT11
 
 //*****************************************************************************
 //
@@ -724,21 +694,38 @@ extern unsigned long xADCDataGet(unsigned long ulBase, unsigned long * pulBuffer
 
 //*****************************************************************************
 //
-//! \addtogroup  LPC17xx _ADC_Exported_APIs  LPC17xx  ADC API
-//! \brief  LPC17xx  ADC API Reference
+//! \addtogroup  LPC17xx_ADC_Status_Flag LPC17xx convert status flag.
+//! \brief       LPC17xx ADC convet channel status flag, can be used to check
+//!              Done/Overrun flag.
+//! @{
+//
+//*****************************************************************************
+
+//! ADC channel convert done flag.
+#define ADC_DONE                       BIT_32_0
+
+//! ADC channel convert overrun flag.
+#define ADC_OVERRUN                    BIT_32_1
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup  LPC17xx_ADC_Exported_APIs  LPC17xx ADC APIs
+//! \brief       LPC17xx ADC APIs Reference
 //! @{
 //
 //*****************************************************************************
 
 extern void ADCInit(unsigned long ulBase, unsigned long ulRate);
-
 extern void ADCStart(unsigned long ulBase, unsigned long ulChs, unsigned long ulMode);
 extern void ADCStop(unsigned long ulBase);
-//pass
 extern void ADCIntEnable(unsigned long ulBase, unsigned long ulChs);
-//pass
 extern void ADCIntDisable(unsigned long ulBase, unsigned long ulChs);
-
 extern unsigned long ADCStatusGet(unsigned long ulBase, unsigned long ulChs);
 extern xtBoolean ADCStatusCheck(unsigned long ulBase, unsigned long ulChs, unsigned long ulFlags);
 extern unsigned long ADCDataRead(unsigned long ulBase, unsigned long ulCh);

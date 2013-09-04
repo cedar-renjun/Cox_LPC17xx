@@ -5,7 +5,7 @@
 //! \version V2.2.1.0
 //! \todo Need to update time information.
 //! \author CooCox
-//! \copy
+//! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
 //! All rights reserved.
@@ -81,7 +81,6 @@ extern "C"
 //!             parameter.
 //! \n
 //! \section    xTIMER_Mode_Type_CoX 2. CoX Port Details 
-//! \verbatim
 //!     +--------------------------+----------------+------------------------+
 //!     |  xTIMER Mode             |       CoX      |         LPC17xx        |
 //!     |--------------------------|----------------|------------------------|
@@ -97,7 +96,6 @@ extern "C"
 //!     |--------------------------|----------------|------------------------|
 //!     |  xTIMER_MODE_PWM         |  Non-Mandatory |            N           |
 //!     +--------------------------+----------------+------------------------+
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************

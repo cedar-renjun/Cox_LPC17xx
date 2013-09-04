@@ -6,7 +6,7 @@
 //! \todo Update this time information.
 //! \date 12/12/2011
 //! \author CooCox
-//! \copy
+//! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
 //! All rights reserved.

@@ -5,7 +5,7 @@
 //! \version V2.2.1.0
 //! \todo Need to update time information.
 //! \author CooCox
-//! \copy
+//! \copyright
 //!
 //! Copyright (c)  2011, CooCox
 //! All rights reserved.

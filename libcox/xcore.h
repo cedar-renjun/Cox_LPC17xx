@@ -2,7 +2,6 @@
 //
 //! \file xcore.h
 //! \brief Prototypes for Cortex-M3 core function.
-//!
 //! - Prototypes for the CPU instruction wrapper functions.
 //! - Prototypes for the NVIC Interrupt Controller Driver.
 //! - Prototypes for the SysTick driver.
@@ -10,7 +9,7 @@
 //! \todo Update this time information.
 //! \date 11/20/2011
 //! \author CooCox
-//! \copy
+//! \copyright
 //!
 //! Copyright (c)  2011, CooCox
 //! All rights reserved.
@@ -85,8 +84,8 @@ extern "C"
 
 //*****************************************************************************
 //
-//! \brief Macro to generate an interrupt priority mask based on the number of bits
-//! of priority supported by the hardware.
+//! \brief Macro to generate an interrupt priority mask based on the number of
+//!        bits of priority supported by the hardware.
 //
 //*****************************************************************************
 #define xINT_PRIORITY_MASK       ((0xFF << (8 - NUM_PRIORITY_BITS)) & 0xFF)

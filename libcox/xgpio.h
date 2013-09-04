@@ -6,7 +6,7 @@
 //! \todo Update this time information.
 //! \date 11/20/2011
 //! \author CooCox
-//! \copy
+//! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
 //! All rights reserved.
@@ -82,7 +82,6 @@ extern "C"
 //!             argument must use this group.
 //! 
 //! \section    xGPIO_General_Pin_IDs_CoX 2.CoX Port Details 
-//! \verbatim
 //! +--------------------------+----------------+------------------------+
 //! |  xGPIO General Pin ID    |       CoX      |          LPC17xx       |
 //! |--------------------------|----------------|------------------------|
@@ -96,7 +95,6 @@ extern "C"
 //! |                          |                |------------------------|
 //! |                          |                |      xGPIO_PIN_31      |
 //! +--------------------------+----------------+------------------------+
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -212,7 +210,6 @@ extern "C"
 //!             parameter, and returned from xGPIODirModeGet.
 //! 
 //! \section    xGPIO_Dir_Mode_CoX 2.CoX Port Details 
-//! \verbatim
 //! +-----------------------+-----------------+------------------------+
 //! |  xGPIO Dir Mode       |       CoX       |          LPC17xx       |
 //! |-----------------------|-----------------|------------------------|
@@ -226,7 +223,6 @@ extern "C"
 //! |-----------------------|-----------------|------------------------|
 //! |  xGPIO_DIR_MODE_OD    |  Non-Mandatory  |            Y           |
 //! +-----------------------+-----------------+------------------------+
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -271,7 +267,6 @@ extern "C"
 //!             parameter, and returned from xGPIOIntTypeGet.
 //! 
 //! \section xGPIO_Int_Type_CoX 2.CoX Port Details 
-//! \verbatim
 //! +-----------------------+----------------+------------------------+
 //! |  xGPIO Int Type       |       CoX      |          LPC17xx       |
 //! |-----------------------|----------------|------------------------|
@@ -287,7 +282,6 @@ extern "C"
 //! |-----------------------|----------------|------------------------|
 //! |  xGPIO_BOTH_EDGES     |  Non-Mandatory |            Y           |
 //! |-----------------------|----------------|------------------------|
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -337,13 +331,11 @@ extern "C"
 //!             parameter.
 //! 
 //! \section    xGPIO_Pad_Config_Strength_CoX 2.CoX Port Details 
-//! \verbatim
 //! +-----------------------+----------------+------------------------+
 //! |  xGPIO Pad Strength   |       CoX      |          LPC17xx       |
 //! |-----------------------|----------------|------------------------|
 //! |  xGPIO_STRENGTH_nMA   | Non-Mandatory  |            N           |
 //! +-----------------------+----------------+------------------------+
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -555,7 +547,6 @@ extern "C"
 //!             \ref xGPIOSPinWrite()
 //! 
 //! \section    xGPIO_Short_Pin_CoX 2.CoX Port Details 
-//! \verbatim
 //! +-------------------------+----------------+------------------------+
 //! |  xGPIO Short Pin ID     |       CoX      |          LPC17xx       |
 //! |-------------------------|----------------|------------------------|
@@ -567,7 +558,6 @@ extern "C"
 //! |                         |                |------------------------|
 //! |                         |                |    PE0 PE1 ... PE31    |  
 //! +-------------------------+----------------+------------------------+
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -764,7 +754,6 @@ extern "C"
 //!             <b> ModuleName + n + PinName </b>, such as CAN0RX, SPI1CLK.
 //!
 //! \section    xGPIO_Peripheral_Pin_Port CoX Port Detail
-//! \verbatim
 //! +-------------------------+----------------+-------------------------+
 //! | General Peripheral Pin  |       CoX      |          LPC17xx        |
 //! |-------------------------|----------------|-------------------------|
@@ -844,7 +833,6 @@ extern "C"
 //! |-------------------------|----------------|-------------------------|
 //! | TIMCCPn                 |    Mandatory   |   TIMCCP0 ... TIMCCP7   |
 //! +-------------------------+----------------+-------------------------+
-//! \endverbatim
 //!  
 //! @{
 //
@@ -1081,7 +1069,6 @@ extern "C"
 //!
 //! \section    xGPIO_Exported_APIs_Port CoX Port Detail
 //!
-//! \verbatim
 //! +----------------------------+----------------+------------------------+
 //! |  xGPIO API                 |       CoX      |          LPC17xx       |
 //! |----------------------------|----------------|------------------------|
@@ -1151,7 +1138,6 @@ extern "C"
 //! |----------------------------|----------------|------------------------|
 //! |  xSPinTypeACMP             |    Mandatory   |            N           |
 //! +----------------------------+----------------+------------------------+
-//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -1618,7 +1604,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!             xSPinTypeADC(ADC0, PE6)  --> Error
 //!             xSPinTypeADC(ADC0, PE5)  --> Error
 //!
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -1651,7 +1636,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |                    |     ADC14               |     PC4 (ADC12)          |
 //! |                    |     ADC15               |     PC5 (ADC12)          |
 //! |--------------------|-------------------------|--------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
@@ -1678,7 +1662,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         xSPinTypeCAN(CAN0RX, PA5) --> Error
 //!         xSPinTypeCAN(CAN0RX, PF0) --> Error
 //!
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -1697,7 +1680,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |       LPC17xx      |     CAN0RX              |     PA11  PD0  PB8       |
 //! |                    |     CAN0TX              |     PA12  PD1  PB9       |
 //! |--------------------|-------------------------|--------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
@@ -1725,7 +1707,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!             xSPinTypeI2C(CAN0RX, PF0)   --> Error
 //!
 //!
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -1748,7 +1729,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |                    |     I2C2SDA             |     PB11                 |
 //! |                    |     I2C2SMBA            |     PB12                 |
 //! |--------------------|-------------------------|--------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
@@ -1775,7 +1755,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         xSPinTypeI2S(I2S0RXSD, PD1)  --> Error
 //!         xSPinTypeI2S(I2S0RXWS, PA2)  --> Error
 //!
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -1809,7 +1788,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |                    |     I2S3TXSD            |     PB5                  |
 //! |                    |     I2S3TXWS            |     PA15                 |
 //! |--------------------|-------------------------|--------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
@@ -1835,7 +1813,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!
 //!             xSPinTypeSPI(SPI0CLK, PA5)  --> Error
 //!             xSPinTypeSPI(SPI0CLK, PA4)  --> Error
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -1864,7 +1841,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |                    |     SPI3MISO            |     PB4                  |
 //! |                    |     SPI3CS              |     PA15                 |
 //! |--------------------|-------------------------|--------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
@@ -1890,7 +1866,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!             xSPinTypeTimer(TIMCCP0, PC5)  --> Error
 //!             xSPinTypeTimer(TIMCCP0, PB6)  --> Error
 //!
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -1917,7 +1892,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |                    |     TIM1CH4N            |                          |
 //! |                    |     TIM14CH2            |                          |
 //! |--------------------|-------------------------|--------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
@@ -1942,7 +1916,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!
 //!             xSPinTypeUART(UART0RX, PE6)  --> Error
 //!             xSPinTypeUART(UART0RX, PA1)  --> Error
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -1976,7 +1949,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |                    |     UART3TX             |     PA0   PA25  PE28     |
 //! |                    |     UART3RX             |     PA1   PA26  PE29     |
 //! |-------------------------------------------------------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
@@ -1993,7 +1965,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! \param  ePeripheralPin is the GPIO Peripheral name such as I2C0SDA. 
 //! \param eShortPin is the GPIO short pin name such as PA0. 
 //!
-//! \verbatim
 //! +--------------------+-------------------------+--------------------------+
 //! |    manufacturer    | ePeripheralPin          | eShortPin                |
 //! |--------------------|-------------------------|--------------------------|
@@ -2012,7 +1983,6 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //! |       LPC17xx      |     DACOUT1             |     PA4                  |
 //! |                    |     DACOUT2             |     PA5                  |
 //! |--------------------|-------------------------|--------------------------|
-//! \endverbatim
 //!
 //! \return None.
 //
