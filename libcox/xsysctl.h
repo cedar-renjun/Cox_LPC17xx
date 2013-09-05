@@ -1,11 +1,10 @@
 //*****************************************************************************
 //
-//! \file xsysctl.h
-//! \brief Prototypes for the System Manager Driver.
-//! \version V2.2.1.0
-//! \todo Update this time information.
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xsysctl.h
+//! \brief     Prototypes for the System Control Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox
@@ -37,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xSYSCTL_H__
-#define __xSYSCTL_H__
+#ifndef __XSYSCTL_H__
+#define __XSYSCTL_H__
 
 //*****************************************************************************
 //
@@ -1754,5 +1753,5 @@ extern xtBoolean SysCtlMCOStatusGet(void);
 }
 #endif
 
-#endif // __xSYSCTL_H__
+#endif // __XSYSCTL_H__
 

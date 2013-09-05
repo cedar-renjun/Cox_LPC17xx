@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xrtc.h
-//! \brief Prototypes for the RTC Driver.
-//! \version V2.2.1.0
-//! \date 06/01/2012
-//! \author CooCox
+//! \file      xrtc.h
+//! \brief     Prototypes for the RTC Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xRTC_H__
-#define __xRTC_H__
+#ifndef __XRTC_H__
+#define __XRTC_H__
 
 //*****************************************************************************
 //
@@ -682,7 +682,7 @@ extern void xRTCIntDisable(unsigned long ulIntType);
 
 //*****************************************************************************
 //
-//! \addtogroup LPC17xx_RTC_Exported_APIs LPC17xx API
+//! \addtogroup LPC17xx_RTC_Exported_APIs LPC17xx RTC API
 //! \brief LPC17xx RTC API Reference.
 //! @{
 //
@@ -738,5 +738,5 @@ extern unsigned long RTCIntCallbackInit(xtEventCallback pfnCallback);
 }
 #endif
 
-#endif // __xRTC_H__
+#endif // __XRTC_H__
 

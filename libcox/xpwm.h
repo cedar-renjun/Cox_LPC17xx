@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xpwm.h
-//! \brief Prototypes for the PWM Driver.
-//! \version V2.2.1.0
-//! \date 6/25/2012
-//! \author CooCox
+//! \file      xpwm.h
+//! \brief     Prototypes for the PWM Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xPWM_H__
-#define __xPWM_H__
+#ifndef __XPWM_H__
+#define __XPWM_H__
 
 //*****************************************************************************
 //
@@ -697,4 +697,4 @@ extern void PWMCapCfg(unsigned long ulBase, unsigned long ulCfg);
 }
 #endif
 
-#endif // __xPWM_H__
+#endif // __XPWM_H__

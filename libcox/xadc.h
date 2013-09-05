@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xadc.h
-//! \brief Defines and Macros for ADC API.
-//! \version V2.2.1.0
-//! \date 6/1/2012
-//! \author CooCox
+//! \file      xadc.h
+//! \brief     Defines and Macros for ADC API.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox

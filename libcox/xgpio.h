@@ -1,38 +1,37 @@
 //*****************************************************************************
 //
-//! \file xgpio.h
-//! \brief Prototypes for the GPIO Driver.
-//! \version V2.2.1.0
-//! \todo Update this time information.
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xgpio.h
+//! \brief     Prototypes for the GPIO Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
-//! Copyright (c)  2011, CooCox 
+//! Copyright (c)  2011, CooCox
 //! All rights reserved.
-//! 
-//! Redistribution and use in source and binary forms, with or without 
-//! modification, are permitted provided that the following conditions 
-//! are met: 
-//!     * Redistributions of source code must retain the above copyright 
-//! notice, this list of conditions and the following disclaimer. 
+//!
+//! Redistribution and use in source and binary forms, with or without
+//! modification, are permitted provided that the following conditions
+//! are met:
+//!     * Redistributions of source code must retain the above copyright
+//! notice, this list of conditions and the following disclaimer.
 //!     * Redistributions in binary form must reproduce the above copyright
 //! notice, this list of conditions and the following disclaimer in the
-//! documentation and/or other materials provided with the distribution. 
-//!     * Neither the name of the <ORGANIZATION> nor the names of its 
-//! contributors may be used to endorse or promote products derived 
-//! from this software without specific prior written permission. 
-//! 
+//! documentation and/or other materials provided with the distribution.
+//!     * Neither the name of the <ORGANIZATION> nor the names of its
+//! contributors may be used to endorse or promote products derived
+//! from this software without specific prior written permission.
+//!
 //! THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
+//! AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 //! IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+//! ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+//! LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+//! CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
 //! SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
+//! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+//! CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+//! ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 //! THE POSSIBILITY OF SUCH DAMAGE.
 //
 //*****************************************************************************
@@ -75,59 +74,55 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xGPIO_General_Pin_IDs xGPIO General Pin ID
-//! 
+//!
 //! \section    xGPIO_General_Pin_IDs 1. Where to use this group
 //!             The following values define the bit field for the ulPins argument
 //!             to several of the APIs. So all the API which have a ulPins
 //!             argument must use this group.
-//! 
-//! \section    xGPIO_General_Pin_IDs_CoX 2.CoX Port Details 
-//! +--------------------------+----------------+------------------------+
+//!
+//! \section    xGPIO_General_Pin_IDs_CoX 2.CoX Port Details
+//!
 //! |  xGPIO General Pin ID    |       CoX      |          LPC17xx       |
 //! |--------------------------|----------------|------------------------|
 //! |  xGPIO_PIN_n             |    Mandatory   |       xGPIO_PIN_0      |
-//! |                          |                |------------------------|
 //! |                          |                |       xGPIO_PIN_1      |
-//! |                          |                |------------------------|
 //! |                          |                |         ...            |
-//! |                          |                |------------------------|
 //! |                          |                |      xGPIO_PIN_30      |
-//! |                          |                |------------------------|
 //! |                          |                |      xGPIO_PIN_31      |
-//! +--------------------------+----------------+------------------------+
+//!
 //! @{
 //
 //*****************************************************************************
 
 //! GPIO Pin 0
-#define xGPIO_PIN_0             GPIO_PIN_0 
+#define xGPIO_PIN_0             GPIO_PIN_0
 
 //! GPIO Pin 1
-#define xGPIO_PIN_1             GPIO_PIN_1 
+#define xGPIO_PIN_1             GPIO_PIN_1
 
 //! GPIO Pin 2
-#define xGPIO_PIN_2             GPIO_PIN_2 
+#define xGPIO_PIN_2             GPIO_PIN_2
 
 //! GPIO Pin 3
-#define xGPIO_PIN_3             GPIO_PIN_3 
+#define xGPIO_PIN_3             GPIO_PIN_3
 
 //! GPIO Pin 4
-#define xGPIO_PIN_4             GPIO_PIN_4 
+#define xGPIO_PIN_4             GPIO_PIN_4
 
 //! GPIO Pin 5
-#define xGPIO_PIN_5             GPIO_PIN_5 
+#define xGPIO_PIN_5             GPIO_PIN_5
 
 //! GPIO Pin 6
-#define xGPIO_PIN_6             GPIO_PIN_6 
+#define xGPIO_PIN_6             GPIO_PIN_6
 
 //! GPIO Pin 7
-#define xGPIO_PIN_7             GPIO_PIN_7 
+#define xGPIO_PIN_7             GPIO_PIN_7
 
 //! GPIO Pin 8
-#define xGPIO_PIN_8             GPIO_PIN_8 
+#define xGPIO_PIN_8             GPIO_PIN_8
 
 //! GPIO Pin 9
-#define xGPIO_PIN_9             GPIO_PIN_9 
+#define xGPIO_PIN_9             GPIO_PIN_9
 
 //! GPIO Pin 10
 #define xGPIO_PIN_10            GPIO_PIN_10
@@ -204,25 +199,21 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xGPIO_Dir_Mode xGPIO Dir Mode
-//! 
+//!
 //! \section    xGPIO_Dir_Mode_S1 1. Where to use this group
 //!             Values that can be passed to xGPIODirModeSet as the ulPinIO
 //!             parameter, and returned from xGPIODirModeGet.
-//! 
-//! \section    xGPIO_Dir_Mode_CoX 2.CoX Port Details 
-//! +-----------------------+-----------------+------------------------+
+//!
+//! \section    xGPIO_Dir_Mode_CoX 2.CoX Port Details
+//!
 //! |  xGPIO Dir Mode       |       CoX       |          LPC17xx       |
 //! |-----------------------|-----------------|------------------------|
 //! |  xGPIO_DIR_MODE_IN    |    Mandatory    |            Y           |
-//! |-----------------------|-----------------|------------------------|
 //! |  xGPIO_DIR_MODE_OUT   |    Mandatory    |            Y           |
-//! |-----------------------|-----------------|------------------------|
 //! |  xGPIO_DIR_MODE_HW    |    Mandatory    |            N           |
-//! |-----------------------|-----------------|------------------------|
 //! |  xGPIO_DIR_MODE_QB    |  Non-Mandatory  |            N           |
-//! |-----------------------|-----------------|------------------------|
 //! |  xGPIO_DIR_MODE_OD    |  Non-Mandatory  |            Y           |
-//! +-----------------------+-----------------+------------------------+
+//!
 //! @{
 //
 //*****************************************************************************
@@ -245,7 +236,7 @@ extern "C"
 //
 //! Pin is in Quasi-bidirectional mode
 //
-#define xGPIO_DIR_MODE_QB       0  
+#define xGPIO_DIR_MODE_QB       0
 
 //
 //! Pin is in Open-Drain mode.
@@ -261,27 +252,22 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xGPIO_Int_Type xGPIO Int Type
-//! 
+//!
 //! \section    xGPIO_Int_Type_S1 1. Where to use this group
 //!             Values that can be passed to xGPIOIntTypeSet as the ulIntType
 //!             parameter, and returned from xGPIOIntTypeGet.
-//! 
-//! \section xGPIO_Int_Type_CoX 2.CoX Port Details 
-//! +-----------------------+----------------+------------------------+
+//!
+//! \section xGPIO_Int_Type_CoX 2.CoX Port Details
+//!
 //! |  xGPIO Int Type       |       CoX      |          LPC17xx       |
 //! |-----------------------|----------------|------------------------|
 //! |  xGPIO_FALLING_EDGE   |    Mandatory   |            Y           |
-//! |-----------------------|----------------|------------------------|
 //! |  xGPIO_RISING_EDGE    |    Mandatory   |            Y           |
-//! |-----------------------|----------------|------------------------|
 //! |  xGPIO_LOW_LEVEL      |    Mandatory   |            N           |
-//! |-----------------------|----------------|------------------------|
 //! |  xGPIO_HIGH_LEVEL     |    Mandatory   |            N           |
-//! |-----------------------|----------------|------------------------|
 //! |  xGPIO_BOTH_LEVEL     |  Non-Mandatory |            N           |
-//! |-----------------------|----------------|------------------------|
 //! |  xGPIO_BOTH_EDGES     |  Non-Mandatory |            Y           |
-//! |-----------------------|----------------|------------------------|
+//!
 //! @{
 //
 //*****************************************************************************
@@ -289,7 +275,7 @@ extern "C"
 //
 //! Interrupt on falling edge
 //
-#define xGPIO_FALLING_EDGE      INT_TYPE_FALLING         
+#define xGPIO_FALLING_EDGE      INT_TYPE_FALLING
 
 //
 //! Interrupt on rising edge
@@ -299,12 +285,12 @@ extern "C"
 //
 //! Interrupt on low level
 //
-#define xGPIO_LOW_LEVEL         0  
+#define xGPIO_LOW_LEVEL         0
 
 //
 //! Interrupt on high level
 //
-#define xGPIO_HIGH_LEVEL        0 
+#define xGPIO_HIGH_LEVEL        0
 
 //
 //! Interrupt on both edge
@@ -315,6 +301,7 @@ extern "C"
 //! Interrupt on both level
 //
 #define xGPIO_BOTH_LEVEL        0
+
 //*****************************************************************************
 //
 //! @}
@@ -324,18 +311,18 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xGPIO_Pad_Config_Strength xGPIO Pad Config Strength
-//! 
+//!
 //! \section    xGPIO_Pad_Config_Strength_S1 1. Where to use this group
 //!             Values that can be passed to xGPIOPadConfigSet as the ulStrength
 //!             parameter, and returned by xGPIOPadConfigGet in the pulStrength
 //!             parameter.
-//! 
-//! \section    xGPIO_Pad_Config_Strength_CoX 2.CoX Port Details 
-//! +-----------------------+----------------+------------------------+
+//!
+//! \section    xGPIO_Pad_Config_Strength_CoX 2.CoX Port Details
+//!
 //! |  xGPIO Pad Strength   |       CoX      |          LPC17xx       |
 //! |-----------------------|----------------|------------------------|
 //! |  xGPIO_STRENGTH_nMA   | Non-Mandatory  |            N           |
-//! +-----------------------+----------------+------------------------+
+//!
 //! @{
 //
 //*****************************************************************************
@@ -355,22 +342,22 @@ extern "C"
 
 //! PortA
 //! For LPC17xx mcu, Port A is equal to Port 0
-#define GPA0                    GPIOA_BASE, GPIO_PIN_0 
-#define GPA1                    GPIOA_BASE, GPIO_PIN_1 
-#define GPA2                    GPIOA_BASE, GPIO_PIN_2 
-#define GPA3                    GPIOA_BASE, GPIO_PIN_3 
-#define GPA4                    GPIOA_BASE, GPIO_PIN_4 
-#define GPA5                    GPIOA_BASE, GPIO_PIN_5 
-#define GPA6                    GPIOA_BASE, GPIO_PIN_6 
-#define GPA7                    GPIOA_BASE, GPIO_PIN_7 
-#define GPA8                    GPIOA_BASE, GPIO_PIN_8 
-#define GPA9                    GPIOA_BASE, GPIO_PIN_9 
-#define GPA10                   GPIOA_BASE, GPIO_PIN_10 
-#define GPA11                   GPIOA_BASE, GPIO_PIN_11 
-#define GPA12                   GPIOA_BASE, GPIO_PIN_12 
-#define GPA13                   GPIOA_BASE, GPIO_PIN_13 
-#define GPA14                   GPIOA_BASE, GPIO_PIN_14 
-#define GPA15                   GPIOA_BASE, GPIO_PIN_15 
+#define GPA0                    GPIOA_BASE, GPIO_PIN_0
+#define GPA1                    GPIOA_BASE, GPIO_PIN_1
+#define GPA2                    GPIOA_BASE, GPIO_PIN_2
+#define GPA3                    GPIOA_BASE, GPIO_PIN_3
+#define GPA4                    GPIOA_BASE, GPIO_PIN_4
+#define GPA5                    GPIOA_BASE, GPIO_PIN_5
+#define GPA6                    GPIOA_BASE, GPIO_PIN_6
+#define GPA7                    GPIOA_BASE, GPIO_PIN_7
+#define GPA8                    GPIOA_BASE, GPIO_PIN_8
+#define GPA9                    GPIOA_BASE, GPIO_PIN_9
+#define GPA10                   GPIOA_BASE, GPIO_PIN_10
+#define GPA11                   GPIOA_BASE, GPIO_PIN_11
+#define GPA12                   GPIOA_BASE, GPIO_PIN_12
+#define GPA13                   GPIOA_BASE, GPIO_PIN_13
+#define GPA14                   GPIOA_BASE, GPIO_PIN_14
+#define GPA15                   GPIOA_BASE, GPIO_PIN_15
 #define GPA16                   GPIOA_BASE, GPIO_PIN_16
 #define GPA17                   GPIOA_BASE, GPIO_PIN_17
 #define GPA18                   GPIOA_BASE, GPIO_PIN_18
@@ -381,31 +368,31 @@ extern "C"
 #define GPA23                   GPIOA_BASE, GPIO_PIN_23
 #define GPA24                   GPIOA_BASE, GPIO_PIN_24
 #define GPA25                   GPIOA_BASE, GPIO_PIN_25
-#define GPA26                   GPIOA_BASE, GPIO_PIN_26 
-#define GPA27                   GPIOA_BASE, GPIO_PIN_27 
-#define GPA28                   GPIOA_BASE, GPIO_PIN_28 
-#define GPA29                   GPIOA_BASE, GPIO_PIN_29 
-#define GPA30                   GPIOA_BASE, GPIO_PIN_30 
-#define GPA31                   GPIOA_BASE, GPIO_PIN_31 
+#define GPA26                   GPIOA_BASE, GPIO_PIN_26
+#define GPA27                   GPIOA_BASE, GPIO_PIN_27
+#define GPA28                   GPIOA_BASE, GPIO_PIN_28
+#define GPA29                   GPIOA_BASE, GPIO_PIN_29
+#define GPA30                   GPIOA_BASE, GPIO_PIN_30
+#define GPA31                   GPIOA_BASE, GPIO_PIN_31
 
 //! PortB
 //! For LPC17xx mcu, Port B is equal to Port 1
-#define GPB0                    GPIOB_BASE, GPIO_PIN_0 
-#define GPB1                    GPIOB_BASE, GPIO_PIN_1 
-#define GPB2                    GPIOB_BASE, GPIO_PIN_2 
-#define GPB3                    GPIOB_BASE, GPIO_PIN_3 
-#define GPB4                    GPIOB_BASE, GPIO_PIN_4 
-#define GPB5                    GPIOB_BASE, GPIO_PIN_5 
-#define GPB6                    GPIOB_BASE, GPIO_PIN_6 
-#define GPB7                    GPIOB_BASE, GPIO_PIN_7 
-#define GPB8                    GPIOB_BASE, GPIO_PIN_8 
-#define GPB9                    GPIOB_BASE, GPIO_PIN_9 
-#define GPB10                   GPIOB_BASE, GPIO_PIN_10 
-#define GPB11                   GPIOB_BASE, GPIO_PIN_11 
-#define GPB12                   GPIOB_BASE, GPIO_PIN_12 
-#define GPB13                   GPIOB_BASE, GPIO_PIN_13 
-#define GPB14                   GPIOB_BASE, GPIO_PIN_14 
-#define GPB15                   GPIOB_BASE, GPIO_PIN_15 
+#define GPB0                    GPIOB_BASE, GPIO_PIN_0
+#define GPB1                    GPIOB_BASE, GPIO_PIN_1
+#define GPB2                    GPIOB_BASE, GPIO_PIN_2
+#define GPB3                    GPIOB_BASE, GPIO_PIN_3
+#define GPB4                    GPIOB_BASE, GPIO_PIN_4
+#define GPB5                    GPIOB_BASE, GPIO_PIN_5
+#define GPB6                    GPIOB_BASE, GPIO_PIN_6
+#define GPB7                    GPIOB_BASE, GPIO_PIN_7
+#define GPB8                    GPIOB_BASE, GPIO_PIN_8
+#define GPB9                    GPIOB_BASE, GPIO_PIN_9
+#define GPB10                   GPIOB_BASE, GPIO_PIN_10
+#define GPB11                   GPIOB_BASE, GPIO_PIN_11
+#define GPB12                   GPIOB_BASE, GPIO_PIN_12
+#define GPB13                   GPIOB_BASE, GPIO_PIN_13
+#define GPB14                   GPIOB_BASE, GPIO_PIN_14
+#define GPB15                   GPIOB_BASE, GPIO_PIN_15
 #define GPB16                   GPIOB_BASE, GPIO_PIN_16
 #define GPB17                   GPIOB_BASE, GPIO_PIN_17
 #define GPB18                   GPIOB_BASE, GPIO_PIN_18
@@ -416,31 +403,31 @@ extern "C"
 #define GPB23                   GPIOB_BASE, GPIO_PIN_23
 #define GPB24                   GPIOB_BASE, GPIO_PIN_24
 #define GPB25                   GPIOB_BASE, GPIO_PIN_25
-#define GPB26                   GPIOB_BASE, GPIO_PIN_26 
-#define GPB27                   GPIOB_BASE, GPIO_PIN_27 
-#define GPB28                   GPIOB_BASE, GPIO_PIN_28 
-#define GPB29                   GPIOB_BASE, GPIO_PIN_29 
-#define GPB30                   GPIOB_BASE, GPIO_PIN_30 
-#define GPB31                   GPIOB_BASE, GPIO_PIN_31 
+#define GPB26                   GPIOB_BASE, GPIO_PIN_26
+#define GPB27                   GPIOB_BASE, GPIO_PIN_27
+#define GPB28                   GPIOB_BASE, GPIO_PIN_28
+#define GPB29                   GPIOB_BASE, GPIO_PIN_29
+#define GPB30                   GPIOB_BASE, GPIO_PIN_30
+#define GPB31                   GPIOB_BASE, GPIO_PIN_31
 
 //! PortC
 //! For LPC17xx mcu, Port C is equal to Port 2
-#define GPC0                    GPIOC_BASE, GPIO_PIN_0 
-#define GPC1                    GPIOC_BASE, GPIO_PIN_1 
-#define GPC2                    GPIOC_BASE, GPIO_PIN_2 
-#define GPC3                    GPIOC_BASE, GPIO_PIN_3 
-#define GPC4                    GPIOC_BASE, GPIO_PIN_4 
-#define GPC5                    GPIOC_BASE, GPIO_PIN_5 
-#define GPC6                    GPIOC_BASE, GPIO_PIN_6 
-#define GPC7                    GPIOC_BASE, GPIO_PIN_7 
-#define GPC8                    GPIOC_BASE, GPIO_PIN_8 
-#define GPC9                    GPIOC_BASE, GPIO_PIN_9 
-#define GPC10                   GPIOC_BASE, GPIO_PIN_10 
-#define GPC11                   GPIOC_BASE, GPIO_PIN_11 
-#define GPC12                   GPIOC_BASE, GPIO_PIN_12 
-#define GPC13                   GPIOC_BASE, GPIO_PIN_13 
-#define GPC14                   GPIOC_BASE, GPIO_PIN_14 
-#define GPC15                   GPIOC_BASE, GPIO_PIN_15 
+#define GPC0                    GPIOC_BASE, GPIO_PIN_0
+#define GPC1                    GPIOC_BASE, GPIO_PIN_1
+#define GPC2                    GPIOC_BASE, GPIO_PIN_2
+#define GPC3                    GPIOC_BASE, GPIO_PIN_3
+#define GPC4                    GPIOC_BASE, GPIO_PIN_4
+#define GPC5                    GPIOC_BASE, GPIO_PIN_5
+#define GPC6                    GPIOC_BASE, GPIO_PIN_6
+#define GPC7                    GPIOC_BASE, GPIO_PIN_7
+#define GPC8                    GPIOC_BASE, GPIO_PIN_8
+#define GPC9                    GPIOC_BASE, GPIO_PIN_9
+#define GPC10                   GPIOC_BASE, GPIO_PIN_10
+#define GPC11                   GPIOC_BASE, GPIO_PIN_11
+#define GPC12                   GPIOC_BASE, GPIO_PIN_12
+#define GPC13                   GPIOC_BASE, GPIO_PIN_13
+#define GPC14                   GPIOC_BASE, GPIO_PIN_14
+#define GPC15                   GPIOC_BASE, GPIO_PIN_15
 #define GPC16                   GPIOC_BASE, GPIO_PIN_16
 #define GPC17                   GPIOC_BASE, GPIO_PIN_17
 #define GPC18                   GPIOC_BASE, GPIO_PIN_18
@@ -451,31 +438,31 @@ extern "C"
 #define GPC23                   GPIOC_BASE, GPIO_PIN_23
 #define GPC24                   GPIOC_BASE, GPIO_PIN_24
 #define GPC25                   GPIOC_BASE, GPIO_PIN_25
-#define GPC26                   GPIOC_BASE, GPIO_PIN_26 
-#define GPC27                   GPIOC_BASE, GPIO_PIN_27 
-#define GPC28                   GPIOC_BASE, GPIO_PIN_28 
-#define GPC29                   GPIOC_BASE, GPIO_PIN_29 
-#define GPC30                   GPIOC_BASE, GPIO_PIN_30 
-#define GPC31                   GPIOC_BASE, GPIO_PIN_31 
+#define GPC26                   GPIOC_BASE, GPIO_PIN_26
+#define GPC27                   GPIOC_BASE, GPIO_PIN_27
+#define GPC28                   GPIOC_BASE, GPIO_PIN_28
+#define GPC29                   GPIOC_BASE, GPIO_PIN_29
+#define GPC30                   GPIOC_BASE, GPIO_PIN_30
+#define GPC31                   GPIOC_BASE, GPIO_PIN_31
 
 //! PortD
 //! For LPC17xx mcu, Port D is equal to Port 3
-#define GPD0                    GPIOD_BASE, GPIO_PIN_0 
-#define GPD1                    GPIOD_BASE, GPIO_PIN_1 
-#define GPD2                    GPIOD_BASE, GPIO_PIN_2 
-#define GPD3                    GPIOD_BASE, GPIO_PIN_3 
-#define GPD4                    GPIOD_BASE, GPIO_PIN_4 
-#define GPD5                    GPIOD_BASE, GPIO_PIN_5 
-#define GPD6                    GPIOD_BASE, GPIO_PIN_6 
-#define GPD7                    GPIOD_BASE, GPIO_PIN_7 
-#define GPD8                    GPIOD_BASE, GPIO_PIN_8 
-#define GPD9                    GPIOD_BASE, GPIO_PIN_9 
-#define GPD10                   GPIOD_BASE, GPIO_PIN_10 
-#define GPD11                   GPIOD_BASE, GPIO_PIN_11 
-#define GPD12                   GPIOD_BASE, GPIO_PIN_12 
-#define GPD13                   GPIOD_BASE, GPIO_PIN_13 
-#define GPD14                   GPIOD_BASE, GPIO_PIN_14 
-#define GPD15                   GPIOD_BASE, GPIO_PIN_15 
+#define GPD0                    GPIOD_BASE, GPIO_PIN_0
+#define GPD1                    GPIOD_BASE, GPIO_PIN_1
+#define GPD2                    GPIOD_BASE, GPIO_PIN_2
+#define GPD3                    GPIOD_BASE, GPIO_PIN_3
+#define GPD4                    GPIOD_BASE, GPIO_PIN_4
+#define GPD5                    GPIOD_BASE, GPIO_PIN_5
+#define GPD6                    GPIOD_BASE, GPIO_PIN_6
+#define GPD7                    GPIOD_BASE, GPIO_PIN_7
+#define GPD8                    GPIOD_BASE, GPIO_PIN_8
+#define GPD9                    GPIOD_BASE, GPIO_PIN_9
+#define GPD10                   GPIOD_BASE, GPIO_PIN_10
+#define GPD11                   GPIOD_BASE, GPIO_PIN_11
+#define GPD12                   GPIOD_BASE, GPIO_PIN_12
+#define GPD13                   GPIOD_BASE, GPIO_PIN_13
+#define GPD14                   GPIOD_BASE, GPIO_PIN_14
+#define GPD15                   GPIOD_BASE, GPIO_PIN_15
 #define GPD16                   GPIOD_BASE, GPIO_PIN_16
 #define GPD17                   GPIOD_BASE, GPIO_PIN_17
 #define GPD18                   GPIOD_BASE, GPIO_PIN_18
@@ -486,31 +473,31 @@ extern "C"
 #define GPD23                   GPIOD_BASE, GPIO_PIN_23
 #define GPD24                   GPIOD_BASE, GPIO_PIN_24
 #define GPD25                   GPIOD_BASE, GPIO_PIN_25
-#define GPD26                   GPIOD_BASE, GPIO_PIN_26 
-#define GPD27                   GPIOD_BASE, GPIO_PIN_27 
-#define GPD28                   GPIOD_BASE, GPIO_PIN_28 
-#define GPD29                   GPIOD_BASE, GPIO_PIN_29 
-#define GPD30                   GPIOD_BASE, GPIO_PIN_30 
-#define GPD31                   GPIOD_BASE, GPIO_PIN_31 
+#define GPD26                   GPIOD_BASE, GPIO_PIN_26
+#define GPD27                   GPIOD_BASE, GPIO_PIN_27
+#define GPD28                   GPIOD_BASE, GPIO_PIN_28
+#define GPD29                   GPIOD_BASE, GPIO_PIN_29
+#define GPD30                   GPIOD_BASE, GPIO_PIN_30
+#define GPD31                   GPIOD_BASE, GPIO_PIN_31
 
 //! PortE
 //! For LPC17xx mcu, Port E is equal to Port 4
-#define GPE0                    GPIOE_BASE, GPIO_PIN_0 
-#define GPE1                    GPIOE_BASE, GPIO_PIN_1 
-#define GPE2                    GPIOE_BASE, GPIO_PIN_2 
-#define GPE3                    GPIOE_BASE, GPIO_PIN_3 
-#define GPE4                    GPIOE_BASE, GPIO_PIN_4 
-#define GPE5                    GPIOE_BASE, GPIO_PIN_5 
-#define GPE6                    GPIOE_BASE, GPIO_PIN_6 
-#define GPE7                    GPIOE_BASE, GPIO_PIN_7 
-#define GPE8                    GPIOE_BASE, GPIO_PIN_8 
-#define GPE9                    GPIOE_BASE, GPIO_PIN_9 
-#define GPE10                   GPIOE_BASE, GPIO_PIN_10 
-#define GPE11                   GPIOE_BASE, GPIO_PIN_11 
-#define GPE12                   GPIOE_BASE, GPIO_PIN_12 
-#define GPE13                   GPIOE_BASE, GPIO_PIN_13 
-#define GPE14                   GPIOE_BASE, GPIO_PIN_14 
-#define GPE15                   GPIOE_BASE, GPIO_PIN_15 
+#define GPE0                    GPIOE_BASE, GPIO_PIN_0
+#define GPE1                    GPIOE_BASE, GPIO_PIN_1
+#define GPE2                    GPIOE_BASE, GPIO_PIN_2
+#define GPE3                    GPIOE_BASE, GPIO_PIN_3
+#define GPE4                    GPIOE_BASE, GPIO_PIN_4
+#define GPE5                    GPIOE_BASE, GPIO_PIN_5
+#define GPE6                    GPIOE_BASE, GPIO_PIN_6
+#define GPE7                    GPIOE_BASE, GPIO_PIN_7
+#define GPE8                    GPIOE_BASE, GPIO_PIN_8
+#define GPE9                    GPIOE_BASE, GPIO_PIN_9
+#define GPE10                   GPIOE_BASE, GPIO_PIN_10
+#define GPE11                   GPIOE_BASE, GPIO_PIN_11
+#define GPE12                   GPIOE_BASE, GPIO_PIN_12
+#define GPE13                   GPIOE_BASE, GPIO_PIN_13
+#define GPE14                   GPIOE_BASE, GPIO_PIN_14
+#define GPE15                   GPIOE_BASE, GPIO_PIN_15
 #define GPE16                   GPIOE_BASE, GPIO_PIN_16
 #define GPE17                   GPIOE_BASE, GPIO_PIN_17
 #define GPE18                   GPIOE_BASE, GPIO_PIN_18
@@ -521,12 +508,12 @@ extern "C"
 #define GPE23                   GPIOE_BASE, GPIO_PIN_23
 #define GPE24                   GPIOE_BASE, GPIO_PIN_24
 #define GPE25                   GPIOE_BASE, GPIO_PIN_25
-#define GPE26                   GPIOE_BASE, GPIO_PIN_26 
-#define GPE27                   GPIOE_BASE, GPIO_PIN_27 
-#define GPE28                   GPIOE_BASE, GPIO_PIN_28 
-#define GPE29                   GPIOE_BASE, GPIO_PIN_29 
-#define GPE30                   GPIOE_BASE, GPIO_PIN_30 
-#define GPE31                   GPIOE_BASE, GPIO_PIN_31 
+#define GPE26                   GPIOE_BASE, GPIO_PIN_26
+#define GPE27                   GPIOE_BASE, GPIO_PIN_27
+#define GPE28                   GPIOE_BASE, GPIO_PIN_28
+#define GPE29                   GPIOE_BASE, GPIO_PIN_29
+#define GPE30                   GPIOE_BASE, GPIO_PIN_30
+#define GPE31                   GPIOE_BASE, GPIO_PIN_31
 
 //*****************************************************************************
 //
@@ -537,7 +524,7 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xGPIO_Short_Pin xGPIO Short Pin ID
-//! 
+//!
 //! \section    xGPIO_Short_Pin_S1 1. Where to use this group
 //!             The following values define the short pin argument(dShortPin)
 //!             to several of the \b XPinTypexxx APIs and all the API which have
@@ -545,8 +532,9 @@ extern "C"
 //!             Such as
 //!             \ref xGPIOSPinRead()
 //!             \ref xGPIOSPinWrite()
-//! 
-//! \section    xGPIO_Short_Pin_CoX 2.CoX Port Details 
+//!
+//! \section    xGPIO_Short_Pin_CoX 2.CoX Port Details
+//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //! +-------------------------+----------------+------------------------+
 //! |  xGPIO Short Pin ID     |       CoX      |          LPC17xx       |
 //! |-------------------------|----------------|------------------------|
@@ -556,24 +544,25 @@ extern "C"
 //! |                         |                |------------------------|
 //! |                         |                |     ...                |
 //! |                         |                |------------------------|
-//! |                         |                |    PE0 PE1 ... PE31    |  
+//! |                         |                |    PE0 PE1 ... PE31    |
 //! +-------------------------+----------------+------------------------+
+//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //! @{
 //
 //*****************************************************************************
 
 //! PortA
 //! For LPC17xx mcu, Port A is equal to Port 0
-#define PA0                      PA0 
-#define PA1                      PA1 
-#define PA2                      PA2 
-#define PA3                      PA3 
-#define PA4                      PA4 
-#define PA5                      PA5 
-#define PA6                      PA6 
-#define PA7                      PA7 
-#define PA8                      PA8 
-#define PA9                      PA9 
+#define PA0                      PA0
+#define PA1                      PA1
+#define PA2                      PA2
+#define PA3                      PA3
+#define PA4                      PA4
+#define PA5                      PA5
+#define PA6                      PA6
+#define PA7                      PA7
+#define PA8                      PA8
+#define PA9                      PA9
 #define PA10                     PA10
 #define PA11                     PA11
 #define PA12                     PA12
@@ -599,16 +588,16 @@ extern "C"
 
 //! PortB
 //! For LPC17xx mcu, Port B is equal to Port 1
-#define PB0                      PB0 
-#define PB1                      PB1 
-#define PB2                      PB2 
-#define PB3                      PB3 
-#define PB4                      PB4 
-#define PB5                      PB5 
-#define PB6                      PB6 
-#define PB7                      PB7 
-#define PB8                      PB8 
-#define PB9                      PB9 
+#define PB0                      PB0
+#define PB1                      PB1
+#define PB2                      PB2
+#define PB3                      PB3
+#define PB4                      PB4
+#define PB5                      PB5
+#define PB6                      PB6
+#define PB7                      PB7
+#define PB8                      PB8
+#define PB9                      PB9
 #define PB10                     PB10
 #define PB11                     PB11
 #define PB12                     PB12
@@ -634,16 +623,16 @@ extern "C"
 
 //! PortC
 //! For LPC17xx mcu, Port C is equal to Port 2
-#define PC0                      PC0 
-#define PC1                      PC1 
-#define PC2                      PC2 
-#define PC3                      PC3 
-#define PC4                      PC4 
-#define PC5                      PC5 
-#define PC6                      PC6 
-#define PC7                      PC7 
-#define PC8                      PC8 
-#define PC9                      PC9 
+#define PC0                      PC0
+#define PC1                      PC1
+#define PC2                      PC2
+#define PC3                      PC3
+#define PC4                      PC4
+#define PC5                      PC5
+#define PC6                      PC6
+#define PC7                      PC7
+#define PC8                      PC8
+#define PC9                      PC9
 #define PC10                     PC10
 #define PC11                     PC11
 #define PC12                     PC12
@@ -669,16 +658,16 @@ extern "C"
 
 //! PortD
 //! For LPC17xx mcu, Port D is equal to Port 3
-#define PD0                      PD0 
-#define PD1                      PD1 
-#define PD2                      PD2 
-#define PD3                      PD3 
-#define PD4                      PD4 
-#define PD5                      PD5 
-#define PD6                      PD6 
-#define PD7                      PD7 
-#define PD8                      PD8 
-#define PD9                      PD9 
+#define PD0                      PD0
+#define PD1                      PD1
+#define PD2                      PD2
+#define PD3                      PD3
+#define PD4                      PD4
+#define PD5                      PD5
+#define PD6                      PD6
+#define PD7                      PD7
+#define PD8                      PD8
+#define PD9                      PD9
 #define PD10                     PD10
 #define PD11                     PD11
 #define PD12                     PD12
@@ -704,16 +693,16 @@ extern "C"
 
 //! PortE
 //! For LPC17xx mcu, Port E is equal to Port 4
-#define PE0                      PE0 
-#define PE1                      PE1 
-#define PE2                      PE2 
-#define PE3                      PE3 
-#define PE4                      PE4 
-#define PE5                      PE5 
-#define PE6                      PE6 
-#define PE7                      PE7 
-#define PE8                      PE8 
-#define PE9                      PE9 
+#define PE0                      PE0
+#define PE1                      PE1
+#define PE2                      PE2
+#define PE3                      PE3
+#define PE4                      PE4
+#define PE5                      PE5
+#define PE6                      PE6
+#define PE7                      PE7
+#define PE8                      PE8
+#define PE9                      PE9
 #define PE10                     PE10
 #define PE11                     PE11
 #define PE12                     PE12
@@ -753,308 +742,270 @@ extern "C"
 //!             The macros of General Peripheral Pin Name always like:
 //!             <b> ModuleName + n + PinName </b>, such as CAN0RX, SPI1CLK.
 //!
-//! \section    xGPIO_Peripheral_Pin_Port CoX Port Detail
-//! +-------------------------+----------------+-------------------------+
+//! \section    xGPIO_Peripheral_Pin_Port CoX Port Details.
+//!
 //! | General Peripheral Pin  |       CoX      |          LPC17xx        |
 //! |-------------------------|----------------|-------------------------|
 //! | ADCn                    |    Mandatory   |   ADC0 ADC1 ... ADC15   |
-//! |-------------------------|----------------|-------------------------|
 //! | CANnRX                  |    Mandatory   |      CAN0RX CAN1RX      |
-//! |-------------------------|----------------|-------------------------|
 //! | CANnTX                  |    Mandatory   |      CAN0TX CAN1TX      |
-//! |-------------------------|----------------|-------------------------|
 //! | I2CnSCK                 |    Mandatory   | I2C0SCK I2C1SCK I2C2SCK |
-//! |-------------------------|----------------|-------------------------|
 //! | I2CnSDA                 |    Mandatory   | I2C0SDA I2C1SDA I2C2SDA |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnRXSCK               |    Mandatory   |        I2S0RXSCK        |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnRXMCLK              |    Mandatory   |       I2S0RXMCLK        |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnRXSD                |    Mandatory   |        I2S0RXSD         |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnRXWS                |    Mandatory   |        I2S0RXWS         |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnTXSCK               |    Mandatory   |        I2S0TXSCK        |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnTXMCLK              |    Mandatory   |       I2S0TXMCLK        |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnTXSD                |    Mandatory   |        I2S0TXSD         |
-//! |-------------------------|----------------|-------------------------|
 //! | I2SnTXWS                |    Mandatory   |        I2S0TXWS         |
-//! |-------------------------|----------------|-------------------------|
 //! | SPInCLK                 |    Mandatory   |     SPI0CLK SPI1CLK     |
-//! |                         |                |------------------------ |
 //! |                         |                |     SPI2CLK SPI3CLK     |
-//! |-------------------------|----------------|-------------------------|
 //! | SPInMOSI                |    Mandatory   |    SPI0MOSI SPI1MOSI    |
-//! |                         |                |------------------------ |
 //! |                         |                |    SPI2MOSI SPI3MOSI    |
-//! |-------------------------|----------------|-------------------------|
 //! | SPInMISO                |    Mandatory   |    SPI0MISO SPI1MISO    |
-//! |                         |                |------------------------ |
 //! |                         |                |    SPI2MISO SPI3MISO    |
-//! |-------------------------|----------------|-------------------------|
 //! | SPInCS                  |    Mandatory   |      SPI0CS SPI1CS      |
-//! |                         |                |------------------------ |
 //! |                         |                |      SPI2CS SPI3CS      |
-//! |-------------------------|----------------|-------------------------|
 //! | UARTnRX                 |    Mandatory   |     UART0RX UART1RX     |
-//! |                         |                |------------------------ |
 //! |                         |                |     UART2RX             |
-//! |-------------------------|----------------|-------------------------|
 //! | UARTnTX                 |    Mandatory   |     UART0TX UART1TX     |
-//! |                         |                |------------------------ |
 //! |                         |                |     UART2TX             |
-//! |-------------------------|----------------|-------------------------|
 //! | UARTnCTS                |    Mandatory   |    UART0CTS UART1CTS    |
-//! |                         |                |------------------------ |
 //! |                         |                |    UART2CTS             |
-//! |-------------------------|----------------|-------------------------|
 //! | UARTnDCD                |    Mandatory   |    UART0DCD UART1DCD    |
-//! |                         |                |------------------------ |
 //! |                         |                |    UART2DCD             |
-//! |-------------------------|----------------|-------------------------|
 //! | UARTnDSR                |    Mandatory   |    UART0DSR UART1DSR    |
-//! |                         |                |------------------------ |
 //! |                         |                |    UART2DSR             |
-//! |-------------------------|----------------|-------------------------|
 //! | UARTnDTR                |    Mandatory   |    UART0DTR UART1DTR    |
-//! |                         |                |------------------------ |
 //! |                         |                |    UART2DTR             |
-//! |-------------------------|----------------|-------------------------|
 //! | CMPnN                   |    Mandatory   |       CMP0N CMP1N       |
-//! |-------------------------|----------------|-------------------------|
 //! | CMPnP                   |    Mandatory   |       CMP0P CMP1P       |
-//! |-------------------------|----------------|-------------------------|
 //! | CMPnO                   |    Mandatory   |       CMP0O CMP1O       |
-//! |-------------------------|----------------|-------------------------|
 //! | PWMn                    |    Mandatory   |      PWM0 ... PWM7      |
-//! |-------------------------|----------------|-------------------------|
 //! | TIMCCPn                 |    Mandatory   |   TIMCCP0 ... TIMCCP7   |
-//! +-------------------------+----------------+-------------------------+
-//!  
+//!
 //! @{
 //
 //*****************************************************************************
 
-#define PA0                     PA0         
-#define RD1                     RD1         
-#define RXD3                    RXD3        
-#define I2C1SDA                 I2C1SDA         
-#define PA1                     PA1         
-#define TD1                     TD1         
-#define RXD3                    RXD3        
-#define I2C1SCL                 I2C1SCL         
-#define PA2                     PA2         
-#define TXD0                    TXD0        
+#define PA0                     PA0
+#define RD1                     RD1
+#define RXD3                    RXD3
+#define I2C1SDA                 I2C1SDA
+#define PA1                     PA1
+#define TD1                     TD1
+#define RXD3                    RXD3
+#define I2C1SCL                 I2C1SCL
+#define PA2                     PA2
+#define TXD0                    TXD0
 #define AD_CH_7                 AD_CH_7
-#define PA3                     PA3         
-#define RXD0                    RXD0        
+#define PA3                     PA3
+#define RXD0                    RXD0
 #define AD_CH_6                 AD_CH_6
-#define PA4                     PA4         
-#define I2SRX_CLK               I2SRX_CLK   
-#define RD2                     RD2         
-#define TIM_CAP2_0              TIM_CAP2_0      
-#define PA5                     PA5         
-#define I2SRX_WS                I2SRX_WS    
-#define TD2                     TD2         
-#define TIM_CAP2_1              TIM_CAP2_1      
-#define PA6                     PA6         
-#define I2SRX_SDA               I2SRX_SDA   
-#define SSEL1                   SSEL1       
-#define TIM_MAT2_0              TIM_MAT2_0      
-#define PA7                     PA7         
-#define I2STX_CLK               I2STX_CLK   
-#define SCK1                    SCK1        
-#define TIM_MAT2_1              TIM_MAT2_1      
-#define PA8                     PA8         
-#define I2STX_WS                I2STX_WS    
-#define MISO1                   MISO1       
-#define TIM_MAT2_2              TIM_MAT2_2      
-#define PA9                     PA9         
-#define I2STX_SDA               I2STX_SDA   
-#define MOSI1                   MOSI1       
-#define TIM_MAT2_3              TIM_MAT2_3      
-#define PA10                    PA10        
-#define TXD2                    TXD2        
-#define I2C2SDA                 I2C2SDA         
-#define TIM_MAT3_0              TIM_MAT3_0      
-#define PA11                    PA11        
-#define RXD2                    RXD2        
-#define I2C2SCL                 I2C2SCL         
-#define TIM_MAT3_1              TIM_MAT3_1      
-#define PA15                    PA15        
-#define TXD1                    TXD1        
-#define SCK0                    SCK0        
-#define SCK                     SCK         
-#define PA16                    PA16        
-#define RXD1                    RXD1        
-#define SSEL0                   SSEL0       
-#define SSEL                    SSEL        
-#define PA17                    PA17        
-#define CTS1                    CTS1        
-#define MISO0                   MISO0       
-#define MISO                    MISO        
-#define PA18                    PA18        
-#define DCD1                    DCD1        
-#define MOSI0                   MOSI0       
-#define MOSI                    MOSI        
-#define PA19                    PA19        
-#define DSR1                    DSR1        
-#define PA20                    PA20        
-#define DTR1                    DTR1        
-#define PA21                    PA21        
-#define RI1                     RI1         
-#define RD1                     RD1         
-#define PA22                    PA22        
-#define RTS1                    RTS1        
-#define TD1                     TD1         
-#define PA23                    PA23        
+#define PA4                     PA4
+#define I2SRX_CLK               I2SRX_CLK
+#define RD2                     RD2
+#define TIM_CAP2_0              TIM_CAP2_0
+#define PA5                     PA5
+#define I2SRX_WS                I2SRX_WS
+#define TD2                     TD2
+#define TIM_CAP2_1              TIM_CAP2_1
+#define PA6                     PA6
+#define I2SRX_SDA               I2SRX_SDA
+#define SSEL1                   SSEL1
+#define TIM_MAT2_0              TIM_MAT2_0
+#define PA7                     PA7
+#define I2STX_CLK               I2STX_CLK
+#define SCK1                    SCK1
+#define TIM_MAT2_1              TIM_MAT2_1
+#define PA8                     PA8
+#define I2STX_WS                I2STX_WS
+#define MISO1                   MISO1
+#define TIM_MAT2_2              TIM_MAT2_2
+#define PA9                     PA9
+#define I2STX_SDA               I2STX_SDA
+#define MOSI1                   MOSI1
+#define TIM_MAT2_3              TIM_MAT2_3
+#define PA10                    PA10
+#define TXD2                    TXD2
+#define I2C2SDA                 I2C2SDA
+#define TIM_MAT3_0              TIM_MAT3_0
+#define PA11                    PA11
+#define RXD2                    RXD2
+#define I2C2SCL                 I2C2SCL
+#define TIM_MAT3_1              TIM_MAT3_1
+#define PA15                    PA15
+#define TXD1                    TXD1
+#define SCK0                    SCK0
+#define SCK                     SCK
+#define PA16                    PA16
+#define RXD1                    RXD1
+#define SSEL0                   SSEL0
+#define SSEL                    SSEL
+#define PA17                    PA17
+#define CTS1                    CTS1
+#define MISO0                   MISO0
+#define MISO                    MISO
+#define PA18                    PA18
+#define DCD1                    DCD1
+#define MOSI0                   MOSI0
+#define MOSI                    MOSI
+#define PA19                    PA19
+#define DSR1                    DSR1
+#define PA20                    PA20
+#define DTR1                    DTR1
+#define PA21                    PA21
+#define RI1                     RI1
+#define RD1                     RD1
+#define PA22                    PA22
+#define RTS1                    RTS1
+#define TD1                     TD1
+#define PA23                    PA23
 #define AD_CH_0                 AD_CH_0
-#define I2SRX_CLK               I2SRX_CLK   
-#define TIM_CAP3_0              TIM_CAP3_0      
-#define PA24                    PA24        
+#define I2SRX_CLK               I2SRX_CLK
+#define TIM_CAP3_0              TIM_CAP3_0
+#define PA24                    PA24
 #define AD_CH_1                 AD_CH_1
-#define I2SRX_WS                I2SRX_WS    
-#define TIM_CAP3_1              TIM_CAP3_1      
-#define PA25                    PA25        
+#define I2SRX_WS                I2SRX_WS
+#define TIM_CAP3_1              TIM_CAP3_1
+#define PA25                    PA25
 #define AD_CH_2                 AD_CH_2
-#define I2SRX_SDA               I2SRX_SDA   
-#define TXD3                    TXD3        
-#define PA26                    PA26        
+#define I2SRX_SDA               I2SRX_SDA
+#define TXD3                    TXD3
+#define PA26                    PA26
 #define AD_CH_3                 AD_CH_3
-#define AOUT                    AOUT        
-#define RXD3                    RXD3        
-#define PA27                    PA27        
-#define I2C0SDA                 I2C0SDA        
-#define USB_SDA                 USB_SDA     
-#define PA28                    PA28        
-#define I2C0SCL                 I2C0SCL         
-#define USB_SCL                 USB_SCL     
-#define PA29                    PA29        
-#define USB_D_P                 USB_D_P     
-#define PA30                    PA30        
-#define USB_D_N                 USB_D_N     
-#define PB0                     PB0         
-#define ETH_TXD0                ETH_TXD0    
-#define PB1                     PB1         
-#define ETH_TXD1                ETH_TXD1    
-#define PB4                     PB4         
-#define ETH_TX_EN               ETH_TX_EN   
-#define PB8                     PB8         
-#define ETH_CRS                 ETH_CRS     
-#define PB9                     PB9         
-#define ETH_RXD0                ETH_RXD0    
-#define PB10                    PB10        
-#define ETH_RXD1                ETH_RXD1    
-#define PB14                    PB14        
-#define ETH_RX_ER               ETH_RX_ER   
-#define PB15                    PB15        
-#define ETH_REF_CLK             ETH_REF_CLK 
-#define PB16                    PB16        
-#define ENET_MDC                ENET_MDC    
-#define PB17                    PB17        
-#define ENET_MDIO               ENET_MDIO   
-#define PB18                    PB18        
-#define USB_UP_LED              USB_UP_LED  
-#define PWM1_CH1                PWM1_CH1    
-#define TIM_CAP1_0              TIM_CAP1_0      
-#define PB19                    PB19        
-#define MCOA0                   MCOA0       
-#define USB_PPWR                USB_PPWR    
-#define TIM_CAP1_1              TIM_CAP1_1      
-#define PB20                    PB20        
-#define MCI0                    MCI0        
-#define PWM1_CH2                PWM1_CH2    
-#define SCK0                    SCK0        
-#define PB21                    PB21        
-#define MCABORT                 MCABORT     
-#define PWM1_CH3                PWM1_CH3    
-#define SSEL0                   SSEL0       
-#define PB22                    PB22        
-#define MCOB0                   MCOB0       
-#define USB_PWRD                USB_PWRD    
-#define TIM_MAT1_0              TIM_MAT1_0      
-#define PB23                    PB23        
-#define MCI1                    MCI1        
-#define PWM1_CH4                PWM1_CH4    
-#define MISO0                   MISO0       
-#define PB24                    PB24        
-#define MCI2                    MCI2        
-#define PWM1_CH5                PWM1_CH5    
-#define MOSI0                   MOSI0       
-#define PB25                    PB25        
-#define MCOA1                   MCOA1       
-#define TIM_MAT1_1              TIM_MAT1_1      
-#define PB26                    PB26        
-#define MCOB1                   MCOB1       
-#define PWM1_CH6                PWM1_CH6    
-#define TIM_CAP0_0              TIM_CAP0_0      
-#define PB27                    PB27        
-#define CLKOUT                  CLKOUT      
-#define USB_OVRCR               USB_OVRCR   
-#define TIM_CAP0_1              TIM_CAP0_1      
-#define PB28                    PB28        
-#define MCOA2                   MCOA2       
-#define PWM_CAP_CH0             PWM_CAP_CH0 
-#define TIM_MAT0_0              TIM_MAT0_0      
-#define PB29                    PB29        
-#define MCOB2                   MCOB2       
-#define PWM_CAP_CH1             PWM_CAP_CH1 
-#define TIM_MAT0_1              TIM_MAT0_1      
-#define PB30                    PB30        
-#define VBUS                    VBUS        
+#define AOUT                    AOUT
+#define RXD3                    RXD3
+#define PA27                    PA27
+#define I2C0SDA                 I2C0SDA
+#define USB_SDA                 USB_SDA
+#define PA28                    PA28
+#define I2C0SCL                 I2C0SCL
+#define USB_SCL                 USB_SCL
+#define PA29                    PA29
+#define USB_D_P                 USB_D_P
+#define PA30                    PA30
+#define USB_D_N                 USB_D_N
+#define PB0                     PB0
+#define ETH_TXD0                ETH_TXD0
+#define PB1                     PB1
+#define ETH_TXD1                ETH_TXD1
+#define PB4                     PB4
+#define ETH_TX_EN               ETH_TX_EN
+#define PB8                     PB8
+#define ETH_CRS                 ETH_CRS
+#define PB9                     PB9
+#define ETH_RXD0                ETH_RXD0
+#define PB10                    PB10
+#define ETH_RXD1                ETH_RXD1
+#define PB14                    PB14
+#define ETH_RX_ER               ETH_RX_ER
+#define PB15                    PB15
+#define ETH_REF_CLK             ETH_REF_CLK
+#define PB16                    PB16
+#define ENET_MDC                ENET_MDC
+#define PB17                    PB17
+#define ENET_MDIO               ENET_MDIO
+#define PB18                    PB18
+#define USB_UP_LED              USB_UP_LED
+#define PWM1_CH1                PWM1_CH1
+#define TIM_CAP1_0              TIM_CAP1_0
+#define PB19                    PB19
+#define MCOA0                   MCOA0
+#define USB_PPWR                USB_PPWR
+#define TIM_CAP1_1              TIM_CAP1_1
+#define PB20                    PB20
+#define MCI0                    MCI0
+#define PWM1_CH2                PWM1_CH2
+#define SCK0                    SCK0
+#define PB21                    PB21
+#define MCABORT                 MCABORT
+#define PWM1_CH3                PWM1_CH3
+#define SSEL0                   SSEL0
+#define PB22                    PB22
+#define MCOB0                   MCOB0
+#define USB_PWRD                USB_PWRD
+#define TIM_MAT1_0              TIM_MAT1_0
+#define PB23                    PB23
+#define MCI1                    MCI1
+#define PWM1_CH4                PWM1_CH4
+#define MISO0                   MISO0
+#define PB24                    PB24
+#define MCI2                    MCI2
+#define PWM1_CH5                PWM1_CH5
+#define MOSI0                   MOSI0
+#define PB25                    PB25
+#define MCOA1                   MCOA1
+#define TIM_MAT1_1              TIM_MAT1_1
+#define PB26                    PB26
+#define MCOB1                   MCOB1
+#define PWM1_CH6                PWM1_CH6
+#define TIM_CAP0_0              TIM_CAP0_0
+#define PB27                    PB27
+#define CLKOUT                  CLKOUT
+#define USB_OVRCR               USB_OVRCR
+#define TIM_CAP0_1              TIM_CAP0_1
+#define PB28                    PB28
+#define MCOA2                   MCOA2
+#define PWM_CAP_CH0             PWM_CAP_CH0
+#define TIM_MAT0_0              TIM_MAT0_0
+#define PB29                    PB29
+#define MCOB2                   MCOB2
+#define PWM_CAP_CH1             PWM_CAP_CH1
+#define TIM_MAT0_1              TIM_MAT0_1
+#define PB30                    PB30
+#define VBUS                    VBUS
 #define AD_CH_4                 AD_CH_4
-#define PB31                    PB31        
-#define SCK1                    SCK1        
+#define PB31                    PB31
+#define SCK1                    SCK1
 #define AD_CH_5                 AD_CH_5
-#define PC0                     PC0         
-#define TXD1                    TXD1        
-#define PC1                     PC1         
-#define RXD1                    RXD1        
-#define PC2                     PC2         
-#define CTS1                    CTS1        
-#define PC3                     PC3         
-#define DCD1                    DCD1        
-#define PC4                     PC4         
-#define DSR1                    DSR1        
-#define PC5                     PC5         
-#define DTR1                    DTR1        
-#define PC6                     PC6         
-#define RI1                     RI1         
-#define PC7                     PC7         
-#define RD2                     RD2         
-#define RTS1                    RTS1        
-#define PC8                     PC8         
-#define TD2                     TD2         
-#define TXD2                    TXD2        
-#define ENET_MDC                ENET_MDC    
-#define PC9                     PC9         
-#define USB_CONNECT             USB_CONNECT 
-#define RXD2                    RXD2        
-#define ENET_MDIO               ENET_MDIO   
-#define PC10                    PC10        
-#define EINT0                   EINT0       
-#define NMI                     NMI         
-#define PC11                    PC11        
-#define EINT1                   EINT1       
-#define I2STX_CLK               I2STX_CLK   
-#define PC12                    PC12        
-#define EINT2                   EINT2       
-#define I2STX_WS                I2STX_WS    
-#define PC13                    PC13        
-#define EINT3                   EINT3       
-#define I2STX_SDA               I2STX_SDA   
-#define PD25                    PD25        
-#define PD26                    PD26        
-#define STCLK                   STCLK       
-#define PE28                    PE28        
-#define RX_MCLK                 RX_MCLK     
-#define TXD3                    TXD3        
-#define PE29                    PE29        
-#define TX_MCLK                 TX_MCLK     
-#define RXD3                    RXD3        
+#define PC0                     PC0
+#define TXD1                    TXD1
+#define PC1                     PC1
+#define RXD1                    RXD1
+#define PC2                     PC2
+#define CTS1                    CTS1
+#define PC3                     PC3
+#define DCD1                    DCD1
+#define PC4                     PC4
+#define DSR1                    DSR1
+#define PC5                     PC5
+#define DTR1                    DTR1
+#define PC6                     PC6
+#define RI1                     RI1
+#define PC7                     PC7
+#define RD2                     RD2
+#define RTS1                    RTS1
+#define PC8                     PC8
+#define TD2                     TD2
+#define TXD2                    TXD2
+#define ENET_MDC                ENET_MDC
+#define PC9                     PC9
+#define USB_CONNECT             USB_CONNECT
+#define RXD2                    RXD2
+#define ENET_MDIO               ENET_MDIO
+#define PC10                    PC10
+#define EINT0                   EINT0
+#define NMI                     NMI
+#define PC11                    PC11
+#define EINT1                   EINT1
+#define I2STX_CLK               I2STX_CLK
+#define PC12                    PC12
+#define EINT2                   EINT2
+#define I2STX_WS                I2STX_WS
+#define PC13                    PC13
+#define EINT3                   EINT3
+#define I2STX_SDA               I2STX_SDA
+#define PD25                    PD25
+#define PD26                    PD26
+#define STCLK                   STCLK
+#define PE28                    PE28
+#define RX_MCLK                 RX_MCLK
+#define TXD3                    TXD3
+#define PE29                    PE29
+#define TX_MCLK                 TX_MCLK
+#define RXD3                    RXD3
 
 //*****************************************************************************
 //
@@ -1067,77 +1018,43 @@ extern "C"
 //! \addtogroup xGPIO_Exported_APIs xGPIO API
 //! \brief      xGPIO API Reference.
 //!
-//! \section    xGPIO_Exported_APIs_Port CoX Port Detail
+//! \section    xGPIO_Exported_APIs_Port CoX Port Details
 //!
-//! +----------------------------+----------------+------------------------+
-//! |  xGPIO API                 |       CoX      |          LPC17xx       |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIODirModeSet           |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinToPeripheralId   |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinToPort           |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinToPin            |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinDirModeSet       |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIODirModeGet           |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinIntCallbackInit   |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinIntEnable         |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinIntEnable        |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinIntDisable        |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinIntDisable       |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinIntStatus         |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinIntClear          |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinIntClear         |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinRead              |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinRead             |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinWrite             |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinWrite            |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOPinConfigure         |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinTypeGPIOInput    |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinTypeGPIOOutput   |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinTypeGPIOOutputOD |  Non-Mandatory |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xGPIOSPinTypeGPIOOutputQB |  Non-Mandatory |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeADC              |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeDAC              |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeCAN              |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeI2C              |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeI2S              |  Non-Mandatory |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypePWM              |  Non-Mandatory |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeSPI              |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeTimer            |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeUART             |    Mandatory   |            Y           |
-//! |----------------------------|----------------|------------------------|
-//! |  xSPinTypeACMP             |    Mandatory   |            N           |
-//! +----------------------------+----------------+------------------------+
+//! |       xGPIO API                 |       CoX      |          LPC17xx       |
+//! |---------------------------------|----------------|------------------------|
+//! |  \ref xGPIODirModeSet           |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinToPeripheralId   |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinToPort           |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinToPin            |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinDirModeSet       |    Mandatory   |            Y           |
+//! |  \ref xGPIODirModeGet           |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinIntCallbackInit   |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinIntEnable         |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinIntEnable        |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinIntDisable        |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinIntDisable       |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinIntStatus         |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinIntClear          |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinIntClear         |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinRead              |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinRead             |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinWrite             |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinWrite            |    Mandatory   |            Y           |
+//! |  \ref xGPIOPinConfigure         |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinTypeGPIOInput    |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinTypeGPIOOutput   |    Mandatory   |            Y           |
+//! |  \ref xGPIOSPinTypeGPIOOutputOD |  Non-Mandatory |            Y           |
+//! |  \ref xGPIOSPinTypeGPIOOutputQB |  Non-Mandatory |            Y           |
+//! |  \ref xSPinTypeADC              |    Mandatory   |            Y           |
+//! |  \ref xSPinTypeDAC              |    Mandatory   |            Y           |
+//! |  \ref xSPinTypeCAN              |    Mandatory   |            Y           |
+//! |  \ref xSPinTypeI2C              |    Mandatory   |            Y           |
+//! |  \ref xSPinTypePWM              |  Non-Mandatory |            Y           |
+//! |  \ref xSPinTypeSPI              |    Mandatory   |            Y           |
+//! |  \ref xSPinTypeTimer            |    Mandatory   |            Y           |
+//! |  \ref xSPinTypeUART             |    Mandatory   |            Y           |
+//! |  \ref xSPinTypeACMP             |    Mandatory   |            N           |
+//!
 //! @{
 //
 //*****************************************************************************
@@ -1162,7 +1079,7 @@ extern "C"
 //!              - \ref GPIO_PIN1
 //!              - \ref ...
 //!              More Information, please refer to \ref xGPIO_General_Pin_IDs.
-//!  
+//!
 //! \param  [in] ulPinIO is the pin direction and/or mode.
 //!              This parameter can be one of the following value:
 //!              Where \ref xGPIO_DIR_MODE_IN specifies that the pin will be
@@ -1173,30 +1090,30 @@ extern "C"
 //!
 //! \return None.
 //!
-//! \note   xGPIOPadConfigSet() must also be used to configure the corresponding
+//! \note   \ref xGPIOPadConfigSet() must also be used to configure the corresponding
 //!         pad(s) in order for them to propagate the signal to/from the GPIO.
 //
 //*****************************************************************************
 extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
-                            unsigned long ulPinIO);   
+                            unsigned long ulPinIO);
 
 //*****************************************************************************
 //
 //! \brief  Get the GPIO port from a Pin.
 //!
 //! \param  [in] eShortPin is the base address of the GPIO port
-//! 
+//!
 //! \return GPIO port code, which is one of the following value:
-//!             \ref xSYSCTL_PERIPH_GPIOC
-//!             \ref xSYSCTL_PERIPH_I2C1
-//!                  ...
-//!             \ref xSYSCTL_PERIPH_TIMER2
-//!             \ref xSYSCTL_PERIPH_TIMER3
+//!             - \ref xSYSCTL_PERIPH_GPIOC
+//!             - \ref xSYSCTL_PERIPH_I2C1
+//!             -      ...
+//!             - \ref xSYSCTL_PERIPH_TIMER2
+//!             - \ref xSYSCTL_PERIPH_TIMER3
 //!
 //!         which can be used in those functions:
-//!             \ref xSysCtlPeripheralEnable 
-//!             \ref xSysCtlPeripheralDisable
-//!             \ref xSysCtlPeripheralReset 
+//!             - \ref xSysCtlPeripheralEnable
+//!             - \ref xSysCtlPeripheralDisable
+//!             - \ref xSysCtlPeripheralReset
 //
 //*****************************************************************************
 #define xGPIOSPinToPeripheralId(eShortPin)                                    \
@@ -1226,7 +1143,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //*****************************************************************************
 #define xGPIOSPinToPortPin(eShortPin)                                         \
         GPIOSPinToPortPin(eShortPin)
-        
+
 //*****************************************************************************
 //
 //! \brief  Get the GPIO pin number from a short Pin.
@@ -1259,7 +1176,7 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //!
 //! \return None.
 //!
-//! \note   xGPIOPadConfigSet() must also be used to configure the corresponding
+//! \note   \ref xGPIOPadConfigSet() must also be used to configure the corresponding
 //!         pad(s) in order for them to propagate the signal to/from the GPIO.
 //
 //*****************************************************************************
@@ -1278,12 +1195,12 @@ extern void xGPIODirModeSet(unsigned long ulPort, unsigned long ulPins,
 //! \param  [in] ulPort is the base address of the GPIO port
 //! \param  [in] ulPin is the bit-packed representation of the pin.
 //!
-//! \return Returns one of the enumerated data types 
-//!         \ref xGPIO_DIR_MODE_IN
-//!         \ref xGPIO_DIR_MODE_OUT
-//!         \ref xGPIO_DIR_MODE_HW
-//!         \ref xGPIO_DIR_MODE_QB
-//!         \ref xGPIO_DIR_MODE_OD
+//! \return Returns one of the enumerated data types
+//!         - \ref xGPIO_DIR_MODE_IN
+//!         - \ref xGPIO_DIR_MODE_OUT
+//!         - \ref xGPIO_DIR_MODE_HW
+//!         - \ref xGPIO_DIR_MODE_QB
+//!         - \ref xGPIO_DIR_MODE_OD
 //
 //*****************************************************************************
 extern unsigned long xGPIODirModeGet(unsigned long ulPort, unsigned long ulPin);
@@ -1299,9 +1216,9 @@ extern unsigned long xGPIODirModeGet(unsigned long ulPort, unsigned long ulPin);
 //! \return None.
 //
 //*****************************************************************************
-extern void xGPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin, 
+extern void xGPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin,
                                    xtEventCallback xtPortCallback);
-        
+
 //*****************************************************************************
 //
 //! \brief  Set the interrupt type and Enable interrupt for the specified pin(s).
@@ -1320,7 +1237,7 @@ extern void xGPIOPinIntCallbackInit(unsigned long ulPort, unsigned long ulPin,
 //*****************************************************************************
 extern void xGPIOPinIntEnable(unsigned long ulPort, unsigned long ulPins,
         unsigned long ulIntType);
-         
+
 //*****************************************************************************
 //
 //! \brief  Set the interrupt type and Enable interrupt for the specified pin(s).
@@ -1346,7 +1263,7 @@ extern void xGPIOPinIntEnable(unsigned long ulPort, unsigned long ulPins,
 //!
 //! \return None.
 //
-//*****************************************************************************       
+//*****************************************************************************
 extern void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins);
 
 //*****************************************************************************
@@ -1357,7 +1274,7 @@ extern void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins);
 //!
 //! \return None.
 //
-//*****************************************************************************       
+//*****************************************************************************
 #define xGPIOSPinIntDisable(eShortPin)                                        \
         xGPIOPinIntDisable(G##eShortPin)
 
@@ -1366,7 +1283,7 @@ extern void xGPIOPinIntDisable(unsigned long ulPort, unsigned long ulPins);
 //! \brief  Get interrupt status for the specified GPIO port.
 //!
 //! \param  [in] ulPort is the base address of the GPIO port.
-//! 
+//!
 //! \return Returns a bit-packed byte, where each bit that is set identifie
 //!         an active masked or raw interrupt, and where bit 0 of the byte
 //!         represents GPIO port pin 0, bit 1 represents GPIO port pin 1, and
@@ -1491,7 +1408,7 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //*****************************************************************************
 #define xGPIOPortWrite(ulPort, ulVal)                                         \
         GPIOPortWrite(ulPort, ulVal)
-        
+
 //*****************************************************************************
 //
 //! \brief  Write a value to the specified pin.
@@ -1563,15 +1480,15 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
             GPIOPinFunCfg(G##eShortPin, GPIO_##eShortPin##_##eShortPin);      \
             GPIOPinModeCfg(G##eShortPin, PIN_MODE_OUTPUT);                    \
         }                                                                     \
-        while(0)  
-            
+        while(0)
+
 //*****************************************************************************
 //
 //! \brief  Turn a pin to a GPIO Output(open drain) pin.
 //!         This function configures a pin for use as an GPIO Output pin device
 //!         and turns the pin into a GPIO Output(open drain) pin.
 //!
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
+//! \param  [in] eShortPin is the GPIO short pin name such as PA0.
 //!
 //! \return None.
 //
@@ -1582,7 +1499,7 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
             GPIOPinFunCfg(G##eShortPin, GPIO_##eShortPin##_eShortPin);        \
             GPIOPinModeCfg(G##eShortPin, PIN_MODE_OD_EN);                     \
         }                                                                     \
-        while(0)  
+        while(0)
 
 //*****************************************************************************
 //
@@ -1590,10 +1507,13 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         This function configures a pin for use as an ADC function device
 //!         and turns the pin into a GPIO ADC input pin.
 //!
-//! \param  [in] ePeripheralPin is the GPIO Peripheral name such as ADC0. 
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
+//! \param  [in] ePeripheralPin is the GPIO Peripheral name such as ADC0.
 //!
+//! \param  [in] eShortPin is the GPIO short pin name such as PA0.
 //!
+//! \return None.
+//!
+//! \note
 //!         Table shows what the ePeripheralPin and eShortPin should be, only
 //!         the argument which are in the same line can be combined.
 //!         For eaxmple(TI):
@@ -1604,40 +1524,41 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!             xSPinTypeADC(ADC0, PE6)  --> Error
 //!             xSPinTypeADC(ADC0, PE5)  --> Error
 //!
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: ADCn         | should be: PXn           |
-//! |                    | n indicate the pin      | XX indicate the GPIO     |
-//! |                    | number such as          | PORT,Such as             |
-//! |                    | 0 1 2 3 ....            | A B C D E ...            |
-//! |                    |                         | n indicate the pin       |
-//! |                    |                         | number such as           |
-//! |                    |                         | 0 1 2 3 ....             |
-//! |--------------------|-------------------------|--------------------------|
-//! |       LPC17xx      |     ADC0                |     PA0 (ADC123)         |
-//! |                    |     ADC1                |     PA1 (ADC123)         |
-//! |                    |     ADC2                |     PA2 (ADC123)         |
-//! |                    |     ADC3                |     PA3 (ADC123)         |
-//! |                    |     ADC4                |  PA4(ADC12)  PF6(ADC3)   |
-//! |                    |     ADC5                |  PA5(ADC12)  PF7(ADC3)   |
-//! |                    |     ADC6                |  PA6(ADC12)  PF8(ADC3)   |
-//! |                    |     ADC7                |  PA7(ADC12)  PF9(ADC3)   |
-//! |                    |     ADC8                |  PB0(ADC12)  PF10(ADC3)  |
-//! |                    |     ADC9                |     PB1 (ADC12)          |
-//! |                    |     ADC10               |     PC0 (ADC123)         |
-//! |                    |     ADC11               |     PC1 (ADC123)         |
-//! |                    |     ADC12               |     PC2 (ADC123)         |
-//! |                    |     ADC13               |     PC3 (ADC123)         |
-//! |                    |     ADC14               |     PC4 (ADC12)          |
-//! |                    |     ADC15               |     PC5 (ADC12)          |
-//! |--------------------|-------------------------|--------------------------|
 //!
-//! \return None.
+//!     +-----------------+-------------------------+--------------------------+
+//!     |  manufacturer   | ePeripheralPin          | eShortPin                |
+//!     |-----------------|-------------------------|--------------------------|
+//!     |  CoX            | This parameter is a     | This parameter is a      |
+//!     |                 | mandatory.The mandatory | mandatory. the mandatory |
+//!     |                 | is the format of        | is the format of         |
+//!     |                 | Variable naming.So it   | Variable naming.So it    |
+//!     |                 | should be: ADCn         | should be: PXn           |
+//!     |                 | n indicate the pin      | XX indicate the GPIO     |
+//!     |                 | number such as          | PORT,Such as             |
+//!     |                 | 0 1 2 3 ....            | A B C D E ...            |
+//!     |                 |                         | n indicate the pin       |
+//!     |                 |                         | number such as           |
+//!     |                 |                         | 0 1 2 3 ....             |
+//!     |-----------------|-------------------------|--------------------------|
+//!     |     LPC17xx     |     ADC0                |     PA0 (ADC123)         |
+//!     |                 |     ADC1                |     PA1 (ADC123)         |
+//!     |                 |     ADC2                |     PA2 (ADC123)         |
+//!     |                 |     ADC3                |     PA3 (ADC123)         |
+//!     |                 |     ADC4                |  PA4(ADC12)  PF6(ADC3)   |
+//!     |                 |     ADC5                |  PA5(ADC12)  PF7(ADC3)   |
+//!     |                 |     ADC6                |  PA6(ADC12)  PF8(ADC3)   |
+//!     |                 |     ADC7                |  PA7(ADC12)  PF9(ADC3)   |
+//!     |                 |     ADC8                |  PB0(ADC12)  PF10(ADC3)  |
+//!     |                 |     ADC9                |     PB1 (ADC12)          |
+//!     |                 |     ADC10               |     PC0 (ADC123)         |
+//!     |                 |     ADC11               |     PC1 (ADC123)         |
+//!     |                 |     ADC12               |     PC2 (ADC123)         |
+//!     |                 |     ADC13               |     PC3 (ADC123)         |
+//!     |                 |     ADC14               |     PC4 (ADC12)          |
+//!     |                 |     ADC15               |     PC5 (ADC12)          |
+//!     +-----------------+-------------------------+--------------------------+
+//!
+//!
 //
 //*****************************************************************************
 #define xSPinTypeADC(ePeripheralPin, eShortPin)                               \
@@ -1646,12 +1567,14 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //*****************************************************************************
 //
 //! \brief  Turn a pin to a GPIO CAN input or output pin.
-//!         This function configures a pin for use as a CAN function and turns 
+//!         This function configures a pin for use as a CAN function and turns
 //!         the pin into a GPIO CAN input or output pin.
 //!
-//! \param  [in] ePeripheralPin is the GPIO Peripheral name such as CAN0RX. 
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
+//! \param  [in] ePeripheralPin is the GPIO Peripheral name such as CAN0RX.
 //!
+//! \param  [in] eShortPin is the GPIO short pin name such as PA0.
+//!
+//! \return None.
 //!         Table shows what the ePeripheralPin and eShortPin should be, only the
 //!         argument which are in the same line can be combined.
 //!         For eaxmple(TI):
@@ -1662,26 +1585,27 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         xSPinTypeCAN(CAN0RX, PA5) --> Error
 //!         xSPinTypeCAN(CAN0RX, PF0) --> Error
 //!
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: CANnRX       | should be: PXn           |
-//! |                    | or CANnTX               | XX indicate the GPIO     |
-//! |                    | n indicate the pin      | PORT,Such as             |
-//! |                    | number such as          | A B C D E ...            |
-//! |                    | 0 1 2 3 ....            | n indicate the pin       |
-//! |                    |                         | number such as           |
-//! |                    |                         | 0 1 2 3 ....             |
-//! |--------------------|-------------------------|--------------------------|
-//! |       LPC17xx      |     CAN0RX              |     PA11  PD0  PB8       |
-//! |                    |     CAN0TX              |     PA12  PD1  PB9       |
-//! |--------------------|-------------------------|--------------------------|
 //!
-//! \return None.
+//!     +--------------------+-------------------------+--------------------------+
+//!     |    manufacturer    | ePeripheralPin          | eShortPin                |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |    CoX             | This parameter is a     | This parameter is a      |
+//!     |                    | mandatory.The mandatory | mandatory. the mandatory |
+//!     |                    | is the format of        | is the format of         |
+//!     |                    | Variable naming.So it   | Variable naming.So it    |
+//!     |                    | should be: CANnRX       | should be: PXn           |
+//!     |                    | or CANnTX               | XX indicate the GPIO     |
+//!     |                    | n indicate the pin      | PORT,Such as             |
+//!     |                    | number such as          | A B C D E ...            |
+//!     |                    | 0 1 2 3 ....            | n indicate the pin       |
+//!     |                    |                         | number such as           |
+//!     |                    |                         | 0 1 2 3 ....             |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |       LPC17xx      |     CAN0RX              |     PA11  PD0  PB8       |
+//!     |                    |     CAN0TX              |     PA12  PD1  PB9       |
+//!     +--------------------+-------------------------+--------------------------+
+//!
+//!
 //
 //*****************************************************************************
 #define xSPinTypeCAN(ePeripheralPin, eShortPin)                               \
@@ -1694,8 +1618,12 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         turns the pin into a GPIO I2C input or output pin.
 //!
 //! \param  [in] ePeripheralPin is the GPIO Peripheral name such as I2C0SDA.
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
 //!
+//! \param  [in] eShortPin is the GPIO short pin name such as PA0.
+//!
+//! \return None.
+//!
+//! \note
 //!         Table shows what the ePeripheralPin and eShortPin should be, only
 //!         the argument which are in the same line can be combined.
 //!         For eaxmple(TI):
@@ -1707,93 +1635,34 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!             xSPinTypeI2C(CAN0RX, PF0)   --> Error
 //!
 //!
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: I2CnSCK      | should be: PXn           |
-//! |                    | or I2CnSDA              | XX indicate the GPIO     |
-//! |                    | n indicate the pin      | PORT,Such as             |
-//! |                    | number such as          | A B C D E ...            |
-//! |                    | 0 1 2 3 ....            | n indicate the pin       |
-//! |                    |                         | number such as           |
-//! |                    |                         | 0 1 2 3 ....             |
-//! |--------------------|-------------------------|--------------------------|
-//! |       LPC17xx      |     I2C1SCK             |     PB6   PB8            |
-//! |                    |     I2C1SDA             |     PB7   PB9            |
-//! |                    |     I2C1SMBA            |     PB5                  |
-//! |                    |     I2C2SCK             |     PB10                 |
-//! |                    |     I2C2SDA             |     PB11                 |
-//! |                    |     I2C2SMBA            |     PB12                 |
-//! |--------------------|-------------------------|--------------------------|
+//!     +--------------------+-------------------------+--------------------------+
+//!     |    manufacturer    | ePeripheralPin          | eShortPin                |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |    CoX             | This parameter is a     | This parameter is a      |
+//!     |                    | mandatory.The mandatory | mandatory. the mandatory |
+//!     |                    | is the format of        | is the format of         |
+//!     |                    | Variable naming.So it   | Variable naming.So it    |
+//!     |                    | should be: I2CnSCK      | should be: PXn           |
+//!     |                    | or I2CnSDA              | XX indicate the GPIO     |
+//!     |                    | n indicate the pin      | PORT,Such as             |
+//!     |                    | number such as          | A B C D E ...            |
+//!     |                    | 0 1 2 3 ....            | n indicate the pin       |
+//!     |                    |                         | number such as           |
+//!     |                    |                         | 0 1 2 3 ....             |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |       LPC17xx      |     I2C1SCK             |     PB6   PB8            |
+//!     |                    |     I2C1SDA             |     PB7   PB9            |
+//!     |                    |     I2C1SMBA            |     PB5                  |
+//!     |                    |     I2C2SCK             |     PB10                 |
+//!     |                    |     I2C2SDA             |     PB11                 |
+//!     |                    |     I2C2SMBA            |     PB12                 |
+//!     |--------------------|-------------------------|--------------------------|
 //!
-//! \return None.
+//!
 //
 //*****************************************************************************
  #define xSPinTypeI2C(ePeripheralPin, eShortPin)                              \
          GPIOSPinConfigure(ePeripheralPin, eShortPin)
-
-//*****************************************************************************
-//
-//! \brief  Turn a pin to a GPIO I2S input or output pin.
-//!         This function configures a pin for use as an I2S function device
-//!         and turns the pin into a GPIO I2S input or output pin.
-//!
-//! \param  [in] ePeripheralPin is the GPIO Peripheral name such as I2C0SDA. 
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
-//!
-//!         Table shows what the ePeripheralPin and eShortPin should be, only
-//!         the argument which are in the same line can be combined.
-//!         For eaxmple(TI):
-//!
-//!         xSPinTypeI2S(I2S0RXSD, PA2)  --> Correct
-//!         xSPinTypeI2S(I2S0RXSD, PD4)  --> Correct
-//!
-//!         xSPinTypeI2S(I2S0RXSD, PD1)  --> Error
-//!         xSPinTypeI2S(I2S0RXWS, PA2)  --> Error
-//!
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: I2SnRXSCK,   | should be: PXn           |
-//! |                    | I2SnRXMCLK,I2S0RXSD,    | XX indicate the GPIO     |
-//! |                    | I2S0RXWS,I2S0TXSCK,     | PORT,Such as             |
-//! |                    | I2S0TXMCLK,I2S0TXSD,    | A B C D E ...            |
-//! |                    | or I2S0TXWS.            | n indicate the pin       |
-//! |                    | n indicate the pin      | number such as           |
-//! |                    | number such as          | 0 1 2 3 ....             |
-//! |                    | 0 1 2 3 ....            |                          |
-//! |--------------------|-------------------------|--------------------------|
-//! |       LPC17xx      |     I2S2RXMCLK          |     PC6                  |
-//! |                    |     I2S2RXSCK           |     PB13                 |
-//! |                    |     I2S2RXSD            |     PB15                 |
-//! |                    |     I2S2RXWS            |     PB12                 |
-//! |                    |     I2S2TXMCLK          |     PC6                  |
-//! |                    |     I2S2TXSCK           |     PB13                 |
-//! |                    |     I2S2TXSD            |     PB15                 |
-//! |                    |     I2S2TXWS            |     PB12                 |
-//! |                    |     I2S3RXMCLK          |     PC7                  |
-//! |                    |     I2S3RXSCK           |     PB3                  |
-//! |                    |     I2S3RXSD            |     PB5                  |
-//! |                    |     I2S3RXWS            |     PA15                 |
-//! |                    |     I2S3TXMCLK          |     PC7                  |
-//! |                    |     I2S3TXSCK           |     PB3                  |
-//! |                    |     I2S3TXSD            |     PB5                  |
-//! |                    |     I2S3TXWS            |     PA15                 |
-//! |--------------------|-------------------------|--------------------------|
-//!
-//! \return None.
-//
-//*****************************************************************************
-#define xSPinTypeI2S(ePeripheralPin, eShortPin)                               \
-        GPIOSPinConfigure(ePeripheralPin, eShortPin)
 
 //*****************************************************************************
 //
@@ -1802,8 +1671,12 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         the pin into a GPIO SPI input or output pin.
 //!
 //! \param  [in] ePeripheralPin is the GPIO Peripheral name such as I2C0SDA.
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
 //!
+//! \param  [in] eShortPin is the GPIO short pin name such as PA0.
+//!
+//! \return None.
+//!
+//! \note
 //!         Table shows what the ePeripheralPin and eShortPin should be, only
 //!         the argument which are in the same line can be combined.
 //!         For eaxmple(TI):
@@ -1813,36 +1686,36 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!
 //!             xSPinTypeSPI(SPI0CLK, PA5)  --> Error
 //!             xSPinTypeSPI(SPI0CLK, PA4)  --> Error
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: SPInCLK,     | should be: PXn           |
-//! |                    | SPInMISO, SPInMOSI,     | XX indicate the GPIO     |
-//! |                    | or SPInCS,              | PORT,Such as             |
-//! |                    | n indicate the pin      | A B C D E ...            |
-//! |                    | number such as          | n indicate the pin       |
-//! |                    | 0 1 2 3 ....            | number such as           |
-//! |                    |                         | 0 1 2 3 ....             |
-//! |--------------------|-------------------------|--------------------------|
-//! |       LPC17xx      |     SPI1CLK             |     PA5 PB3              |
-//! |                    |     SPI1MOSI            |     PA7,PB5              |
-//! |                    |     SPI1MISO            |     PA6,PB4              |
-//! |                    |     SPI1CS              |     PA4,PA15             |
-//! |                    |     SPI2CLK             |     PB13                 |
-//! |                    |     SPI2MOSI            |     PB15                 |
-//! |                    |     SPI2MISO            |     PB14                 |
-//! |                    |     SPI2CS              |     PB12                 |
-//! |                    |     SPI3CLK             |     PB3                  |
-//! |                    |     SPI3MOSI            |     PB5                  |
-//! |                    |     SPI3MISO            |     PB4                  |
-//! |                    |     SPI3CS              |     PA15                 |
-//! |--------------------|-------------------------|--------------------------|
 //!
-//! \return None.
+//!     +--------------------+-------------------------+--------------------------+
+//!     |    manufacturer    | ePeripheralPin          | eShortPin                |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |    CoX             | This parameter is a     | This parameter is a      |
+//!     |                    | mandatory.The mandatory | mandatory. the mandatory |
+//!     |                    | is the format of        | is the format of         |
+//!     |                    | Variable naming.So it   | Variable naming.So it    |
+//!     |                    | should be: SPInCLK,     | should be: PXn           |
+//!     |                    | SPInMISO, SPInMOSI,     | XX indicate the GPIO     |
+//!     |                    | or SPInCS,              | PORT,Such as             |
+//!     |                    | n indicate the pin      | A B C D E ...            |
+//!     |                    | number such as          | n indicate the pin       |
+//!     |                    | 0 1 2 3 ....            | number such as           |
+//!     |                    |                         | 0 1 2 3 ....             |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |       LPC17xx      |     SPI1CLK             |     PA5 PB3              |
+//!     |                    |     SPI1MOSI            |     PA7,PB5              |
+//!     |                    |     SPI1MISO            |     PA6,PB4              |
+//!     |                    |     SPI1CS              |     PA4,PA15             |
+//!     |                    |     SPI2CLK             |     PB13                 |
+//!     |                    |     SPI2MOSI            |     PB15                 |
+//!     |                    |     SPI2MISO            |     PB14                 |
+//!     |                    |     SPI2CS              |     PB12                 |
+//!     |                    |     SPI3CLK             |     PB3                  |
+//!     |                    |     SPI3MOSI            |     PB5                  |
+//!     |                    |     SPI3MISO            |     PB4                  |
+//!     |                    |     SPI3CS              |     PA15                 |
+//!     +--------------------+-------------------------+--------------------------+
+//!
 //
 //*****************************************************************************
 #define xSPinTypeSPI(ePeripheralPin, eShortPin)                               \
@@ -1854,46 +1727,50 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         This function configures a pin for use as a Timer function and turns
 //!         the pin into a GPIO Timer input or output pin.
 //!
-//! \param  [in] ePeripheralPin is the GPIO Peripheral name such as I2C0SDA. 
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
+//! \param  [in] ePeripheralPin is the GPIO Peripheral name such as I2C0SDA.
 //!
+//! \param  [in] eShortPin is the GPIO short pin name such as PA0.
+//!
+//! \return None.
+//!
+//! \note
 //!         Table shows what the ePeripheralPin and eShortPin should be, only the
 //!         argument which are in the same line can be combined.
 //!         For eaxmple(TI):
+//!
 //!             xSPinTypeTimer(TIMCCP0, PD3)  --> Correct
 //!             xSPinTypeTimer(TIMCCP0, PJ7)  --> Correct
 //!
 //!             xSPinTypeTimer(TIMCCP0, PC5)  --> Error
 //!             xSPinTypeTimer(TIMCCP0, PB6)  --> Error
 //!
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: TIMCCPn,     | should be: PXn           |
-//! |                    | n indicate the pin      | XX indicate the GPIO     |
-//! |                    | number such as          | PORT,Such as             |
-//! |                    | 0 1 2 3 ....            | A B C D E ...            |
-//! |                    |                         | n indicate the pin       |
-//! |                    |                         | number such as           |
-//! |                    |                         | 0 1 2 3 ....             |
-//! |--------------------|-------------------------|--------------------------|
-//! |       LPC17xx      |     TIM1ETR             |     PA12 PE7             |
-//! |                    |     TIM1CH1             |     PA8  PE9             |
-//! |                    |     TIM1CH1N            |     PA7  PB13   PE8      |
-//! |                    |     TIM1CH2             |     PA9  PE11            |
-//! |                    |     TIM1CH2N            |     PB14 PB0   PE10      |
-//! |                    |     TIM1CH3             |     PA10 PE13            |
-//! |                    |     TIM1CH3N            |     PB15 PB1   PE12      |
-//! |                    |     TIM1CH4             |     PA11 PE14            |
-//! |                    |     TIM1CH4N            |                          |
-//! |                    |     TIM14CH2            |                          |
-//! |--------------------|-------------------------|--------------------------|
+//!     +--------------------+-------------------------+--------------------------+
+//!     |    manufacturer    | ePeripheralPin          | eShortPin                |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |    CoX             | This parameter is a     | This parameter is a      |
+//!     |                    | mandatory.The mandatory | mandatory. the mandatory |
+//!     |                    | is the format of        | is the format of         |
+//!     |                    | Variable naming.So it   | Variable naming.So it    |
+//!     |                    | should be: TIMCCPn,     | should be: PXn           |
+//!     |                    | n indicate the pin      | XX indicate the GPIO     |
+//!     |                    | number such as          | PORT,Such as             |
+//!     |                    | 0 1 2 3 ....            | A B C D E ...            |
+//!     |                    |                         | n indicate the pin       |
+//!     |                    |                         | number such as           |
+//!     |                    |                         | 0 1 2 3 ....             |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |       LPC17xx      |     TIM1ETR             |     PA12 PE7             |
+//!     |                    |     TIM1CH1             |     PA8  PE9             |
+//!     |                    |     TIM1CH1N            |     PA7  PB13   PE8      |
+//!     |                    |     TIM1CH2             |     PA9  PE11            |
+//!     |                    |     TIM1CH2N            |     PB14 PB0   PE10      |
+//!     |                    |     TIM1CH3             |     PA10 PE13            |
+//!     |                    |     TIM1CH3N            |     PB15 PB1   PE12      |
+//!     |                    |     TIM1CH4             |     PA11 PE14            |
+//!     |                    |     TIM1CH4N            |                          |
+//!     |                    |     TIM14CH2            |                          |
+//!     |--------------------|-------------------------|--------------------------|
 //!
-//! \return None.
 //
 //*****************************************************************************
 #define xSPinTypeTimer(ePeripheralPin, eShortPin)                             \
@@ -1906,51 +1783,56 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         the pin into a GPIO UART input or output pin.
 //!
 //! \param  [in] ePeripheralPin is the GPIO Peripheral name such as I2C0SDA.
-//! \param  [in] eShortPin is the GPIO short pin name such as PA0. 
 //!
+//! \param  [in] eShortPin is the GPIO short pin name such as PA0.
+//!
+//! \return None.
+//!
+//! \note
 //!         Table shows what the ePeripheralPin and eShortPin should be, only the
 //!         argument which are in the same line can be combined.
 //!         For eaxmple(TI):
+//!
 //!             xSPinTypeUART(UART0RX, PA0)  --> Correct
 //!             xSPinTypeUART(UART0TX, PA1)  --> Correct
 //!
 //!             xSPinTypeUART(UART0RX, PE6)  --> Error
 //!             xSPinTypeUART(UART0RX, PA1)  --> Error
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: UARTnRX,     | should be: PXn           |
-//! |                    | UARTnTX, UARTnCTS,      | XX indicate the GPIO     |
-//! |                    | ......,                 | PORT,Such as             |
-//! |                    | n indicate the pin      | A B C D E ...            |
-//! |                    | number such as          | n indicate the pin       |
-//! |                    | 0 1 2 3 ....            | number such as           |
-//! |                    |                         | 0 1 2 3 ....             |
-//! |--------------------|-------------------------|--------------------------|
-//! |                    |     UART0TX             |     PA2                  |
-//! |                    |     UART0RX             |     PA3                  |
-//! |                    | ------------------------- ------------------------ |
-//! |                    |     UART1TX             |     PA15  PC0            |
-//! |                    |     UART1RX             |     PA16  PC1            |
-//! |                    |     UART1CTS            |     PA17  PC2            |
-//! |                    |     UART1DCD            |     PA18  PC3            |
-//! |                    |     UART1DSR            |     PA19  PC4            |
-//! |      LPC17xx       |     UART1DTR            |     PA20  PC5            |
-//! |                    |     UART1RI             |     PA21  PC6            |
-//! |                    |     UART1RTS            |     PA22  PC7            |
-//! |                    | ------------------------- ------------------------ |
-//! |                    |     UART2TX             |     PA10  PC8            |
-//! |                    |     UART2RX             |     PA11  PC9            |
-//! |                    | ------------------------- ------------------------ |
-//! |                    |     UART3TX             |     PA0   PA25  PE28     |
-//! |                    |     UART3RX             |     PA1   PA26  PE29     |
-//! |-------------------------------------------------------------------------|
 //!
-//! \return None.
+//!     +--------------------+-------------------------+--------------------------+
+//!     |    manufacturer    | ePeripheralPin          | eShortPin                |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |    CoX             | This parameter is a     | This parameter is a      |
+//!     |                    | mandatory.The mandatory | mandatory. the mandatory |
+//!     |                    | is the format of        | is the format of         |
+//!     |                    | Variable naming.So it   | Variable naming.So it    |
+//!     |                    | should be: UARTnRX,     | should be: PXn           |
+//!     |                    | UARTnTX, UARTnCTS,      | XX indicate the GPIO     |
+//!     |                    | ......,                 | PORT,Such as             |
+//!     |                    | n indicate the pin      | A B C D E ...            |
+//!     |                    | number such as          | n indicate the pin       |
+//!     |                    | 0 1 2 3 ....            | number such as           |
+//!     |                    |                         | 0 1 2 3 ....             |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |                    |     UART0TX             |     PA2                  |
+//!     |                    |     UART0RX             |     PA3                  |
+//!     |                    | ------------------------- ------------------------ |
+//!     |                    |     UART1TX             |     PA15  PC0            |
+//!     |                    |     UART1RX             |     PA16  PC1            |
+//!     |                    |     UART1CTS            |     PA17  PC2            |
+//!     |                    |     UART1DCD            |     PA18  PC3            |
+//!     |                    |     UART1DSR            |     PA19  PC4            |
+//!     |      LPC17xx       |     UART1DTR            |     PA20  PC5            |
+//!     |                    |     UART1RI             |     PA21  PC6            |
+//!     |                    |     UART1RTS            |     PA22  PC7            |
+//!     |                    | ------------------------- ------------------------ |
+//!     |                    |     UART2TX             |     PA10  PC8            |
+//!     |                    |     UART2RX             |     PA11  PC9            |
+//!     |                    | ------------------------- ------------------------ |
+//!     |                    |     UART3TX             |     PA0   PA25  PE28     |
+//!     |                    |     UART3RX             |     PA1   PA26  PE29     |
+//!     |-------------------------------------------------------------------------|
+//!
 //
 //*****************************************************************************
 #define xSPinTypeUART(ePeripheralPin, eShortPin)                              \
@@ -1962,27 +1844,31 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //!         This function configures a pin for use as an GPIO DAC function and
 //!         turns the pin into a GPIO DAC output pin.
 //!
-//! \param  ePeripheralPin is the GPIO Peripheral name such as I2C0SDA. 
-//! \param eShortPin is the GPIO short pin name such as PA0. 
+//! \param  ePeripheralPin is the GPIO Peripheral name such as I2C0SDA.
 //!
-//! +--------------------+-------------------------+--------------------------+
-//! |    manufacturer    | ePeripheralPin          | eShortPin                |
-//! |--------------------|-------------------------|--------------------------|
-//! |    CoX             | This parameter is a     | This parameter is a      |
-//! |                    | mandatory.The mandatory | mandatory. the mandatory |
-//! |                    | is the format of        | is the format of         |
-//! |                    | Variable naming.So it   | Variable naming.So it    |
-//! |                    | should be: DACOUTn,     | should be: PXn           |
-//! |                    |                         | X  indicate the GPIO     |
-//! |                    | n x indicate the pin    | PORT,Such as             |
-//! |                    | number such as          | A B C D E ...            |
-//! |                    | 0 1 2 3 ....            | n indicate the pin       |
-//! |                    |                         | number such as           |
-//! |                    |                         | 0 1 2 3 ....             |
-//! |--------------------|-------------------------|--------------------------|
-//! |       LPC17xx      |     DACOUT1             |     PA4                  |
-//! |                    |     DACOUT2             |     PA5                  |
-//! |--------------------|-------------------------|--------------------------|
+//! \param eShortPin is the GPIO short pin name such as PA0.
+//!
+//! \return None.
+//!
+//! \note
+//!     +--------------------+-------------------------+--------------------------+
+//!     |    manufacturer    | ePeripheralPin          | eShortPin                |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |    CoX             | This parameter is a     | This parameter is a      |
+//!     |                    | mandatory.The mandatory | mandatory. the mandatory |
+//!     |                    | is the format of        | is the format of         |
+//!     |                    | Variable naming.So it   | Variable naming.So it    |
+//!     |                    | should be: DACOUTn,     | should be: PXn           |
+//!     |                    |                         | X  indicate the GPIO     |
+//!     |                    | n x indicate the pin    | PORT,Such as             |
+//!     |                    | number such as          | A B C D E ...            |
+//!     |                    | 0 1 2 3 ....            | n indicate the pin       |
+//!     |                    |                         | number such as           |
+//!     |                    |                         | 0 1 2 3 ....             |
+//!     |--------------------|-------------------------|--------------------------|
+//!     |       LPC17xx      |     DACOUT1             |     PA4                  |
+//!     |                    |     DACOUT2             |     PA5                  |
+//!     |--------------------|-------------------------|--------------------------|
 //!
 //! \return None.
 //
@@ -1997,14 +1883,26 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 //
 //*****************************************************************************
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! \addtogroup GPIO
+//! @{
+//
+//*****************************************************************************
 
+//! Auxiliary function.
 #define GPIOSPinConfigure(ePeripheralPin, eShortPin)                          \
         GPIOPinFunCfg(G##eShortPin, GPIO_##eShortPin##_##ePeripheralPin)
 
 //*****************************************************************************
 //
-//! \addtogroup  LPC17xx _GPIO_General_Pin_IDs  LPC17xx  GPIO General Pin ID
+//! \addtogroup  LPC17xx_GPIO_General_Pin_IDs  LPC17xx GPIO General Pin ID
 //! \brief       The following values define the bit field for the ucPins argument
 //!              to several of the APIs.
 //! @{
@@ -2358,6 +2256,13 @@ extern void xGPIOPinWrite(unsigned long ulPort, unsigned long ulPins,
 #define INT_TYPE_RISING         BIT_32_0
 #define INT_TYPE_FALLING        BIT_32_1
 
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_GPIO_Exported_APIs LPC17xx GPIO API
+//! \brief      LPC17xx GPIO API Reference.
+//! @{
+//
+//*****************************************************************************
 
 extern unsigned long  GPIOPinToPeripheralId(unsigned long ulPort, unsigned long ulPin);
 extern unsigned long  GPIOPinToPort(unsigned long ulPort, unsigned long ulPin);
@@ -2377,6 +2282,38 @@ extern void          GPIOPinIntFlagClear(unsigned long ulPort, unsigned long ulP
 extern void          GPIOPinIntEnable(unsigned long ulPort, unsigned long ulPin);
 extern void          GPIOPinIntDisable(unsigned long ulPort, unsigned long ulPin);
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+// Mark the end of the C bindings section for C++ compilers.
+//
+//*****************************************************************************
+#ifdef __cplusplus
+}
 #endif
+
+#endif // __XGPIO_H__
 

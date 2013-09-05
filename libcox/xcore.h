@@ -1,14 +1,13 @@
 //*****************************************************************************
 //
-//! \file xcore.h
-//! \brief Prototypes for Cortex-M3 core function.
-//! - Prototypes for the CPU instruction wrapper functions.
-//! - Prototypes for the NVIC Interrupt Controller Driver.
-//! - Prototypes for the SysTick driver.
-//! \version V2.2.1.0
-//! \todo Update this time information.
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xcore.h
+//! \brief     Prototypes for Cortex-M3 core function.
+//!                - Prototypes for the CPU instruction wrapper functions.
+//!                - Prototypes for the NVIC Interrupt Controller Driver.
+//!                - Prototypes for the SysTick driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox

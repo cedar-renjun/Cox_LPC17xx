@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_sysctl.h
-//! \brief Macros used when accessing the system control hardware.
-//! \version V2.2.1.0
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xhw_timer.h
+//! \brief     Macros used when accessing the TIMER hardware.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -37,8 +37,17 @@
 //*****************************************************************************
 
 
-#ifndef __XHW_SYSCTL_H__
-#define __XHW_SYSCTL_H__
+#ifndef __XHW_TIMER_H__
+#define __XHW_TIMER_H__
+
+#include "xhw_types.h"
+#include "xhw_ints.h"
+#include "xcore.h"
+#include "xhw_memmap.h"
+#include "xhw_nvic.h"
+#include "xhw_sysctl.h"
+#include "xdebug.h"
+#include "xsysctl.h"
 
 //*****************************************************************************
 //
@@ -56,51 +65,27 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_TIMER_Register TIMER Register Hardware Layer.
+//! \addtogroup LPC17xx_TIMER_Register Timer Register Hardware Layer.
 //! \brief      Here are detail register information.
 //!             it contains:
 //!                 - Register offset.
 //!                 - detailed bit-field of the registers.
 //!                 - Enum and mask of the registers.
 //! 
-//!             Users can read or write the registers via xHWREG().
+//! \note       Users can read or write the registers via xHWREG().
 //!
 //! @{
 //
 //*****************************************************************************
 
-
 //*****************************************************************************
 //
-//! @}
+//! \addtogroup LPC17xx_Timer_Register_Offsets Timer Register Offset(Map)
+//! \brief      Here is the register offset, users can get the register address
+//!             via <b>TIMERn_BASE + offset</b>, (n=0/1/2...).
+//! @{
 //
 //*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-#endif // __XHW_SYSCTL_H__
-
-
-
-
-
-
-
-
-
-
-
-
 
 //! Interrupt Register.
 //! The IR can be written to clear interrupts.The IR can be read to identify
@@ -168,6 +153,42 @@
 //! The CTCR selects between Timer and Counter mode, and in Counter mode selects the signal
 //! and edge(s) for counting.
 #define TIMER_CTCR              ((unsigned long)0x00000070)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
+
+
+
+
+
+
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+#endif // __XHW_TIMER_H__
+
+
 
 
 

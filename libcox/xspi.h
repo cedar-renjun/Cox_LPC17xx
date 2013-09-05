@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xspi.h
-//! \brief Prototypes for the SPI Driver.
-//! \version V2.2.1.0
-//! \date 11/14/2011
-//! \author CooCox
+//! \file      xspi.h
+//! \brief     Prototypes for the SPI Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xSPI_H__
-#define __xSPI_H__
+#ifndef __XSPI_H__
+#define __XSPI_H__
 
 //*****************************************************************************
 //
@@ -969,6 +969,6 @@ extern void SPIIntFlagClear(unsigned long ulBase, unsigned long ulFlags);
 }
 #endif
 
-#endif // __xSPI_H__
+#endif // __XSPI_H__
 
 

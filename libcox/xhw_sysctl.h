@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_sysctl.h
-//! \brief Macros used when accessing the system control hardware.
-//! \version V2.2.1.0
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xhw_sysctl.h
+//! \brief     Macros used when accessing the system control hardware.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox
@@ -67,16 +67,14 @@
 
 //*****************************************************************************
 //
-//! \addtogroup LPC17xx_SysCtl_Register LPC17xx SysCtl Register
-//! \brief Here are the detailed info of SysCtl registers.
-//!
-//! it contains:
-//! - Register offset.
-//! - detailed bit-field of the registers.
-//! - Enum and mask of the registers.
-//! .
-//! Users can read or write the registers through xHWREG().
-//! \todo Remove all STM32 information.
+//! \addtogroup LPC17xx_SYSCTL_Register System Control Register Hardware Layer.
+//! \brief      Here are detail register information.
+//!             it contains:
+//!                 - Register offset.
+//!                 - detailed bit-field of the registers.
+//!                 - Enum and mask of the registers.
+//! 
+//! \note       Users can read or write the registers via xHWREG().
 //!
 //! @{
 //
@@ -84,9 +82,8 @@
 
 //*****************************************************************************
 //
-//! \addtogroup LPC17xx_SysCtl_Register_Offsets LPC17xx SysCtl Register Offsets(Map)
-//! \brief Defines for the system control register addresses.
-//! <b>SysCtl_BASE + offset</b>.
+//! \addtogroup LPC17xx_SYSCTL_Register_Address System Control Register Address
+//! \brief      Here is the register address
 //! @{
 //
 //*****************************************************************************

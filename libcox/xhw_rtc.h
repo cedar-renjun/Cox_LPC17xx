@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_sysctl.h
-//! \brief Macros used when accessing the system control hardware.
-//! \version V2.2.1.0
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xhw_rtc.h
+//! \brief     Macros used when accessing the RTC hardware.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -37,8 +37,8 @@
 //*****************************************************************************
 
 
-#ifndef __XHW_SYSCTL_H__
-#define __XHW_SYSCTL_H__
+#ifndef __XHW_RTC_H__
+#define __XHW_RTC_H__
 
 //*****************************************************************************
 //
@@ -56,7 +56,7 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_RTC_Register RTC Register Hardware Layer.
+//! \addtogroup LPC17xx_RTC_Register RTC Register Hardware Layer.
 //! \brief      Here are detail register information.
 //!             it contains:
 //!                 - Register offset.
@@ -69,38 +69,14 @@
 //
 //*****************************************************************************
 
-
 //*****************************************************************************
 //
-//! @}
+//! \addtogroup LPC17xx_RTC_Register_Offsets RTC Register Offset(Map)
+//! \brief      Here is the register offset, users can get the register address
+//!             via <b>RTC_BASE + offset</b>.
+//! @{
 //
 //*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-#endif // __XHW_SYSCTL_H__
-
-
-
-
-
-
-
-
-
-
-
-
 
 //! Interrupt Location Register
 #define RTC_ILR                 ((unsigned long)0x00000000)
@@ -195,19 +171,41 @@
 //! Alarm value for Year
 #define RTC_ALYEAR              ((unsigned long)0x0000007C)
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-//! RTC_ILR {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_ILR RTC Register ILR.
+//! \brief      WDT ILR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
 //! RTC counter increment interrupt flag.
-#define ILR_CIF             BIT_32_0
+#define ILR_CIF                 BIT_32_0
 
 //! RTC alarm registers interrupt flag.
-#define ILR_CALF            BIT_32_1
+#define ILR_CALF                BIT_32_1
 
-//! RTC_ILR }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-
-//! RTC_CCR {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_CCR RTC Register CCR.
+//! \brief      WDT CCR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
 //! RTC Clock Enable.
 #define CCR_CLKEN               BIT_32_0
@@ -218,10 +216,20 @@
 //! Calibration counter enable.
 #define CCR_CCALEN              BIT_32_4
 
-//! RTC_CCR }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-
-//! RTC_CIIR {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_CIIR RTC Register CIIR.
+//! \brief      WDT CIIR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
 //! Second increment interrupt.
 #define CIIR_IMSEC              BIT_32_0
@@ -247,11 +255,20 @@
 //! Year increment interrupt.
 #define CIIR_IMYEAR             BIT_32_7
 
-//! RTC_CIIR }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-
-
-//! RTC_AMR {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_AMR RTC Register AMR.
+//! \brief      WDT AMR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
 //! Second increment interrupt.
 #define AMR_SEC                 BIT_32_0
@@ -277,93 +294,173 @@
 //! Year increment interrupt.
 #define AMR_YEAR                BIT_32_7
 
-//! RTC_AMR }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-
-
-//! RTC_AUX {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_AUX RTC Register AUX.
+//! \brief      WDT AUR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
 //! RTC Oscillator fail detect flag.
 #define RTC_AUX_OSCF            BIT_32_4
 
-//! RTC_AUX }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-
-//! RTC_AUXEN {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_AUXEN RTC Register AUXEN.
+//! \brief      WDT AUREN Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
 //! Oscillator fail detect interrupt enable.
 #define RTC_AUXEN_OSCFEN        BIT_32_4
 
-//! RTC_AUXEN }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_CTIME0 RTC Register CTIME0.
+//! \brief      WDT CTIME0 Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
-//! RTC_CTIME0 {{
-
-
-//! Second value.
+//! Second value mask
 #define CTIME0_SEC_M            BIT_MASK(32, 5, 0)
+//! Second value shift
 #define CTIME0_SEC_S            0
 
-//! Minutes value.
+//! Minutes value mask
 #define CTIME0_MIN_M            BIT_MASK(32, 13, 8)
+//! Minutes value shift
 #define CTIME0_MIN_S            8
 
-//! Hours value.
+//! Hours value mask
 #define CTIME0_HOUR_M           BIT_MASK(32, 20, 16)
+//! Hours value shift
 #define CTIME0_HOUR_S           16
 
-//! Day of week value.
+//! Day of week value mask
 #define CTIME0_DOW_M            BIT_MASK(32, 26, 24)
+//! Day of week value shift
 #define CTIME0_DOW_S            24
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-//! RTC_CTIME0 }}
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_CTIME1 RTC Register CTIME1.
+//! \brief      WDT CTIME1 Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
-
-//! RTC_CTIME1 {{
-
-
-//! Day of month value.
+//! Day of month value mask
 #define CTIME1_DOM_M            BIT_MASK(32, 4, 0)
+//! Day of month value shift
 #define CTIME1_DOM_S            0
 
-//! Month value.
+//! Month value mask
 #define CTIME1_MON_M            BIT_MASK(32, 11, 8)
+//! Month value shift
 #define CTIME1_MON_S            8
 
-//! Year value.
+//! Year value mask
 #define CTIME1_YEAR_M           BIT_MASK(32, 27, 16)
+//! Year value shift
 #define CTIME1_YEAR_S           16
 
-//! RTC_CTIME1 }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_CTIME2 RTC Register CTIME2.
+//! \brief      WDT CTIME2 Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
-
-//! RTC_CTIME2 {{
-
-//! Day of year value.
+//! Day of year value mask
 #define CTIME2_DOY_M            BIT_MASK(32, 11, 0)
+//! Day of year value shift
 #define CTIME2_DOY_S            0
 
-//! RTC_CTIME2 }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-//! CALI {{
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_RTC_Register_CALI RTC Register CALI.
+//! \brief      WDT CALI Register description.
+//!
+//! @{
+//
+//*****************************************************************************
 
-//! Calibration counter value.
+//! Calibration counter value mask
 #define CALI_VAL_M              BIT_MASK(32, 16, 0)
+//! Calibration counter value shift
 #define CALI_VAL_S              0
 
 //! Calibration counter value.
 #define CALI_DIR                BIT_32_17
 
-//! CALI }}
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
 
-//! Mask {{
-
-
-//! Mask }}
-
+#endif // __XHW_RTC_H__
 

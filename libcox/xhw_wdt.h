@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_wdt.h
-//! \brief Macros used when accessing the WDT hardware.
-//! \version V2.2.1.0
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xhw_wdt.h
+//! \brief     Macros used when accessing the WDT hardware.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -62,7 +62,7 @@
 //!                 - detailed bit-field of the registers.
 //!                 - Enum and mask of the registers.
 //! 
-//!             Users can read or write the registers via xHWREG().
+//! \note       Users can read or write the registers via xHWREG().
 //!
 //! @{
 //
@@ -70,9 +70,9 @@
 
 //*****************************************************************************
 //
-//! \addtogroup LPC17xx_WDT_Register_Offset WDT Register Offset.
-//! \brief      WDT Register Address Offset macro.
-//!
+//! \addtogroup LPC17xx_Wdt_Register_Offsets Wdt Register Offset(Map)
+//! \brief      Here is the register offset, users can get the register address
+//!             via <b>WDT_BASE + offset</b>.
 //! @{
 //
 //*****************************************************************************

@@ -1,12 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_ints.h
-//! \brief Macros that define the interrupt assignment on NXP LPC17xx.
-//! \version V2.1.1.0
-//! \date 11/14/2011
-//! \todo Update this time information
-//! \todo Update the GPIO macro
-//! \author CooCox
+//! \file      xhw_ints.h
+//! \brief     Macros that define the interrupt assignment on NXP LPC17xx.
+//! \version   V2.1.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox
@@ -40,14 +38,6 @@
 
 #ifndef __xHW_INTS_H__
 #define __xHW_INTS_H__
-
-//! Detect MCU Type.
-#if defined(LPC_175x) || defined (LPC_176x)
-#else
-#error Please select your LPC MCU first!             \
-       This value can be one of the following value: \
-       LPC_175x or LPC_176x or LPC_177x or LPC_178x
-#endif
 
 //*****************************************************************************
 //

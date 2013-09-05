@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file       xhw_adc.h
-//! \brief      Macros used when accessing ADC Module.
-//! \version    V2.2.1.0
-//! \date       11/20/2011
-//! \author     CooCox
+//! \file      xhw_adc.h
+//! \brief     Macros used when accessing ADC Module.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -37,8 +37,8 @@
 //*****************************************************************************
 
 
-#ifndef __XHW_SYSCTL_H__
-#define __XHW_SYSCTL_H__
+#ifndef __XHW_ADC_H__
+#define __XHW_ADC_H__
 
 //*****************************************************************************
 //
@@ -56,15 +56,24 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_ADC_Register ADC Register Hardware Layer.
+//! \addtogroup LPC17xx_ADC_Register ADC Register Hardware Layer.
 //! \brief      Here are detail register information.
 //!             it contains:
 //!                 - Register offset.
 //!                 - detailed bit-field of the registers.
 //!                 - Enum and mask of the registers.
 //! 
-//!             Users can read or write the registers via xHWREG().
+//! \note        Users can read or write the registers through xHWREG().
 //!
+//! @{
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_ADC_Register_Offsets ADC Register Offset(Map)
+//! \brief      Here is the register offset, users can get the register address
+//!             via <b>ADC_BASE + offset</b>.
 //! @{
 //
 //*****************************************************************************
@@ -88,7 +97,13 @@
 //
 //*****************************************************************************
 
-#endif // __XHW_SYSCTL_H__
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+#endif // __XHW_ADC_H__
 
 
 

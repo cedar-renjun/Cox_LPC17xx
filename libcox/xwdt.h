@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xwdt.h
-//! \brief Prototypes for the WDT Driver.
-//! \version V2.2.1.0
-//! \date 6/14/2012
-//! \author CooCox
+//! \file      xwdt.h
+//! \brief     Prototypes for the WDT Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xWDT_H__
-#define __xWDT_H__
+#ifndef __XWDT_H__
+#define __XWDT_H__
 
 //*****************************************************************************
 //
@@ -407,5 +407,5 @@ extern void WDTStatusFlagClear(unsigned long ulFlags);
 }
 #endif
 
-#endif // __xWDT_H__
+#endif // __XWDT_H__
 

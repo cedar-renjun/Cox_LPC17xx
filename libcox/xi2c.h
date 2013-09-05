@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xi2c.h
-//! \brief Prototypes for the I2C Driver.
-//! \version V2.2.1.0
-//! \todo Need to update time information.
-//! \author CooCox
+//! \file      xi2c.h
+//! \brief     Prototypes for the I2C Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xI2C_H__
-#define __xI2C_H__
+#ifndef __XI2C_H__
+#define __XI2C_H__
 
 //*****************************************************************************
 //
@@ -1399,4 +1399,4 @@ extern xtBoolean I2CBusBusyStatus(unsigned long ulBase);
 //}
 #endif
 
-#endif // __xI2C_H__
+#endif // __XI2C_H__

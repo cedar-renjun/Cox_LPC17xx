@@ -1,11 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_nvic.h
-//! \brief Macros used when accessing the Cortex-M NVIC.
-//! \version V2.2.1.0
-//! \todo Update this time information
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xhw_nvic.h
+//! \brief     Macros used when accessing the Cortex-M NVIC.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox

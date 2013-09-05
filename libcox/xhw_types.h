@@ -1,11 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_types.h
-//! \brief Common types and macros.
-//! \version V2.1.1.0
-//! \todo Update this time information
-//! \date 11/14/2011
-//! \author CooCox
+//! \file      xhw_types.h
+//! \brief     Common types and macros.
+//! \version   V2.1.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox

@@ -1,11 +1,10 @@
 //*****************************************************************************
 //
-//! \file xdebug.h
-//! \brief Macros for assisting debug of the peripheral library.
-//! \version V2.1.1.0
-//! \date 11/14/2011
-//! \todo Update this time information.
-//! \author CooCox
+//! \file      xdebug.h
+//! \brief     Macros for assisting debug of the peripheral library.
+//! \version   V2.1.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox
@@ -49,30 +48,27 @@
 
 //*****************************************************************************
 //
-//! \addtogroup xDebug xDebug
-//! \brief Provided some assert macros to help debug.
+//! \addtogroup xDebug
+//! \brief      Provided some assert macros to help debug.
+//!             This module provides a macro called \ref xASSERT, Used to assert
+//!             some conditions if is correct.
 //!
-//! This module provides a macro called \ref xASSERT, Used to assert
-//! some conditions if is correct.
+//! \section    xDebug_When When User the Debug feature?
+//!             - Verify the legitimacy of the parameters
+//!             - Judge execution of the accuracy of the results
+//!             - where you want to determine if actual == expected ?
 //!
-//! \section xDebug_When When User the Debug feature?
-//! - Verify the legitimacy of the parameters
-//! - Judge execution of the accuracy of the results
-//! - where you want to determine if actual == expected ?
-//! .
-//!
-//! \section xDebug_How How to use the Debug Feature?
-//! -# Enable the debug feature by doing a \b xDEBUG build.
-//! -# add the \ref xASSERT where you want.
-//! .
-//!
-//! We strongly recommend you to open the debug characteristics in your
-//! development  process. This way can find out the questions as soon
-//! as possible.
-//!
-//! When release the code, you should shut down the debug characteristics,
-//! because they also take up CPU time, and you have ensured the condition
-//! is ok in the debug process.
+//! \section    xDebug_How How to use the Debug Feature?
+//!             - Enable the debug feature by doing a \ref xDEBUG build.
+//!             - add the \ref xASSERT where you want.
+//!             
+//! \note
+//!             We strongly recommend you to open the debug characteristics in
+//!             your development  process. This way can find out the questions
+//!             as soon as possible.
+//!             When release the code, you should shut down the debug
+//!             characteristics, because they also take up CPU time, and you have
+//!             ensured the condition is ok in the debug process.
 //!
 //! @{
 //
@@ -81,21 +77,33 @@
 //*****************************************************************************
 //
 //! \addtogroup xDebug_Exported_APIs xDebug API
-//! \brief xDebug API Reference.
+//! \brief      xDebug API Reference.
 //! @{
 //
 //*****************************************************************************
 
+//*****************************************************************************
+//
+//! \brief  Error Handler function.
+//!         This function can be used to print error file name and error line
+//!         number.
+//!
+//! \param  [in] pcFilename is a string pointer point to error filename.
+//!
+//! \param  [in] ulLine is the error line number.
+//!
+//! \return None.
+//
+//*****************************************************************************
 extern void __xerror__(char *pcFilename, unsigned long ulLine);
 
 //*****************************************************************************
 //
-//! \brief The ASSERT macro.
+//! \brief  The ASSERT macro.
+//!         It does the actual assertion checking. Typically, this will be for
+//!         procedure arguments.
 //!
-//! \param expr is the expression to be check.
-//!
-//! It does the actual assertion checking. Typically, this will be for
-//! procedure arguments.
+//! \param  [in] expr is the expression to be check.
 //!
 //! \return None.
 //

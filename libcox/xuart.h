@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xuart.h
-//! \brief Prototypes for the UART Driver.
-//! \version V2.2.1.0
-//! \date 11/14/2011
-//! \author CooCox
+//! \file      xuart.h
+//! \brief     Prototypes for the UART Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xUART_H__
-#define __xUART_H__
+#ifndef __XUART_H__
+#define __XUART_H__
 
 //*****************************************************************************
 //
@@ -1185,5 +1185,5 @@ extern xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags)
 }
 #endif
 
-#endif // __xUART_H__
+#endif // __XUART_H__
 

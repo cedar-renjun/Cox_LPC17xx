@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_sysctl.h
-//! \brief Macros used when accessing the system control hardware.
-//! \version V2.2.1.0
-//! \date 11/20/2011
-//! \author CooCox
+//! \file      xhw_pwm.h
+//! \brief     Macros used when accessing the PWM hardware.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -37,8 +37,8 @@
 //*****************************************************************************
 
 
-#ifndef __XHW_SYSCTL_H__
-#define __XHW_SYSCTL_H__
+#ifndef __XHW_PWM_H__
+#define __XHW_PWM_H__
 
 //*****************************************************************************
 //
@@ -56,154 +56,171 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_PWM_Register PWM Register Hardware Layer.
-//! \brief      Here are detail register information.
-//!             it contains:
-//!                 - Register offset.
-//!                 - detailed bit-field of the registers.
-//!                 - Enum and mask of the registers.
-//! 
-//!             Users can read or write the registers via xHWREG().
+//! \addtogroup  LPC17xx_PWM_Register  LPC17xx PWM Register
+//! \brief       Here are the detailed info of PWM registers. 
+//!              it contains:
+//!              - Register offset.
+//!              - detailed bit-field of the registers.
+//!              - Enum and mask of the registers.
 //!
+//!
+//! \note        Users can read or write the registers through xHWREG().
 //! @{
 //
 //*****************************************************************************
 
 //*****************************************************************************
 //
-//! @}
+//! \addtogroup LPC17xx_PWM_Register_Offsets PWM Register Offset(Map)
+//! \brief      Here is the register offset, users can get the register address
+//!             via <b>PWM1_BASE + offset</b>.
+//! @{
 //
 //*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-//*****************************************************************************
-//
-//! @}
-//
-//*****************************************************************************
-
-#endif // __XHW_SYSCTL_H__
-
-
-
-
-
-
 
 //! Interrupt Register.
 //! The IR can be written to clear interrupts.The IR can be
 //! read to identify which of eight possible interrupt sources are pending.
-#define PWM_IR 0x00000000
+#define PWM_IR                  ((unsigned long) 0x00000000)
 
 //! Timer Control Register.
 //! The TCR is used to control the Timer Counter functions.
 //! The Timer Counter can be disabled or reset through the TCR.
-#define PWM_TCR 0x00000004
+#define PWM_TCR                 ((unsigned long) 0x00000004)
 
 //! Timer Counter.
 //! The 32-bit TC is incremented every PR+1 cycles of PCLK.
 //! The TC is controlled through the TCR.
-#define PWM_TC 0x00000008
+#define PWM_TC                  ((unsigned long) 0x00000008)
 
 //! Prescale Register.
 //! The TC is incremented every PR+1 cycles of PCLK.
-#define PWM_PR 0x0000000C
+#define PWM_PR                  ((unsigned long) 0x0000000C)
 
 //! Prescale Counter.
 //! The 32-bit PC is a counter which is incremented to the value stored in PR.
 //! When the value in PR is reached, the TC is incremented.
 //! The PC is observable and controllable through the bus interface.
-#define PWM_PC 0x00000010
+#define PWM_PC                  ((unsigned long) 0x00000010)
 
 //! Match Control Register.
 //! The MCR is used to control if an interrupt is generated and if the TC is
 //! reset when a Match occurs.
-#define PWM_MCR 0x00000014
+#define PWM_MCR                 ((unsigned long) 0x00000014)
 
 //! Match Register 0.
 //! MR0 can be enabled in the MCR to reset the TC, stop
 //! both the TC and PC, and/or generate an interrupt when it matches the TC.
 //! In addition, a match between this value and the TC sets any PWM output
 //! that is in single-edge mode, and sets PWM1 if it¡¯s in double-edge mode.
-#define PWM_MR0 0x00000018
+#define PWM_MR0                 ((unsigned long) 0x00000018)
 
 //! Match Register 1.
 //! MR1 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.In addition, a match
 //! between this value and the TC clears PWM1 in either edge mode, and sets
 //! PWM2 if it¡¯s in double-edge mode.
-#define PWM_MR1 0x0000001C
+#define PWM_MR1                 ((unsigned long) 0x0000001C)
 
 //! Match Register 2.
 //! MR2 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.
 //! In addition, a match between this value and the TC clears PWM2 in either
 //! edge mode, and sets PWM3 if it¡¯s in double-edge mode.
-#define PWM_MR2 0x00000020
+#define PWM_MR2                 ((unsigned long) 0x00000020)
 
 //! Match Register 3.
 //! MR3 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.
 //! In addition, a match between this value and the TC clears PWM3 in either
 //! edge mode, and sets PWM4 if it¡¯s in double-edge mode.
-#define PWM_MR3 0x00000024
+#define PWM_MR3                 ((unsigned long) 0x00000024)
 
 //! Capture Control Register.
 //! The CCR controls which edges of the capture inputs are used to load the Capture
 //! Registers and whether or not an interrupt is generated when a capture takes place.
-#define PWM_CCR 0x00000028
+#define PWM_CCR                 ((unsigned long) 0x00000028)
 
 //! CR0 Capture Register 0.
 //! CR0 is loaded with the value of the TC when there is an event on the CAPn.0 input.
-#define PWM_CR0 0x0000002C
+#define PWM_CR0                 ((unsigned long) 0x0000002C)
 
 //! Capture Register 1.
-#define PWM_CR1 0x00000030
+#define PWM_CR1                 ((unsigned long) 0x00000030)
 
 //! Capture Register 2.
-#define PWM_CR2 0x00000034
+#define PWM_CR2                 ((unsigned long) 0x00000034)
 
 //! Capture Register 3.
-#define PWM_CR3 0x00000038
+#define PWM_CR3                 ((unsigned long) 0x00000038)
 
 //! Match Register 4.
 //! MR4 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.In addition, a match
 //! between this value and the TC clears PWM4 in either edge mode, and sets
 //! PWM5 if it¡¯s in double-edge mode.
-#define PWM_MR4 0x00000040
+#define PWM_MR4                 ((unsigned long) 0x00000040)
 
 //! Match Register 5.
 //! MR5 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.In addition, a match
 //! between this value and the TC clears PWM5 in either edge mode, and sets
 //! PWM6 if it¡¯s in double-edge mode.
-#define PWM_MR5 0x00000044
+#define PWM_MR5                 ((unsigned long) 0x00000044)
 
 //! Match Register 6.
 //! MR6 can be enabled in the MCR to reset the TC, stop both the TC and PC,
 //! and/or generate an interrupt when it matches the TC.In addition, a match
 //! between this value and the TC clears PWM6 in either edge mode.
-#define PWM_MR6 0x00000048
+#define PWM_MR6                 ((unsigned long) 0x00000048)
 
 //! PWM Control Register.
 //! Enables PWM outputs and selects PWM channel types as either single edge or
 //! double edge controlled.
-#define PWM_PCR 0x0000004C
+#define PWM_PCR                 ((unsigned long) 0x0000004C)
 
 //! Load Enable Register.
 //! Enables use of new PWM match values.
-#define PWM_LER 0x00000050
+#define PWM_LER                 ((unsigned long) 0x00000050)
 
 //! Count Control Register.
 //! The CTCR selects between Timer and Counter mode, and in Counter mode selects
 //! the signal and edge(s) for counting.
-#define PWM_CTCR 0x00000070
+#define PWM_CTCR                ((unsigned long) 0x00000070)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+#endif // __XHW_PWM_H__
+
+
+
+
+
+
 
 
 //! PWM_IR {{

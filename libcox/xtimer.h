@@ -1,10 +1,10 @@
 //*****************************************************************************
 //
-//! \file xtimer.h
-//! \brief Prototypes for the TIMER Driver.
-//! \version V2.2.1.0
-//! \todo Need to update time information.
-//! \author CooCox
+//! \file      xtimer.h
+//! \brief     Prototypes for the TIMER Driver.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -36,8 +36,8 @@
 //
 //*****************************************************************************
 
-#ifndef __xTIMER_H__
-#define __xTIMER_H__
+#ifndef __XTIMER_H__
+#define __XTIMER_H__
 
 //*****************************************************************************
 //
@@ -1128,5 +1128,5 @@ extern void xTimerCounterDetectPhaseSelect(unsigned long ulBase, unsigned long u
 }
 #endif
 
-#endif // __xTIMER_H__
+#endif // __XTIMER_H__
 

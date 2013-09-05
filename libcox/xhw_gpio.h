@@ -1,11 +1,10 @@
 //*****************************************************************************
 //
-//! \file xhw_gpio.h
-//! \brief Macros used when accessing the GPIO control hardware.
-//! \version V2.2.1.0
-//! \todo Update this time information.
-//! \date 12/12/2011
-//! \author CooCox
+//! \file      xhw_gpio.h
+//! \brief     Macros used when accessing the GPIO control hardware.
+//! \version   V2.2.1.0
+//! \date      $CURRENTTIME$
+//! \author    CooCox
 //! \copyright
 //!
 //! Copyright (c)  2011, CooCox 
@@ -56,15 +55,14 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_GPIO_Register STM32F1xx GPIO Register
-//! \brief Here are the detailed info of GPIO registers. 
-//!
-//! it contains:
-//! - Register offset.
-//! - detailed bit-field of the registers.
-//! - Enum and mask of the registers.
-//! .
-//! Users can read or write the registers through xHWREG().
+//! \addtogroup LPC17xx_GPIO_Register GPIO Register Hardware Layer.
+//! \brief      Here are detail register information.
+//!             it contains:
+//!                 - Register offset.
+//!                 - detailed bit-field of the registers.
+//!                 - Enum and mask of the registers.
+//! 
+//! \note        Users can read or write the registers through xHWREG().
 //!
 //! @{
 //
@@ -72,15 +70,12 @@
 
 //*****************************************************************************
 //
-//! \addtogroup STM32F1xx_GPIO_Register_Offsets GPIO Register Offset(Map)
-//! \brief Here is the GPIO register offset, users can get the register address
-//! through <b>GPIO_BASE + offset</b>.
+//! \addtogroup LPC17xx_GPIO_Register_Offsets GPIO Register Offset(Map)
+//! \brief      Here is the register offset, users can get the register address
+//!             via <b>GPIOx_BASE + offset</b>, (x=A/B/C...).
 //! @{
 //
 //*****************************************************************************
-
-//! Pin Function select registers offset. you can use those with PIN_CON_BASE
-//! to access those register.
 
 //! Pin Function Select register 0
 #define PINSEL0                        ((unsigned long)0x00000000)
