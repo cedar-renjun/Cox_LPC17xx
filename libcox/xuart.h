@@ -1130,8 +1130,8 @@ extern void UARTIntEnable(unsigned long ulBase, unsigned long ulIntFlags);
 extern void UARTIntDisable(unsigned long ulBase, unsigned long ulIntFlags);
 
 //! \todo Still need to test.
-extern unsigned long UARTIntGet(unsigned long ulBase);
-extern xtBoolean UARTIntCheck(unsigned long ulBase, unsigned long ulIntFlags);
+extern unsigned long UARTIntStatusGet(unsigned long ulBase);
+extern xtBoolean UARTIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags);
 
 extern void UARTFIFOCfg(unsigned long ulBase, unsigned long ulCfg);
 extern void UARTTransStop(unsigned long ulBase);
@@ -1147,7 +1147,7 @@ extern void UARTIrDAEnable(unsigned long ulBase);
 extern void UARTIrDADisable(unsigned long ulBase);
 extern void UARTModemCfg(unsigned long ulBase, unsigned long ulCfg);
 extern void UARTRS485Cfg(unsigned long ulBase, unsigned long ulCfg);
-extern void UARTRS485AddrSet(unsigned long ulBase, unsigned long ulVal);
+extern void UARTRS485AddrSet(unsigned long ulBase, unsigned long ulAddr);
 extern void UARTRS485DlyTimeSet(unsigned long ulBase, unsigned long ulVal);
 extern unsigned long UARTModemStatGet(unsigned long ulBase);
 extern xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags);

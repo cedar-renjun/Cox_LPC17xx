@@ -74,25 +74,19 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xWDT_Function_Type xWDT Function Type
-//! \n
-//! \section xWDT_Function_Type_Section 1. Where to use this group
-//! Values that can be passed to xWDTFunctionEnable(), 
-//! xWDTFunctionDisable() as the ulFunction parameter. 
-//! \n
-//! \section xWDT_Function_Type_CoX 2. CoX Port Details 
-//! \verbatim
-//! +------------------------ +----------------+------------------------+
-//! |xWDT Function Type       |       CoX      |         LPC17xx        |
-//! |------------------------ |----------------|------------------------|
-//! |xWDT_INT_FUNCTION        |    Mandatory   |            Y           |
-//! |------------------------ |----------------|------------------------|
-//! |xWDT_RESET_FUNCTION      |    Mandatory   |            Y           |
-//! |------------------------ |----------------|------------------------|
-//! |xWDT_WAKEUP_FUNCTION     |  Non-Mandatory |            N           |
-//! |------------------------ |----------------|------------------------|
-//! |xWDT_HOLD_IN_ICE         |  Non-Mandatory |            N           |
-//! +------------------------ +----------------+------------------------+
-//! \endverbatim
+//! \section    xWDT_Function_Type_Section 1. Where to use this group
+//!             Values that can be passed to 
+//!             - \ref xWDTFunctionEnable()
+//!             - \ref xWDTFunctionDisable()
+//!             as the ulFunction parameter. 
+//! 
+//! \section    xWDT_Function_Type_CoX     2. CoX Port Details 
+//! 
+//! | xWDT Function Type    |      CoX      |         LPC17xx        |
+//! |-----------------------|---------------|------------------------|
+//! | xWDT_INT_FUNCTION     |   Mandatory   |            Y           |
+//! | xWDT_RESET_FUNCTION   |   Mandatory   |            Y           |
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -116,24 +110,19 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xWDT_Clock_Config xWDT Clock Configuration
-//! \brief Values that show xWDT Clock Configuration
-//! \n
-//! \section xWDT_Clock_Config_Section 1. Where to use this group
-//! Watch dog clock Configs. Such as clock source, Prescaler divider.
-//! Values that can be passed to xWDTInit as the ulConfig parameter 
-//! \n
-//! \section xWDT_Clock_Config_CoX 2.CoX Port Details 
-//! \verbatim
-//! +-------------------------+----------------+------------------------+
+//! \brief      Values that show xWDT Clock Configuration
+//! 
+//! \section    xWDT_Clock_Config_Section 1. Where to use this group
+//!             Watch dog clock Configs. Such as clock source, Prescaler divider.
+//!             Values that can be passed to xWDTInit as the ulConfig parameter 
+//!
+//! \section    xWDT_Clock_Config_CoX     2. CoX Port Details 
+//! 
 //! | Clock Configuration     |       CoX      |         LPC17xx        |
 //! |-------------------------|----------------|------------------------|
 //! | xWDT_S_INTSL            |    Mandatory   |            Y           |
-//! |-------------------------|----------------|------------------------|
 //! | xWDT_S_EXTSL            |    Mandatory   |            Y           |
-//! |-------------------------|----------------|------------------------|
-//! | xWDT_S_HCLK_DIV         |  Non-Mandatory |            N           |
-//! |-------------------------|----------------|------------------------|
-//! \endverbatim
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -153,28 +142,19 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xWDT_Exported_APIs xWDT API
-//! \brief xWDT API Reference.
+//! \brief      xWDT API Reference.
 //!
-//! \section xWDT_Exported_APIs_Port CoX Port Details
-//! \verbatim
-//! +-------------------------+----------------+------------------------+
-//! | xWDT API                |       CoX      |        LPC17xx         |
-//! |-------------------------|----------------|------------------------|
-//! | xWDTInit                |    Mandatory   |            Y           |
-//! |-------------------------|----------------|------------------------|
-//! | xWDTEnable              |    Mandatory   |            Y           |
-//! |-------------------------|----------------|------------------------|
-//! | xWDTIntCallbackInit     |    Mandatory   |            Y           |
-//! |-------------------------|----------------|------------------------|
-//! | xWDTDisable             |    Mandatory   |            N           |
-//! |-------------------------|----------------|------------------------|
-//! | xWDTRestart             |    Mandatory   |            Y           |
-//! |-------------------------|----------------|------------------------|
-//! | xWDTFunctionEnable      |    Mandatory   |            Y           |
-//! |-------------------------|----------------|------------------------|
-//! | xWDTFunctionDisable     |    Mandatory   |            Y           |
-//! +-------------------------+----------------+------------------------+
-//! \endverbatim
+//! \section    xWDT_Exported_APIs_Port CoX Port Details
+//! 
+//! |       xWDT API            |       CoX      |        LPC17xx         |
+//! |---------------------------|----------------|------------------------|
+//! | \ref  xWDTInit            |    Mandatory   |            Y           |
+//! | \ref  xWDTEnable          |    Mandatory   |            Y           |
+//! | \ref  xWDTIntCallbackInit |    Mandatory   |            Y           |
+//! | \ref  xWDTDisable         |    Mandatory   |            N           |
+//! | \ref  xWDTRestart         |    Mandatory   |            Y           |
+//! | \ref  xWDTFunctionEnable  |    Mandatory   |            Y           |
+//! | \ref  xWDTFunctionDisable |    Mandatory   |            Y           |
 //!
 //! @{
 //
@@ -193,8 +173,8 @@ extern "C"
 //!              This value must be \ref xWDT_BASE.
 //!
 //! \param  [in] ulConfig is the WDT clock source Selection.
-//!              \ref xWDT_S_INTSL
-//!              \ref xWDT_S_EXTSL
+//!              - \ref xWDT_S_INTSL
+//!              - \ref xWDT_S_EXTSL
 //!             
 //! \param  [in] ulReload is the WDT's reload value.
 //!              0xFF <= ulReload <= 0xFFFFFFFF
@@ -281,8 +261,8 @@ extern void xWDTInit(unsigned long ulBase, unsigned long ulConfig,
 //!
 //! \param  [in] ulFunction is the watch dog timer's function.
 //!              This parameter is the OR value of any of the following:
-//!              \ref xWDT_INT_FUNCTION
-//!              \ref xWDT_RESET_FUNCTION
+//!              - \ref xWDT_INT_FUNCTION
+//!              - \ref xWDT_RESET_FUNCTION
 //!
 //! \note   xWDTInit(ulBase, ulConfig, ulReload) must be called before function:
 //!         \ref xWDTEnable and \ref xWDTFunctionEnable.
@@ -301,8 +281,8 @@ extern void xWDTFunctionEnable(unsigned long ulBase, unsigned long ulFunction);
 //!
 //! \param  [in] ulFunction is the watch dog timer's function.
 //!              This parameter is the OR value of any of the following:
-//!              \ref xWDT_INT_FUNCTION
-//!              \ref xWDT_RESET_FUNCTION
+//!              - \ref xWDT_INT_FUNCTION
+//!              - \ref xWDT_RESET_FUNCTION
 //!
 //! \return None.
 //!

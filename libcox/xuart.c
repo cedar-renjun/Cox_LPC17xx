@@ -11,7 +11,30 @@
 #include "xhw_uart.h"
 #include "xuart.h"
 
+//! \todo Add ISR register/handler function.
 
+//*****************************************************************************
+//
+//! \internal
+//! \brief  Configure UART baud rate.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulBaudrate is target baud rate. which can be most common value
+//!              e.g. 9600/115200.
+//!
+//! \return Show whether configure baud rate or not.
+//!         - xtrue  configure success.
+//!         - xflase configure failure.
+//!
+//! \note   This function is only for internal use!
+//
+//*****************************************************************************
 static xtBoolean UartSetDivisors(unsigned long ulBase, unsigned long ulBaudrate)
 {
     unsigned long      ulPeriClk     = 0;
@@ -159,7 +182,22 @@ static xtBoolean UartSetDivisors(unsigned long ulBase, unsigned long ulBaudrate)
     return (xfalse);                                       // Failure to configure Baud registers.
 }
 
-
+//*****************************************************************************
+//
+//! \brief  Receive an byte via uart.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \return The byte received.
+//! 
+//! \note   This function will exit unless receive an byte successfully.
+//
+//*****************************************************************************
 unsigned char UARTByteRead(unsigned long ulBase)
 {
     unsigned long ulTmpReg = 0;
@@ -184,6 +222,24 @@ unsigned char UARTByteRead(unsigned long ulBase)
     return (ulTmpReg);
 }
 
+//*****************************************************************************
+//
+//! \brief  Transmit an byte via uart.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ucData is the byte you want to transmit.
+//!
+//! \return None.
+//!
+//! \note   This function will exit unless transmit an byte successfully.
+//
+//*****************************************************************************
 void UARTByteWrite(unsigned long ulBase, unsigned char ucData)
 {
     unsigned long ulTmpReg = 0;
@@ -206,8 +262,28 @@ void UARTByteWrite(unsigned long ulBase, unsigned char ucData)
     xHWREG(ulBase + THR) = (unsigned long) ucData;    // UART Data register.
 }
 
-
-
+//*****************************************************************************
+//
+//! \brief  Receive an byte via uart not blocking.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [out] ucpData is the pointer point to the address of receive buffer. 
+//!               This parameter NUST NOT be NULL.
+//!
+//! \return Indicate the whether receive byte sucessfully.
+//!         - xtrue   Have received an byte succssfully.
+//!         - xflase  Have not received an byte.
+//! 
+//! \note   Unlike \ref UARTByteRead, when no data available, it will exit
+//!         inmmediately.
+//
+//*****************************************************************************
 xtBoolean UARTByteReadNoBlocking(unsigned long ulBase, unsigned char * ucpData)
 {
     unsigned long ulTmpReg = 0;
@@ -236,6 +312,26 @@ xtBoolean UARTByteReadNoBlocking(unsigned long ulBase, unsigned char * ucpData)
 
 }
 
+//*****************************************************************************
+//
+//! \brief  Transmit an byte via uart not blocking.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ucData is the byte you want to transmit.
+//!
+//! \return Indicate the whether transmit byte sucessfully.
+//!         - xtrue   Have received an byte succssfully.
+//!         - xflase  Have not received an byte.
+//! 
+//! \note   Unlike \ref UARTByteWrite, when FIFO is full, it will exit inmmediately.
+//
+//*****************************************************************************
 xtBoolean UARTByteWriteNoBlocking(unsigned long ulBase, unsigned char ucData)
 {
     unsigned long ulTmpReg = 0;
@@ -262,6 +358,24 @@ xtBoolean UARTByteWriteNoBlocking(unsigned long ulBase, unsigned char ucData)
 
 }
 
+//*****************************************************************************
+//
+//! \brief  Send string.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [out] pStr is the target string.
+//!
+//! \return None.
+//! 
+//! \note   This function will continue transmit until meet '\0' in string.
+//
+//*****************************************************************************
 void UARTStrSend(unsigned long ulBase, unsigned char * pStr)
 {
     // Check input parameters.
@@ -274,6 +388,24 @@ void UARTStrSend(unsigned long ulBase, unsigned char * pStr)
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Transmit a block of data via uart.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] pBuf is the buffer address.
+//!
+//! \param  [in] ulLen is the size of buffer, ulLen Bytes.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTBufWrite(unsigned long ulBase, unsigned char * pBuf, unsigned long ulLen)
 {
     unsigned long i = 0;
@@ -288,6 +420,24 @@ void UARTBufWrite(unsigned long ulBase, unsigned char * pBuf, unsigned long ulLe
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Receive a block of data via uart.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [out] pBuf is the buffer address.
+//!
+//! \param  [in] ulLen is the size of buffer, ulLen Bytes.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTBufRead(unsigned long ulBase, unsigned char * pBuf, unsigned long ulLen)
 {
     unsigned long i = 0;
@@ -302,6 +452,30 @@ void UARTBufRead(unsigned long ulBase, unsigned char * pBuf, unsigned long ulLen
     }
 }
 
+//*****************************************************************************
+//
+//! \brief  Enable UART Interrupt.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulIntFlags is the interrupt flag to be enabled. which can be
+//!              one of the following value:
+//!              - \ref INT_RDA
+//!              - \ref INT_THRE
+//!              - \ref INT_RLS
+//!              - \ref INT_MODEM
+//!              - \ref INT_CTS
+//!              - \ref INT_ABEO
+//!              - \ref INT_ABTO
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTIntEnable(unsigned long ulBase, unsigned long ulIntFlags)
 {
     // Check input parameters.
@@ -327,6 +501,30 @@ void UARTIntEnable(unsigned long ulBase, unsigned long ulIntFlags)
     xHWREG(ulBase + IER) |= ulIntFlags;
 }
 
+//*****************************************************************************
+//
+//! \brief  Disable UART Interrupt.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulIntFlags is the interrupt flag to be disabled. which can be
+//!              one of the following value:
+//!              - \ref INT_RDA
+//!              - \ref INT_THRE
+//!              - \ref INT_RLS
+//!              - \ref INT_MODEM
+//!              - \ref INT_CTS
+//!              - \ref INT_ABEO
+//!              - \ref INT_ABTO
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTIntDisable(unsigned long ulBase, unsigned long ulIntFlags)
 {
     // Check input parameters.
@@ -351,7 +549,29 @@ void UARTIntDisable(unsigned long ulBase, unsigned long ulIntFlags)
     xHWREG(ulBase + IER) &= ~ulIntFlags;
 }
 
-unsigned long UARTIntGet(unsigned long ulBase)
+//*****************************************************************************
+//
+//! \brief  Get uart interrupt status.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \return The interrupt status which consist of the logical OR the following value:
+//!              - \ref INT_RDA
+//!              - \ref INT_THRE
+//!              - \ref INT_RLS
+//!              - \ref INT_MODEM
+//!              - \ref INT_CTS
+//!              - \ref INT_ABEO
+//!              - \ref INT_ABTO
+//!
+//
+//*****************************************************************************
+unsigned long UARTIntStatusGet(unsigned long ulBase)
 {
 
     // Check input parameters.
@@ -362,7 +582,33 @@ unsigned long UARTIntGet(unsigned long ulBase)
     return xHWREG(ulBase + IIR);
 }
 
-xtBoolean UARTIntCheck(unsigned long ulBase, unsigned long ulIntFlags)
+//*****************************************************************************
+//
+//! \brief  Check UART Interrupt Flag.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulIntFlags is the interrupt flag to be checked.
+//!              which can be one of the following value:
+//!              - \ref INT_RDA
+//!              - \ref INT_THRE
+//!              - \ref INT_RLS
+//!              - \ref INT_MODEM
+//!              - \ref INT_CTS
+//!              - \ref INT_ABEO
+//!              - \ref INT_ABTO
+//!
+//! \return
+//!         - xtrue  The checked flag has been set.
+//!         - xflase The checked flag has not been set.
+//
+//*****************************************************************************
+xtBoolean UARTIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
 {
     unsigned long ulTmpReg = 0;
 
@@ -427,14 +673,78 @@ xtBoolean UARTIntCheck(unsigned long ulBase, unsigned long ulIntFlags)
                 while (1);
             }
     }
-
-
-
-
 }
 
+//*****************************************************************************
+//
+//! \brief  Clear interrupt flag.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulFlags is the Modem status flag that you want to check. 
+//!              This value must be logical OR of the following value:
+//!              - \ref INT_ABEO
+//!              - \ref INT_ABTO
+//!
+//! \return None.
+//
+//*****************************************************************************
+void UARTIntFlagClear(unsigned long ulBase, unsigned long ulIntFlags)
+{
+    // Check input parameters.
+    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
+            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
+    xASSERT( (ulIntFlags & ~(INT_ABEO | INT_ABTO)) == 0);
 
+    switch(ulIntFlags)
+    {
+        case INT_ABEO:
+        case INT_ABTO:
+        case INT_ABEO | INT_ABTO:
+            {
+                xHWREG(ulBase + ACR) |= ulIntFlags;
+                break;
+            }
 
+        default:                         // Error
+            {
+                while(1);
+            }
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  Configure uart FIFO.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulCfg is the parameters to configure FIFO.
+//!              which can be the OR of the following value:
+//!              - \ref FIFO_CFG_FIFO_EN              
+//!              - \ref FIFO_CFG_FIFO_DIS             
+//!              - \ref FIFO_CFG_RX_FIFO_RESET        
+//!              - \ref FIFO_CFG_TX_FIFO_RESET        
+//!              - \ref FIFO_CFG_DMA_EN               
+//!              - \ref FIFO_CFG_DMA_DIS              
+//!              - \ref FIFO_CFG_RX_TRI_LVL_0         
+//!              - \ref FIFO_CFG_RX_TRI_LVL_1         
+//!              - \ref FIFO_CFG_RX_TRI_LVL_2         
+//!              - \ref FIFO_CFG_RX_TRI_LVL_3 
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTFIFOCfg(unsigned long ulBase, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -464,6 +774,20 @@ void UARTFIFOCfg(unsigned long ulBase, unsigned long ulCfg)
     xHWREG(ulBase + FCR) = ulTmpReg;
 }
 
+//*****************************************************************************
+//
+//! \brief  Start transmit function.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTTransStart(unsigned long ulBase)
 {
     // Check input parameters.
@@ -473,6 +797,20 @@ void UARTTransStart(unsigned long ulBase)
     xHWREG(ulBase + TER) |= TER_TX_EN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Stop transmit function.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTTransStop(unsigned long ulBase)
 {
     // Check input parameters.
@@ -482,7 +820,21 @@ void UARTTransStop(unsigned long ulBase)
     xHWREG(ulBase + TER) &= ~TER_TX_EN;
 }
 
-
+//*****************************************************************************
+//
+//! \brief  Get UART status.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \return The status of uart, which consist of the following value:
+//! \todo   Add status value.
+//
+//*****************************************************************************
 unsigned long UARTStatGet(unsigned long ulBase)
 {
     // Check input parameters.
@@ -492,6 +844,33 @@ unsigned long UARTStatGet(unsigned long ulBase)
     return( xHWREG(ulBase + LSR) );
 }
 
+//*****************************************************************************
+//
+//! \brief  Check UART status flag.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulFlags is the checked flag, which consist of the following
+//!              value:
+//!              - \ref RX_FIFO_NOT_EMPTY               
+//!              - \ref OVERRUN_ERR                     
+//!              - \ref PARITY_ERR                      
+//!              - \ref FRAMING_ERR                     
+//!              - \ref BREAK_INT                       
+//!              - \ref TX_FIFO_EMPTY                   
+//!              - \ref TX_EMPTY                        
+//!              - \ref RX_FIFO_ERR          
+//!
+//! \return
+//!         - xtrue  The checked flag has been set.
+//!         - xflase The checked flag has not been set.
+//
+//*****************************************************************************
 xtBoolean UARTStatCheck(unsigned long ulBase, unsigned long ulFlags)
 {
 
@@ -520,7 +899,35 @@ xtBoolean UARTStatCheck(unsigned long ulBase, unsigned long ulFlags)
     }
 }
 
-//! \note This function is only suit for UART0/2/3.
+//*****************************************************************************
+//
+//! \brief  Configure IrDA.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulCfg is the checked flag, which consist of the OR of following
+//!              value:
+//!              - \ref IRDA_INV_EN        
+//!              - \ref IRDA_INV_DIS       
+//!              - \ref IRDA_FIX_PULSE_DIS 
+//!              - \ref IRDA_FIX_PULSE_2   
+//!              - \ref IRDA_FIX_PULSE_4   
+//!              - \ref IRDA_FIX_PULSE_8   
+//!              - \ref IRDA_FIX_PULSE_16  
+//!              - \ref IRDA_FIX_PULSE_32  
+//!              - \ref IRDA_FIX_PULSE_64  
+//!              - \ref IRDA_FIX_PULSE_128 
+//!              - \ref IRDA_FIX_PULSE_256 
+//!
+//! \return None.
+//!
+//! \note   This function is only suit for UART0/2/3.
+//
+//*****************************************************************************
 void UARTIrDACfg(unsigned long ulBase, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -553,17 +960,79 @@ void UARTIrDACfg(unsigned long ulBase, unsigned long ulCfg)
     
 }
 
+//*****************************************************************************
+//
+//! \brief  Enable IrDA Function.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \return None.
+//!
+//! \note   This function is only suit for UART0/2/3.
+//
+//*****************************************************************************
 void UARTIrDAEnable(unsigned long ulBase)
 {
     xHWREG(ulBase + ICR) |= ICR_IRDA_EN;
 }
 
+//*****************************************************************************
+//
+//! \brief  Disable IrDA Function.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \return None.
+//!
+//! \note   This function is only suit for UART0/2/3.
+//
+//*****************************************************************************
 void UARTIrDADisable(unsigned long ulBase)
 {
     xHWREG(ulBase + ICR) &= ~ICR_IRDA_EN;
 }
 
-
+//*****************************************************************************
+//
+//! \brief  Configure UART.
+//!         This function configure uart baud, data length, stop bit, parity.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] ulBaud is the target baud.
+//!
+//! \param  [in] ulCfg is uart configure parameters. which can be the logical
+//!              OR of the following value:
+//!              - \ref UART_CFG_LEN_5_BIT    
+//!              - \ref UART_CFG_LEN_6_BIT    
+//!              - \ref UART_CFG_LEN_7_BIT    
+//!              - \ref UART_CFG_LEN_8_BIT    
+//!              - \ref UART_CFG_STOP_1_BIT   
+//!              - \ref UART_CFG_STOP_2_BIT   
+//!              - \ref UART_CFG_PARITY_NONE  
+//!              - \ref UART_CFG_PARITY_ODD   
+//!              - \ref UART_CFG_PARITY_EVEN  
+//!              - \ref UART_CFG_PARITY_1     
+//!              - \ref UART_CFG_PARITY_0     
+//!              - \ref UART_CFG_BREAK_EN     
+//!              - \ref UART_CFG_BREAK_DIS
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTCfg(unsigned long ulBase, unsigned long ulBaud, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -598,8 +1067,27 @@ void UARTCfg(unsigned long ulBase, unsigned long ulBaud, unsigned long ulCfg)
     UartSetDivisors(ulBase, ulBaud);
 }
 
-
-
+//*****************************************************************************
+//
+//! \brief  Configure Modem function.
+//!         This function configure uart modem.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART1_BASE
+//!
+//! \param  [in] ulCfg is uart modem configure parameters. which can be the logical
+//!              OR of the following value:
+//!              - \ref LOOPBACK_MODE_EN
+//!              - \ref LOOPBACK_MODE_DIS
+//!              - \ref AUTO_RTS_EN
+//!              - \ref AUTO_RTS_DIS
+//!              - \ref AUTO_CTS_EN
+//!              - \ref AUTO_CTS_DIS
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTModemCfg(unsigned long ulBase, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -621,6 +1109,32 @@ void UARTModemCfg(unsigned long ulBase, unsigned long ulCfg)
 
 }
 
+//*****************************************************************************
+//
+//! \brief  Configure RS485 function.
+//!         This function configure uart rs485.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART1_BASE
+//!
+//! \param  [in] ulCfg is uart modem configure parameters. which can be the logical
+//!              OR of the following value:
+//!              - \ref RS485_NMM_DIS         
+//!              - \ref RS485_NMM_EN          
+//!              - \ref RS485_RX_EN           
+//!              - \ref RS485_RX_DIS          
+//!              - \ref RS485_AUTO_ADDR_EN    
+//!              - \ref RS485_AUTO_ADDR_DIS   
+//!              - \ref RS485_AUTO_DIR_DIS    
+//!              - \ref RS485_AUTO_DIR_RTS    
+//!              - \ref RS485_AUTO_DIR_DTR    
+//!              - \ref RS485_AUTO_DIR_INV_EN 
+//!              - \ref RS485_AUTO_DIR_INV_DIS   
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTRS485Cfg(unsigned long ulBase, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -647,8 +1161,20 @@ void UARTRS485Cfg(unsigned long ulBase, unsigned long ulCfg)
     xHWREG(ulBase + RS485CTRL) = ulTmpReg;
 }
 
-//!  \note This function is only suit for UART1.
-void UARTRS485AddrSet(unsigned long ulBase, unsigned long ulVal)
+//*****************************************************************************
+//
+//! \brief  Configure RS485 slave address.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART1_BASE
+//!
+//! \param  [in] uladdr is rs485 slave address.
+//!
+//! \return None.
+//
+//*****************************************************************************
+void UARTRS485AddrSet(unsigned long ulBase, unsigned long ulAddr)
 {
     // Check input parameters.
     xASSERT(ulBase == UART1_BASE);
@@ -657,7 +1183,19 @@ void UARTRS485AddrSet(unsigned long ulBase, unsigned long ulVal)
     xHWREG(ulBase + ADRMATCH) = (ulVal & RS485ADRMATCH_ADRMATCH_M);
 }
 
-//! \note This function is only suit for UART1.
+//*****************************************************************************
+//
+//! \brief  Configure RS485 Delay Time value.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART1_BASE
+//!
+//! \param  [in] uladdr is rs485 delay time value.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void UARTRS485DlyTimeSet(unsigned long ulBase, unsigned long ulVal)
 {
     // Check input parameters.
@@ -667,7 +1205,17 @@ void UARTRS485DlyTimeSet(unsigned long ulBase, unsigned long ulVal)
     xHWREG(ulBase + RS485DLY) = (ulVal & RS485DLY_DLY_M);
 }
 
-//! \note This function is only suit for UART1.
+//*****************************************************************************
+//
+//! \brief  Get Modem status.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART1_BASE
+//!
+//! \return The Modem status value.
+//
+//*****************************************************************************
 unsigned long UARTModemStatGet(unsigned long ulBase)
 {
     // Check input parameters.
@@ -676,7 +1224,24 @@ unsigned long UARTModemStatGet(unsigned long ulBase)
     return (xHWREG(ulBase + MSR));
 }
 
-//! \note This function is only suit for UART1.
+//*****************************************************************************
+//
+//! \brief  Check Modem status Flag.
+//!
+//! \param  [in] ulBase is the uart module base address.
+//!              This value can be one of the following value:
+//!              - \ref UART1_BASE
+//!
+//! \param  [in] ulFlags is the Modem status flag that you want to check. 
+//!              This value must be logical OR of the following value:
+//!              - \ref xxx
+//! \todo        
+//!
+//! \return
+//!         - xtrue  The checked flag has been set.
+//!         - xflase The checked flag has not been set.
+//
+//*****************************************************************************
 xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags)
 {
 
@@ -694,27 +1259,3 @@ xtBoolean UARTModemStatCheck(unsigned long ulBase, unsigned long ulFlags)
     }
 }
 
-
-void UARTIntFlagClear(unsigned long ulBase, unsigned long ulIntFlags)
-{
-    // Check input parameters.
-    xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
-            (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
-    xASSERT( (ulIntFlags & ~(INT_ABEO | INT_ABTO)) == 0);
-
-    switch(ulIntFlags)
-    {
-        case INT_ABEO:
-        case INT_ABTO:
-        case INT_ABEO | INT_ABTO:
-            {
-                xHWREG(ulBase + ACR) |= ulIntFlags;
-                break;
-            }
-
-        default:                         // Error
-            {
-                while(1);
-            }
-    }
-}

@@ -40,6 +40,15 @@
 #ifndef __XHW_RTC_H__
 #define __XHW_RTC_H__
 
+#include "xhw_types.h"
+#include "xhw_ints.h"
+#include "xcore.h"
+#include "xhw_memmap.h"
+#include "xhw_nvic.h"
+#include "xhw_sysctl.h"
+#include "xdebug.h"
+#include "xsysctl.h"
+
 //*****************************************************************************
 //
 //! \addtogroup CoX_Peripheral_Lib

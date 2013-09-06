@@ -63,14 +63,12 @@
 //*****************************************************************************
 //
 //! \addtogroup xLowLayer_Peripheral_Memmap xLowLayer Peripheral Memmap
-//! \brief The following are definitions for the base addresses of the memories
-//! and peripherals.
+//! \brief      The following are definitions for the base addresses of the memories
+//!             and peripherals.
 //!
 //! They are always used as ulBase parameters in the peripheral library.
 //! The name of a macro for the base address of a peripheral is in  general
 //! format as x$Namen$_BASE, e.g. xUART0_BASE.
-//!
-//! \todo Finish GPIO Base address macro.
 //!
 //! @{
 //
@@ -130,11 +128,11 @@
 
 //*****************************************************************************
 //
-//! \addtogroup LPC17xx_LowLayer_Peripheral_Memmap NXP LPC17xx LowLayer Peripheral Memmap
-//! The following are defines for the base address of the memories and
-//! peripherals.
+//! \addtogroup LPC17xx_LowLayer_Peripheral_Memmap LPC17xx LowLayer Peripheral Memmap
+//! \brief      The following are defines for the base address of the memories
+//!             and peripherals.
 //!
-//! This is always used as ulBase parameter in the peripheral library.
+//! \note       This is always used as ulBase parameter in the peripheral library.
 //! @{
 //
 //*****************************************************************************

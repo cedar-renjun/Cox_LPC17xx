@@ -40,6 +40,15 @@
 #ifndef __XHW_I2C_H__
 #define __XHW_I2C_H__
 
+#include "xhw_types.h"
+#include "xhw_ints.h"
+#include "xcore.h"
+#include "xhw_memmap.h"
+#include "xhw_nvic.h"
+#include "xhw_sysctl.h"
+#include "xdebug.h"
+#include "xsysctl.h"
+
 //*****************************************************************************
 //
 //! \addtogroup CoX_Peripheral_Lib
@@ -164,6 +173,222 @@
 
 //*****************************************************************************
 //
+//! \addtogroup LPC17xx_I2C_Register_CONSET I2C Register CONSET
+//! \brief      I2C CONSET Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Asser acknowledge flag.
+#define CONSET_AA                  BIT_32_2
+
+//! I2C interrupt flag.
+#define CONSET_SI                  BIT_32_3
+
+//! Stop Flag.
+#define CONSET_STO                 BIT_32_4
+
+//! Start Flag.
+#define CONSET_STA                 BIT_32_5
+
+//! I2C interface enable.
+#define CONSET_I2CEN               BIT_32_6
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_CONCLR I2C Register CONCLR
+//! \brief      I2C CONCLR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Assert acknowledge clear bit.
+#define CONCLR_AAC                  BIT_32_2
+
+//! I2C interrupt clear bit.
+#define CONCLR_SIC                  BIT_32_3
+
+//! Start flag clear bit.
+#define CONCLR_STAC                 BIT_32_5
+
+//! I2C interface disable bit.
+#define CONCLR_I2CENC               BIT_32_6
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_STAT I2C Register STAT 
+//! \brief      I2C STAT Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! I2C interface status.
+#define STAT_STATUS_M               BIT_MASK(32, 7, 3)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_DAT I2C Register DAT
+//! \brief      I2C DAT Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Data value mask.
+#define DAT_DATA_M                  BIT_MASK(32, 7, 0)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_MMCTRL I2C Register MMCTRL
+//! \brief      I2C MMCTRL Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Monitor mode enable.
+#define MMCTRL_MM_ENA              BIT_32_0
+
+//! SCL output enable.
+#define MMCTRL_ENA_SCL             BIT_32_1
+
+//! Select interrupt register match.
+#define MMCTRL_MATCH_ALL           BIT_32_2
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_DATABUF I2C Register DATABUF
+//! \brief      I2C DATABUF Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Data buffer mask.
+#define DATABUF_DATA_M             BIT_MASK(32, 7, 0)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_ADR I2C Register ADR
+//! \brief      I2C ADR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! General Call Enable Bit.
+#define ADR_GC                     BIT_32_0
+
+//! I2C device address for slave mode.
+#define ADR_ADDR_M                 BIT_MASK(32, 7, 1)
+
+//! I2C device address for slave mode shift.
+#define ADR_ADDR_S                 1
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_MASK I2C Register MASK
+//! \brief      I2C ADR Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Mask Bits.
+#define MASK_MASK_M                 BIT_MASK(32, 7, 1)
+
+//! I2C device address for slave mode shift.
+#define MASK_MASK_S                 1
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_SCLH I2C Register SCLH
+//! \brief      I2C SCLH Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Count for SCL High time period selection.
+#define SCLH_SCLH_M                 BIT_MASK(32, 15, 0)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Register_SCLL I2C Register SCLL
+//! \brief      I2C SCLL Register description.
+//!
+//! @{
+//
+//*****************************************************************************
+
+//! Count for SCL low time period selection.
+#define SCLL_SCLL_M                 BIT_MASK(32, 15, 0)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
 //! @}
 //
 //*****************************************************************************
@@ -181,119 +406,3 @@
 //*****************************************************************************
 
 #endif // __XHW_I2C_H__
-
-
-
-
-
-
-
-//! CONSET {{
-
-//! Asser acknowledge flag.
-#define CONSET_AA                  BIT_32_2
-
-//! I2C interrupt flag.
-#define CONSET_SI                  BIT_32_3
-
-//! Stop Flag.
-#define CONSET_STO                 BIT_32_4
-
-//! Start Flag.
-#define CONSET_STA                 BIT_32_5
-
-//! I2C interface enable.
-#define CONSET_I2CEN               BIT_32_6
-
-//! CONSET }}
-
-
-//! CONCLR {{
-
-//! Assert acknowledge clear bit.
-#define CONCLR_AAC                  BIT_32_2
-
-//! I2C interrupt clear bit.
-#define CONCLR_SIC                  BIT_32_3
-
-//! Start flag clear bit.
-#define CONCLR_STAC                 BIT_32_5
-
-//! I2C interface disable bit.
-#define CONCLR_I2CENC               BIT_32_6
-
-//! CONCLR }}
-
-//! STAT {{
-
-//! I2C interface status.
-#define STAT_STATUS_M               BIT_MASK(32, 7, 3)
-
-//! STAT }}
-
-//! I2CDAT {{
-
-//! Data value mask.
-#define DAT_DATA_M                  BIT_MASK(32, 7, 0)
-
-//! I2CDAT }}
-
-
-//! MMCTRL {{
-
-//! Monitor mode enable.
-#define MMCTRL_MM_ENA              BIT_32_0
-
-//! SCL output enable.
-#define MMCTRL_ENA_SCL             BIT_32_1
-
-//! Select interrupt register match.
-#define MMCTRL_MATCH_ALL           BIT_32_2
-
-//! MMCTRL }}
-
-
-//! DATA_BUF {{
-
-//! Data buffer mask.
-#define DATABUF_DATA_M             BIT_MASK(32, 7, 0)
-
-//! DATA_BUF }}
-
-
-//! ADR {{
-
-//! General Call Enable Bit.
-#define ADR_GC                     BIT_32_0
-
-//! I2C device address for slave mode.
-#define ADR_ADDR_M                 BIT_MASK(32, 7, 1)
-
-//! I2C device address for slave mode shift.
-#define ADR_ADDR_S                 1
-
-//! ADR }}
-
-//! MASK {{
-
-//! Mask Bits.
-#define MASK_MASK_M                 BIT_MASK(32, 7, 1)
-
-//! I2C device address for slave mode shift.
-#define MASK_MASK_S                 1
-
-//! MASK }}
-
-//! SCLH {{
-
-//! Count for SCL High time period selection.
-#define SCLH_SCLH_M                 BIT_MASK(32, 15, 0)
-
-//! SCLH }}
-
-//! SCLL {{
-
-//! Count for SCL low time period selection.
-#define SCLL_SCLL_M                 BIT_MASK(32, 15, 0)
-
-//! SCLL }}
