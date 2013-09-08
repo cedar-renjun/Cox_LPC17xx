@@ -74,22 +74,19 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xRTC_INT_Type xRTC Interrupt Type
-//! \brief Values that show xRTC Interrupt Type
-//! \n
-//! \section xRTC_INT_Type_Section 1. Where to use this group
-//! Values that can be passed to xRTCIntEnable(),xRTCIntDisable() and 
-//! xRTCIntClear() as the ulIntFlags parameter. 
-//! \n
-//! \section xRTC_INT_Type_CoX 2.CoX Port Details 
-//! +--------------------------+----------------+------------------------+
+//! \brief      Values that show xRTC Interrupt Type
+//! 
+//! \section    xRTC_INT_Type_Section 1. Where to use this group
+//!             Values that can be passed to xRTCIntEnable(),xRTCIntDisable()
+//!             and xRTCIntClear() as the ulIntFlags parameter. 
+//! 
+//! \section    xRTC_INT_Type_CoX     2. CoX Port Details 
+//!
 //! |  xRTC Interrupts         |       CoX      |         LPC17xx        |
 //! |--------------------------|----------------|------------------------|
 //! |  xRTC_INT_SECOND         |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_INT_ALARM          |  Non-Mandatory |            Y           |
-//! |--------------------------|----------------|------------------------|
-//! |  xRTC_INT_OVERFLOW       |  Non-Mandatory |            N           |
-//! +--------------------------+----------------+------------------------+
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -105,23 +102,20 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xRTC_INT_Event xRTC Interrupt Event
-//! \brief Values that show xRTC Interrupt Event
-//! \n
-//! \section xRTC_INT_Event_Section 1. Where to use this group
-//! RTC Event/Error Flag, Used by IntHandle's Event Callback Function as 
-//! ulMsgParam parmeter. User Callback function can user this to detect what 
-//! event happened.  
-//! \n
-//! \section xRTC_INT_Event_CoX 2.CoX Port Details 
-//! +------------------------+----------------+------------------------+
-//! |xRTC Interrupts         |       CoX      |         LPC17xx        |
-//! |------------------------|----------------|------------------------|
-//! |xRTC_EVENT_SECOND       |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTC_EVENT_ALARM        |  Non-Mandatory |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTC_EVENT_OVERFLOW     |  Non-Mandatory |            N           |
-//! +------------------------+----------------+------------------------+
+//! \brief      Values that show xRTC Interrupt Event
+//! 
+//! \section    xRTC_INT_Event_Section 1. Where to use this group
+//!             RTC Event/Error Flag, Used by IntHandle's Event Callback
+//!             Function as ulMsgParam parmeter. User Callback function can
+//!             user this to detect what event happened.  
+//!
+//! \section    xRTC_INT_Event_CoX     2. CoX Port Details 
+//! 
+//! |  xRTC Interrupts         |       CoX      |         LPC17xx        |
+//! |--------------------------|----------------|------------------------|
+//! |  xRTC_EVENT_SECOND       |    Mandatory   |            Y           |
+//! |  xRTC_EVENT_ALARM        |  Non-Mandatory |            Y           |
+//!
 //! @{
 //
 //*****************************************************************************
@@ -137,30 +131,24 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xRTC_Day_Week xRTC Day Week
-//! \brief Values that show xRTC Day Week
-//! \n
-//! \section xRTC_Day_Week_Section 1. Where to use this group
-//! Values that can be passed to xRTCTimeRead(),xRTCTimeWrite() 
-//! as the tTime.ulWDay parameter. 
-//! \n
-//! \section xRTC_Day_Week_CoX 2.CoX Port Details 
-//! +--------------------------+----------------+------------------------+
+//! \brief      Values that show xRTC Day Week
+//! 
+//! \section    xRTC_Day_Week_Section 1. Where to use this group
+//!             Values that can be passed to xRTCTimeRead(),xRTCTimeWrite() 
+//!             as the tTime.ulWDay parameter. 
+//!
+//! \section    xRTC_Day_Week_CoX     2. CoX Port Details 
+//! 
 //! |  tTime.ulWDay            |       CoX      |         LPC17xx        |
 //! |--------------------------|----------------|------------------------|
 //! |  xRTC_WEEK_SUNDAY        |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_WEEK_MONDAY        |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_WEEK_TUESDAY       |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_WEEK_WEDNESDAY     |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_WEEK_THURSDAY      |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_WEEK_FRIDAY        |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_WEEK_SATURDAY      |    Mandatory   |            Y           |
-//! +--------------------------+----------------+------------------------+
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -168,37 +156,37 @@ extern "C"
 //
 //! Sunday
 //
-#define xRTC_WEEK_SUNDAY        
+#define xRTC_WEEK_SUNDAY        0
 
 //
 //! Monday
 //
-#define xRTC_WEEK_MONDAY        
+#define xRTC_WEEK_MONDAY        1
 
 //
 //! Tuesday
 //
-#define xRTC_WEEK_TUESDAY       
+#define xRTC_WEEK_TUESDAY       2
 
 //
 //! Wednesday
 //
-#define xRTC_WEEK_WEDNESDAY     
+#define xRTC_WEEK_WEDNESDAY     3
 
 //
 //! Thursday
 //
-#define xRTC_WEEK_THURSDAY     
+#define xRTC_WEEK_THURSDAY      4
 
 //
 //! Friday
 //
-#define xRTC_WEEK_FRIDAY      
+#define xRTC_WEEK_FRIDAY        5
 
 //
 //! Saturday
 //
-#define xRTC_WEEK_SATURDAY   
+#define xRTC_WEEK_SATURDAY      6
 
 //*****************************************************************************
 //
@@ -210,12 +198,12 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xRTC_Year_Offset xRTC Year Offset
-//! \Values that show xRTC Year Offset
-//! \n
-//! \section xRTC_Year_Offset_Section 1. Where to use this group
-//! Values that is the offset of the year. 
-//! \n
-//! \section xRTC_Year_Offset_CoX 2.CoX Port Details 
+//! \brief      Values that show xRTC Year Offset
+//! 
+//! \section    xRTC_Year_Offset_Section 1. Where to use this group
+//!             Values that is the offset of the year. 
+//! 
+//! \section    xRTC_Year_Offset_CoX     2. CoX Port Details 
 //! @{
 //
 //*****************************************************************************
@@ -234,20 +222,19 @@ extern "C"
 //*****************************************************************************
 //
 //! \addtogroup xRTC_Time_Type xRTC Time Type
-//! \brief Values that show xRTC Time Type
-//! \n
-//! \section xRTC_Year_Offset_Section 1. Where to use this group
-//! Values that can be passed to RTCTimeRead() and RTCTimeWrite()
-//! as the ulTimeAlarm parameter. 
-//! \n
-//! \section xRTC_Year_Offset_CoX 2.CoX Port Details 
-//! +--------------------------+----------------+------------------------+
+//! \brief      Values that show xRTC Time Type
+//! 
+//! \section    xRTC_Year_Offset_Section 1. Where to use this group
+//!             Values that can be passed to RTCTimeRead() and RTCTimeWrite()
+//!             as the ulTimeAlarm parameter. 
+//! 
+//! \section    xRTC_Year_Offset_CoX     2. CoX Port Details 
+//!
 //! |  ulTimeAlarm             |       CoX      |         LPC17xx        |
 //! |--------------------------|----------------|------------------------|
 //! |  xRTC_TIME_CURRENT       |    Mandatory   |            Y           |
-//! |--------------------------|----------------|------------------------|
 //! |  xRTC_TIME_ALARM         |  Non-Mandatory |            Y           |
-//! |--------------------------|----------------|------------------------|
+//!
 //! @{
 //
 //*****************************************************************************
@@ -275,11 +262,7 @@ extern "C"
 //
 //*****************************************************************************
 
-//*****************************************************************************
-//
 //! xRTC Time and Calendar Definition definitions
-//
-//*****************************************************************************
 typedef struct 
 {
     //
@@ -327,28 +310,21 @@ typedef struct
 //*****************************************************************************
 //
 //! \addtogroup xRTC_Exported_APIs xRTC API
-//! \brief xRTC API Reference.
+//! \brief      xRTC API Reference.
 //!
-//! \section xRTC_Exported_APIs_Port CoX Port Details
-//! +------------------------+----------------+------------------------+
-//! |xRTC API                |       CoX      |         LPC17xx        |
-//! |------------------------|----------------|------------------------|
-//! |xRTCTimeInit            |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTCTimeRead            |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTCTimeWrite           |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTCIntEnable           |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTCIntCallbackInit     |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTCIntDisable          |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTCStart               |    Mandatory   |            Y           |
-//! |------------------------|----------------|------------------------|
-//! |xRTCStop                |    Mandatory   |            Y           |
-//! +------------------------+----------------+------------------------+
+//! \section    xRTC_Exported_APIs_Port CoX Port Details
+//! 
+//! |      xRTC API            |       CoX      |         LPC17xx        |
+//! |--------------------------|----------------|------------------------|
+//! | \ref xRTCTimeInit        |    Mandatory   |            Y           |
+//! | \ref xRTCTimeRead        |    Mandatory   |            Y           |
+//! | \ref xRTCTimeWrite       |    Mandatory   |            Y           |
+//! | \ref xRTCIntEnable       |    Mandatory   |            Y           |
+//! | \ref xRTCIntCallbackInit |    Mandatory   |            Y           |
+//! | \ref xRTCIntDisable      |    Mandatory   |            Y           |
+//! | \ref xRTCStart           |    Mandatory   |            Y           |
+//! | \ref xRTCStop            |    Mandatory   |            Y           |
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -376,8 +352,8 @@ typedef struct
 //! \param  [out] xtTime specifies the point of time and data.
 //! \param  [in]  ulTimeAlarm specifies which will be read current time or alarm time.
 //!               This parameter is the one of any of the following:
-//!               \ref xRTC_TIME_CURRENT  Get Current time.
-//!               \ref xRTC_TIME_ALARM    Get System Alarm.
+//!               - \ref xRTC_TIME_CURRENT  Get Current time.
+//!               - \ref xRTC_TIME_ALARM    Get System Alarm.
 //!
 //! \return None.
 //
@@ -389,11 +365,11 @@ extern void xRTCTimeRead(xtTime * pxtTime, unsigned long ulTimeAlarm);
 //! \brief  Write current date/time or alarm date/time to RTC Module.
 //!         This function is to configure current date/time or alarm date/time.
 //!
-//! \param  [out] xtTime specifies the point of time and data.
+//! \param  [in] xtTime specifies the point of time and data.
 //! \param  [in]  ulTimeAlarm specifies which will be read current time or alarm time.
 //!               This parameter is the one of any of the following:
-//!               \ref xRTC_TIME_CURRENT  Get Current time.
-//!               \ref xRTC_TIME_ALARM    Get System Alarm.
+//!               - \ref xRTC_TIME_CURRENT  Get Current time.
+//!               - \ref xRTC_TIME_ALARM    Get System Alarm.
 //!
 //! \return None.
 //
@@ -407,8 +383,8 @@ extern void xRTCTimeWrite(xtTime * pxtTime, unsigned long ulTimeAlarm);
 //!
 //! \param  [in] ulIntType is the bit mask of the interrupt sources to be enabled.
 //!              This value can be the logical OR of the following value:
-//!              \ref xRTC_INT_SECOND      Tick interrupt
-//!              \ref xRTC_INT_ALARM       Alarm interrupt
+//!              - \ref xRTC_INT_SECOND      Tick interrupt
+//!              - \ref xRTC_INT_ALARM       Alarm interrupt
 //!
 //! \return None.
 //
@@ -422,8 +398,8 @@ extern void xRTCIntEnable(unsigned long ulIntType);
 //!
 //! \param  [in] ulIntType is the bit mask of the interrupt sources to be enabled.
 //!              This value can be the logical OR of the following value:
-//!              \ref xRTC_INT_SECOND      Tick interrupt
-//!              \ref xRTC_INT_ALARM       Alarm interrupt
+//!              - \ref xRTC_INT_SECOND      Tick interrupt
+//!              - \ref xRTC_INT_ALARM       Alarm interrupt
 //!
 //! \return None.
 //
@@ -569,7 +545,6 @@ extern void xRTCIntDisable(unsigned long ulIntType);
 
 //! Enable year increment interrupt.
 #define INT_YEAR_EN             BIT_32_7
-
 
 //! Disable second increment interrupt.
 #define INT_SEC_DIS             BIT_32_8

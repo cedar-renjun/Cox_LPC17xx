@@ -11,7 +11,166 @@
 #include "xhw_uart.h"
 #include "xuart.h"
 
-//! \todo Add ISR register/handler function.
+//*****************************************************************************
+//
+// An array for uart callback function point
+//
+//*****************************************************************************
+static xtEventCallback g_pfnWDTHandlerCallbacks[4] = {0};
+
+//*****************************************************************************
+//
+//! \brief  UART 0 interrupt handler.
+//!         This function is the UART interrupt handler, it simple execute the
+//!         callback function if there be one.
+//!
+//! \param  None.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
+void UART0IntHandler(void)
+{
+    if(g_pfnWDTHandlerCallbacks != 0)
+    {
+        g_pfnWDTHandlerCallbacks[0](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  UART 1 interrupt handler.
+//!         This function is the UART interrupt handler, it simple execute the
+//!         callback function if there be one.
+//!
+//! \param  None.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
+void UART1IntHandler(void)
+{
+    if(g_pfnWDTHandlerCallbacks != 0)
+    {
+        g_pfnWDTHandlerCallbacks[1](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  UART 2 interrupt handler.
+//!         This function is the UART interrupt handler, it simple execute the
+//!         callback function if there be one.
+//!
+//! \param  None.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
+void UART2IntHandler(void)
+{
+    if(g_pfnWDTHandlerCallbacks != 0)
+    {
+        g_pfnWDTHandlerCallbacks[2](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  UART 3 interrupt handler.
+//!         This function is the UART interrupt handler, it simple execute the
+//!         callback function if there be one.
+//!
+//! \param  None.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
+void UART3IntHandler(void)
+{
+    if(g_pfnWDTHandlerCallbacks != 0)
+    {
+        g_pfnWDTHandlerCallbacks[3](0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  Register user interrupts callback function  for the UART.
+//!
+//! \param  [in] ulBase is the base address of the UART port.
+//!              This value can be one of the following value:
+//!              - \ref UART0_BASE
+//!              - \ref UART1_BASE
+//!              - \ref UART2_BASE
+//!              - \ref UART3_BASE
+//!
+//! \param  [in] xtPortCallback is user callback for the UART.
+//!
+//! \return None.
+//
+//*****************************************************************************
+unsigned long UARTIntCallbackInit(unsigned long ulBase,
+        xtEventCallback pfnCallback);
+{
+    // Check the parameters.
+    xASSERT( (ulBase == UART0_BASE) ||
+             (ulBase == UART1_BASE) ||
+             (ulBase == UART2_BASE) ||
+             (ulBase == UART3_BASE) );
+    xASSERT(pfnCallback != 0);
+
+    // Register user call back function.
+    switch(ulBase)
+    {
+        case UART0_BASE:
+            {
+                g_pfnWDTHandlerCallbacks[0] = pfnCallback;
+                break;
+            }
+
+        case UART1_BASE:
+            {
+                g_pfnWDTHandlerCallbacks[1] = pfnCallback;
+                break;
+            }
+
+        case UART2_BASE:
+            {
+                g_pfnWDTHandlerCallbacks[2] = pfnCallback;
+                break;
+            }
+
+        case UART3_BASE:
+            {
+                g_pfnWDTHandlerCallbacks[3] = pfnCallback;
+                break;
+            }
+    }
+
+    return (0);
+
+}
 
 //*****************************************************************************
 //
@@ -276,15 +435,15 @@ void UARTByteWrite(unsigned long ulBase, unsigned char ucData)
 //! \param  [out] ucpData is the pointer point to the address of receive buffer. 
 //!               This parameter NUST NOT be NULL.
 //!
-//! \return Indicate the whether receive byte sucessfully.
-//!         - xtrue   Have received an byte succssfully.
-//!         - xflase  Have not received an byte.
+//! \return Returns the character read from the specified port, cast as a
+//!         \e long. A \b -1 is returned if there are no characters present in the
+//!         receive FIFO.
 //! 
 //! \note   Unlike \ref UARTByteRead, when no data available, it will exit
 //!         inmmediately.
 //
 //*****************************************************************************
-xtBoolean UARTByteReadNoBlocking(unsigned long ulBase, unsigned char * ucpData)
+unsigned long UARTByteReadNoBlocking(unsigned long ulBase)
 {
     unsigned long ulTmpReg = 0;
 
@@ -292,22 +451,18 @@ xtBoolean UARTByteReadNoBlocking(unsigned long ulBase, unsigned char * ucpData)
     xASSERT((ulBase == UART0_BASE) || (ulBase == UART1_BASE) ||
             (ulBase == UART2_BASE) || (ulBase == UART3_BASE) );
 
-    xASSERT(0 != ucpData);
-
     // DLAB MUST be zero.
     xHWREG(ulBase + LCR) &= ~LCR_DLAB;
 
     // Receive one byte ?
-    ulTmpReg = xHWREG(ulBase + LSR);
-    if(ulTmpReg & LSR_RDR)            // Yes
+    if( xHWREG(ulBase + LSR) &  LSR_RDR)  // Yes
     {
         // Read the byte.
-        *ucpData = (unsigned char) xHWREG(ulBase + RBR);
-        return (xtrue);
+        return xHWREG(ulBase + RBR);
     }
-    else                             // No
+    else                                  // No
     {
-        return (xfalse);
+        return (-1);
     }
 
 }
@@ -831,8 +986,16 @@ void UARTTransStop(unsigned long ulBase)
 //!              - \ref UART2_BASE
 //!              - \ref UART3_BASE
 //!
-//! \return The status of uart, which consist of the following value:
-//! \todo   Add status value.
+//! \return The status of uart, which consist of the logical OR of the following
+//!         value:
+//!              - \ref RX_FIFO_NOT_EMPTY               
+//!              - \ref OVERRUN_ERR                     
+//!              - \ref PARITY_ERR                      
+//!              - \ref FRAMING_ERR                     
+//!              - \ref BREAK_INT                       
+//!              - \ref TX_FIFO_EMPTY                   
+//!              - \ref TX_EMPTY                        
+//!              - \ref RX_FIFO_ERR  
 //
 //*****************************************************************************
 unsigned long UARTStatGet(unsigned long ulBase)
@@ -1178,9 +1341,9 @@ void UARTRS485AddrSet(unsigned long ulBase, unsigned long ulAddr)
 {
     // Check input parameters.
     xASSERT(ulBase == UART1_BASE);
-    xASSERT((ulVal & ~RS485ADRMATCH_ADRMATCH_M) == 0);
+    xASSERT((ulAddr & ~RS485ADRMATCH_ADRMATCH_M) == 0);
 
-    xHWREG(ulBase + ADRMATCH) = (ulVal & RS485ADRMATCH_ADRMATCH_M);
+    xHWREG(ulBase + ADRMATCH) = (ulAddr & RS485ADRMATCH_ADRMATCH_M);
 }
 
 //*****************************************************************************

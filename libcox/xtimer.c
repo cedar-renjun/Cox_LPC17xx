@@ -159,25 +159,25 @@ void TimerIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref xTIMER0_BASE, \ref xTIMER1_BASE,
-//!              \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!              - \ref xTIMER0_BASE, - \ref xTIMER1_BASE,
+//!              - \ref xTIMER2_BASE, - \ref xTIMER3_BASE.
 //!
 //! \param  [in] ulChannel is the channel of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref xTIMER_CHANNEL0
-//!              \ref xTIMER_CHANNEL1
+//!              - \ref xTIMER_CHANNEL0
+//!              - \ref xTIMER_CHANNEL1
 //!
 //! \param  [in] ulConfig is the mode Configuratation of the Timer port.
 //!              This parameter is the OR value of two values:
 //!              - Timer's mode
-//!                \ref xTIMER_MODE_ONESHOT
-//!                \ref xTIMER_MODE_PERIODIC
-//!                \ref xTIMER_MODE_TOGGLE and
-//!                \ref xTIMER_MODE_CONTINUOUS
-//!                \ref xTIMER_MODE_CAPTURE
+//!                - \ref xTIMER_MODE_ONESHOT
+//!                - \ref xTIMER_MODE_PERIODIC
+//!                - \ref xTIMER_MODE_TOGGLE and
+//!                - \ref xTIMER_MODE_CONTINUOUS
+//!                - \ref xTIMER_MODE_CAPTURE
 //!              - Timer's direction
-//!                \ref xTIMER_COUNT_UP
-//!                \ref xTIMER_COUNT_DOWN
+//!                - \ref xTIMER_COUNT_UP
+//!                - \ref xTIMER_COUNT_DOWN
 //!
 //! \param  [in] ulTickFreq is the tick frequency of the Timer port.
 //!
@@ -259,17 +259,17 @@ void TimerInitConfig(unsigned long ulBase, unsigned long ulChannel,
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \return The status of timer module interrupt status.
 //!         This value is the OR of the following value:
-//!              \ref TIMER_INT_MAT_CH_0
-//!              \ref TIMER_INT_MAT_CH_1
-//!              \ref TIMER_INT_MAT_CH_2
-//!              \ref TIMER_INT_MAT_CH_3
-//!              \ref TIMER_INT_CAP_CH_0
-//!              \ref TIMER_INT_CAP_CH_1
+//!              - \ref TIMER_INT_MAT_CH_0
+//!              - \ref TIMER_INT_MAT_CH_1
+//!              - \ref TIMER_INT_MAT_CH_2
+//!              - \ref TIMER_INT_MAT_CH_3
+//!              - \ref TIMER_INT_CAP_CH_0
+//!              - \ref TIMER_INT_CAP_CH_1
 //!
 //
 //*****************************************************************************
@@ -290,17 +290,17 @@ unsigned long TimerIntStatusGet(unsigned long ulBase)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulIntFlags is the interrupt flag you want to check
 //!         This value is the OR of the following value:
-//!              \ref TIMER_INT_MAT_CH_0
-//!              \ref TIMER_INT_MAT_CH_1
-//!              \ref TIMER_INT_MAT_CH_2
-//!              \ref TIMER_INT_MAT_CH_3
-//!              \ref TIMER_INT_CAP_CH_0
-//!              \ref TIMER_INT_CAP_CH_1
+//!              - \ref TIMER_INT_MAT_CH_0
+//!              - \ref TIMER_INT_MAT_CH_1
+//!              - \ref TIMER_INT_MAT_CH_2
+//!              - \ref TIMER_INT_MAT_CH_3
+//!              - \ref TIMER_INT_CAP_CH_0
+//!              - \ref TIMER_INT_CAP_CH_1
 //!
 //! \return The status of special interrupt flag.
 //!         - xtrue The check flag has been set. 
@@ -333,17 +333,17 @@ xtBoolean TimerIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulIntFlags is the interrupt flag you want to clear.
 //!         This value is the OR of the following value:
-//!              \ref TIMER_INT_MAT_CH_0
-//!              \ref TIMER_INT_MAT_CH_1
-//!              \ref TIMER_INT_MAT_CH_2
-//!              \ref TIMER_INT_MAT_CH_3
-//!              \ref TIMER_INT_CAP_CH_0
-//!              \ref TIMER_INT_CAP_CH_1
+//!              - \ref TIMER_INT_MAT_CH_0
+//!              - \ref TIMER_INT_MAT_CH_1
+//!              - \ref TIMER_INT_MAT_CH_2
+//!              - \ref TIMER_INT_MAT_CH_3
+//!              - \ref TIMER_INT_CAP_CH_0
+//!              - \ref TIMER_INT_CAP_CH_1
 //!
 //! \return None.
 //!
@@ -366,8 +366,8 @@ void TimerIntStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \return None.
 //!
@@ -390,8 +390,8 @@ void TimerStart(unsigned long ulBase)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \return None.
 //!
@@ -414,8 +414,8 @@ void TimerStop(unsigned long ulBase)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \return None.
 //!
@@ -449,8 +449,8 @@ MODE_COUNTER_CH1_BOTHEDGE
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulValue is the timer clock precsacle.
 //!              0 <= ulValue <= (32-bit long maximum value)
@@ -476,8 +476,8 @@ void TimerPrescaleSet(unsigned long ulBase, unsigned long ulValue)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \return      The timer clock precsacle.
 //!              0 <= ulValue <= (32-bit long maximum value)
@@ -501,8 +501,8 @@ unsigned long TimerPrescaleGet(unsigned long ulBase)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulValue is the timer counter value.
 //!              0 <= ulValue <= (32-bit long maximum value)
@@ -528,8 +528,8 @@ void TimerLoadSet(unsigned long ulBase, unsigned long ulValue)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \return [in] The timer counter value.
 //!              0 <= ulValue <= (32-bit long maximum value)
@@ -554,15 +554,15 @@ unsigned long TimerLoadGet(unsigned long ulBase)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulChs is the timer channel.
 //!              This value can be one of the following value:
-//!              \ref TIMER_MAT_CH_0
-//!              \ref TIMER_MAT_CH_1
-//!              \ref TIMER_MAT_CH_2
-//!              \ref TIMER_MAT_CH_3
+//!              - \ref TIMER_MAT_CH_0
+//!              - \ref TIMER_MAT_CH_1
+//!              - \ref TIMER_MAT_CH_2
+//!              - \ref TIMER_MAT_CH_3
 //!
 //! \param  [in] ulValue is the timer match value.
 //!              0 <= ulValue <= (32-bit long maximum value)
@@ -620,15 +620,15 @@ void TimerMatchValueSet(unsigned long ulBase, unsigned long ulChs, unsigned long
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulChs is the timer channel.
 //!              This value can be one of the following value:
-//!              \ref TIMER_MAT_CH_0
-//!              \ref TIMER_MAT_CH_1
-//!              \ref TIMER_MAT_CH_2
-//!              \ref TIMER_MAT_CH_3
+//!              - \ref TIMER_MAT_CH_0
+//!              - \ref TIMER_MAT_CH_1
+//!              - \ref TIMER_MAT_CH_2
+//!              - \ref TIMER_MAT_CH_3
 //!
 //! \return The timer match value.
 //!
@@ -683,8 +683,8 @@ unsigned long  TimerMatchValueGet(unsigned long ulBase, unsigned long ulChs)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \return The timer current counter value.
 //!         0 <= ulValue <= (32-bit long maximum value).
@@ -708,25 +708,25 @@ unsigned long TimerValueGet(unsigned long ulBase)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulChs is the timer channel.
 //!              This value can be one of the following value:
-//!              \ref TIMER_MAT_CH_0
-//!              \ref TIMER_MAT_CH_1
-//!              \ref TIMER_MAT_CH_2
-//!              \ref TIMER_MAT_CH_3
+//!              - \ref TIMER_MAT_CH_0
+//!              - \ref TIMER_MAT_CH_1
+//!              - \ref TIMER_MAT_CH_2
+//!              - \ref TIMER_MAT_CH_3
 //!
 //! \param  [in] ulCfgs is the parameters for timer match mode.
 //!              This value can be one of the following value:
-//!              \ref TIMER_MAT_INT        Triggle interrupt when match event occurs.
-//!              \ref TIMER_MAT_RESET      Reset counter when match event occurs.   
-//!              \ref TIMER_MAT_STOP       Stop counter when match event occurs.   
-//!              \ref TIMER_MAT_PIN_NONE   No action when match event occurs.   
-//!              \ref TIMER_MAT_PIN_LOW    Set pin low when match event occurs.  
-//!              \ref TIMER_MAT_PIN_HIGH   Set pin High when match event occurs.   
-//!              \ref TIMER_MAT_PIN_TOGGLE Toggle pin value when match event occurs.   
+//!              - \ref TIMER_MAT_INT        Triggle interrupt when match event occurs.
+//!              - \ref TIMER_MAT_RESET      Reset counter when match event occurs.   
+//!              - \ref TIMER_MAT_STOP       Stop counter when match event occurs.   
+//!              - \ref TIMER_MAT_PIN_NONE   No action when match event occurs.   
+//!              - \ref TIMER_MAT_PIN_LOW    Set pin low when match event occurs.  
+//!              - \ref TIMER_MAT_PIN_HIGH   Set pin High when match event occurs.   
+//!              - \ref TIMER_MAT_PIN_TOGGLE Toggle pin value when match event occurs.   
 //!
 //! \return None.
 //!
@@ -790,23 +790,23 @@ void TimerMatchCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCf
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulChs is the timer channel.
 //!              This value can be one of the following value:
-//!              \ref TIMER_CAP_CH_0
-//!              \ref TIMER_CAP_CH_1
+//!              - \ref TIMER_CAP_CH_0
+//!              - \ref TIMER_CAP_CH_1
 //!
 //! \param  [in] ulCfgs is the parameters for timer match mode.
 //!              This value can be one of the following value:
-//!              \ref TIMER_CFG_CAP_RISING  Capture rising edge signal.
-//!              \ref TIMER_CFG_CAP_FALLING Capture falling edge signal.
-//!              \ref TIMER_CFG_CAP_INT     Triggle interrupt when capture event occurs.
+//!              - \ref TIMER_CFG_CAP_RISING  Capture rising edge signal.
+//!              - \ref TIMER_CFG_CAP_FALLING Capture falling edge signal.
+//!              - \ref TIMER_CFG_CAP_INT     Triggle interrupt when capture event occurs.
 //!
 //! \return None.
-//! \note   \ref TIMER_CFG_CAP_INT can be used with \ref TIMER_CFG_CAP_RISING
-//!         and \ref TIMER_CFG_CAP_FALLING, i.e:
+//! \note   - \ref TIMER_CFG_CAP_INT can be used with - \ref TIMER_CFG_CAP_RISING
+//!         and - \ref TIMER_CFG_CAP_FALLING, i.e:
 //!         TimerCaptureCfg(TIMER0_BASE, TIMER_CAP_CH_0, TIMER_CFG_CAP_RISING | TIMER_CFG_CAP_INT);
 //!
 //
@@ -846,13 +846,13 @@ void TimerCaptureCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ul
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulChs is the timer channel.
 //!              This value can be one of the following value:
-//!              \ref TIMER_CAP_CH_0
-//!              \ref TIMER_CAP_CH_1
+//!              - \ref TIMER_CAP_CH_0
+//!              - \ref TIMER_CAP_CH_1
 //!
 //! \return The capture value.
 //!
@@ -893,22 +893,22 @@ unsigned long TimerCapValueGet(unsigned long ulBase, unsigned long ulChs)
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
 //!              This value can be one of the following value:
-//!              \ref TIMER0_BASE, \ref TIMER1_BASE,
-//!              \ref TIMER2_BASE, \ref TIMER3_BASE.
+//!              - \ref TIMER0_BASE, - \ref TIMER1_BASE,
+//!              - \ref TIMER2_BASE, - \ref TIMER3_BASE.
 //!
 //! \param  [in] ulChs is the timer channel.
 //!              This value can be one of the following value:
-//!              \ref TIMER_CAP_CH_0
-//!              \ref TIMER_CAP_CH_1
+//!              - \ref TIMER_CAP_CH_0
+//!              - \ref TIMER_CAP_CH_1
 //!
 //! \param  [in] ulCfg is the parameters for configure timer counter mode.
 //!              This value can be one of the following value:
-//!              \ref TIMER_CFG_CNT_CAP0_RISING     Capture 0 rising edge increase counter.
-//!              \ref TIMER_CFG_CNT_CAP0_FALLING    Capture 0 falling edge increase counter.
-//!              \ref TIMER_CFG_CNT_CAP0_BOTH       Capture 0 both edge increase counter.
-//!              \ref TIMER_CFG_CNT_CAP1_RISING     Capture 1 rising edge increase counter.
-//!              \ref TIMER_CFG_CNT_CAP1_FALLING    Capture 1 falling edge increase counter.
-//!              \ref TIMER_CFG_CNT_CAP1_BOTH       Capture 1 both edge increase counter.
+//!              - \ref TIMER_CFG_CNT_CAP0_RISING     Capture 0 rising edge increase counter.
+//!              - \ref TIMER_CFG_CNT_CAP0_FALLING    Capture 0 falling edge increase counter.
+//!              - \ref TIMER_CFG_CNT_CAP0_BOTH       Capture 0 both edge increase counter.
+//!              - \ref TIMER_CFG_CNT_CAP1_RISING     Capture 1 rising edge increase counter.
+//!              - \ref TIMER_CFG_CNT_CAP1_FALLING    Capture 1 falling edge increase counter.
+//!              - \ref TIMER_CFG_CNT_CAP1_BOTH       Capture 1 both edge increase counter.
 //!
 //! \return None.
 //!
@@ -933,17 +933,17 @@ void TimerCounterCfg(unsigned long ulBase, unsigned long ulCfg)
 //!
 //! \param [in] ulBase is the base address of the Timer port.
 //!             Can be one of the following value:
-//!             \ref xTIMER0_BASE, \ref xTIMER1_BASE,
-//!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!             - \ref xTIMER0_BASE, - \ref xTIMER1_BASE,
+//!             - \ref xTIMER2_BASE, - \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
 //!             This value can be one of the following value:
-//!             \ref xTIMER_CHANNEL0 is general timer channel.
-//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!             - \ref xTIMER_CHANNEL0 is general timer channel.
+//!             - \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \param [in] ulIntFlags is the interrupt type of the Timer port.
-//!             \ref xTIMER_INT_MATCH       Match interrupt event.
-//!             \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
+//!             - \ref xTIMER_INT_MATCH       Match interrupt event.
+//!             - \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
 //!
 //! \return None.
 //
@@ -979,17 +979,17 @@ void xTimerIntEnable(unsigned long ulBase, unsigned long ulChannel, unsigned lon
 //!
 //! \param [in] ulBase is the base address of the Timer port.
 //!             Can be one of the following value:
-//!             \ref xTIMER0_BASE, \ref xTIMER1_BASE,
-//!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!             - \ref xTIMER0_BASE, - \ref xTIMER1_BASE,
+//!             - \ref xTIMER2_BASE, - \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
 //!             This value can be one of the following value:
-//!             \ref xTIMER_CHANNEL0 is general timer channel.
-//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!             - \ref xTIMER_CHANNEL0 is general timer channel.
+//!             - \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \param [in] ulIntFlags is the interrupt type of the Timer port.
-//!             \ref xTIMER_INT_MATCH       Match interrupt event.
-//!             \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
+//!             - \ref xTIMER_INT_MATCH       Match interrupt event.
+//!             - \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
 //!
 //! \return None.
 //
@@ -1025,17 +1025,17 @@ void xTimerIntDisable(unsigned long ulBase, unsigned long ulChannel, unsigned lo
 //!
 //! \param [in] ulBase is the base address of the Timer port.
 //!             Can be one of the following value:
-//!             \ref xTIMER0_BASE, \ref xTIMER1_BASE,
-//!             \ref xTIMER2_BASE, \ref xTIMER3_BASE.
+//!             - \ref xTIMER0_BASE, - \ref xTIMER1_BASE,
+//!             - \ref xTIMER2_BASE, - \ref xTIMER3_BASE.
 //!
 //! \param [in] ulChannel is the channel of the Timer port.
 //!             This value can be one of the following value:
-//!             \ref xTIMER_CHANNEL0 is general timer channel.
-//!             \ref xTIMER_CHANNEL1 is input capture channel.
+//!             - \ref xTIMER_CHANNEL0 is general timer channel.
+//!             - \ref xTIMER_CHANNEL1 is input capture channel.
 //!
 //! \param [in] ulIntFlags is the interrupt type of the Timer port.
-//!             \ref xTIMER_INT_MATCH       Match interrupt event.
-//!             \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
+//!             - \ref xTIMER_INT_MATCH       Match interrupt event.
+//!             - \ref xTIMER_INT_CAP_EVENT   Input capture interrupt event.
 //!
 //! \return the Status of The Timer counter interrupt.
 //

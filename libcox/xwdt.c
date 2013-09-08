@@ -74,12 +74,12 @@ unsigned long WDTIntCallbackInit(xtEventCallback pfnCallback)
 //! \param  [in] ulConfig is the WDT clock source Selection and Mode.
 //!              This value can be OR of two type of value:
 //!              - clock source
-//!                 \ref WDT_CFG_CLKSRC_IRC
-//!                 \ref WDT_CFG_CLKSRC_APB
-//!                 \ref WDT_CFG_CLKSRC_RTC
+//!                 - \ref WDT_CFG_CLKSRC_IRC
+//!                 - \ref WDT_CFG_CLKSRC_APB
+//!                 - \ref WDT_CFG_CLKSRC_RTC
 //!              - clock source
-//!                 \ref WDT_CFG_INT_MODE
-//!                 \ref WDT_CFG_RESET_MODE
+//!                 - \ref WDT_CFG_INT_MODE
+//!                 - \ref WDT_CFG_RESET_MODE
 //!             
 //! \param  [in] ulValue is the Timer's reload value.
 //!              0xFF <= ulReload <= 0xFFFFFFFF
@@ -166,7 +166,8 @@ void WDTCfg(unsigned long ulCfg, unsigned long ulValue)
 //!
 //! \return None.
 //!
-//! \note   User must call this function before WDT counter overflow.
+//! \note   User must call this function to feed watchdog before WDT counter
+//!         overflow.
 //!
 //
 //*****************************************************************************
@@ -200,14 +201,35 @@ void WDTEnable(void)
 
 //*****************************************************************************
 //
+//! \brief  Disable WDT Module.
+//!         This function is used to Disable WDT module and Stop counter.
+//!
+//! \param  None.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
+void WDTDisable(void)
+{
+    // Enable Watchdog bit.
+    xHWREG(WDT_BASE + WDT_MOD) &= ~WDMOD_EN;
+
+    // Feed dog to clock the watchdog.
+    xHWREG(WDT_BASE + WDT_FEED) = (unsigned long) 0xAA;
+    xHWREG(WDT_BASE + WDT_FEED) = (unsigned long) 0x55;
+}
+
+//*****************************************************************************
+//
 //! \brief  Get WDT status.
 //!         This function is used to get WDT status.
 //!
 //! \param  None.
 //!
 //! \return The status of WDT, which contains of the OR of following value:
-//!         \ref WDT_FLAG_TIMEOUT
-//!         \ref WDT_FLAG_INT
+//!         - \ref WDT_FLAG_TIMEOUT
+//!         - \ref WDT_FLAG_INT
 //!
 //
 //*****************************************************************************
@@ -219,12 +241,12 @@ unsigned long WDTStatusFlagGet(void)
 //*****************************************************************************
 //
 //! \brief  Check WDT status flag.
-//!         This function is used to check whether special flag is set or not.
+//!         This function checks whether special flag is set or not.
 //!
 //! \param  [in] ulFlags is the flag you want to check
 //!         This value is the OR of the following value:
-//!              \ref WDT_FLAG_TIMEOUT
-//!              \ref WDT_FLAG_INT
+//!              - \ref WDT_FLAG_TIMEOUT
+//!              - \ref WDT_FLAG_INT
 //!
 //! \return The status of special flag.
 //!         - xtrue The check flag has been set. 
@@ -261,12 +283,18 @@ xtBoolean WDTStatusFlagCheck(unsigned long ulFlags)
 //!
 //! \return None.
 //!
-//! \note   This function only can be used to clear WDT_FLAG_TIMEOUT flag.
+//! \note   
+//!       1. This function only can be used to clear WDT_FLAG_TIMEOUT flag.
+//!       2. When mcu reset, user must call \ref WDTStatusFlagCheck to check
+//!          whether watchdog timeout, if timeout flag is set, then user must
+//!          call \ref WDTStatusFlagClear to clear this flag.
+//!         
 //
 //*****************************************************************************       
 void WDTStatusFlagClear(unsigned long ulFlags)
 {
 
+    // Parameters valid ?
     xASSERT(ulFlags == WDT_FLAG_TIMEOUT);
 
     // Clear Timeout Flag.
@@ -290,8 +318,8 @@ void WDTStatusFlagClear(unsigned long ulFlags)
 //!              This value must be \ref xWDT_BASE.
 //!
 //! \param  [in] ulConfig is the Timer's Prescaler divider and clock source Selection.
-//!              \ref xWDT_S_INTSL
-//!              \ref xWDT_S_EXTSL
+//!              - \ref xWDT_S_INTSL
+//!              - \ref xWDT_S_EXTSL
 //!             
 //! \param  [in] ulReload is the Timer's reload value.
 //!              0xFF <= ulReload <= 0xFFFFFFFF
@@ -324,8 +352,8 @@ void xWDTInit(unsigned long ulBase, unsigned long ulConfig, unsigned long ulRelo
 //!
 //! \param  [in] ulFunction is the watch dog timer's function.
 //!              This parameter is the OR value of any of the following:
-//!              \ref xWDT_INT_FUNCTION
-//!              \ref xWDT_RESET_FUNCTION
+//!              - \ref xWDT_INT_FUNCTION
+//!              - \ref xWDT_RESET_FUNCTION
 //!
 //! \note   xWDTInit(ulBase, ulConfig, ulReload) must be called before function:
 //!         \ref xWDTEnable and \ref xWDTFunctionEnable.
@@ -343,6 +371,43 @@ void xWDTFunctionEnable(unsigned long ulBase, unsigned long ulFunction)
     }
 
     // Configure WDT interrupt/reset mode.
-    WDTCfg(ulConfig, _PreValue);
+    WDTCfg(ulFunction, _PreValue);
 }
 
+//*****************************************************************************
+//
+//! \brief  Disable the watch dog timer's function. 
+//!         This function is to disable the watch dog timer's function such as
+//!         Interrupt reset.
+//!
+//! \param  [in] ulBase is the base address of the WatchDog Timer(WDT) module.
+//!              This value must be \ref xWDT_BASE.
+//!
+//! \param  [in] ulFunction is the watch dog timer's function.
+//!              This parameter is the OR value of any of the following:
+//!              - \ref xWDT_INT_FUNCTION
+//!              - \ref xWDT_RESET_FUNCTION
+//!
+//! \return None.
+//!
+//! \note   For LPC17xx, You can't Disable Those functions.
+//
+//*****************************************************************************      
+void xWDTFunctionDisable(unsigned long ulBase, unsigned long ulFunction)
+{
+    // Avoid compiler warning
+    (void) ulBase;
+    (void) ulFunction;
+
+    // Check input parameters valid.
+    xASSERT(ulBase == xWDT_BASE);
+    xASSERT((ulFunction == xWDT_INT_FUNCTION) || (ulFunction == xWDT_RESET_FUNCTION));
+
+    // Set watch dog mode register to default value.
+    xHWREG(WDT_BASE + WDT_MOD) = 0x00;
+
+    // Feed watchdog.
+    xHWREG(WDT_BASE + WDT_FEED) = (unsigned long) 0xAA;
+    xHWREG(WDT_BASE + WDT_FEED) = (unsigned long) 0x55;
+}
+ 

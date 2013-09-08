@@ -1086,7 +1086,7 @@ extern void xTimerIntEnable(unsigned long ulBase, unsigned long ulChannel, unsig
 extern void xTimerIntDisable(unsigned long ulBase, unsigned long ulChannel, unsigned long ulIntFlags);
 
 extern xtBoolean xTimerStatusGet(unsigned long ulBase, unsigned long ulChannel, unsigned long ulIntFlags);
-extern void xTimerCounterDetectPhaseSelect(unsigned long ulBase, unsigned long ulChannel, unsigned long ulPhase);
+//extern void xTimerCounterDetectPhaseSelect(unsigned long ulBase, unsigned long ulChannel, unsigned long ulPhase);
 
 //*****************************************************************************
 //

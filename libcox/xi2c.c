@@ -152,9 +152,9 @@ unsigned long I2CIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallba
 //!         Master block.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] TargetClk is the I2C clock bit rate.
 //!              0 < ulI2CClk <= 400000
@@ -202,17 +202,17 @@ void I2CMasterInit(unsigned long ulBase, unsigned long TargetClk)
 //!         function of specified I2C port.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr specifies the slave address.
 //!              The ucSlaveAddr can be a 7-bit value.
 //!
 //! \param  [in] ulGeneralCall specifies enable General Call function or not.
 //!              The ulGeneralCall can be one of the following values:
-//!                  \ref I2C_GENERAL_CALL_EN
-//!                  \ref I2C_GENERAL_CALL_DIS.
+//!                  - \ref I2C_GENERAL_CALL_EN
+//!                  - \ref I2C_GENERAL_CALL_DIS.
 //!
 //! \return None.
 //!
@@ -255,9 +255,9 @@ void I2CSlaveInit(unsigned long ulBase, unsigned long ulSlaveAddr,
 //! \brief  Enable I2C Module.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -281,9 +281,9 @@ void I2CEnable(unsigned long ulBase)
 //! \brief  Disable I2C Module.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -307,9 +307,9 @@ void I2CDisable(unsigned long ulBase)
 //! \brief  Release Start signal on i2c bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -340,9 +340,9 @@ void I2CStartSend(unsigned long ulBase)
 //! \brief  Release Stop signal on i2c bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -372,9 +372,9 @@ void I2CStopSend(unsigned long ulBase)
 //! \brief  Enable I2C general call function.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -416,9 +416,9 @@ void I2CGeneralCallEnable(unsigned long ulBase, unsigned long ulID)
 //! \brief  Disable I2C general call function.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -460,16 +460,16 @@ void I2CGeneralCallDisable(unsigned long ulBase, unsigned long ulID)
 //! \brief  Configure I2C slave address.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ulID is Slave addree channel
 //!              This parameter can be one of the following value.
-//!              \ref I2C_SLAVE_ADD0
-//!              \ref I2C_SLAVE_ADD1
-//!              \ref I2C_SLAVE_ADD2
-//!              \ref I2C_SLAVE_ADD3
+//!              - \ref I2C_SLAVE_ADD0
+//!              - \ref I2C_SLAVE_ADD1
+//!              - \ref I2C_SLAVE_ADD2
+//!              - \ref I2C_SLAVE_ADD3
 //!
 //! \param  [in] ulVal is the slave address.
 //!              bit7-->bit1
@@ -536,9 +536,9 @@ void I2CSlaveAddrSet(unsigned long ulBase, unsigned long ulID, unsigned long ulV
 //! \brief  Read an byte from I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -562,9 +562,9 @@ unsigned long I2CDataRead(unsigned long ulBase)
 //! \brief  Write an byte to I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ulValue is the byte ready to write.
 //!       
@@ -590,41 +590,41 @@ void I2CDataWrite(unsigned long ulBase, unsigned long ulValue)
 //! \brief  Get I2C bus status.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return The status code of I2C bus, which can be one of the following value:
-//!         \ref I2C_STAT_NO_INF
-//!         \ref I2C_STAT_BUS_ERROR
-//!         \ref I2C_STAT_M_TX_START
-//!         \ref I2C_STAT_M_TX_RESTART
-//!         \ref I2C_STAT_M_TX_SLAW_ACK
-//!         \ref I2C_STAT_M_TX_SLAW_NACK
-//!         \ref I2C_STAT_M_TX_DAT_ACK
-//!         \ref I2C_STAT_M_TX_DAT_NACK
-//!         \ref I2C_STAT_M_TX_ARB_LOST
-//!         \ref I2C_STAT_M_RX_START
-//!         \ref I2C_STAT_M_RX_RESTART
-//!         \ref I2C_STAT_M_RX_ARB_LOST
-//!         \ref I2C_STAT_M_RX_SLAR_ACK
-//!         \ref I2C_STAT_M_RX_SLAR_NACK
-//!         \ref I2C_STAT_M_RX_DAT_ACK
-//!         \ref I2C_STAT_M_RX_DAT_NACK
-//!         \ref I2C_STAT_S_RX_SLAW_ACK
-//!         \ref I2C_STAT_S_RX_ARB_LOST_M_SLA
-//!         \ref I2C_STAT_S_RX_GENCALL_ACK
-//!         \ref I2C_STAT_S_RX_ARB_LOST_M_GENCALL
-//!         \ref I2C_STAT_S_RX_PRE_SLA_DAT_ACK
-//!         \ref I2C_STAT_S_RX_PRE_SLA_DAT_NACK
-//!         \ref I2C_STAT_S_RX_PRE_GENCALL_DAT_ACK
-//!         \ref I2C_STAT_S_RX_PRE_GENCALL_DAT_NACK
-//!         \ref I2C_STAT_S_RX_STA_STO_SLVREC_SLVTRX
-//!         \ref I2C_STAT_S_TX_SLAR_ACK
-//!         \ref I2C_STAT_S_TX_ARB_LOST_M_SLA
-//!         \ref I2C_STAT_S_TX_DAT_ACK
-//!         \ref I2C_STAT_S_TX_DAT_NACK
-//!         \ref I2C_STAT_S_TX_LAST_DAT_ACK
+//!         - \ref I2C_STAT_NO_INF
+//!         - \ref I2C_STAT_BUS_ERROR
+//!         - \ref I2C_STAT_M_TX_START
+//!         - \ref I2C_STAT_M_TX_RESTART
+//!         - \ref I2C_STAT_M_TX_SLAW_ACK
+//!         - \ref I2C_STAT_M_TX_SLAW_NACK
+//!         - \ref I2C_STAT_M_TX_DAT_ACK
+//!         - \ref I2C_STAT_M_TX_DAT_NACK
+//!         - \ref I2C_STAT_M_TX_ARB_LOST
+//!         - \ref I2C_STAT_M_RX_START
+//!         - \ref I2C_STAT_M_RX_RESTART
+//!         - \ref I2C_STAT_M_RX_ARB_LOST
+//!         - \ref I2C_STAT_M_RX_SLAR_ACK
+//!         - \ref I2C_STAT_M_RX_SLAR_NACK
+//!         - \ref I2C_STAT_M_RX_DAT_ACK
+//!         - \ref I2C_STAT_M_RX_DAT_NACK
+//!         - \ref I2C_STAT_S_RX_SLAW_ACK
+//!         - \ref I2C_STAT_S_RX_ARB_LOST_M_SLA
+//!         - \ref I2C_STAT_S_RX_GENCALL_ACK
+//!         - \ref I2C_STAT_S_RX_ARB_LOST_M_GENCALL
+//!         - \ref I2C_STAT_S_RX_PRE_SLA_DAT_ACK
+//!         - \ref I2C_STAT_S_RX_PRE_SLA_DAT_NACK
+//!         - \ref I2C_STAT_S_RX_PRE_GENCALL_DAT_ACK
+//!         - \ref I2C_STAT_S_RX_PRE_GENCALL_DAT_NACK
+//!         - \ref I2C_STAT_S_RX_STA_STO_SLVREC_SLVTRX
+//!         - \ref I2C_STAT_S_TX_SLAR_ACK
+//!         - \ref I2C_STAT_S_TX_ARB_LOST_M_SLA
+//!         - \ref I2C_STAT_S_TX_DAT_ACK
+//!         - \ref I2C_STAT_S_TX_DAT_NACK
+//!         - \ref I2C_STAT_S_TX_LAST_DAT_ACK
 //
 //*****************************************************************************
 unsigned long I2CStatusGet(unsigned long ulBase)
@@ -645,9 +645,9 @@ unsigned long I2CStatusGet(unsigned long ulBase)
 //! \brief  Enable I2C Function Interrupt.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //
@@ -684,9 +684,9 @@ void I2CIntEnable(unsigned long ulBase)
 //! \brief  Disable I2C Function Interrupt.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //
@@ -735,9 +735,9 @@ void I2CIntDisable(unsigned long ulBase)
 //!         transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] ucData is the byte to transmit.
@@ -817,9 +817,9 @@ void I2CMasterWriteRequestS1(unsigned long ulBase, unsigned long ucSlaveAddr,
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucData is the byte to transmit.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
@@ -885,9 +885,9 @@ void I2CMasterWriteRequestS2(unsigned long ulBase, unsigned long ucData,
 //!         release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] ucData is the byte to transmit.
@@ -922,9 +922,9 @@ void I2CMasterWriteS1(unsigned long ulBase, unsigned long ulSlaveAddr,
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucData is the byte to transmit.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
@@ -963,9 +963,9 @@ void I2CMasterWriteS2(unsigned long ulBase, unsigned long ulData, xtBoolean bEnd
 //!         terminate this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] pucDataBuf is the data buffer to transmit.
@@ -1057,9 +1057,9 @@ void I2CMasterWriteBufS1(unsigned long ulBase, unsigned long ucSlaveAddr,
 //!         this transmition and release the I2C bus.!
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] pucDataBuf is the data buffer to transmit.
 //! \param  [in] ulLen is the data buffer byte size.
@@ -1138,9 +1138,9 @@ void I2CMasterWriteBufS2(unsigned long ulBase, unsigned char *pucDataBuf,
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP
@@ -1229,9 +1229,9 @@ unsigned long I2CMasterReadRequestS1(unsigned long ulBase,
 //!         this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP condition and
 //!              terminate this transmition.
@@ -1294,9 +1294,9 @@ unsigned long I2CMasterReadRequestS2(unsigned long ulBase, xtBoolean bEndTransmi
 //!         transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return None.
 //!
@@ -1334,9 +1334,9 @@ unsigned long I2CMasterReadLastRequestS2(unsigned long ulBase)
 //!         this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] pucData is the buffer where to save the data.
@@ -1374,9 +1374,9 @@ unsigned long I2CMasterReadS1(unsigned long ulBase,
 //!         to terminate this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [in] pucData is the buffer where to save the data.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP
@@ -1418,9 +1418,9 @@ unsigned long I2CMasterReadS2(unsigned long ulBase, unsigned char *pucData, xtBo
 //!        terminate this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [out] ucSlaveAddr is the 7-bit slave address.
 //!
@@ -1531,9 +1531,9 @@ unsigned long  I2CMasterReadBufS1(unsigned long ulBase,
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \param  [out] pucDataBuf is the buffer where to save the data.
 //!
@@ -1600,13 +1600,13 @@ unsigned long I2CMasterReadBufS2(unsigned long ulBase,
 //! \brief  Check I2C bus busy status.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref I2C0_BASE
-//!              \ref I2C1_BASE
-//!              \ref I2C2_BASE
+//!              - \ref I2C0_BASE
+//!              - \ref I2C1_BASE
+//!              - \ref I2C2_BASE
 //!
 //! \return Return the I2C bus busy status.
-//!         \ref xtrue   I2C bus is busy.
-//!         \ref xflase  I2C bus is not busy.
+//!         - \ref xtrue   I2C bus is busy.
+//!         - \ref xflase  I2C bus is not busy.
 //!
 //
 //*****************************************************************************

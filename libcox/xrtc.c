@@ -53,9 +53,9 @@ void RTCIntHandler(void)
 
 //*****************************************************************************
 //
-//! \brief Init interrupts callback for the RTC.
+//! \brief  Register user's interrupt callback function for the RTC.
 //!
-//! \param [in] xtPortCallback is user callback for the WDT.
+//! \param  [in] xtPortCallback is user callback for the RTC.
 //!
 //! \return None.
 //
@@ -79,25 +79,25 @@ unsigned long RTCIntCallbackInit(xtEventCallback pfnCallback)
 //!
 //! \param [in] ulType is the type of time.
 //!             This value can be one of the following value:
-//!             \ref RTC_TIMETYPE_SECOND     
-//!             \ref RTC_TIMETYPE_MINUTE     
-//!             \ref RTC_TIMETYPE_HOUR       
-//!             \ref RTC_TIMETYPE_DAYOFWEEK  
-//!             \ref RTC_TIMETYPE_DAYOFMONTH 
-//!             \ref RTC_TIMETYPE_DAYOFYEAR  
-//!             \ref RTC_TIMETYPE_MONTH      
-//!             \ref RTC_TIMETYPE_YEAR       
+//!             - \ref RTC_TIMETYPE_SECOND     
+//!             - \ref RTC_TIMETYPE_MINUTE     
+//!             - \ref RTC_TIMETYPE_HOUR       
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             - \ref RTC_TIMETYPE_MONTH      
+//!             - \ref RTC_TIMETYPE_YEAR       
 //!
 //! \param [in] ulValue is the value of time, for different type of time, you
 //!             must satisfied those condition.
-//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
-//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
-//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
-//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
-//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
-//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
-//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
-//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!             - \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             - \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             - \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             - \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             - \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
 //!                                                                  
 //! \return None.                                                    
 //
@@ -207,25 +207,25 @@ void RTCTimeSet(unsigned long ulType, unsigned long ulValue)
 //!
 //! \param [in] ulType is the type of time.
 //!             This value can be one of the following value:
-//!             \ref RTC_TIMETYPE_SECOND     
-//!             \ref RTC_TIMETYPE_MINUTE     
-//!             \ref RTC_TIMETYPE_HOUR       
-//!             \ref RTC_TIMETYPE_DAYOFWEEK  
-//!             \ref RTC_TIMETYPE_DAYOFMONTH 
-//!             \ref RTC_TIMETYPE_DAYOFYEAR  
-//!             \ref RTC_TIMETYPE_MONTH      
-//!             \ref RTC_TIMETYPE_YEAR       
+//!             - \ref RTC_TIMETYPE_SECOND     
+//!             - \ref RTC_TIMETYPE_MINUTE     
+//!             - \ref RTC_TIMETYPE_HOUR       
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             - \ref RTC_TIMETYPE_MONTH      
+//!             - \ref RTC_TIMETYPE_YEAR       
 //!
 //! \return The value of time, for different type of time, value
 //!             satisfied different range condition.
-//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
-//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
-//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
-//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
-//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
-//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
-//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
-//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!             - \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             - \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             - \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             - \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             - \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
 //!                                                                  
 //
 //***************************************************************************** 
@@ -288,25 +288,25 @@ unsigned long RTCTimeGet(unsigned long ulType)
 //!
 //! \param [in] ulType is the type of time.
 //!             This value can be one of the following value:
-//!             \ref RTC_TIMETYPE_SECOND     
-//!             \ref RTC_TIMETYPE_MINUTE     
-//!             \ref RTC_TIMETYPE_HOUR       
-//!             \ref RTC_TIMETYPE_DAYOFWEEK  
-//!             \ref RTC_TIMETYPE_DAYOFMONTH 
-//!             \ref RTC_TIMETYPE_DAYOFYEAR  
-//!             \ref RTC_TIMETYPE_MONTH      
-//!             \ref RTC_TIMETYPE_YEAR       
+//!             - \ref RTC_TIMETYPE_SECOND     
+//!             - \ref RTC_TIMETYPE_MINUTE     
+//!             - \ref RTC_TIMETYPE_HOUR       
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             - \ref RTC_TIMETYPE_MONTH      
+//!             - \ref RTC_TIMETYPE_YEAR       
 //!
 //! \param [in] ulValue is the value of time, for different type of time, you
 //!             must satisfied those condition.
-//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
-//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
-//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
-//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
-//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
-//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
-//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
-//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!             - \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             - \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             - \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             - \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             - \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
 //!                                                                  
 //! \return None.                                                    
 //
@@ -417,25 +417,25 @@ void RTCAlarmSet(unsigned long ulType, unsigned long ulValue)
 //!
 //! \param [in] ulType is the type of time.
 //!             This value can be one of the following value:
-//!             \ref RTC_TIMETYPE_SECOND     
-//!             \ref RTC_TIMETYPE_MINUTE     
-//!             \ref RTC_TIMETYPE_HOUR       
-//!             \ref RTC_TIMETYPE_DAYOFWEEK  
-//!             \ref RTC_TIMETYPE_DAYOFMONTH 
-//!             \ref RTC_TIMETYPE_DAYOFYEAR  
-//!             \ref RTC_TIMETYPE_MONTH      
-//!             \ref RTC_TIMETYPE_YEAR       
+//!             - \ref RTC_TIMETYPE_SECOND     
+//!             - \ref RTC_TIMETYPE_MINUTE     
+//!             - \ref RTC_TIMETYPE_HOUR       
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK  
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH 
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR  
+//!             - \ref RTC_TIMETYPE_MONTH      
+//!             - \ref RTC_TIMETYPE_YEAR       
 //!
 //! \return The value of time, for different type of time, value
 //!             satisfied different range condition.
-//!             \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
-//!             \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
-//!             \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
-//!             \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
-//!             \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
-//!             \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
-//!             \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
-//!             \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
+//!             - \ref RTC_TIMETYPE_SECOND        0 <= ulValue <= 59   
+//!             - \ref RTC_TIMETYPE_MINUTE        0 <= ulValue <= 59                     
+//!             - \ref RTC_TIMETYPE_HOUR          0 <= ulValue <= 23                     
+//!             - \ref RTC_TIMETYPE_DAYOFWEEK     0 <= ulValue <= 6                     
+//!             - \ref RTC_TIMETYPE_DAYOFMONTH    1 <= ulValue <= 31                     
+//!             - \ref RTC_TIMETYPE_DAYOFYEAR     1 <= ulValue <= 366
+//!             - \ref RTC_TIMETYPE_MONTH         1 <= ulValue <= 12
+//!             - \ref RTC_TIMETYPE_YEAR          0 <= ulValue <= 4095
 //!                                                                  
 //
 //***************************************************************************** 
@@ -496,11 +496,11 @@ unsigned long RTCAlarmGet(unsigned long ulType)
 //!
 //! \param  [in] ulID is the order of rtc general register.
 //!              ulID can be one of the following value:
-//!              \ref RTC_REG_0
-//!              \ref RTC_REG_1
-//!              \ref RTC_REG_2
-//!              \ref RTC_REG_3
-//!              \ref RTC_REG_4
+//!              - \ref RTC_REG_0
+//!              - \ref RTC_REG_1
+//!              - \ref RTC_REG_2
+//!              - \ref RTC_REG_3
+//!              - \ref RTC_REG_4
 //!
 //! \param  [in] ulValue is the data going to store into general register.
 //!              0 <= ulValue <= 0xFFFFFFFF
@@ -519,11 +519,11 @@ void RTCGenRegWrite(unsigned long ulID, unsigned long ulValue)
 //!
 //! \param  [in] ulID is the order of rtc general register.
 //!              ulID can be one of the following value:
-//!              \ref RTC_REG_0
-//!              \ref RTC_REG_1
-//!              \ref RTC_REG_2
-//!              \ref RTC_REG_3
-//!              \ref RTC_REG_4
+//!              - \ref RTC_REG_0
+//!              - \ref RTC_REG_1
+//!              - \ref RTC_REG_2
+//!              - \ref RTC_REG_3
+//!              - \ref RTC_REG_4
 //!
 //! \return The value stored in general register.
 //!              0 <= ulValue <= 0xFFFFFFFF
@@ -543,8 +543,8 @@ unsigned long RTCGenRegRead(unsigned long ulID)
 //! \param  None.
 //!
 //! \return The status of RTC interrupt, which contains of the OR of following value:
-//!         \ref RTC_INT_INC
-//!         \ref RTC_INT_ALARM
+//!         - \ref RTC_INT_INC
+//!         - \ref RTC_INT_ALARM
 //!
 //
 //*****************************************************************************
@@ -560,8 +560,8 @@ unsigned long RTCIntFlagGet(void)
 //!
 //! \param  [in] ulFlags is the flag you want to check
 //!         This value is the OR of the following value:
-//!              \ref RTC_INT_INC
-//!              \ref RTC_INT_ALARM
+//!              - \ref RTC_INT_INC
+//!              - \ref RTC_INT_ALARM
 //!
 //! \return The status of special flag.
 //!         - xtrue The check flag has been set. 
@@ -590,8 +590,8 @@ xtBoolean RTCIntFlagCheck(unsigned long ulFlags)
 //!
 //! \param  [in] ulFlags is RTC interrupt status flag.
 //!              This parameter can be OR of the following value:
-//!              \ref RTC_INT_INC
-//!              \ref RTC_INT_ALARM
+//!              - \ref RTC_INT_INC
+//!              - \ref RTC_INT_ALARM
 //!
 //! \return None.
 //!
@@ -681,42 +681,38 @@ void RTCCaliDisable(void)
 //!
 //! \param  [in] ulCfg is interrupt configure parameters.
 //!              This value can be the logical OR of the following value:
-//!
-//!              \ref INT_SEC_EN         Enable second       interrupt     
-//!              \ref INT_MIN_EN         Enable minute       interrupt     
-//!              \ref INT_HOUR_EN        Enable hour         interrupt     
-//!              \ref INT_DOM_EN         Enable day of month interrupt     
-//!              \ref INT_DOW_EN         Enable day of week  interrupt     
-//!              \ref INT_DOY_EN         Enable day of year  interrupt     
-//!              \ref INT_MON_EN         Enable month        interrupt     
-//!              \ref INT_YEAR_EN        Enable year         interrupt     
-//! 
-//!              \ref INT_SEC_DIS        Disable second       interrupt     
-//!              \ref INT_MIN_DIS        Disable minute       interrupt     
-//!              \ref INT_HOUR_DIS       Disable hour         interrupt     
-//!              \ref INT_DOM_DIS        Disable day of month interrupt     
-//!              \ref INT_DOW_DIS        Disable day of week  interrupt     
-//!              \ref INT_DOY_DIS        Disable day of year  interrupt     
-//!              \ref INT_MON_DIS        Disable month        interrupt     
-//!              \ref INT_YEAR_DIS       Disable year         interrupt     
-//! 
-//!              \ref INT_ALARM_SEC_EN   Enable second       alarm interrupt     
-//!              \ref INT_ALARM_MIN_EN   Enable minute       alarm interrupt     
-//!              \ref INT_ALARM_HOUR_EN  Enable hour         alarm interrupt     
-//!              \ref INT_ALARM_DOM_EN   Enable day of month alarm interrupt     
-//!              \ref INT_ALARM_DOW_EN   Enable day of week  alarm interrupt     
-//!              \ref INT_ALARM_DOY_EN   Enable day of year  alarm interrupt     
-//!              \ref INT_ALARM_MON_EN   Enable month        alarm interrupt     
-//!              \ref INT_ALARM_YEAR_EN  Enable year         alarm interrupt     
-//! 
-//!              \ref INT_ALARM_SEC_DIS  Disable second       alarm interrupt     
-//!              \ref INT_ALARM_MIN_DIS  Disable minute       alarm interrupt     
-//!              \ref INT_ALARM_HOUR_DIS Disable hour         alarm interrupt     
-//!              \ref INT_ALARM_DOM_DIS  Disable day of month alarm interrupt     
-//!              \ref INT_ALARM_DOW_DIS  Disable day of week  alarm interrupt     
-//!              \ref INT_ALARM_DOY_DIS  Disable day of year  alarm interrupt     
-//!              \ref INT_ALARM_MON_DIS  Disable month        alarm interrupt     
-//!              \ref INT_ALARM_YEAR_DIS Disable year         alarm interrupt     
+//!              - \ref INT_SEC_EN         Enable second       interrupt     
+//!              - \ref INT_MIN_EN         Enable minute       interrupt     
+//!              - \ref INT_HOUR_EN        Enable hour         interrupt     
+//!              - \ref INT_DOM_EN         Enable day of month interrupt     
+//!              - \ref INT_DOW_EN         Enable day of week  interrupt     
+//!              - \ref INT_DOY_EN         Enable day of year  interrupt     
+//!              - \ref INT_MON_EN         Enable month        interrupt     
+//!              - \ref INT_YEAR_EN        Enable year         interrupt     
+//!              - \ref INT_SEC_DIS        Disable second       interrupt     
+//!              - \ref INT_MIN_DIS        Disable minute       interrupt     
+//!              - \ref INT_HOUR_DIS       Disable hour         interrupt     
+//!              - \ref INT_DOM_DIS        Disable day of month interrupt     
+//!              - \ref INT_DOW_DIS        Disable day of week  interrupt     
+//!              - \ref INT_DOY_DIS        Disable day of year  interrupt     
+//!              - \ref INT_MON_DIS        Disable month        interrupt     
+//!              - \ref INT_YEAR_DIS       Disable year         interrupt     
+//!              - \ref INT_ALARM_SEC_EN   Enable second       alarm interrupt     
+//!              - \ref INT_ALARM_MIN_EN   Enable minute       alarm interrupt     
+//!              - \ref INT_ALARM_HOUR_EN  Enable hour         alarm interrupt     
+//!              - \ref INT_ALARM_DOM_EN   Enable day of month alarm interrupt     
+//!              - \ref INT_ALARM_DOW_EN   Enable day of week  alarm interrupt     
+//!              - \ref INT_ALARM_DOY_EN   Enable day of year  alarm interrupt     
+//!              - \ref INT_ALARM_MON_EN   Enable month        alarm interrupt     
+//!              - \ref INT_ALARM_YEAR_EN  Enable year         alarm interrupt     
+//!              - \ref INT_ALARM_SEC_DIS  Disable second       alarm interrupt     
+//!              - \ref INT_ALARM_MIN_DIS  Disable minute       alarm interrupt     
+//!              - \ref INT_ALARM_HOUR_DIS Disable hour         alarm interrupt     
+//!              - \ref INT_ALARM_DOM_DIS  Disable day of month alarm interrupt     
+//!              - \ref INT_ALARM_DOW_DIS  Disable day of week  alarm interrupt     
+//!              - \ref INT_ALARM_DOY_DIS  Disable day of year  alarm interrupt     
+//!              - \ref INT_ALARM_MON_DIS  Disable month        alarm interrupt     
+//!              - \ref INT_ALARM_YEAR_DIS Disable year         alarm interrupt     
 //!
 //! \return None.
 //
@@ -754,8 +750,8 @@ void RTCIntCfg(unsigned long ulCfg)
 //!
 //! \param  [in] ulIntType is the bit mask of the interrupt sources to be enabled.
 //!              This value can be the logical OR of the following value:
-//!              \ref xRTC_INT_SECOND      Tick interrupt
-//!              \ref xRTC_INT_ALARM       Alarm interrupt
+//!              - \ref xRTC_INT_SECOND      Tick interrupt
+//!              - \ref xRTC_INT_ALARM       Alarm interrupt
 //!
 //! \return None.
 //
@@ -791,8 +787,8 @@ void xRTCIntEnable(unsigned long ulIntType)
 //!
 //! \param  [in] ulIntType is the bit mask of the interrupt sources to be enabled.
 //!              This value can be the logical OR of the following value:
-//!              \ref xRTC_INT_SECOND      Tick interrupt
-//!              \ref xRTC_INT_ALARM       Alarm interrupt
+//!              - \ref xRTC_INT_SECOND      Tick interrupt
+//!              - \ref xRTC_INT_ALARM       Alarm interrupt
 //!
 //! \return None.
 //
@@ -830,10 +826,11 @@ void xRTCIntDisable(unsigned long ulIntType)
 //! \param  [out] xtTime specifies the point of time and data.
 //! \param  [in]  ulTimeAlarm specifies which will be read current time or alarm time.
 //!               This parameter is the one of any of the following:
-//!               \ref xRTC_TIME_CURRENT  Get Current time.
-//!               \ref xRTC_TIME_ALARM    Get System Alarm.
+//!               - \ref xRTC_TIME_CURRENT  Get Current time.
+//!               - \ref xRTC_TIME_ALARM    Get System Alarm.
 //!
 //! \return None.
+//! \todo   Finish this function.
 //
 //***************************************************************************** 
 void xRTCTimeRead(xtTime * pxtTime, unsigned long ulTimeAlarm)
@@ -868,10 +865,11 @@ void xRTCTimeRead(xtTime * pxtTime, unsigned long ulTimeAlarm)
 //! \param  [out] xtTime specifies the point of time and data.
 //! \param  [in]  ulTimeAlarm specifies which will be read current time or alarm time.
 //!               This parameter is the one of any of the following:
-//!               \ref xRTC_TIME_CURRENT  Get Current time.
-//!               \ref xRTC_TIME_ALARM    Get System Alarm.
+//!               - \ref xRTC_TIME_CURRENT  Get Current time.
+//!               - \ref xRTC_TIME_ALARM    Get System Alarm.
 //!
 //! \return None.
+//! \todo   Finish this function.
 //
 //***************************************************************************** 
 void xRTCTimeWrite(xtTime * pxtTime, unsigned long ulTimeAlarm)

@@ -114,7 +114,7 @@ extern "C"
 //! 
 //! \section    xWDT_Clock_Config_Section 1. Where to use this group
 //!             Watch dog clock Configs. Such as clock source, Prescaler divider.
-//!             Values that can be passed to xWDTInit as the ulConfig parameter 
+//!             Values that can be passed to \ref xWDTInit as the ulConfig parameter 
 //!
 //! \section    xWDT_Clock_Config_CoX     2. CoX Port Details 
 //! 
@@ -150,11 +150,11 @@ extern "C"
 //! |---------------------------|----------------|------------------------|
 //! | \ref  xWDTInit            |    Mandatory   |            Y           |
 //! | \ref  xWDTEnable          |    Mandatory   |            Y           |
-//! | \ref  xWDTIntCallbackInit |    Mandatory   |            Y           |
-//! | \ref  xWDTDisable         |    Mandatory   |            N           |
+//! | \ref  xWDTDisable         |    Mandatory   |            Y           |
 //! | \ref  xWDTRestart         |    Mandatory   |            Y           |
 //! | \ref  xWDTFunctionEnable  |    Mandatory   |            Y           |
 //! | \ref  xWDTFunctionDisable |    Mandatory   |            Y           |
+//! | \ref  xWDTIntCallbackInit |    Mandatory   |            Y           |
 //!
 //! @{
 //
@@ -163,7 +163,7 @@ extern "C"
 //*****************************************************************************
 //
 //! \brief  Configurate The WatchDog Timer(WDT)'s Timer Interval. 
-//!         This function is to configureThe WatchDog Timer(WDT)'s Timer Interval.
+//!         This function is to configure The WatchDog Timer(WDT)'s Timer Interval.
 //!         There are three factors to determine the Timer Interval, they are:
 //!             - clock source
 //!             - Prescaler divider
@@ -182,7 +182,7 @@ extern "C"
 //! \return None.
 //!
 //! \note   xWDTInit(ulBase, ulConfig, ulReload) must be called before function:
-//!         \ref xWDTEnable and \ref xWDTFunctionEnable.
+//!         - \ref xWDTEnable and - \ref xWDTFunctionEnable.
 //!
 //
 //*****************************************************************************
@@ -191,8 +191,8 @@ extern void xWDTInit(unsigned long ulBase, unsigned long ulConfig,
 
 //*****************************************************************************
 //
-//! \brief  Enable the Watchdog timer interrupt. 
-//!         This function is to Enable the Watchdog timer interrupt.
+//! \brief  Enable the Watchdog timer module.
+//!         This function is to Enable the Watchdog timer and start counter.
 //!
 //! \param  [in] ulBase is the base address of the WatchDog Timer(WDT) module.
 //!              This value must be \ref xWDT_BASE.
@@ -200,25 +200,25 @@ extern void xWDTInit(unsigned long ulBase, unsigned long ulConfig,
 //! \return None.
 //!
 //! \note   xWDTInit(ulBase, ulConfig, ulReload) must be called before function:
-//!         \ref xWDTEnable and \ref xWDTFunctionEnable.
+//!         - \ref xWDTEnable and - \ref xWDTFunctionEnable.
 //
 //*****************************************************************************       
 #define xWDTEnable(ulBase)      WDTEnable()
 
 //*****************************************************************************
 //
-//! \brief  Disable the Watchdog timer interrupt. 
-//!         This function is to Disable the Watchdog timer interrupt.
+//! \brief  Disable the Watchdog timer.
+//!         This function is to Disable the Watchdog timer module and stop
+//!         the counter.
 //!
 //! \param  [in] ulBase is the base address of the WatchDog Timer(WDT) module.
 //!              This value must be \ref xWDT_BASE.
 //!
 //! \return None.
 //!
-//! \note   For LPC17xx, You can't disable watchdog.
 //
 //***************************************************************************** 
-#define xWDTDisable(ulBase)
+#define xWDTDisable(ulBase)     WDTDisable()
 
 //*****************************************************************************
 //
@@ -227,7 +227,8 @@ extern void xWDTInit(unsigned long ulBase, unsigned long ulConfig,
 //! \param  [in] ulBase is the base address of the WatchDog Timer(WDT) module.
 //!              This value must be \ref xWDT_BASE.
 //!
-//! \param  [in] xtPortCallback is callback for the Watchdog timer.
+//! \param  [in] xtPortCallback is user's callback function for the Watchdog
+//!              timer.
 //!
 //! \return None.
 //
@@ -237,7 +238,7 @@ extern void xWDTInit(unsigned long ulBase, unsigned long ulConfig,
 
 //*****************************************************************************
 //
-//! \brief  Restart the Watchdog timer. 
+//! \brief  Restart the Watchdog timer counter. 
 //!         This function is to restart the Watchdog timer by feed watchdog.
 //!
 //! \param  [in] ulBase is the base address of the WatchDog Timer(WDT) module.
@@ -245,7 +246,7 @@ extern void xWDTInit(unsigned long ulBase, unsigned long ulConfig,
 //!
 //! \return None.
 //!
-//! \note   User can use this function to feed the watch dog.
+//! \note   User can use this function to feed the watch dog interval.
 //
 //*****************************************************************************       
 #define xWDTRestart(ulBase)     WDTFeed()
@@ -289,7 +290,7 @@ extern void xWDTFunctionEnable(unsigned long ulBase, unsigned long ulFunction);
 //! \note   For LPC17xx, You can't Disable Those functions.
 //
 //*****************************************************************************      
-#define xWDTFunctionDisable(ulBase, ulFunction)
+extern void xWDTFunctionDisable(unsigned long ulBase, unsigned long ulFunction);
         
 //*****************************************************************************
 //
@@ -312,17 +313,25 @@ extern void xWDTFunctionEnable(unsigned long ulBase, unsigned long ulFunction);
 
 //*****************************************************************************
 //
-//! \addtogroup IWDG_Prescaler_Value IWDG Prescaler Value
-//! Values that can be passed to IWDGTimerPrescalerSet().
+//! \addtogroup LPC17xx_WDT_CFG LPC WDT configure parameter.
+//! 
 //! @{
 //
 //*****************************************************************************
 
+//! Interrupt mode
 #define WDT_CFG_INT_MODE        BIT_32_0
+
+//! Reset mode
 #define WDT_CFG_RESET_MODE      BIT_32_1 | BIT_32_0
 
+//! Select Internal RC as WDT clock source.
 #define WDT_CFG_CLKSRC_IRC      BIT_32_2
+
+//! Select APB as WDT clock source.
 #define WDT_CFG_CLKSRC_APB      BIT_32_3
+
+//! Select RTC clock as WDT clock source.
 #define WDT_CFG_CLKSRC_RTC      BIT_32_3 | BIT_32_2
 
 //! Watchdog time-out flag.
@@ -340,7 +349,7 @@ extern void xWDTFunctionEnable(unsigned long ulBase, unsigned long ulFunction);
 //*****************************************************************************
 //
 //! \addtogroup LPC17xx_WDT_Exported_APIs LPC17xx WDT API
-//! \brief LPC17xx WDT API Reference.
+//! \brief      LPC17xx WDT API Reference.
 //! @{
 //
 //*****************************************************************************
@@ -348,8 +357,8 @@ extern void xWDTFunctionEnable(unsigned long ulBase, unsigned long ulFunction);
 extern void WDTCfg(unsigned long ulCfg, unsigned long ulValue);
 extern void WDTFeed(void);
 extern void WDTEnable(void);
+extern void WDTDisable(void);
 extern unsigned long WDTIntCallbackInit(xtEventCallback pfnCallback);
-
 extern unsigned long WDTStatusFlagGet(void);
 extern xtBoolean WDTStatusFlagCheck(unsigned long ulFlags);
 extern void WDTStatusFlagClear(unsigned long ulFlags);

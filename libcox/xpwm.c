@@ -38,6 +38,28 @@
                                  PWM_INT_CH_3 | PWM_INT_CH_4  | PWM_INT_CH_5 |       \
                                  PWM_INT_CH_6 | PWM_INT_CAP_0 | PWM_INT_CAP_1)
 
+//*****************************************************************************
+//
+//! \brief  Clear PWM interrupt status flag.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulIntFlags is the interrupt flag, which can be logical OR of
+//!              the following value:
+//!              - \ref PWM_INT_CH_0 
+//!              - \ref PWM_INT_CH_1 
+//!              - \ref PWM_INT_CH_2 
+//!              - \ref PWM_INT_CH_3 
+//!              - \ref PWM_INT_CH_4 
+//!              - \ref PWM_INT_CH_5 
+//!              - \ref PWM_INT_CH_6 
+//!              - \ref PWM_INT_CAP_0
+//!              - \ref PWM_INT_CAP_1
+//! \return None.
+//
+//*****************************************************************************
 void PWMIntStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
 {
 
@@ -48,6 +70,27 @@ void PWMIntStatusClear(unsigned long ulBase, unsigned long ulIntFlags)
     // Check flag.
     xHWREG(PWM1_BASE + PWM_IR) |= ulIntFlags;
 }
+
+//*****************************************************************************
+//
+//! \brief  Get PWM interrupt status.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \return  The PWM interrupt status, which consists of the following value:
+//!              - \ref PWM_INT_CH_0 
+//!              - \ref PWM_INT_CH_1 
+//!              - \ref PWM_INT_CH_2 
+//!              - \ref PWM_INT_CH_3 
+//!              - \ref PWM_INT_CH_4 
+//!              - \ref PWM_INT_CH_5 
+//!              - \ref PWM_INT_CH_6 
+//!              - \ref PWM_INT_CAP_0
+//!              - \ref PWM_INT_CAP_1
+//
+//*****************************************************************************
 unsigned long PWMIntStatusGet(unsigned long ulBase)
 {
 
@@ -57,6 +100,32 @@ unsigned long PWMIntStatusGet(unsigned long ulBase)
     return xHWREG(PWM1_BASE + PWM_IR);
 
 }
+
+//*****************************************************************************
+//
+//! \brief  Check PWM interrupt status.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the
+//!              following value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulIntFlags is the interrupt flag, which can be logical OR of
+//!              the following value:
+//!              - \ref PWM_INT_CH_0 
+//!              - \ref PWM_INT_CH_1 
+//!              - \ref PWM_INT_CH_2 
+//!              - \ref PWM_INT_CH_3 
+//!              - \ref PWM_INT_CH_4 
+//!              - \ref PWM_INT_CH_5 
+//!              - \ref PWM_INT_CH_6 
+//!              - \ref PWM_INT_CAP_0
+//!              - \ref PWM_INT_CAP_1
+//!
+//! \return The status of check interrupt flag.
+//!         - xtrue The check flag has been set. 
+//!         - xflase The check flag has not been set. 
+//
+//*****************************************************************************
 xtBoolean PWMIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
 {
     // Check input parameters.
@@ -74,7 +143,17 @@ xtBoolean PWMIntStatusCheck(unsigned long ulBase, unsigned long ulIntFlags)
     }   
 }
 
-
+//*****************************************************************************
+//
+//! \brief  Enable PWM counter.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the
+//!              following value:
+//!              - \ref PWM1_BASE
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMCounterEnable(unsigned long ulBase)
 {
     // Check input parameters.
@@ -82,6 +161,18 @@ void PWMCounterEnable(unsigned long ulBase)
 
     xHWREG(PWM1_BASE + PWM_TCR) |= TCR_CNT_EN;
 }
+
+//*****************************************************************************
+//
+//! \brief  Disable PWM counter.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the
+//!              following value:
+//!              - \ref PWM1_BASE
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMCounterDisable(unsigned long ulBase)
 {
     // Check input parameters.
@@ -89,6 +180,18 @@ void PWMCounterDisable(unsigned long ulBase)
 
     xHWREG(PWM1_BASE + PWM_TCR) &= ~TCR_CNT_EN;
 }
+
+//*****************************************************************************
+//
+//! \brief  Reset PWM counter.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the
+//!              following value:
+//!              - \ref PWM1_BASE
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMCounterReset(unsigned long ulBase)
 {
     // Check input parameters.
@@ -115,8 +218,34 @@ PWM_CH_6
 #define PWM_MATCH_STOP_DIS      BIT_32_10        
 */
 
-// \todo Is there ADN or OR 
-
+//*****************************************************************************
+//
+//! \brief  Configurate PWM match function.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulCh is PWM channel, which can be one of the following value:
+//!              - \ref PWM_CH_0
+//!              - \ref PWM_CH_1
+//!              - \ref PWM_CH_2
+//!              - \ref PWM_CH_3
+//!              - \ref PWM_CH_4
+//!              - \ref PWM_CH_5
+//!              - \ref PWM_CH_6
+//!
+//! \param  [in] ulCfg is pwm configure parameters, which can be the logical
+//!              OR of the following value:
+//!              - \ref PWM_MATCH_INT_EN   
+//!              - \ref PWM_MATCH_INT_DIS  
+//!              - \ref PWM_MATCH_RESET_EN 
+//!              - \ref PWM_MATCH_RESET_DIS
+//!              - \ref PWM_MATCH_STOP_EN  
+//!              - \ref PWM_MATCH_STOP_DIS 
+//! \return None.
+//
+//*****************************************************************************
 void PWMMatchCfg(unsigned long ulBase, unsigned long ulCh, unsigned long ulCfg)
 {
     unsigned long i        = 0;
@@ -140,8 +269,30 @@ void PWMMatchCfg(unsigned long ulBase, unsigned long ulCh, unsigned long ulCfg)
             xHWREG(PWM1_BASE + PWM_MCR) = ulTmpReg;
         }
     }
- }
+}
 
+//*****************************************************************************
+//
+//! \brief  Set PWM match value.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulCh is PWM channel, which can be one of the following value:
+//!              - \ref PWM_CH_0
+//!              - \ref PWM_CH_1
+//!              - \ref PWM_CH_2
+//!              - \ref PWM_CH_3
+//!              - \ref PWM_CH_4
+//!              - \ref PWM_CH_5
+//!              - \ref PWM_CH_6
+//!
+//! \param  [in] ulValue is the PWM channel match value.
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMMatchUpdate(unsigned long ulBase, unsigned long ulCh, unsigned long ulValue)
 {
     // Check input parameters.
@@ -194,11 +345,53 @@ void PWMMatchUpdate(unsigned long ulBase, unsigned long ulCh, unsigned long ulVa
     xHWREG(PWM1_BASE + PWM_LER) |= ulCh;
 }
 
+//*****************************************************************************
+//
+//! \brief  Enable PWM channel signal output.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulCh is PWM channel, which can be the logical OR of the
+//!              following value:
+//!              - \ref PWM_CH_0
+//!              - \ref PWM_CH_1
+//!              - \ref PWM_CH_2
+//!              - \ref PWM_CH_3
+//!              - \ref PWM_CH_4
+//!              - \ref PWM_CH_5
+//!              - \ref PWM_CH_6
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMOutPutEnable(unsigned long ulBase, unsigned long ulChs)
 {
     xHWREG(PWM1_BASE + PWM_PCR) |= (ulChs<<8);
 }
 
+//*****************************************************************************
+//
+//! \brief  Disable PWM channel signal output.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulCh is PWM channel, which can be the logical OR of the
+//!              following value:
+//!              - \ref PWM_CH_0
+//!              - \ref PWM_CH_1
+//!              - \ref PWM_CH_2
+//!              - \ref PWM_CH_3
+//!              - \ref PWM_CH_4
+//!              - \ref PWM_CH_5
+//!              - \ref PWM_CH_6
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMOutPutDisable(unsigned long ulBase, unsigned long ulChs)
 {
     xHWREG(PWM1_BASE + PWM_PCR) &= ~(ulChs<<8);
@@ -210,6 +403,32 @@ void PWMOutPutDisable(unsigned long ulBase, unsigned long ulChs)
 #define PWM_EDGE_SINGLE         BIT_32_1
 */
 
+//*****************************************************************************
+//
+//! \brief  Configure PWM channel output edge.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulCh is PWM channel, which can be the logical OR of the
+//!              following value:
+//!              - \ref PWM_CH_0
+//!              - \ref PWM_CH_1
+//!              - \ref PWM_CH_2
+//!              - \ref PWM_CH_3
+//!              - \ref PWM_CH_4
+//!              - \ref PWM_CH_5
+//!              - \ref PWM_CH_6
+//!
+//! \param  [in] ulCfg is PWM Configure parameter, which can be one of the
+//!              following value:
+//!              - \ref PWM_EDGE_DOUBLE
+//!              - \ref PWM_EDGE_SINGLE
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMEdgeCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfg)
 {
     switch(ulCfg)
@@ -247,6 +466,32 @@ void PWMEdgeCfg(unsigned long ulBase, unsigned long ulChs, unsigned long ulCfg)
 #define CH1_EDGE_EVENT_INT_DIS     BIT_32_13
 */
 
+//*****************************************************************************
+//
+//! \brief  Configure PWM capture channel mode.
+//!
+//! \param  [in] ulBase is the PWM base address, which can be one of the following
+//!              value:
+//!              - \ref PWM1_BASE
+//!
+//! \param  [in] ulCfg is PWM capture configure parameter, which can be one of the
+//!              following value:
+//!              - \ref CH0_FALLING_SAMPLE_EN   
+//!              - \ref CH0_FALLING_SAMPLE_DIS  
+//!              - \ref CH0_RISING_SAMPLE_EN    
+//!              - \ref CH0_RISING_SAMPLE_DIS   
+//!              - \ref CH0_EDGE_EVENT_INT_EN   
+//!              - \ref CH0_EDGE_EVENT_INT_DIS  
+//!              - \ref CH1_FALLING_SAMPLE_EN   
+//!              - \ref CH1_FALLING_SAMPLE_DIS  
+//!              - \ref CH1_RISING_SAMPLE_EN    
+//!              - \ref CH1_RISING_SAMPLE_DIS   
+//!              - \ref CH1_EDGE_EVENT_INT_EN   
+//!              - \ref CH1_EDGE_EVENT_INT_DIS  
+//!
+//! \return None.
+//
+//*****************************************************************************
 void PWMCapCfg(unsigned long ulBase, unsigned long ulCfg)
 {
     unsigned long ulTmpReg = 0;
@@ -257,5 +502,4 @@ void PWMCapCfg(unsigned long ulBase, unsigned long ulCfg)
     xHWREG(PWM1_BASE + PWM_CCR) = ulTmpReg;
 
 }
-
 

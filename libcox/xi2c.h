@@ -75,13 +75,10 @@
 //
 //! \addtogroup xI2C_INT_Master xI2C Master Interrupt
 //!
-//! \verbatim
-//! +--------------------------+----------------+------------------------+
 //! |  xI2C Master Interrupts  |       CoX      |         LPC17xx        |
 //! |--------------------------|----------------|------------------------|
 //! |  xI2C_MASTER_INT_DATA    |    Mandatory   |            Y           |
-//! +--------------------------+----------------+------------------------+
-//! \endverbatim
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -101,14 +98,11 @@
 //
 //! \addtogroup xI2C_Event_Master xI2C Master Event
 //!
-//! \verbatim
-//! +--------------------------+----------------+------------------------+
 //! |  xI2C Master Event       |       CoX      |         LPC17xx        |
 //! |--------------------------|----------------|------------------------|
 //! |  xI2C_MASTER_EVENT_TX    |    Mandatory   |            Y           |
 //! |  xI2C_MASTER_EVENT_RX    |    Mandatory   |            Y           |
-//! +--------------------------+----------------+------------------------+
-//! \endverbatim
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -132,30 +126,15 @@
 //*****************************************************************************
 //
 //! \addtogroup xI2C_INT_Slave xI2C Slave Interrupt
+//! \brief      Slave Interrupt event
 //!
-//!
-//! \verbatim
-//! +--------------------------+----------------+------------------------+
 //! |  xI2C Slave Interrupts   |       CoX      |         LPC17xx        |
 //! |--------------------------|----------------|------------------------|
-//! |  xI2C_SLAVE_INT_START    |    Optional    |            N           |
-//! |  xI2C_SLAVE_INT_STOP     |    Optional    |            N           |
 //! |  xI2C_SLAVE_INT_DATA     |    Mandatory   |            Y           |
-//! +--------------------------+----------------+------------------------+
-//! \endverbatim
+//! 
 //! @{
 //
 //*****************************************************************************
-
-//
-//! Start Condition
-//
-#define xI2C_SLAVE_INT_START
-
-//
-//! Stop Condition
-//
-#define xI2C_SLAVE_INT_STOP
 
 //
 //! A data received or data requested or error occurs
@@ -172,17 +151,14 @@
 //*****************************************************************************
 //
 //! \addtogroup xI2C_Event_Slave xI2C Slave Event
-//!
-//! \verbatim
-//! +--------------------------+----------------+------------------------+
+//! 
 //! |  xI2C Slave Event        |       CoX      |         LPC17xx        |
 //! |--------------------------|----------------|------------------------|
 //! |  xI2C_SLAVE_EVENT_START  |    Optional    |            N           |
 //! |  xI2C_SLAVE_EVENT_STOP   |    Optional    |            N           |
 //! |  xI2C_SLAVE_EVENT_TREQ   |    Mandatory   |            Y           |
 //! |  xI2C_SLAVE_EVENT_RREQ   |    Mandatory   |            Y           |
-//! +--------------------------+----------------+------------------------+
-//! \endverbatim
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -216,17 +192,14 @@
 //*****************************************************************************
 //
 //! \addtogroup xI2C_Master_Error xI2C Master Error
-//!
-//! \verbatim
-//! +---------------------------+----------------+------------------------+
+//! 
 //! |  xI2C Master Error        |       CoX      |         LPC17xx        |
 //! |---------------------------|----------------|------------------------|
 //! |  xI2C_MASTER_ERR_NONE     |    Mandatory   |            Y           |
 //! |  xI2C_MASTER_ERR_ADDR_ACK |    Mandatory   |            Y           |
 //! |  xI2C_MASTER_ERR_DATA_ACK |    Mandatory   |            Y           |
 //! |  xI2C_MASTER_ERR_ARB_LOST |    Mandatory   |            Y           |
-//! +---------------------------+----------------+------------------------+
-//! \endverbatim
+//!
 //! @{
 //
 //*****************************************************************************
@@ -253,7 +226,6 @@
 //
 #define xI2C_MASTER_ERR_ARB_LOST
 
-
 //*****************************************************************************
 //
 //! @}
@@ -263,26 +235,27 @@
 //*****************************************************************************
 //
 //! \addtogroup xI2C_General_Call xI2C General Call
-//! \brief Values that show xI2C General Call
-//! \n
-//! \section xI2C_Transfer_Type_Section 1. Where to use this group
-//! Values that can be passed to xI2CSlaveInit()
-//! as the ulGeneralCall parameter.
-//! \n
-//! \section xI2C_Transfer_Type_CoX 2.CoX Mandatory and CoX Non-mandatory
-//! \verbatim
-//! +-------------------------+---------------+---------------------------+
+//! \brief      Values that show xI2C General Call
+//! 
+//! \section    xI2C_Transfer_Type_Section 1. Where to use this group
+//!             Values that can be passed to xI2CSlaveInit() as the
+//!             ulGeneralCall parameter.
+//!
+//! \section    xI2C_Transfer_Type_CoX     2. CoX Mandatory and CoX Non-mandatory
+//! 
 //! |  xI2C General Call      |      CoX      |          LPC17xx          |
 //! |-------------------------|---------------|---------------------------|
 //! |  xI2C_GENERAL_CALL_DIS  |   Mandatory   |             Y             |
-//! |-------------------------|---------------|---------------------------|
 //! |  xI2C_GENERAL_CALL_EN   | Non-Mandatory |             Y             |
-//! |-------------------------|---------------|---------------------------|
-//! \endverbatim
+//! 
 //! @{
 //
 //*****************************************************************************
+
+//! Enable I2C general call function.
 #define xI2C_GENERAL_CALL_EN                  I2C_GENERAL_CALL_EN
+
+//! Disable I2C general call function.
 #define xI2C_GENERAL_CALL_DIS                 I2C_GENERAL_CALL_DIS
 
 //*****************************************************************************
@@ -294,78 +267,45 @@
 //*****************************************************************************
 //
 //! \addtogroup xI2C_Exported_APIs xI2C API
-//! \brief xI2C API Reference.
+//! \brief      xI2C API Reference.
 //!
-//! \section xI2C_Exported_APIs_Port CoX Port Details
-//! \verbatim
-//! +-------------------------------+----------------+------------------------+
-//! |  xI2C API                     |       CoX      |        LPC17xx         |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterInit               |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterEnable             |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterDisable            |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterBusBusy            |    Mandatory   |            N           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterBusy               |    Mandatory   |            N           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterError              |    Mandatory   |            N           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterDataPut            |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterDataGet            |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterStop               |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterWriteRequestS1     |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterWriteRequestS2     |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterWriteS1            |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterWriteS2            |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterWriteBufS1         |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterWriteBufS2         |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterReadRequestS1      |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterReadRequestS2      |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterReadLastRequestS2  |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterReadS1             |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterReadS2             |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterReadBufS1          |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterReadBufS2          |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterIntEnable          |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CMasterIntDisable         |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CSlaveIntEnable           |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CSlaveIntDisable          |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CSlaveInit                |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CSlaveEnable              |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CSlaveDisable             |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CIntCallbackInit          |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CSlaveDataPut             |    Mandatory   |            Y           |
-//! |-------------------------------|----------------|------------------------|
-//! |  xI2CSlaveDataGet             |    Mandatory   |            Y           |
-//! +-------------------------------+----------------+------------------------+
-//! \endverbatim
+//! \section    xI2C_Exported_APIs_Port CoX Port Details
+//! 
+//! |       xI2C API                     |     CoX      |    LPC17xx         |
+//! |------------------------------------|--------------|--------------------|
+//! | \ref  xI2CMasterInit               |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterEnable             |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterDisable            |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterBusBusy            |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterBusy               |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterError              |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterDataPut            |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterDataGet            |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterStop               |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterWriteRequestS1     |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterWriteRequestS2     |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterWriteS1            |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterWriteS2            |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterWriteBufS1         |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterWriteBufS2         |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterReadRequestS1      |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterReadRequestS2      |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterReadLastRequestS2  |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterReadS1             |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterReadS2             |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterReadBufS1          |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterReadBufS2          |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterIntEnable          |  Mandatory   |        Y           |
+//! | \ref  xI2CMasterIntDisable         |  Mandatory   |        Y           |
+//! | \ref  xI2CSlaveIntEnable           |  Mandatory   |        Y           |
+//! | \ref  xI2CSlaveIntDisable          |  Mandatory   |        Y           |
+//! | \ref  xI2CSlaveInit                |  Mandatory   |        Y           |
+//! | \ref  xI2CSlaveEnable              |  Mandatory   |        Y           |
+//! | \ref  xI2CSlaveDisable             |  Mandatory   |        Y           |
+//! | \ref  xI2CIntCallbackInit          |  Mandatory   |        Y           |
+//! | \ref  xI2CSlaveDataPut             |  Mandatory   |        Y           |
+//! | \ref  xI2CSlaveDataGet             |  Mandatory   |        Y           |
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -379,9 +319,9 @@
 //!         Master block.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ulI2CClk is the I2C clock bit rate.
 //!              0 < ulI2CClk <= 400000
@@ -397,9 +337,9 @@
 //!         This function will enable operation of the I2C Master block.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -412,9 +352,9 @@
 //!         This function will disable operation of the I2C Master block.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -427,9 +367,9 @@
 //!        This will enable operation of the I2C Slave block.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -442,9 +382,9 @@
 //!        This will disable operation of the I2C slave block.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -459,9 +399,9 @@
 //!         determine if another master is currently using the bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return The I2C bus status:
 //!         - xtrue    if I2C bus is busy.
@@ -477,9 +417,9 @@
 //!         is busy transmitting or receiving data.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return The I2C bus status:
 //!         - xtrue    if I2C bus is busy.
@@ -493,9 +433,9 @@
 //! \brief  Register user interrupt callback ISR for the I2C module.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] xtI2CCallback is user callback for the specified I2C Port.
 //!
@@ -511,9 +451,9 @@
 //!        This function is to send a byte on specified I2C BUS.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucData specifies the data which will send to I2C BUS.
 //!
@@ -531,9 +471,9 @@
 //!        This function is to receive a byte on specified I2C BUS.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return None.
 //!
@@ -549,12 +489,13 @@
 //!         Enables the I2C Master interrupt source.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ulIntType is the interrupt type of the I2C module.
-//!         TODO
+//!              which can be one of the following value:
+//!              - \ref xI2C_MASTER_INT_DATA
 //!
 //! \return None.
 //
@@ -568,9 +509,9 @@
 //!         Disables the I2C Master interrupt source.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ulIntType is the interrupt type of the I2C module.
 //!         TODO
@@ -588,16 +529,16 @@
 //!         function of specified I2C port.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr specifies the slave address.
 //!              The ucSlaveAddr can be a 7-bit value.
 //! \param  [in] ulGeneralCall specifies enable General Call function or not.
 //!              The ulGeneralCall can be one of the following values:
-//!                  \ref xI2C_GENERAL_CALL_EN
-//!                  \ref xI2C_GENERAL_CALL_DIS.
+//!                - \ref xI2C_GENERAL_CALL_EN
+//!                - \ref xI2C_GENERAL_CALL_DIS.
 //!
 //! \return None.
 //!
@@ -612,14 +553,14 @@
 //! \brief  Enables the I2C Slave interrupt.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ulIntType is the interrupt type of the I2C module.
 //!              This value can be one of the following value:
-//!              \ref xI2C_SLAVE_INT_STOP
-//!              \ref xI2C_SLAVE_INT_DATA
+//!              - \ref xI2C_SLAVE_INT_STOP
+//!              - \ref xI2C_SLAVE_INT_DATA
 //!
 //! \return None.
 //
@@ -632,14 +573,14 @@
 //! \brief  Disables the I2C Slave interrupt.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ulIntType is the interrupt type of the I2C module.
 //!              This value can be one of the following value:
-//!              \ref xI2C_SLAVE_INT_STOP
-//!              \ref xI2C_SLAVE_INT_DATA
+//!              - \ref xI2C_SLAVE_INT_STOP
+//!              - \ref xI2C_SLAVE_INT_DATA
 //!
 //! \return None.
 //
@@ -654,15 +595,15 @@
 //!         send and receive operations.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return Returns the error status, can be one of the following value:
-//!         \ref I2C_MASTER_ERR_NONE
-//!         \ref I2C_MASTER_ERR_ADDR_ACK
-//!         \ref I2C_MASTER_ERR_DATA_ACK
-//!         \ref I2C_MASTER_ERR_ARB_LOST
+//!         - \ref I2C_MASTER_ERR_NONE
+//!         - \ref I2C_MASTER_ERR_ADDR_ACK
+//!         - \ref I2C_MASTER_ERR_DATA_ACK
+//!         - \ref I2C_MASTER_ERR_ARB_LOST
 //
 //*****************************************************************************
 #define xI2CMasterError(ulBase)
@@ -673,9 +614,9 @@
 //!         This function will put an byte into I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucData data to be transmitted from the I2C Master
 //!
@@ -691,9 +632,9 @@
 //!         This function will get an byte into I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return The data received from I2C bus.
 //!
@@ -710,9 +651,9 @@
 //!         getting some errors, call this function.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return None.
 //
@@ -738,9 +679,9 @@
 //!         transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] ucData is the byte to transmit.
@@ -749,7 +690,7 @@
 //!
 //! \return None.
 //!
-//! \nore   For this function returns immediately, it is always using in the
+//! \note   For this function returns immediately, it is always using in the
 //!         interrupt handler.
 //
 //*****************************************************************************
@@ -774,9 +715,9 @@
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucData is the byte to transmit.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
@@ -806,9 +747,9 @@
 //!         release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] ucData is the byte to transmit.
@@ -840,9 +781,9 @@
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucData is the byte to transmit.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP condition
@@ -879,9 +820,9 @@
 //!         terminate this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] pucDataBuf is the data buffer to transmit.
@@ -922,9 +863,9 @@
 //!         this transmition and release the I2C bus.!
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] pucDataBuf is the data buffer to transmit.
 //! \param  [in] ulLen is the data buffer byte size.
@@ -962,9 +903,9 @@
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP
@@ -1001,9 +942,9 @@
 //!         this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP condition and
 //!              terminate this transmition.
@@ -1036,9 +977,9 @@
 //!         transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \return None.
 //!
@@ -1069,9 +1010,9 @@
 //!         this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] ucSlaveAddr is the 7-bit slave address.
 //! \param  [in] pucData is the buffer where to save the data.
@@ -1104,9 +1045,9 @@
 //!         to terminate this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [in] pucData is the buffer where to save the data.
 //! \param  [in] bEndTransmition is flag to control if transmit the STOP
@@ -1145,9 +1086,9 @@
 //!        terminate this transmition and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [out] ucSlaveAddr is the 7-bit slave address.
 //!
@@ -1194,9 +1135,9 @@
 //!         and release the I2C bus.
 //!
 //! \param  [in] ulBase is the I2C module base address.
-//!              \ref xI2C0_BASE
-//!              \ref xI2C1_BASE
-//!              \ref xI2C2_BASE
+//!              - \ref xI2C0_BASE
+//!              - \ref xI2C1_BASE
+//!              - \ref xI2C2_BASE
 //!
 //! \param  [out] pucDataBuf is the buffer where to save the data.
 //!
@@ -1226,15 +1167,38 @@
 //
 //*****************************************************************************
 
-#define I2C_GENERAL_CALL_EN     BIT_32_0
-#define I2C_GENERAL_CALL_DIS    BIT_32_1
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C
+//! @{
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_CFG LPC I2C configure parameters.
+//! 
+//! @{
+//
+//*****************************************************************************
+
+//! Enable I2C general call
+#define I2C_GENERAL_CALL_EN            BIT_32_0
+
+//! Disable I2C general call
+#define I2C_GENERAL_CALL_DIS           BIT_32_1
             
+//! I2C slave address 0
+#define I2C_SLAVE_ADD0                 BIT_32_0
 
-#define I2C_SLAVE_ADD0          BIT_32_0
-#define I2C_SLAVE_ADD1          BIT_32_1
-#define I2C_SLAVE_ADD2          BIT_32_2
-#define I2C_SLAVE_ADD3          BIT_32_3
+//! I2C slave address 1
+#define I2C_SLAVE_ADD1                 BIT_32_1
 
+//! I2C slave address 2
+#define I2C_SLAVE_ADD2                 BIT_32_2
+
+//! I2C slave address 3
+#define I2C_SLAVE_ADD3                 BIT_32_3
 
 /*------------- I2C return status code definitions ------------------*/
 //! No relevant information
@@ -1335,6 +1299,20 @@
 
 //! Last data byte in I2DAT has been transmitted (AA = 0); ACK has been received
 #define I2C_STAT_S_TX_LAST_DAT_ACK            ((unsigned long) 0xC8)
+
+//*****************************************************************************
+//
+//! @}
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+//! \addtogroup LPC17xx_I2C_Exported_APIs LPC17xx I2C API
+//! \brief      LPC17xx I2C API Reference.
+//! @{
+//
+//*****************************************************************************
 
 extern unsigned long I2CIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback);
 extern void I2CMasterInit(unsigned long ulBase, unsigned long TargetClk);

@@ -8,15 +8,15 @@
 //!
 //! \param  [in] ulFlags is the SPI status flag, this value can be OR of the
 //!              following value:
-//!              \ref SPI_ABRT Slave abort
-//!              \ref SPI_MODF Mode Fault
-//!              \ref SPI_ROVR Read overrun
-//!              \ref SPI_WCOL write collision
-//!              \ref SPI_SPIF SPI transfer finish
+//!              - \ref SPI_ABRT Slave abort
+//!              - \ref SPI_MODF Mode Fault
+//!              - \ref SPI_ROVR Read overrun
+//!              - \ref SPI_WCOL write collision
+//!              - \ref SPI_SPIF SPI transfer finish
 //!
 //! \return The status of checked flag.
-//!         \ref xtrue status flag has been set.
-//!         \ref xflase status flag has not been set.
+//!         - \ref xtrue status flag has been set.
+//!         - \ref xflase status flag has not been set.
 //!
 //
 //*****************************************************************************
@@ -51,11 +51,11 @@ xtBoolean SPIStatCheck(unsigned long ulBase, unsigned long ulFlags)
 //! \param  [in] ulBase specifies the SPI module base address.
 //!
 //! \return The status of SPI, which is the OR of the following value:
-//!              \ref SPI_ABRT Slave abort
-//!              \ref SPI_MODF Mode Fault
-//!              \ref SPI_ROVR Read overrun
-//!              \ref SPI_WCOL write collision
-//!              \ref SPI_SPIF SPI transfer finish
+//!              - \ref SPI_ABRT Slave abort
+//!              - \ref SPI_MODF Mode Fault
+//!              - \ref SPI_ROVR Read overrun
+//!              - \ref SPI_WCOL write collision
+//!              - \ref SPI_SPIF SPI transfer finish
 //!
 //
 //*****************************************************************************
@@ -75,9 +75,9 @@ unsigned long SPIStatGet(unsigned long ulBase)
 //!
 //! \param  [in] ulFlags is the flag ready to be clear.
 //!              can be one of the following value:
-//!              \ref SPI_ABRT    Slave abort
-//!              \ref SPI_MODF    Mode fault
-//!              \ref SPI_ROVR    Read overrun
+//!              - \ref SPI_ABRT    Slave abort
+//!              - \ref SPI_MODF    Mode fault
+//!              - \ref SPI_ROVR    Read overrun
 //
 //*****************************************************************************
 void SPIStatFlagClear(unsigned long ulBase, unsigned long ulFlags)
@@ -133,23 +133,23 @@ unsigned long SPIDataReadWrite(unsigned long ulBase, unsigned long ulVal)
 //!
 //! \param  [in] ulCfgs is SPI configure parameters.
 //!              which can be OR of the following value:
-//!              \ref SPI_DATA_LEN_8   
-//!              \ref SPI_DATA_LEN_9   
-//!              \ref SPI_DATA_LEN_10  
-//!              \ref SPI_DATA_LEN_11  
-//!              \ref SPI_DATA_LEN_12  
-//!              \ref SPI_DATA_LEN_13  
-//!              \ref SPI_DATA_LEN_14  
-//!              \ref SPI_DATA_LEN_15  
-//!              \ref SPI_DATA_LEN_16  
-//!              \ref SPI_MODE_MASTER  
-//!              \ref SPI_MODE_SLAVE   
-//!              \ref SPI_CPHA_FIRST   
-//!              \ref SPI_CPHA_SECOND  
-//!              \ref SPI_CPOL_HIGH    
-//!              \ref SPI_CPOL_LOW     
-//!              \ref SPI_LSB_FIRST    
-//!              \ref SPI_MSB_FIRST
+//!              - \ref SPI_DATA_LEN_8   
+//!              - \ref SPI_DATA_LEN_9   
+//!              - \ref SPI_DATA_LEN_10  
+//!              - \ref SPI_DATA_LEN_11  
+//!              - \ref SPI_DATA_LEN_12  
+//!              - \ref SPI_DATA_LEN_13  
+//!              - \ref SPI_DATA_LEN_14  
+//!              - \ref SPI_DATA_LEN_15  
+//!              - \ref SPI_DATA_LEN_16  
+//!              - \ref SPI_MODE_MASTER  
+//!              - \ref SPI_MODE_SLAVE   
+//!              - \ref SPI_CPHA_FIRST   
+//!              - \ref SPI_CPHA_SECOND  
+//!              - \ref SPI_CPOL_HIGH    
+//!              - \ref SPI_CPOL_LOW     
+//!              - \ref SPI_LSB_FIRST    
+//!              - \ref SPI_MSB_FIRST
 //!
 //! \return None.
 //
@@ -250,7 +250,7 @@ void SPIIntDisable(unsigned long ulBase)
 //! \param  [in] ulBase specifies the SPI module base address.
 //!
 //! \return The interrupt status of SPI, this value can be
-//!         \ref SPI_INT_SPIF SPI event has been occurs.
+//!         - \ref SPI_INT_SPIF SPI event has been occurs.
 //!         0.
 //
 //*****************************************************************************
@@ -272,7 +272,7 @@ unsigned long SPIIntFlagGet(unsigned long ulBase)
 //!
 //! \param  [in] ulFlags is the flag you want to check
 //!         This value is the one of the following value:
-//!              \ref SPI_INT_SPIF
+//!              - \ref SPI_INT_SPIF
 //!
 //! \return The status of special flag.
 //!         - xtrue The check flag has been set. 
@@ -302,7 +302,7 @@ xtBoolean SPIIntFlagCheck(unsigned long ulBase, unsigned long ulFlags)
 //!
 //! \param  [in] ulFlags is SPI interrupt status flag.
 //!              This parameter can be OR of the following value:
-//!              \ref SPI_INT_SPIF
+//!              - \ref SPI_INT_SPIF
 //!
 //! \return None.
 //

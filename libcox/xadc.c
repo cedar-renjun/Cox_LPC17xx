@@ -17,7 +17,7 @@
 //!         This function can be used to configure ADC peripherals clock frequecy.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be - \ref xADC0_BASE.
 //!
 //! \param  [in] ulRate is the ADC convert frequecy, it must be lower than 200KHz.
 //!
@@ -60,28 +60,28 @@ void ADCInit(unsigned long ulBase, unsigned long ulRate)
 //!         This function configure ADC convert mode, triggle mode.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be - \ref xADC0_BASE.
 //!
 //! \param  [in] ulChs is ADC channel.
 //!              This value can be OR of the following value:
-//!              \ref ADC_CH_0
-//!              \ref ADC_CH_1
-//!              \ref ADC_CH_2
-//!              \ref ADC_CH_3
-//!              \ref ADC_CH_4
-//!              \ref ADC_CH_5
-//!              \ref ADC_CH_6
+//!              - \ref ADC_CH_0
+//!              - \ref ADC_CH_1
+//!              - \ref ADC_CH_2
+//!              - \ref ADC_CH_3
+//!              - \ref ADC_CH_4
+//!              - \ref ADC_CH_5
+//!              - \ref ADC_CH_6
 //!
 //! \param  [in] ulMode is adc convert mode, consist of burst and external
 //!              triggle mode. this value can be one of the following value:
-//!              \ref ADC_START_MODE_BURST
-//!              \ref ADC_START_MODE_NOW  
-//!              \ref ADC_START_MODE_EINT0
-//!              \ref ADC_START_MODE_CAP01
-//!              \ref ADC_START_MODE_MAT01
-//!              \ref ADC_START_MODE_MAT03
-//!              \ref ADC_START_MODE_MAT10
-//!              \ref ADC_START_MODE_MAT11
+//!              - \ref ADC_START_MODE_BURST
+//!              - \ref ADC_START_MODE_NOW  
+//!              - \ref ADC_START_MODE_EINT0
+//!              - \ref ADC_START_MODE_CAP01
+//!              - \ref ADC_START_MODE_MAT01
+//!              - \ref ADC_START_MODE_MAT03
+//!              - \ref ADC_START_MODE_MAT10
+//!              - \ref ADC_START_MODE_MAT11
 //!
 //! \return None.
 //
@@ -129,7 +129,7 @@ void ADCStart(unsigned long ulBase, unsigned long ulChs, unsigned long ulMode)
 //! \brief  Stop ADC convert procedure.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be - \ref xADC0_BASE.
 //!
 //! \return None.
 //
@@ -153,17 +153,17 @@ void ADCStop(unsigned long ulBase)
 //!         This function can be used to enable ADC convert done interrupt.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be - \ref xADC0_BASE.
 //!
 //! \param  [in] ulChs is ADC channel.
 //!              This value can be OR of the following value:
-//!              \ref ADC_CH_0
-//!              \ref ADC_CH_1
-//!              \ref ADC_CH_2
-//!              \ref ADC_CH_3
-//!              \ref ADC_CH_4
-//!              \ref ADC_CH_5
-//!              \ref ADC_CH_6
+//!              - \ref ADC_CH_0
+//!              - \ref ADC_CH_1
+//!              - \ref ADC_CH_2
+//!              - \ref ADC_CH_3
+//!              - \ref ADC_CH_4
+//!              - \ref ADC_CH_5
+//!              - \ref ADC_CH_6
 //!
 //! \return None.
 //
@@ -189,17 +189,17 @@ void ADCIntEnable(unsigned long ulBase, unsigned long ulChs)
 //!         This function can be used to disable ADC convert done interrupt.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be - \ref xADC0_BASE.
 //!
 //! \param  [in] ulChs is ADC channel.
 //!              This value can be OR of the following value:
-//!              \ref ADC_CH_0
-//!              \ref ADC_CH_1
-//!              \ref ADC_CH_2
-//!              \ref ADC_CH_3
-//!              \ref ADC_CH_4
-//!              \ref ADC_CH_5
-//!              \ref ADC_CH_6
+//!              - \ref ADC_CH_0
+//!              - \ref ADC_CH_1
+//!              - \ref ADC_CH_2
+//!              - \ref ADC_CH_3
+//!              - \ref ADC_CH_4
+//!              - \ref ADC_CH_5
+//!              - \ref ADC_CH_6
 //!
 //! \return None.
 //
@@ -227,26 +227,26 @@ void ADCIntDisable(unsigned long ulBase, unsigned long ulChs)
 //!         OVERRUN flag.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be - \ref xADC0_BASE.
 //!
 //! \param  [in] ulChs is ADC channel.
 //!              This value can be OR of the following value:
-//!              \ref ADC_CH_0
-//!              \ref ADC_CH_1
-//!              \ref ADC_CH_2
-//!              \ref ADC_CH_3
-//!              \ref ADC_CH_4
-//!              \ref ADC_CH_5
-//!              \ref ADC_CH_6
+//!              - \ref ADC_CH_0
+//!              - \ref ADC_CH_1
+//!              - \ref ADC_CH_2
+//!              - \ref ADC_CH_3
+//!              - \ref ADC_CH_4
+//!              - \ref ADC_CH_5
+//!              - \ref ADC_CH_6
 //!
 //! \param  [in] ulFlags is used to check done or overrun status bit.
 //!              This flag is OR of the following value:
-//!              \ref ADC_DONE
-//!              \ref ADC_OVERRUN
+//!              - \ref ADC_DONE
+//!              - \ref ADC_OVERRUN
 //!
 //! \return The ADC channel status flag.
-//!              \ref xtrue when flag has been set.
-//!              \ref xflase when flag has not been set.
+//!              - \ref xtrue when flag has been set.
+//!              - \ref xflase when flag has not been set.
 //
 //*****************************************************************************
 xtBoolean ADCStatusCheck(unsigned long ulBase, unsigned long ulChs, unsigned long ulFlags)
@@ -292,17 +292,17 @@ xtBoolean ADCStatusCheck(unsigned long ulBase, unsigned long ulChs, unsigned lon
 //! \brief  Read ADC channel converted data.
 //!
 //! \param  [in] ulBase is the base address of the ADC module.
-//!              This value must be \ref xADC0_BASE.
+//!              This value must be - \ref xADC0_BASE.
 //!
 //! \param  [in] ulChs is ADC channel.
 //!              This value can be OR of the following value:
-//!              \ref ADC_CH_0
-//!              \ref ADC_CH_1
-//!              \ref ADC_CH_2
-//!              \ref ADC_CH_3
-//!              \ref ADC_CH_4
-//!              \ref ADC_CH_5
-//!              \ref ADC_CH_6
+//!              - \ref ADC_CH_0
+//!              - \ref ADC_CH_1
+//!              - \ref ADC_CH_2
+//!              - \ref ADC_CH_3
+//!              - \ref ADC_CH_4
+//!              - \ref ADC_CH_5
+//!              - \ref ADC_CH_6
 //!
 //! \return The ADC channel data.
 //!
