@@ -83,11 +83,11 @@ extern "C"
 //!             as the ulIntType parameter. 
 //! 
 //! \section    xPWM_Int_Type_CoX     2. CoX Mandatory and CoX Non-mandatory 
-//! +--------------------------+----------------+-----------+
+//! 
 //! |  xPWM Interrupt Source   |       CoX      |  LPC17xx  |
 //! |--------------------------|----------------|-----------|
 //! |  xPWM_INT_PWM            |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
+//!
 //! @{
 //
 //*****************************************************************************
@@ -114,13 +114,13 @@ extern "C"
 //!             use this to detect what event happened. 
 //!
 //! \section    xPWM_Event_Type_CoX     2. CoX Mandatory and CoX Non-mandatory 
-//! +--------------------------+----------------+-----------+
+//! 
 //! |  xPWM Event Source       |       CoX      |  LPC17xx  |
 //! |--------------------------|----------------|-----------|
 //! |  xPWM_EVENT_PWM          |    Mandatory   |     Y     |
 //! |--------------------------|----------------|-----------|
 //! |  xPWM_EVENT_CAP          |  non-Mandatory |     Y     |
-//! |--------------------------|----------------|-----------|
+//! 
 //! @{
 //
 //*****************************************************************************
@@ -151,6 +151,7 @@ extern "C"
 //!             ulConfig parameter. 
 //! 
 //! \section    xPWM_Event_Type_CoX     2. CoX Mandatory and CoX Non-mandatory 
+//! \verbatim
 //! +--------------------------+----------------+-----------+
 //! |  xPWM Freq Config        |       CoX      |  LPC17xx  |
 //! |--------------------------|----------------|-----------|
@@ -159,6 +160,7 @@ extern "C"
 //! |  b is The PreScale value |                |           |
 //! |  c is PWM Counter value  |                |           |
 //! |--------------------------|----------------|-----------|
+//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -185,6 +187,7 @@ extern "C"
 //!             use this to detect what Channel event happened. 
 //!
 //! \section    xPWM_Channel_CoX 2.CoX Mandatory and CoX Non-mandatory 
+//! \verbatim
 //! +-----------------------+----------------+---------------+
 //! | xPWM Channel Number   |       CoX      |     LPC17xx   |
 //! |-----------------------|----------------|---------------|
@@ -202,6 +205,7 @@ extern "C"
 //! |                       |                | ------------- |
 //! |                       |                | xPWM_CHANNEL6 |
 //! |-----------------------|----------------|---------------|
+//! \endverbatim
 //! @{
 //
 //*****************************************************************************
@@ -258,21 +262,14 @@ extern "C"
 //!             parameter. 
 //!
 //! \section    xPWM_Config_CoX 2.CoX Mandatory and CoX Non-mandatory 
-//! +--------------------------+----------------+-----------+
+//! 
 //! | xPWM Config              |       CoX      |  LPC17xx  |
 //! |--------------------------|----------------|-----------|
 //! | xPWM_ONE_SHOT_MODE       |    Mandatory   |     N     |
-//! |--------------------------|----------------|-----------|
 //! | xPWM_TOGGLE_MODE         |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
 //! | xPWM_OUTPUT_INVERTER_EN  |  Non-Mandatory |     Y     |
-//! |--------------------------|----------------|-----------|
 //! | xPWM_OUTPUT_INVERTER_DIS |  Non-Mandatory |     Y     |
-//! |--------------------------|----------------|-----------|
-//! | xPWM_DEAD_ZONE_EN        |  Non-Mandatory |     N     |
-//! |--------------------------|----------------|-----------|
-//! | xPWM_DEAD_ZONE_DIS       |  Non-Mandatory |     N     |
-//! |--------------------------|----------------|-----------|
+//!
 //! @{
 //
 //*****************************************************************************
@@ -307,37 +304,24 @@ extern "C"
 //
 //! \addtogroup xPWM_Exported_APIs xPWM APIs
 //! \brief      xPWM API Reference.
-//! +--------------------------+----------------+-----------+
-//! |  xPWM API                |       CoX      |  LPC17xx  |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMInitConfigure       |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMFrequencySet        |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMFrequencyConfig     |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMFrequencyGet        |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMOutputEnable        |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMOutputDisable       |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMStart               |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMStop                |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMDutySet             |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMDutyGet             |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMIntEnable           |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMIntDisable          |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMIntFlagGet          |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
-//! |  xPWMIntCallbackInit     |    Mandatory   |     Y     |
-//! |--------------------------|----------------|-----------|
+//! 
+//! |      xPWM API                |       CoX      |  LPC17xx  |
+//! |------------------------------|----------------|-----------|
+//! | \ref xPWMInitConfigure       |    Mandatory   |     Y     |
+//! | \ref xPWMFrequencySet        |    Mandatory   |     Y     |
+//! | \ref xPWMFrequencyConfig     |    Mandatory   |     Y     |
+//! | \ref xPWMFrequencyGet        |    Mandatory   |     Y     |
+//! | \ref xPWMOutputEnable        |    Mandatory   |     Y     |
+//! | \ref xPWMOutputDisable       |    Mandatory   |     Y     |
+//! | \ref xPWMStart               |    Mandatory   |     Y     |
+//! | \ref xPWMStop                |    Mandatory   |     Y     |
+//! | \ref xPWMDutySet             |    Mandatory   |     Y     |
+//! | \ref xPWMDutyGet             |    Mandatory   |     Y     |
+//! | \ref xPWMIntEnable           |    Mandatory   |     Y     |
+//! | \ref xPWMIntDisable          |    Mandatory   |     Y     |
+//! | \ref xPWMIntFlagGet          |    Mandatory   |     Y     |
+//! | \ref xPWMIntCallbackInit     |    Mandatory   |     Y     |
+//!
 //! @{
 //
 //*****************************************************************************
@@ -611,6 +595,9 @@ extern "C"
 #define PWM_INT_CH_6            BIT_32_10           
 #define PWM_INT_CAP_0           BIT_32_4           
 #define PWM_INT_CAP_1           BIT_32_5           
+#define PWM_INT_FLAG_MASK       (PWM_INT_CH_0 | PWM_INT_CH_1  | PWM_INT_CH_2 |       \
+                                 PWM_INT_CH_3 | PWM_INT_CH_4  | PWM_INT_CH_5 |       \
+                                 PWM_INT_CH_6 | PWM_INT_CAP_0 | PWM_INT_CAP_1)
 
 #define PWM_MATCH_INT_EN        BIT_32_0         
 #define PWM_MATCH_INT_DIS       BIT_32_8         

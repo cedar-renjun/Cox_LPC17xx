@@ -1387,7 +1387,8 @@ unsigned long I2CMasterReadS1(unsigned long ulBase,
 //! \note   This function is usually used in thread mode.
 //
 //*****************************************************************************
-unsigned long I2CMasterReadS2(unsigned long ulBase, unsigned char *pucData, xtBoolean bEndTransmition)
+unsigned long I2CMasterReadS2(unsigned long ulBase, unsigned char *pucData,
+        xtBoolean bEndTransmition)
 {
     *pucData = I2CMasterReadRequestS2(ulBase, bEndTransmition);
     return (0);

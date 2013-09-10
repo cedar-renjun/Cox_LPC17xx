@@ -171,6 +171,9 @@
 //! SPI data length mask
 #define S0SPCR_BITS_M           BIT_MASK(32, 11, 8)
 
+//! SPI data length shift
+#define S0SPCR_BITS_S           8
+
 //! SPI 8-bit per transfer
 #define S0SPCR_BITS_8           (BIT_32_11)
 

@@ -11,6 +11,75 @@
 #include "xhw_adc.h"
 #include "xadc.h"  
 
+//! ADC channel ID array
+static unsigned long ChID[8] = 
+{
+    ADC_CH_0,
+    ADC_CH_1,
+    ADC_CH_2,
+    ADC_CH_3,
+    ADC_CH_4,
+    ADC_CH_5,
+    ADC_CH_6,
+    ADC_CH_7,
+};
+
+// internal variable.
+static unsigned long _ADC_Mode     = 0;
+static unsigned long _ADC_Status   = 0;
+static unsigned long _ADC_Triggler = 0;
+
+//*****************************************************************************
+//
+// An array is ADC callback function point
+//
+//*****************************************************************************
+static xtEventCallback g_pfnADCHandlerCallbacks = 0;
+
+//*****************************************************************************
+//
+//! \brief  ADC interrupt handler.
+//!         This function is the ADC interrupt handler, it simple execute the
+//!         callback function if there be one.
+//!
+//! \param  None.
+//!
+//! \return None.
+//!
+//
+//*****************************************************************************
+void ADCIntHandler(void)
+{
+    if(g_pfnADCHandlerCallbacks != 0)
+    {
+        g_pfnADCHandlerCallbacks(0, 0, 0, 0);
+    }
+    else
+    {
+        while(1);
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  Register user interrupts callback function  for the ADC.
+//!
+//! \param  [in] xtPortCallback is user callback for the ADC.
+//!
+//! \return None.
+//
+//*****************************************************************************
+unsigned long ADCIntCallbackInit(xtEventCallback pfnCallback)
+{
+    // Check the parameters.
+    xASSERT(pfnCallback != 0);
+
+    g_pfnADCHandlerCallbacks = pfnCallback;
+
+    return (0);
+
+}
+
 //*****************************************************************************
 //
 //! \brief  Init ADC module
@@ -366,5 +435,200 @@ unsigned long ADCDataRead(unsigned long ulBase, unsigned long ulCh)
     // Return ADC channel value.
     ulTmpReg = (ulTmpReg & BIT_MASK(32, 15, 4)) >> 4;
     return (ulTmpReg);
+}
+
+//*****************************************************************************
+//
+//! \brief  Get the captured data from a sample sequence.
+//!         This function copies data from the specified sample sequence
+//!         FIFO to a memory resident buffer.  The number of samples
+//!         available in the FIFO are copied into the buffer, which is
+//!         assumed to be large enough to hold that many samples.
+//!         This will only return the samples that are presently available,
+//!         which may not be the entire sample sequence if it is in the
+//!         process of being executed.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.  This value must be
+//!              - \ref xADC0_BASE.
+//!
+//! \param  [in] pulBuffer is the address where the data is stored.
+//!
+//! \return The number of sample channel, if return 0, indicate that some channel
+//!         is converting.
+//!
+//
+//*****************************************************************************
+unsigned long xADCDataGet(unsigned long ulBase, unsigned long * pulBuffer)
+{
+    unsigned long i        = 0;
+    unsigned long ulTmpReg = 0;
+
+    // Check input parameters valid
+    xASSERT(ulBase == xADC0_BASE);
+    xASSERT(pulBuffer != NULL);
+    
+    // Check channel 0-->6 status, then read converted channel data.
+    ulTmpReg = xHWREG(ulBase + AD_STAT);
+    for(i = 0; i < 7; i++)
+    {
+        if( ulTmpReg & (1<<i) )  // Check 
+        {
+            *pulBuffer++ = ADCDataRead(ulBase, ChID[i]);
+        }
+    }
+}
+
+//*****************************************************************************
+//
+//! \brief  Configure ADC Module.
+//!         This function configures ADC convert mode(single/continue scan mode)
+//!         and triggle mode(soft/hardware triggler).
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be
+//!              - \ref xADC0_BASE.
+//!
+//! \param  [in] ulMode is ADC scan mode, can be one of the following value:
+//!              - \ref xADC_MODE_SCAN_SINGLE_CYCLE
+//!              - \ref xADC_MODE_SCAN_CONTINUOUS
+//!
+//! \param  [in] ulTrigger is ADC triggle source select. For LPC17xx, it can be
+//!              one of the following value:
+//!              - \ref xADC_TRIGGER_PROCESSOR
+//!              - \ref xADC_TRIGGER_EXT_EINT0
+//!              - \ref xADC_TRIGGER_EXT_CAP01
+//!              - \ref xADC_TRIGGER_EXT_MAT01
+//!              - \ref xADC_TRIGGER_EXT_MAT03
+//!              - \ref xADC_TRIGGER_EXT_MAT10
+//!              - \ref xADC_TRIGGER_EXT_MAT11
+//!
+//! \return None.
+//!
+//! \note   This function must be called first!
+//
+//*****************************************************************************
+void xADCConfigure(unsigned long ulBase, unsigned long ulMode,
+        unsigned long ulTrigger)
+{
+    // Check input parameters valid
+    xASSERT(ulBase == xADC0_BASE);
+    xASSERT(pulBuffer != NULL);
+
+    // Record the configure parameters
+    _ADC_Mode     = ulMode;
+    _ADC_Triggler = ulTrigger;
+
+    // ADC has been configured, mark it!
+    _ADC_Status   = 1;
+}
+
+//*****************************************************************************
+//
+//! \brief  Configure ADC convert array.
+//!         This function is used to fill ADC convert array, so you can use it
+//!         to support ADC burst mode.
+//!
+//! \param  [in] ulBase is the base address of the ADC module.
+//!              This value must be
+//!              - \ref xADC0_BASE.
+//!
+//! \param  [in] ulStep is the ID of ADC converter channel array, which can be
+//!              used in continue convert mode.
+//!              0 <= ulStep <=7.
+//!
+//! \param  [in] ulConfig is ADC channerl source, which can be one of the
+//!              following value:
+//!              - \ref xADC_CTL_CH0
+//!              - \ref xADC_CTL_CH1
+//!              - \ref xADC_CTL_CH2
+//!              - \ref xADC_CTL_CH3
+//!              - \ref xADC_CTL_CH4
+//!              - \ref xADC_CTL_CH5
+//!              - \ref xADC_CTL_CH6
+//!              - \ref xADC_CTL_CH7
+//!
+//! \return None.
+//!
+//! \note   For LPC17xx, The relationship between ADC Convert array is fixed.
+//!         must follow the below law.
+//! \note
+//!         Array ID  |  ADC Channel
+//!         ----------|--------------
+//!         Array[0]  |  xADC_CTL_CH0
+//!         Array[1]  |  xADC_CTL_CH1
+//!         ...       |  ...
+//!         Array[7]  |  xADC_CTL_CH7
+//! \note
+//!         so, you can use this function to configure ADC continue scan mode
+//!         or single sample mode.
+//!         for example:
+//!         Status   |  Configure Function
+//!         ---------|-----------------------------------------------
+//!         Right    |  xADCStepConfigure(xADC0_BASE, 0, xADC_CTL_CH0)
+//!         Wrong    |  xADCStepConfigure(xADC0_BASE, 1, xADC_CTL_CH0)
+//
+//*****************************************************************************
+void xADCStepConfigure(unsigned long ulBase, unsigned long ulStep,
+       unsigned long ulConfig)
+{
+    unsigned long ulTmpReg = 0;
+
+    // Check input parameters valid
+    xASSERT(ulBase == xADC0_BASE);
+    xASSERT((ulStep >= 0) && (ulStep <= 6));
+    xASSERT( (ulConfig == xADC_CTL_CH0) ||
+             (ulConfig == xADC_CTL_CH1) ||
+             (ulConfig == xADC_CTL_CH2) ||
+             (ulConfig == xADC_CTL_CH3) ||
+             (ulConfig == xADC_CTL_CH4) ||
+             (ulConfig == xADC_CTL_CH5) ||
+             (ulConfig == xADC_CTL_CH6) );
+    
+    // Configure ADC array.
+    xHWREG(ulBase + AD_CR) |= ulConfig;
+}
+
+//*****************************************************************************
+//
+//! \brief  Enable ADC sample sequence.
+//!         Allows the specified sample sequence to be captured when its trigger
+//!         is detected. A sample sequence must be configured before it is enabled.
+//!
+//! \param  [in] ulBase is the base address of the ADC module. This value must be
+//!              - \ref xADC0_BASE.
+//!
+//! \return None.
+//!
+//! \note   User must call xADCConfigure first.
+//
+//*****************************************************************************
+void xADCEnable(unsigned long ulBase)
+{
+    // Check input parameters valid
+    xASSERT(ulBase == xADC0_BASE);
+
+    // Has been call xADCConfigure ?
+    if(0 == _ADC_Status)
+    {
+        // Error! user must call xADCConfigure first.
+        while(1);
+    }
+
+    // Record the configure parameters
+    _ADC_Mode     = ulMode;
+    _ADC_Triggler = ulTrigger;
+
+    // Configure ADC Clock
+    ADCInit(ulBase, 200000);
+
+    if(_ADC_Mode == xADC_MODE_SCAN_CONTINUOUS)  //brust mode
+    {
+        ADCStart(ulBase, ADC_START_MODE_BURST);
+    }
+    else
+    {
+        ADCStart(ulBase, _ADC_Triggler);
+    }
+
 }
 
