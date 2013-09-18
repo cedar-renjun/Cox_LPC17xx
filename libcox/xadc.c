@@ -28,6 +28,7 @@ static unsigned long ChID[8] =
 static unsigned long _ADC_Mode     = 0;
 static unsigned long _ADC_Status   = 0;
 static unsigned long _ADC_Triggler = 0;
+static unsigned long _ADC_Channels = 0;
 
 //*****************************************************************************
 //
@@ -511,8 +512,7 @@ void xADCConfigure(unsigned long ulBase, unsigned long ulMode,
         unsigned long ulTrigger)
 {
     // Check input parameters valid
-    xASSERT(ulBase == xADC0_BASE);
-    xASSERT(pulBuffer != NULL);
+    xASSERT(ulBase == xADC0_BASE);    
 
     // Record the configure parameters
     _ADC_Mode     = ulMode;
@@ -570,12 +570,11 @@ void xADCConfigure(unsigned long ulBase, unsigned long ulMode,
 //*****************************************************************************
 void xADCStepConfigure(unsigned long ulBase, unsigned long ulStep,
        unsigned long ulConfig)
-{
-    unsigned long ulTmpReg = 0;
+{    
 
     // Check input parameters valid
     xASSERT(ulBase == xADC0_BASE);
-    xASSERT((ulStep >= 0) && (ulStep <= 6));
+    xASSERT(ulStep <= 6);
     xASSERT( (ulConfig == xADC_CTL_CH0) ||
              (ulConfig == xADC_CTL_CH1) ||
              (ulConfig == xADC_CTL_CH2) ||
@@ -583,6 +582,8 @@ void xADCStepConfigure(unsigned long ulBase, unsigned long ulStep,
              (ulConfig == xADC_CTL_CH4) ||
              (ulConfig == xADC_CTL_CH5) ||
              (ulConfig == xADC_CTL_CH6) );
+    
+    _ADC_Channels |= ulConfig;
     
     // Configure ADC array.
     xHWREG(ulBase + AD_CR) |= ulConfig;
@@ -615,19 +616,19 @@ void xADCEnable(unsigned long ulBase)
     }
 
     // Record the configure parameters
-    _ADC_Mode     = ulMode;
-    _ADC_Triggler = ulTrigger;
+    //_ADC_Mode     = ulMode;
+    //_ADC_Triggler = ulTrigger;
 
     // Configure ADC Clock
-    ADCInit(ulBase, 200000);
-
+    ADCInit(ulBase, 200000);   
+     
     if(_ADC_Mode == xADC_MODE_SCAN_CONTINUOUS)  //brust mode
     {
-        ADCStart(ulBase, ADC_START_MODE_BURST);
+        ADCStart(ulBase, _ADC_Channels, ADC_START_MODE_BURST);
     }
     else
     {
-        ADCStart(ulBase, _ADC_Triggler);
+        ADCStart(ulBase, _ADC_Channels, _ADC_Triggler);
     }
 
 }

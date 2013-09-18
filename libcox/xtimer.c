@@ -158,38 +158,39 @@ void TimerIntCallbackInit(unsigned long ulBase, xtEventCallback pfnCallback)
 //!         This function is to configurate The Timer's mode and tick frequency.
 //!
 //! \param  [in] ulBase is the base address of the Timer port.
-//!              This value can be one of the following value:
-//!              - \ref xTIMER0_BASE, - \ref xTIMER1_BASE,
-//!              - \ref xTIMER2_BASE, - \ref xTIMER3_BASE.
+//!              Can be one of the following value:
+//!              - \ref xTIMER0_BASE
+//!              - \ref xTIMER1_BASE
+//!              - \ref xTIMER2_BASE
+//!              - \ref xTIMER3_BASE
 //!
 //! \param  [in] ulChannel is the channel of the Timer port.
-//!              This value can be one of the following value:
-//!              - \ref xTIMER_CHANNEL0
-//!              - \ref xTIMER_CHANNEL1
+//!              Can be one of the following value:
+//!              - \ref xTIMER_CHANNEL0 is timer channel.
+//!              - \ref xTIMER_CHANNEL1 is capture channel.
 //!
 //! \param  [in] ulConfig is the mode Configuratation of the Timer port.
-//!              This parameter is the OR value of two values:
-//!              - Timer's mode
-//!                - \ref xTIMER_MODE_ONESHOT
-//!                - \ref xTIMER_MODE_PERIODIC
-//!                - \ref xTIMER_MODE_TOGGLE and
-//!                - \ref xTIMER_MODE_CONTINUOUS
-//!                - \ref xTIMER_MODE_CAPTURE
-//!              - Timer's direction
-//!                - \ref xTIMER_COUNT_UP
-//!                - \ref xTIMER_COUNT_DOWN
+//!              Can be one of the following value:
+//!              - Timer mode
+//!                  - \ref xTIMER_MODE_ONESHOT
+//!                  - \ref xTIMER_MODE_PERIODIC
+//!                  - \ref xTIMER_MODE_CONTINUOUS
+//!                  - \ref xTIMER_MODE_CAPTURE
+//!              - Timer counter direction
+//!                  - \ref xTIMER_COUNT_UP
 //!
 //! \param  [in] ulTickFreq is the tick frequency of the Timer port.
 //!
 //! \return None.
 //!
-//! \note   For LPC17xx, Channel 0 is general timer, Channel 1 is input capture
+//! \note   For LPC17xx, Only xTIMER_CHANNEL1 can be configure into Capture mode.
 //
 //*****************************************************************************
 void TimerInitConfig(unsigned long ulBase, unsigned long ulChannel,
         unsigned long ulConfig, unsigned long ulTickFreq)
 {
-    unsigned long ulFre = 0;
+    unsigned long ulFre    = 0;
+    unsigned long ulTmpReg = 0;
 
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
@@ -241,14 +242,54 @@ void TimerInitConfig(unsigned long ulBase, unsigned long ulChannel,
     }
     TimerPrescaleSet(ulBase, ulFre);
 
+    // Configure into timer mode
+    xHWREG(ulBase + TIMER_CTCR) = 0;
 
     if(ulChannel == xTIMER_CHANNEL0)               // Timer Mode
     {
-        // Nothing todo
+        // Error! Only xTIMER_CHANNEL1 can be configur into capture mode.
+        if(ulConfig == xTIMER_MODE_CAPTURE)
+        {
+            while(1);
+        }
+
+        ulTmpReg = xHWREG(ulBase + TIMER_MCR);
+        ulTmpReg &= ~(MCR_MRxR | MCR_MRxS);
+
+        // Configure Timer mode.
+        switch(ulConfig)
+        {
+            case xTIMER_MODE_ONESHOT:
+                {
+                    ulTmpReg |= MCR_MRxS;
+                    xHWREG(ulBase + TIMER_MCR) = ulTmpReg;
+                    break;
+                }
+
+            case xTIMER_MODE_PERIODIC:
+                {
+                    ulTmpReg |= MCR_MRxR;
+                    xHWREG(ulBase + TIMER_MCR) = ulTmpReg;
+                    break;
+                }
+
+            case xTIMER_MODE_CONTINUOUS:
+                {
+                    xHWREG(ulBase + TIMER_MCR) = ulTmpReg;
+                    break;
+                }
+        }
     }
     else if(ulChannel == xTIMER_CHANNEL1)          // Capture Mode 
     {
-        // Nothing todo
+        // Error! Only xTIMER_CHANNEL1 can be configur into capture mode.
+        if(ulConfig != xTIMER_MODE_CAPTURE)
+        {
+            while(1);
+        }
+
+        // Clear all channel match event
+        xHWREG(ulBase + TIMER_MCR) = 0;
     }
 }
 
@@ -1061,16 +1102,104 @@ xtBoolean xTimerStatusGet(unsigned long ulBase, unsigned long ulChannel,
     }
 }
 
+//*****************************************************************************
+//
+//! \brief Select The Timer counter capture detect edge. 
+//!        This function is to select The Timer counter capture detect edge.
+//!
+//! \param [in] ulBase is the base address of the Timer port.
+//!             Can be one of the following value:
+//!             - \ref xTIMER0_BASE
+//!             - \ref xTIMER1_BASE
+//!             - \ref xTIMER2_BASE
+//!             - \ref xTIMER3_BASE
+//!
+//! \param [in] ulChannel is the channel of the Timer port.
+//!             This value can be one of the following value:
+//!             - \ref xTIMER_CHANNEL0 is general timer channel.
+//!             - \ref xTIMER_CHANNEL1 is input capture channel.
+//!
+//! \param [in] ulEdge is the capture detect mode and detect edge of the
+//!             Timer port.
+//!             This value can be logic OR of the following value:
+//!             - \ref xTIMER_CAP_RISING
+//!             - \ref xTIMER_CAP_FALLING
+//!             - \ref xTIMER_CAP_BOTH
+//!
+//! \return None.
+//
+//*****************************************************************************
 void xTimerCaptureEdgeSelect(unsigned long ulBase, unsigned long ulChannel,
                                     unsigned long ulEdge)
 {
+    // Avoid compiler warning
+    (void) ulChannel;
+
     // Check the parameters.
     xASSERT((ulBase == TIMER0_BASE) || (ulBase == TIMER1_BASE) ||
             (ulBase == TIMER2_BASE) || (ulBase == TIMER3_BASE) );
     xASSERT(ulChannel == xTIMER_CHANNEL1);
-    (void) ulChannel;
 
-    // Configure Capture Edge
-    TimerCaptureCfg(ulBase, TIMER_CAP_CH_0, ulEdge);
+    if (ulEdge != 0)
+    {
+        // Configure Capture Edge
+        TimerCaptureCfg(ulBase, TIMER_CAP_CH_0, ulEdge);
+    }
+
 }
 
+//*****************************************************************************
+//
+//! \brief  Select The Timer counter detect phase. 
+//!         This function is to select The Timer counter detect phase.
+//!
+//! \param  [in] ulBase is the base address of the Timer port.
+//!              Can be one of the following value:
+//!              - \ref xTIMER0_BASE
+//!              - \ref xTIMER1_BASE
+//!              - \ref xTIMER2_BASE
+//!              - \ref xTIMER3_BASE
+//!
+//! \param  [in] ulChannel is the channel of the Timer port.
+//!              This value can be one of the following value:
+//!              - \ref xTIMER_CHANNEL0 is general timer channel.
+//!              - \ref xTIMER_CHANNEL1 is input capture channel.
+//!
+//! \param  [in] ulPhase is the counter detect phase of the Timer port.
+//!              This value can be one of the following value:
+//!              - \ref xTIMER_COUNTER_RISING
+//!              - \ref xTIMER_COUNTER_FALLING
+//! 
+//! \return None.
+//!
+//! \note   This function configure input capture pin 0 for counter clock.
+//
+//*****************************************************************************
+void xTimerCounterDetectPhaseSelect(unsigned long ulBase, unsigned long ulChannel,
+        unsigned long ulPhase)
+{
+
+    // Avoid compiler warning
+    (void) ulChannel;
+
+    // Check the parameters.
+    xASSERT( (ulBase == xTIMER0_BASE) ||
+             (ulBase == xTIMER1_BASE) ||
+             (ulBase == xTIMER2_BASE) ||
+             (ulBase == xTIMER3_BASE) ||);
+
+    xASSERT( (ulChannel == xTIMER0_BASE) ||
+             (ulChannel == xTIMER1_BASE) ||);
+
+    xASSERT( (ulPhase == xTIMER_COUNTER_RISING) ||
+             (ulPhase == xTIMER_COUNTER_FALLING) ||);
+
+    if(ulPhase == xTIMER_COUNTER_FALLING) // Falling edge increment timer counter
+    {
+        xHWREG(ulBase + TIMER_CTCR) = 0x10;
+    }
+    else                                  // Rising edge increment timer counter
+    {
+        xHWREG(ulBase + TIMER_CTCR) = 0x01;
+    }
+}

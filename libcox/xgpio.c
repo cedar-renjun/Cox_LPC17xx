@@ -21,6 +21,33 @@ static xtEventCallback g_psGPIOPinIntAssignTable[64] =
 
 //*****************************************************************************
 //
+//! \brief  GPIO interrupt handler.
+//!         This function is the GPIO interrupt handler, it simple execute the
+//!         callback function if there be one.
+//!
+//! \param  None.
+//!
+//! \return None.
+//! 
+//! \note   EINT3 channel is shared with GPIO interrupts.
+//
+//*****************************************************************************
+void EINT3IntHandler(void)
+{
+    unsigned long i      = 0;
+
+    //Find and call any interrupt function.
+    for(i = 0; i < 64; i++)
+    {
+        if(g_psGPIOPinIntAssignTable[i])
+        {
+            g_psGPIOPinIntAssignTable[i](0,0,0,0);
+        }
+    }   
+}
+
+//*****************************************************************************
+//
 //! \internal
 //! \brief  This function convert gpio ID to the number of the gpio.
 //!         For example:
